@@ -107,59 +107,37 @@ public class IncidentRepository : IIncidentRepository
 
         // Apply filters
         if (!string.IsNullOrEmpty(filter.Title))
-        {
             query = query.Where(i => i.Title.Contains(filter.Title));
-        }
 
         if (!string.IsNullOrEmpty(filter.Description))
-        {
             query = query.Where(i => i.Description.Contains(filter.Description));
-        }
 
         if (filter.Status.HasValue)
-        {
             query = query.Where(i => i.Status == filter.Status.Value);
-        }
 
         if (filter.Priority.HasValue)
-        {
             query = query.Where(i => i.Priority == filter.Priority.Value);
-        }
 
         if (filter.AssignedToId.HasValue)
-        {
             query = query.Where(i => i.AssignedToId == filter.AssignedToId.Value);
-        }
 
         if (filter.ReportedById.HasValue)
-        {
             query = query.Where(i => i.ReportedById == filter.ReportedById.Value);
-        }
 
         if (filter.CreatedFrom.HasValue)
-        {
             query = query.Where(i => i.CreatedAt >= filter.CreatedFrom.Value);
-        }
 
         if (filter.CreatedTo.HasValue)
-        {
             query = query.Where(i => i.CreatedAt <= filter.CreatedTo.Value);
-        }
 
         if (filter.UpdatedFrom.HasValue)
-        {
             query = query.Where(i => i.UpdatedAt >= filter.UpdatedFrom.Value);
-        }
 
         if (filter.UpdatedTo.HasValue)
-        {
             query = query.Where(i => i.UpdatedAt <= filter.UpdatedTo.Value);
-        }
 
         if (!string.IsNullOrEmpty(filter.Location))
-        {
             query = query.Where(i => i.Address.Contains(filter.Location) || i.ZipCode.Contains(filter.Location));
-        }
 
         // Apply distance filter if coordinates and distance are provided
         if (filter.Latitude.HasValue && filter.Longitude.HasValue && filter.DistanceInKm.HasValue)
