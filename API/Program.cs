@@ -2,10 +2,15 @@ using System.Text;
 using API.Data;
 using API.Helpers;
 using API.Middleware;
+using API.Models.Classes;
+using API.Models.Enums;
+using API.Repositories;
+using API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 var key = Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"] ?? throw new InvalidOperationException("JWT Key is not configured"));
@@ -46,12 +51,23 @@ builder.Services.AddSwaggerGen(c =>
             Array.Empty<string>()
         }
     });
+
+    // Add support for file uploads
+    c.OperationFilter<FileUploadOperationFilter>();
 });
 
 builder.Services.AddDbContext<IncidentDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<JwtHelper>();
 builder.Services.AddScoped<DataSeeder>();
+
+// Add AutoMapper
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
+// Add Incident services
+builder.Services.AddScoped<IIncidentRepository, IncidentRepository>();
+builder.Services.AddScoped<IIncidentService, IncidentService>();
+builder.Services.AddScoped<IFileService, FileService>();
 
 builder.Services.AddAuthentication(options =>
     {
@@ -71,6 +87,31 @@ builder.Services.AddAuthentication(options =>
             IssuerSigningKey = new SymmetricSecurityKey(key)
         };
     });
+
+builder.Services.AddAuthorization(options =>
+{
+    // Policies for self-created incidents
+    options.AddPolicy("CanViewOwnIncidents", policy =>
+        policy.RequireRole(Role.Member, Role.FieldEmployee, Role.Admin));
+    options.AddPolicy("CanUpdateOwnIncidents", policy =>
+        policy.RequireRole(Role.Member, Role.FieldEmployee, Role.Admin));
+    options.AddPolicy("CanDeleteOwnIncidents", policy =>
+        policy.RequireRole(Role.Member, Role.FieldEmployee, Role.Admin));
+
+    // Policies for all incidents
+    options.AddPolicy("CanViewAllIncidents", policy =>
+        policy.RequireRole(Role.FieldEmployee, Role.Admin));
+    options.AddPolicy("CanUpdateIncidentStatus", policy =>
+        policy.RequireRole(Role.FieldEmployee, Role.Admin));
+
+    // Policies restricted to admins
+    options.AddPolicy("CanUpdateIncidentPriority", policy =>
+        policy.RequireRole(Role.Admin));
+    options.AddPolicy("CanUpdateAnyIncident", policy =>
+        policy.RequireRole(Role.Admin));
+    options.AddPolicy("CanDeleteAnyIncident", policy =>
+        policy.RequireRole(Role.Admin));
+});
 
 var app = builder.Build();
 
