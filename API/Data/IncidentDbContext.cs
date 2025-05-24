@@ -16,6 +16,7 @@ public sealed class IncidentDbContext : DbContext
     public DbSet<Role> Roles { get; set; }
     public DbSet<UserRole> UserRoles { get; set; }
     public DbSet<InvalidatedToken> InvalidatedTokens { get; set; }
+    public DbSet<IncidentPhoto> IncidentPhotos { get; set; }
 
     // Optional: Fluent API overrides
     protected override void OnModelCreating(ModelBuilder modelBuilder)

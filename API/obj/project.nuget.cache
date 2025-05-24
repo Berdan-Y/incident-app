@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "IOYaNgit5as=",
+  "dgSpecHash": "zJprAO8K+lc=",
   "success": true,
   "projectFilePath": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/API.csproj",
   "expectedPackageFiles": [
+    "/Users/berdanyilmaz/.nuget/packages/automapper/14.0.0/automapper.14.0.0.nupkg.sha512",
     "/Users/berdanyilmaz/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
     "/Users/berdanyilmaz/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/berdanyilmaz/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/9.0.5/microsoft.aspnetcore.authentication.jwtbearer.9.0.5.nupkg.sha512",

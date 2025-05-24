@@ -25,17 +25,55 @@ public class DataSeeder
             new() { Id = Role.MemberId, Name = Role.Member }
         };
 
-        var user = new User
+        var now = DateTime.UtcNow;
+        var adminUser = new User
+        {
+            Id = Guid.NewGuid(),
+            Email = "admin@gmail.com",
+            Password = BCrypt.Net.BCrypt.HashPassword("password"),
+            FirstName = "Admin",
+            LastName = "User",
+            RoleJson = "{\"Name\":\"Admin\"}",
+            CreatedAt = now,
+            UpdatedAt = now
+        };
+
+        var testUser = new User
         {
             Id = Guid.NewGuid(),
             Email = "test@gmail.com",
             Password = BCrypt.Net.BCrypt.HashPassword("password"),
             FirstName = "Test",
-            LastName = "User"
+            LastName = "User",
+            CreatedAt = now,
+            UpdatedAt = now
         };
 
         await _context.Roles.AddRangeAsync(roles);
-        await _context.Users.AddAsync(user);
+        await _context.Users.AddRangeAsync(adminUser, testUser);
+        await _context.SaveChangesAsync();
+
+        // Create UserRole entries
+        var adminRole = await _context.Roles.FindAsync(Role.AdminId);
+        var memberRole = await _context.Roles.FindAsync(Role.MemberId);
+
+        var adminUserRole = new UserRole
+        {
+            UserId = adminUser.Id,
+            RoleId = Role.AdminId,
+            User = adminUser,
+            Role = adminRole!
+        };
+
+        var testUserRole = new UserRole
+        {
+            UserId = testUser.Id,
+            RoleId = Role.MemberId,
+            User = testUser,
+            Role = memberRole!
+        };
+
+        await _context.UserRoles.AddRangeAsync(adminUserRole, testUserRole);
         await _context.SaveChangesAsync();
     }
 

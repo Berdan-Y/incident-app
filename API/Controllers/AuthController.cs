@@ -35,6 +35,7 @@ public class AuthController : ControllerBase
             return BadRequest(new { message = "Email already exists" });
         
         var hashedPassword = BCrypt.Net.BCrypt.HashPassword(registerDto.Password);
+        var now = DateTime.UtcNow;
         
         var user = new User
         {
@@ -43,6 +44,8 @@ public class AuthController : ControllerBase
             Password = hashedPassword,
             FirstName = registerDto.FirstName,
             LastName = registerDto.LastName,
+            CreatedAt = now,
+            UpdatedAt = now
         };
         
         _context.Users.Add(user);
@@ -75,6 +78,8 @@ public class AuthController : ControllerBase
     public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
     {
         var user = await _context.Users
+            .Include(u => u.UserRoles)
+                .ThenInclude(ur => ur.Role)
             .FirstOrDefaultAsync(u => u.Email == loginDto.Email);
 
         if (user == null)
@@ -85,8 +90,12 @@ public class AuthController : ControllerBase
 
         var token = await _jwtHelper.GenerateToken(user, _context);
         
+        var roles = user.UserRoles.Select(ur => ur.Role.Name).ToList();
+        
         return Ok(new { 
             token = token,
+            userId = user.Id,
+            roles = roles,
             message = "Login successful"
         });
     }
