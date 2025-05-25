@@ -48,6 +48,18 @@
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-ZbK\u002Bv6QEqUynklAaSTs\u002B8O5xKXl5kcP4XtnB\u002BMxGuPU="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"642"},{"Name":"Content-Type","Value":"text/html"},{"Name":"ETag","Value":"\u0022ZbK\u002Bv6QEqUynklAaSTs\u002B8O5xKXl5kcP4XtnB\u002BMxGuPU=\u0022"},{"Name":"Last-Modified","Value":"Sat, 24 May 2025 22:46:39 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/Blazor/js/app.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\app.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-PhA0LnIsLUiuBZQQszb\u002BGwG/OnC7HStBianHbgxINjg="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1423"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022PhA0LnIsLUiuBZQQszb\u002BGwG/OnC7HStBianHbgxINjg=\u0022"},{"Name":"Last-Modified","Value":"Sun, 25 May 2025 17:00:08 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/Blazor/js/app.uxoqvs4pkg.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\app.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"uxoqvs4pkg"},{"Name":"integrity","Value":"sha256-PhA0LnIsLUiuBZQQszb\u002BGwG/OnC7HStBianHbgxINjg="},{"Name":"label","Value":"_content/Blazor/js/app.js"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1423"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022PhA0LnIsLUiuBZQQszb\u002BGwG/OnC7HStBianHbgxINjg=\u0022"},{"Name":"Last-Modified","Value":"Sun, 25 May 2025 17:00:08 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/Blazor/js/camera.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\camera.js'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>

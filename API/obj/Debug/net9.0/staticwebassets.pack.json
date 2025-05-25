@@ -9,8 +9,16 @@
       "PackagePath": "staticwebassets/uploads/incidents/25352d92-65cc-46e0-9fc2-274ca2c7d7d7.png"
     },
     {
+      "Id": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/2546e33e-475b-4997-ae7d-b0bde5a173b9.jpg",
+      "PackagePath": "staticwebassets/uploads/incidents/2546e33e-475b-4997-ae7d-b0bde5a173b9.jpg"
+    },
+    {
       "Id": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/3b3a6d49-3027-409a-a77c-6ff1728d1f75.jpg",
       "PackagePath": "staticwebassets/uploads/incidents/3b3a6d49-3027-409a-a77c-6ff1728d1f75.jpg"
+    },
+    {
+      "Id": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/7f23c804-f06d-42f6-b185-aca10111a9e0.png",
+      "PackagePath": "staticwebassets/uploads/incidents/7f23c804-f06d-42f6-b185-aca10111a9e0.png"
     },
     {
       "Id": "obj/Debug/net9.0/staticwebassets/msbuild.API.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

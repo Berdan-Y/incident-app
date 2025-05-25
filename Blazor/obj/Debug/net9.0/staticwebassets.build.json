@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "NOewPaYcJGi/Q3GbuNuQBvgJcLEFG5LOtRYXyih22ZY=",
+  "Hash": "5wuzMabCJT5FCC9gr5/KZLlcbyMB9f8UvGl2m7mIuek=",
   "Source": "Blazor",
   "BasePath": "_content/Blazor",
   "Mode": "Default",
@@ -689,6 +689,27 @@
       "OriginalItemSpec": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js"
     },
     {
+      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/ivef3mez61-uxoqvs4pkg.gz",
+      "SourceId": "Blazor",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/",
+      "BasePath": "_content/Blazor",
+      "RelativePath": "js/app#[.{fingerprint=uxoqvs4pkg}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/js/app.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "0ozog1kybs",
+      "Integrity": "cMG8SUF/cCm8nRma7yaPrLpdUA+BRQR3omsEUylwAV4=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/js/app.js"
+    },
+    {
       "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/jrm2yinjuu-jj8uyg4cgr.gz",
       "SourceId": "Blazor",
       "SourceType": "Discovered",
@@ -1233,6 +1254,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/index.html"
+    },
+    {
+      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/js/app.js",
+      "SourceId": "Blazor",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/",
+      "BasePath": "_content/Blazor",
+      "RelativePath": "js/app#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "uxoqvs4pkg",
+      "Integrity": "PhA0LnIsLUiuBZQQszb+GwG/OnC7HStBianHbgxINjg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/app.js"
     },
     {
       "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/js/camera.js",
@@ -3816,6 +3858,304 @@
         {
           "Name": "integrity",
           "Value": "sha256-Ay9VLo2bg8oOgRPUsCcmWOwUTIFkSMMzyPUhD4aPKSc="
+        }
+      ]
+    },
+    {
+      "Route": "js/app.js",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/ivef3mez61-uxoqvs4pkg.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001945525292"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "513"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"cMG8SUF/cCm8nRma7yaPrLpdUA+BRQR3omsEUylwAV4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 25 May 2025 17:00:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"PhA0LnIsLUiuBZQQszb+GwG/OnC7HStBianHbgxINjg=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-PhA0LnIsLUiuBZQQszb+GwG/OnC7HStBianHbgxINjg="
+        }
+      ]
+    },
+    {
+      "Route": "js/app.js",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/js/app.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1423"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"PhA0LnIsLUiuBZQQszb+GwG/OnC7HStBianHbgxINjg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 25 May 2025 17:00:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-PhA0LnIsLUiuBZQQszb+GwG/OnC7HStBianHbgxINjg="
+        }
+      ]
+    },
+    {
+      "Route": "js/app.js.gz",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/ivef3mez61-uxoqvs4pkg.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "513"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"cMG8SUF/cCm8nRma7yaPrLpdUA+BRQR3omsEUylwAV4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 25 May 2025 17:00:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-cMG8SUF/cCm8nRma7yaPrLpdUA+BRQR3omsEUylwAV4="
+        }
+      ]
+    },
+    {
+      "Route": "js/app.uxoqvs4pkg.js",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/ivef3mez61-uxoqvs4pkg.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001945525292"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "513"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"cMG8SUF/cCm8nRma7yaPrLpdUA+BRQR3omsEUylwAV4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 25 May 2025 17:00:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"PhA0LnIsLUiuBZQQszb+GwG/OnC7HStBianHbgxINjg=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "uxoqvs4pkg"
+        },
+        {
+          "Name": "label",
+          "Value": "js/app.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-PhA0LnIsLUiuBZQQszb+GwG/OnC7HStBianHbgxINjg="
+        }
+      ]
+    },
+    {
+      "Route": "js/app.uxoqvs4pkg.js",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/js/app.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1423"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"PhA0LnIsLUiuBZQQszb+GwG/OnC7HStBianHbgxINjg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 25 May 2025 17:00:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "uxoqvs4pkg"
+        },
+        {
+          "Name": "label",
+          "Value": "js/app.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-PhA0LnIsLUiuBZQQszb+GwG/OnC7HStBianHbgxINjg="
+        }
+      ]
+    },
+    {
+      "Route": "js/app.uxoqvs4pkg.js.gz",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/ivef3mez61-uxoqvs4pkg.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "513"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"cMG8SUF/cCm8nRma7yaPrLpdUA+BRQR3omsEUylwAV4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 25 May 2025 17:00:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "uxoqvs4pkg"
+        },
+        {
+          "Name": "label",
+          "Value": "js/app.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-cMG8SUF/cCm8nRma7yaPrLpdUA+BRQR3omsEUylwAV4="
         }
       ]
     },

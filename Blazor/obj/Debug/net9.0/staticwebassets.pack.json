@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets/index.html"
     },
     {
+      "Id": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/js/app.js",
+      "PackagePath": "staticwebassets/js/app.js"
+    },
+    {
       "Id": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/js/camera.js",
       "PackagePath": "staticwebassets/js/camera.js"
     },

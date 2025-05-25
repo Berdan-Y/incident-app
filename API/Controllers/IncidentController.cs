@@ -95,6 +95,8 @@ public class IncidentController : ControllerBase
     {
         // Get the incident data from form
         var incidentData = form["incident"];
+        Console.WriteLine($"Received incident data: {incidentData}");
+        
         if (string.IsNullOrEmpty(incidentData))
             return BadRequest("Incident data is required");
 
@@ -125,8 +127,10 @@ public class IncidentController : ControllerBase
 
         // Handle photos if any
         var photos = form.Files.Where(f => f.Name.StartsWith("photos"));
+        Console.WriteLine($"Number of photos received: {photos.Count()}");
         foreach (var photo in photos)
         {
+            Console.WriteLine($"Processing photo: {photo.FileName}, ContentType: {photo.ContentType}, Length: {photo.Length}");
             await _incidentService.AddPhotoToIncidentAsync(incident.Id, photo);
         }
 
