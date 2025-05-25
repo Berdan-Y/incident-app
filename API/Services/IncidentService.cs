@@ -175,7 +175,7 @@ public class IncidentService : IIncidentService
             throw new InvalidOperationException("Maximum number of photos (10) reached for this incident");
 
         var filePath = await _fileService.SaveFileAsync(photo, "uploads/incidents");
-        
+
         var photoEntity = new IncidentPhoto
         {
             FileName = photo.FileName,

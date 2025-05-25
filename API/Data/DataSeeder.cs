@@ -84,7 +84,7 @@ public class DataSeeder
         _context.Users.RemoveRange(await _context.Users.ToListAsync());
         _context.Roles.RemoveRange(await _context.Roles.ToListAsync());
         _context.Incidents.RemoveRange(await _context.Incidents.ToListAsync());
-        
+
         await _context.SaveChangesAsync();
     }
 }

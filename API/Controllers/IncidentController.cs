@@ -96,7 +96,7 @@ public class IncidentController : ControllerBase
         // Get the incident data from form
         var incidentData = form["incident"];
         Console.WriteLine($"Received incident data: {incidentData}");
-        
+
         if (string.IsNullOrEmpty(incidentData))
             return BadRequest("Incident data is required");
 
@@ -105,7 +105,7 @@ public class IncidentController : ControllerBase
         {
             PropertyNameCaseInsensitive = true
         });
-        
+
         if (incidentDto == null)
             return BadRequest("Invalid incident data");
 
@@ -207,8 +207,8 @@ public class IncidentController : ControllerBase
             if (User.IsInRole(Role.Member))
             {
                 // Members can only update title, description, and address
-                if (patchDto.Status.HasValue || patchDto.Priority.HasValue || 
-                    patchDto.AssignedToId.HasValue || patchDto.Latitude.HasValue || 
+                if (patchDto.Status.HasValue || patchDto.Priority.HasValue ||
+                    patchDto.AssignedToId.HasValue || patchDto.Latitude.HasValue ||
                     patchDto.Longitude.HasValue || patchDto.ZipCode != null)
                 {
                     return Forbid();
@@ -322,7 +322,7 @@ public class IncidentController : ControllerBase
             var incident = await _incidentService.AssignIncidentAsync(id, assigneeId);
             if (incident == null)
                 return NotFound();
-                
+
             return Ok(incident);
         }
         catch (Exception)

@@ -9,4 +9,4 @@ public class IncidentUpdateDto
     public Status? Status { get; set; }
     public Priority? Priority { get; set; }
     public Guid? AssignedToId { get; set; }
-} 
+}

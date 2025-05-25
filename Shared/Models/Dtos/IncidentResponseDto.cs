@@ -20,4 +20,4 @@ public class IncidentResponseDto
     public Guid? AssignedToId { get; set; }
     public UserDto? AssignedTo { get; set; }
     public ICollection<IncidentPhotoDto>? Photos { get; set; } = new List<IncidentPhotoDto>();
-} 
+}

@@ -20,4 +20,4 @@ public class IncidentFilterDto
     public double? DistanceInKm { get; set; }
     public string? SortBy { get; set; }
     public bool SortDescending { get; set; }
-} 
+}

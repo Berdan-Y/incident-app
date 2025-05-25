@@ -62,4 +62,4 @@ public class FileService : IFileService
         var baseUrl = _configuration["BaseUrl"] ?? "http://localhost:5000";
         return $"{baseUrl}/{filePath.Replace("\\", "/")}";
     }
-} 
+}

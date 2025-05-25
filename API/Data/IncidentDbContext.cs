@@ -6,7 +6,7 @@ namespace API.Data;
 
 public sealed class IncidentDbContext : DbContext
 {
-    public IncidentDbContext(DbContextOptions<IncidentDbContext> options) 
+    public IncidentDbContext(DbContextOptions<IncidentDbContext> options)
         : base(options)
     {
     }

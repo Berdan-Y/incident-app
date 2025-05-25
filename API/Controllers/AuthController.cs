@@ -24,7 +24,7 @@ public class AuthController : ControllerBase
         _context = context;
         _configuration = configuration;
     }
-    
+
     [HttpPost("register")]
     [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -33,10 +33,10 @@ public class AuthController : ControllerBase
     {
         if (_context.Users.Any(u => u.Email == registerDto.Email))
             return BadRequest(new { message = "Email already exists" });
-        
+
         var hashedPassword = BCrypt.Net.BCrypt.HashPassword(registerDto.Password);
         var now = DateTime.UtcNow;
-        
+
         var user = new User
         {
             Id = Guid.NewGuid(),
@@ -47,7 +47,7 @@ public class AuthController : ControllerBase
             CreatedAt = now,
             UpdatedAt = now
         };
-        
+
         _context.Users.Add(user);
 
         var role = _context.Roles.Find(Role.MemberId);
@@ -61,14 +61,14 @@ public class AuthController : ControllerBase
             User = user,
             Role = role
         };
-        
+
         _context.UserRoles.Add(userRole);
-        
+
         _context.SaveChanges();
-        
+
         return Ok(new { message = "User registered successfully" });
     }
-    
+
     [HttpPost("login")]
     [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -89,10 +89,11 @@ public class AuthController : ControllerBase
             return Unauthorized(new { message = "Invalid email or password" });
 
         var token = await _jwtHelper.GenerateToken(user, _context);
-        
+
         var roles = user.UserRoles.Select(ur => ur.Role.Name).ToList();
-        
-        return Ok(new { 
+
+        return Ok(new
+        {
             token = token,
             userId = user.Id,
             roles = roles,

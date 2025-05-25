@@ -38,7 +38,7 @@ builder.Services.AddSwaggerGen(c =>
         Version = "v1",
         Description = "API for Incident Management System"
     });
-    
+
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Type = SecuritySchemeType.Http,
@@ -146,7 +146,7 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Incident API v1");
         c.RoutePrefix = "swagger";
-        
+
         // Add custom JavaScript to handle the token automatically
         c.InjectJavascript("/swagger-ui/custom.js");
     });
@@ -238,7 +238,7 @@ app.MapGet("/swagger-ui/custom.js", async context =>
 }, 500);
 ";
 
-    
+
     context.Response.ContentType = "application/javascript";
     await context.Response.WriteAsync(js);
 });

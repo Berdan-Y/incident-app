@@ -32,4 +32,4 @@ public class MappingProfile : Profile
 
         CreateMap<IncidentPhoto, IncidentPhotoDto>();
     }
-} 
+}

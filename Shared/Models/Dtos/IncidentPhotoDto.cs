@@ -8,4 +8,4 @@ public class IncidentPhotoDto
     public required string FilePath { get; set; }
     public DateTime UploadedAt { get; set; }
     public Guid IncidentId { get; set; }
-} 
+}

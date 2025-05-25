@@ -46,7 +46,7 @@ public class IncidentRepository : IIncidentRepository
     {
         _context.Incidents.Add(incident);
         await _context.SaveChangesAsync();
-        
+
         // Reload the incident with related entities
         return await _context.Incidents
             .Include(i => i.CreatedBy)
@@ -58,7 +58,7 @@ public class IncidentRepository : IIncidentRepository
     {
         _context.Entry(incident).State = EntityState.Modified;
         await _context.SaveChangesAsync();
-        
+
         // Reload the incident with related entities
         return await _context.Incidents
             .Include(i => i.CreatedBy)
@@ -147,7 +147,7 @@ public class IncidentRepository : IIncidentRepository
             var lat = filter.Latitude.Value;
             var lon = filter.Longitude.Value;
 
-            query = query.Where(i => 
+            query = query.Where(i =>
                 (6371 * Math.Acos(
                     Math.Cos(lat * Math.PI / 180) * Math.Cos(i.Latitude * Math.PI / 180) *
                     Math.Cos((lon - i.Longitude) * Math.PI / 180) +
@@ -161,7 +161,7 @@ public class IncidentRepository : IIncidentRepository
         {
             query = filter.SortBy.ToLower() switch
             {
-                "title" => filter.SortDescending 
+                "title" => filter.SortDescending
                     ? query.OrderByDescending(i => i.Title)
                     : query.OrderBy(i => i.Title),
                 "description" => filter.SortDescending
@@ -179,21 +179,21 @@ public class IncidentRepository : IIncidentRepository
                 "assignee" => filter.SortDescending
                     ? query.OrderByDescending(i => i.AssignedTo.FirstName + " " + i.AssignedTo.LastName)
                     : query.OrderBy(i => i.AssignedTo.FirstName + " " + i.AssignedTo.LastName),
-                "createdat" => filter.SortDescending 
+                "createdat" => filter.SortDescending
                     ? query.OrderByDescending(i => i.CreatedAt)
                     : query.OrderBy(i => i.CreatedAt),
                 "updatedat" => filter.SortDescending
                     ? query.OrderByDescending(i => i.UpdatedAt)
                     : query.OrderBy(i => i.UpdatedAt),
-                "location" when filter.Latitude.HasValue && filter.Longitude.HasValue => 
+                "location" when filter.Latitude.HasValue && filter.Longitude.HasValue =>
                     filter.SortDescending
-                        ? query.OrderByDescending(i => 
+                        ? query.OrderByDescending(i =>
                             (6371 * Math.Acos(
                                 Math.Cos(filter.Latitude.Value * Math.PI / 180) * Math.Cos(i.Latitude * Math.PI / 180) *
                                 Math.Cos((filter.Longitude.Value - i.Longitude) * Math.PI / 180) +
                                 Math.Sin(filter.Latitude.Value * Math.PI / 180) * Math.Sin(i.Latitude * Math.PI / 180)
                             )))
-                        : query.OrderBy(i => 
+                        : query.OrderBy(i =>
                             (6371 * Math.Acos(
                                 Math.Cos(filter.Latitude.Value * Math.PI / 180) * Math.Cos(i.Latitude * Math.PI / 180) *
                                 Math.Cos((filter.Longitude.Value - i.Longitude) * Math.PI / 180) +
