@@ -1,7 +1,4 @@
 using Blazor.Components;
-using Blazor.Components.Layout;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using MudBlazor.Services;
 using Microsoft.AspNetCore.DataProtection;
 
@@ -16,8 +13,8 @@ builder.Services.AddRazorComponents()
 // Add MudBlazor services
 builder.Services.AddMudServices();
 
-// Add ThemeService as singleton
-builder.Services.AddSingleton<ThemeService>();
+// Add ThemeService as scoped
+builder.Services.AddScoped<ThemeService>();
 
 // Configure Data Protection
 builder.Services.AddDataProtection()

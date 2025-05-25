@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v9.0": {
       "Blazor/1.0.0": {
         "dependencies": {
+          "Microsoft.AspNetCore.Components.Web": "9.0.1",
           "MudBlazor": "8.6.0",
           "Shared": "1.0.0"
         },

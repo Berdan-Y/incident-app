@@ -656,6 +656,7 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "Microsoft.AspNetCore.Components.Web >= 9.0.1",
       "MudBlazor >= 8.6.0",
       "Shared >= 1.0.0"
     ]
@@ -708,6 +709,10 @@
       "net9.0": {
         "targetAlias": "net9.0",
         "dependencies": {
+          "Microsoft.AspNetCore.Components.Web": {
+            "target": "Package",
+            "version": "[9.0.1, )"
+          },
           "MudBlazor": {
             "target": "Package",
             "version": "[8.6.0, )"

@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Components.Routing
 @using MudBlazor
+@implements IDisposable
 
 <Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
@@ -25,8 +26,18 @@
 @code {
     [Inject] private ThemeService ThemeService { get; set; } = default!;
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await ThemeService.InitializeAsync();
+        if (firstRender)
+        {
+            await ThemeService.InitializeAsync();
+            ThemeService.OnChange += StateHasChanged;
+            StateHasChanged();
+        }
+    }
+
+    public void Dispose()
+    {
+        ThemeService.OnChange -= StateHasChanged;
     }
 }

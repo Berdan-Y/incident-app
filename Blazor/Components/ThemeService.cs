@@ -1,33 +1,42 @@
 using Microsoft.JSInterop;
 using MudBlazor;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace Blazor.Components;
 
 public class ThemeService
 {
     private readonly IServiceProvider _serviceProvider;
+    private readonly NavigationManager _navigationManager;
+    private readonly IJSRuntime _jsRuntime;
     private bool _isDarkMode;
     private MudTheme _currentTheme;
+    private bool _isInitialized;
 
     public event Action? OnChange;
 
     public bool IsDarkMode => _isDarkMode;
     public MudTheme CurrentTheme => _currentTheme;
 
-    public ThemeService(IServiceProvider serviceProvider)
+    public ThemeService(IServiceProvider serviceProvider, NavigationManager navigationManager, IJSRuntime jsRuntime)
     {
         _serviceProvider = serviceProvider;
+        _navigationManager = navigationManager;
+        _jsRuntime = jsRuntime;
         _currentTheme = LightTheme;
         _isDarkMode = false;
+        _isInitialized = false;
     }
 
     public async Task InitializeAsync()
     {
+        if (_isInitialized)
+            return;
+
         try
         {
-            using var scope = _serviceProvider.CreateScope();
-            var jsRuntime = scope.ServiceProvider.GetRequiredService<IJSRuntime>();
-            var savedTheme = await jsRuntime.InvokeAsync<string>("localStorage.getItem", "theme");
+            var savedTheme = await _jsRuntime.InvokeAsync<string>("localStorage.getItem", "theme");
             if (savedTheme != null)
             {
                 _isDarkMode = savedTheme == "dark";
@@ -40,6 +49,10 @@ public class ThemeService
             // Ignore the error during prerendering
             // The theme will be initialized after the component is rendered
         }
+        finally
+        {
+            _isInitialized = true;
+        }
     }
 
     public async Task ToggleTheme()
@@ -48,11 +61,12 @@ public class ThemeService
         _currentTheme = _isDarkMode ? DarkTheme : LightTheme;
         NotifyStateChanged();
 
+        if (!_isInitialized)
+            return;
+
         try
         {
-            using var scope = _serviceProvider.CreateScope();
-            var jsRuntime = scope.ServiceProvider.GetRequiredService<IJSRuntime>();
-            await jsRuntime.InvokeVoidAsync("localStorage.setItem", "theme", _isDarkMode ? "dark" : "light");
+            await _jsRuntime.InvokeVoidAsync("localStorage.setItem", "theme", _isDarkMode ? "dark" : "light");
         }
         catch (InvalidOperationException)
         {
@@ -60,7 +74,11 @@ public class ThemeService
         }
     }
 
-    private void NotifyStateChanged() => OnChange?.Invoke();
+    private void NotifyStateChanged()
+    {
+        _navigationManager.NavigateTo(_navigationManager.Uri, forceLoad: false);
+        OnChange?.Invoke();
+    }
 
     public static MudTheme LightTheme => new()
     {

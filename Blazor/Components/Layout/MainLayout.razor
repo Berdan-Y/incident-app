@@ -1,4 +1,6 @@
 ﻿@inherits LayoutComponentBase
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
 @inject ThemeService ThemeService
 
 <MudLayout>
@@ -29,9 +31,9 @@
         _drawerOpen = !_drawerOpen;
     }
 
-    void ToggleTheme()
+    async Task ToggleTheme()
     {
-        ThemeService.ToggleTheme();
+        await ThemeService.ToggleTheme();
     }
 }
 
