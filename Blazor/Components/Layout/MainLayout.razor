@@ -1,7 +1,10 @@
 ﻿@inherits LayoutComponentBase
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Authorization
 @inject ThemeService ThemeService
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <MudThemeProvider Theme="@ThemeService.CurrentTheme" />
 <MudDialogProvider />
@@ -39,6 +42,13 @@
     async Task ToggleTheme()
     {
         await ThemeService.ToggleTheme();
+    }
+
+    private async Task Logout()
+    {
+        var authState = (CustomAuthStateProvider)AuthenticationStateProvider;
+        await authState.Logout();
+        NavigationManager.NavigateTo("/login");
     }
 }
 

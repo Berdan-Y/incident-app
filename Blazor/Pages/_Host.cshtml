@@ -1,6 +1,7 @@
 @page "/"
 @namespace Blazor.Pages
 @using Blazor.Components
+@using Microsoft.AspNetCore.Components.Authorization
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <!DOCTYPE html>
@@ -16,7 +17,9 @@
     <HeadOutlet />
 </head>
 <body>
-    <component type="typeof(App)" render-mode="ServerPrerendered" />
+    <CascadingAuthenticationState>
+        <component type="typeof(App)" render-mode="ServerPrerendered" />
+    </CascadingAuthenticationState>
     <script src="_framework/blazor.server.js"></script>
     <script src="_content/MudBlazor/MudBlazor.min.js"></script>
     <script src="js/camera.js"></script>

@@ -1,6 +1,8 @@
 using Blazor.Components;
+using Blazor.Components.Services;
 using MudBlazor.Services;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Components.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,11 +12,18 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+// Add Authentication
+builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
+builder.Services.AddAuthorizationCore();
+
 // Add MudBlazor services
 builder.Services.AddMudServices();
 
 // Add ThemeService as scoped
 builder.Services.AddScoped<ThemeService>();
+
+// Add AuthService
+builder.Services.AddScoped<AuthService>();
 
 // Add HttpClient
 builder.Services.AddHttpClient("API", client =>

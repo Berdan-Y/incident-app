@@ -1,7 +1,27 @@
 ﻿@using MudBlazor
+@using Microsoft.AspNetCore.Components.Authorization
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <MudNavMenu>
     <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
-    <MudNavLink Href="/incidents/report" Icon="@Icons.Material.Filled.Add">Report Incident</MudNavLink>
-    <MudNavLink Href="weather" Icon="@Icons.Material.Filled.Cloud">Weather</MudNavLink>
+    <AuthorizeView>
+        <Authorized>
+            <MudNavLink Href="/incidents/report" Icon="@Icons.Material.Filled.Add">Report Incident</MudNavLink>
+            <MudNavLink Href="weather" Icon="@Icons.Material.Filled.Cloud">Weather</MudNavLink>
+            <MudNavLink OnClick="@Logout" Icon="@Icons.Material.Filled.Logout">Logout</MudNavLink>
+        </Authorized>
+        <NotAuthorized>
+            <MudNavLink Href="/login" Icon="@Icons.Material.Filled.Login">Login</MudNavLink>
+        </NotAuthorized>
+    </AuthorizeView>
 </MudNavMenu>
+
+@code {
+    private async Task Logout()
+    {
+        var authState = (CustomAuthStateProvider)AuthenticationStateProvider;
+        await authState.Logout();
+        NavigationManager.NavigateTo("/login");
+    }
+}
