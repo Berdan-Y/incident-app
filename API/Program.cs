@@ -3,7 +3,6 @@ using API.Data;
 using API.Helpers;
 using API.Middleware;
 using API.Models.Classes;
-using API.Models.Enums;
 using API.Repositories;
 using API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -18,6 +17,19 @@ var key = Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"] ?? thr
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+
+// Add CORS
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins("http://localhost:5292", "https://localhost:5292")
+              .AllowAnyMethod()
+              .AllowAnyHeader()
+              .AllowCredentials();
+    });
+});
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
@@ -86,6 +98,17 @@ builder.Services.AddAuthentication(options =>
             ValidAudience = builder.Configuration["JwtSettings:Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(key)
         };
+        options.Events = new JwtBearerEvents
+        {
+            OnAuthenticationFailed = context =>
+            {
+                if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
+                {
+                    context.Response.Headers.Add("Token-Expired", "true");
+                }
+                return Task.CompletedTask;
+            }
+        };
     });
 
 builder.Services.AddAuthorization(options =>
@@ -130,6 +153,9 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 }
 
 app.UseHttpsRedirection();
+
+// Add CORS before authentication
+app.UseCors();
 
 // Add JWT middleware before authentication
 app.UseMiddleware<JwtMiddleware>();

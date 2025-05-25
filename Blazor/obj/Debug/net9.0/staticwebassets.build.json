@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "mwcwKbO4xwSStVv4DTeey2enUDswlvSweYFcy6gk0c0=",
+  "Hash": "NOewPaYcJGi/Q3GbuNuQBvgJcLEFG5LOtRYXyih22ZY=",
   "Source": "Blazor",
   "BasePath": "_content/Blazor",
   "Mode": "Default",
@@ -498,6 +498,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/index.html"
+    },
+    {
+      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/d0ac1up9i5-rv83v6jxqy.gz",
+      "SourceId": "Blazor",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/",
+      "BasePath": "_content/Blazor",
+      "RelativePath": "js/camera#[.{fingerprint=rv83v6jxqy}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/js/camera.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "1bjlaoaomw",
+      "Integrity": "/Z5hao7IOPhzbF9xSDjyU1yB+Kvf+vtnZHu+zPnF/r4=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/js/camera.js"
     },
     {
       "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/daoq96vlz1-brrll72w73.gz",
@@ -1212,6 +1233,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/index.html"
+    },
+    {
+      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/js/camera.js",
+      "SourceId": "Blazor",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/",
+      "BasePath": "_content/Blazor",
+      "RelativePath": "js/camera#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "rv83v6jxqy",
+      "Integrity": "txaz+S/W+KUKWqlhpvCbNFcLrdPET0zpHT1AtAL8BYc=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/camera.js"
     },
     {
       "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
@@ -2826,7 +2868,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 24 May 2025 23:26:02 GMT"
+          "Value": "Sun, 25 May 2025 10:03:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2887,7 +2929,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 24 May 2025 23:26:02 GMT"
+          "Value": "Sun, 25 May 2025 10:03:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2932,7 +2974,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 24 May 2025 23:26:02 GMT"
+          "Value": "Sun, 25 May 2025 10:03:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2987,7 +3029,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 24 May 2025 23:26:02 GMT"
+          "Value": "Sun, 25 May 2025 10:03:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3048,7 +3090,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 24 May 2025 23:26:02 GMT"
+          "Value": "Sun, 25 May 2025 10:03:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3093,7 +3135,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 24 May 2025 23:26:02 GMT"
+          "Value": "Sun, 25 May 2025 10:03:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3148,7 +3190,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 24 May 2025 23:26:02 GMT"
+          "Value": "Sun, 25 May 2025 10:03:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3201,7 +3243,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 24 May 2025 23:26:02 GMT"
+          "Value": "Sun, 25 May 2025 10:03:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3238,7 +3280,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 24 May 2025 23:26:02 GMT"
+          "Value": "Sun, 25 May 2025 10:03:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3285,7 +3327,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 24 May 2025 23:26:02 GMT"
+          "Value": "Sun, 25 May 2025 10:03:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3338,7 +3380,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 24 May 2025 23:26:02 GMT"
+          "Value": "Sun, 25 May 2025 10:03:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3375,7 +3417,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 24 May 2025 23:26:02 GMT"
+          "Value": "Sun, 25 May 2025 10:03:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3774,6 +3816,304 @@
         {
           "Name": "integrity",
           "Value": "sha256-Ay9VLo2bg8oOgRPUsCcmWOwUTIFkSMMzyPUhD4aPKSc="
+        }
+      ]
+    },
+    {
+      "Route": "js/camera.js",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/d0ac1up9i5-rv83v6jxqy.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.002044989775"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "488"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/Z5hao7IOPhzbF9xSDjyU1yB+Kvf+vtnZHu+zPnF/r4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 25 May 2025 14:31:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"txaz+S/W+KUKWqlhpvCbNFcLrdPET0zpHT1AtAL8BYc=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-txaz+S/W+KUKWqlhpvCbNFcLrdPET0zpHT1AtAL8BYc="
+        }
+      ]
+    },
+    {
+      "Route": "js/camera.js",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/js/camera.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1140"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"txaz+S/W+KUKWqlhpvCbNFcLrdPET0zpHT1AtAL8BYc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 25 May 2025 14:31:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-txaz+S/W+KUKWqlhpvCbNFcLrdPET0zpHT1AtAL8BYc="
+        }
+      ]
+    },
+    {
+      "Route": "js/camera.js.gz",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/d0ac1up9i5-rv83v6jxqy.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "488"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/Z5hao7IOPhzbF9xSDjyU1yB+Kvf+vtnZHu+zPnF/r4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 25 May 2025 14:31:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-/Z5hao7IOPhzbF9xSDjyU1yB+Kvf+vtnZHu+zPnF/r4="
+        }
+      ]
+    },
+    {
+      "Route": "js/camera.rv83v6jxqy.js",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/d0ac1up9i5-rv83v6jxqy.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.002044989775"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "488"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/Z5hao7IOPhzbF9xSDjyU1yB+Kvf+vtnZHu+zPnF/r4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 25 May 2025 14:31:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"txaz+S/W+KUKWqlhpvCbNFcLrdPET0zpHT1AtAL8BYc=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "rv83v6jxqy"
+        },
+        {
+          "Name": "label",
+          "Value": "js/camera.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-txaz+S/W+KUKWqlhpvCbNFcLrdPET0zpHT1AtAL8BYc="
+        }
+      ]
+    },
+    {
+      "Route": "js/camera.rv83v6jxqy.js",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/js/camera.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1140"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"txaz+S/W+KUKWqlhpvCbNFcLrdPET0zpHT1AtAL8BYc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 25 May 2025 14:31:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "rv83v6jxqy"
+        },
+        {
+          "Name": "label",
+          "Value": "js/camera.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-txaz+S/W+KUKWqlhpvCbNFcLrdPET0zpHT1AtAL8BYc="
+        }
+      ]
+    },
+    {
+      "Route": "js/camera.rv83v6jxqy.js.gz",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/d0ac1up9i5-rv83v6jxqy.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "488"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/Z5hao7IOPhzbF9xSDjyU1yB+Kvf+vtnZHu+zPnF/r4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 25 May 2025 14:31:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "rv83v6jxqy"
+        },
+        {
+          "Name": "label",
+          "Value": "js/camera.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-/Z5hao7IOPhzbF9xSDjyU1yB+Kvf+vtnZHu+zPnF/r4="
         }
       ]
     },

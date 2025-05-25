@@ -16,6 +16,12 @@ builder.Services.AddMudServices();
 // Add ThemeService as scoped
 builder.Services.AddScoped<ThemeService>();
 
+// Add HttpClient
+builder.Services.AddHttpClient("API", client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration["ApiBaseUrl"] ?? "http://localhost:5292/");
+});
+
 // Configure Data Protection
 builder.Services.AddDataProtection()
     .SetApplicationName("IncidentApp")

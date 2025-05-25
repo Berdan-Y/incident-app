@@ -43,7 +43,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 24 May 2025 23:26:02 GMT"
+          "Value": "Sun, 25 May 2025 10:03:54 GMT"
         },
         {
           "Name": "Vary",
@@ -92,7 +92,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 24 May 2025 23:26:02 GMT"
+          "Value": "Sun, 25 May 2025 10:03:54 GMT"
         }
       ],
       "EndpointProperties": [
@@ -141,7 +141,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 24 May 2025 23:26:02 GMT"
+          "Value": "Sun, 25 May 2025 10:03:54 GMT"
         },
         {
           "Name": "Vary",
@@ -204,7 +204,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 24 May 2025 23:26:02 GMT"
+          "Value": "Sun, 25 May 2025 10:03:54 GMT"
         },
         {
           "Name": "Vary",
@@ -245,7 +245,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 24 May 2025 23:26:02 GMT"
+          "Value": "Sun, 25 May 2025 10:03:54 GMT"
         }
       ],
       "EndpointProperties": [
@@ -286,7 +286,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 24 May 2025 23:26:02 GMT"
+          "Value": "Sun, 25 May 2025 10:03:54 GMT"
         },
         {
           "Name": "Vary",
@@ -1339,6 +1339,304 @@
         {
           "Name": "integrity",
           "Value": "sha256-Ay9VLo2bg8oOgRPUsCcmWOwUTIFkSMMzyPUhD4aPKSc="
+        }
+      ]
+    },
+    {
+      "Route": "js/camera.js",
+      "AssetFile": "js/camera.js.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.002044989775"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "488"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/Z5hao7IOPhzbF9xSDjyU1yB+Kvf+vtnZHu+zPnF/r4=\""
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"txaz+S/W+KUKWqlhpvCbNFcLrdPET0zpHT1AtAL8BYc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 25 May 2025 14:31:10 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-txaz+S/W+KUKWqlhpvCbNFcLrdPET0zpHT1AtAL8BYc="
+        }
+      ]
+    },
+    {
+      "Route": "js/camera.js",
+      "AssetFile": "js/camera.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1140"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"txaz+S/W+KUKWqlhpvCbNFcLrdPET0zpHT1AtAL8BYc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 25 May 2025 14:31:10 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-txaz+S/W+KUKWqlhpvCbNFcLrdPET0zpHT1AtAL8BYc="
+        }
+      ]
+    },
+    {
+      "Route": "js/camera.js.gz",
+      "AssetFile": "js/camera.js.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "488"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/Z5hao7IOPhzbF9xSDjyU1yB+Kvf+vtnZHu+zPnF/r4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 25 May 2025 14:31:10 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-/Z5hao7IOPhzbF9xSDjyU1yB+Kvf+vtnZHu+zPnF/r4="
+        }
+      ]
+    },
+    {
+      "Route": "js/camera.rv83v6jxqy.js",
+      "AssetFile": "js/camera.js.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.002044989775"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "488"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/Z5hao7IOPhzbF9xSDjyU1yB+Kvf+vtnZHu+zPnF/r4=\""
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"txaz+S/W+KUKWqlhpvCbNFcLrdPET0zpHT1AtAL8BYc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 25 May 2025 14:31:10 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "rv83v6jxqy"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-txaz+S/W+KUKWqlhpvCbNFcLrdPET0zpHT1AtAL8BYc="
+        },
+        {
+          "Name": "label",
+          "Value": "js/camera.js"
+        }
+      ]
+    },
+    {
+      "Route": "js/camera.rv83v6jxqy.js",
+      "AssetFile": "js/camera.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1140"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"txaz+S/W+KUKWqlhpvCbNFcLrdPET0zpHT1AtAL8BYc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 25 May 2025 14:31:10 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "rv83v6jxqy"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-txaz+S/W+KUKWqlhpvCbNFcLrdPET0zpHT1AtAL8BYc="
+        },
+        {
+          "Name": "label",
+          "Value": "js/camera.js"
+        }
+      ]
+    },
+    {
+      "Route": "js/camera.rv83v6jxqy.js.gz",
+      "AssetFile": "js/camera.js.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "488"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/Z5hao7IOPhzbF9xSDjyU1yB+Kvf+vtnZHu+zPnF/r4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 25 May 2025 14:31:10 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "rv83v6jxqy"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-/Z5hao7IOPhzbF9xSDjyU1yB+Kvf+vtnZHu+zPnF/r4="
+        },
+        {
+          "Name": "label",
+          "Value": "js/camera.js.gz"
         }
       ]
     },

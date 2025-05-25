@@ -3,6 +3,11 @@
 @using Microsoft.AspNetCore.Components.Web
 @inject ThemeService ThemeService
 
+<MudThemeProvider Theme="@ThemeService.CurrentTheme" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+<MudPopoverProvider />
+
 <MudLayout>
     <MudAppBar>
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />

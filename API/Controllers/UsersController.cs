@@ -1,5 +1,5 @@
 using API.Data;
-using API.Dtos;
+using Shared.Models.Dtos;
 using API.Models.Classes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

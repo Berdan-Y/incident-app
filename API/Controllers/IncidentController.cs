@@ -1,12 +1,15 @@
-using API.Dtos;
-using API.Models.Enums;
+using Shared.Models.Enums;
 using API.Models.Classes;
 using API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Text.Json;
-using Status = API.Models.Enums.Status;
+using Shared.Models.Dtos;
+using IncidentCreateDto = Shared.Models.Dtos.IncidentCreateDto;
+using IncidentPhotoDto = Shared.Models.Dtos.IncidentPhotoDto;
+using IncidentResponseDto = Shared.Models.Dtos.IncidentResponseDto;
+using Status = Shared.Models.Enums.Status;
 
 namespace API.Controllers;
 

@@ -1,0 +1,92 @@
+@inject IJSRuntime JS
+
+<MudPaper Class="pa-4" Style="max-width: 450px; margin:auto;">
+    <MudButton Color="Color.Secondary"
+               Variant="Variant.Outlined"
+               StartIcon="@Icons.Material.Filled.CameraAlt"
+               OnClick="StartCamera"
+               Disabled="isCameraRunning"
+               Class="mb-2">
+        Start Camera
+    </MudButton>
+
+    <MudButton Color="Color.Primary"
+               Variant="Variant.Filled"
+               StartIcon="@Icons.Material.Filled.PhotoCamera"
+               OnClick="TakePhoto"
+               Disabled="!isCameraRunning"
+               Class="mb-2 ml-2">
+        Take Photo
+    </MudButton>
+
+    <div>
+        <video id="video" autoplay playsinline width="400" style="border-radius:8px; background:#000"></video>
+    </div>
+
+    <div class="mt-4">
+        @if (capturedImages != null && capturedImages.Count > 0)
+        {
+            <MudText Typo="Typo.subtitle1">Captured Photo(s):</MudText>
+            <MudGrid>
+                @foreach (var img in capturedImages)
+                {
+                    <MudItem xs="6" sm="4" md="3">
+                        <MudPaper Class="pa-1 ma-1 d-flex justify-center" Style="background:#f5f5f5;">
+                            <img src="@img" alt="Captured" style="width:100%; border-radius:8px;" />
+                        </MudPaper>
+                    </MudItem>
+                }
+            </MudGrid>
+            <MudButton Color="Color.Error"
+                       Variant="Variant.Text"
+                       StartIcon="@Icons.Material.Filled.Delete"
+                       OnClick="@ClearPhotos"
+                       Disabled="@(!capturedImages.Any())"
+                       Class="mb-2">
+                Clear All Photos
+            </MudButton>
+        }
+    </div>
+</MudPaper>
+
+@code {
+    private bool isCameraRunning = false;
+    private List<string> capturedImages = new();
+
+    private async Task StartCamera()
+    {
+        await JS.InvokeVoidAsync("startCamera");
+        isCameraRunning = true;
+        capturedImages.Clear();
+    }
+
+    private async Task TakePhoto()
+    {
+        try
+        {
+            var photoDataUrl = await JS.InvokeAsync<string>("takePhoto");
+            if (!string.IsNullOrWhiteSpace(photoDataUrl))
+            {
+                capturedImages.Add(photoDataUrl);
+                StateHasChanged();
+            } else
+            {
+                Console.WriteLine("No photo returned from JS.");
+            }
+        }
+        catch (JSException jsEx)
+        {
+            Console.WriteLine($"JavaScript error: {jsEx.Message}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Unexpected error: {ex}");
+            throw; // re-throw to catch in debugger
+        }
+    }
+    
+    private void ClearPhotos()
+    {
+        capturedImages.Clear();
+    }
+}

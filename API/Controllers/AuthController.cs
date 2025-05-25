@@ -1,6 +1,6 @@
 using System.Text.Json;
 using API.Data;
-using API.Dtos;
+using Shared.Models.Dtos;
 using API.Helpers;
 using API.Models.Classes;
 using Microsoft.AspNetCore.Authorization;

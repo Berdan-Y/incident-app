@@ -1,6 +1,7 @@
-using API.Models.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Shared.Models.Enums;
+using Status = Shared.Models.Enums.Status;
 
 namespace API.Models.Classes;
 

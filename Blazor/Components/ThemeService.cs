@@ -91,7 +91,9 @@ public class ThemeService
             DrawerBackground = Colors.Shades.White,
             DrawerText = "rgba(0,0,0, 0.7)",
             DrawerIcon = "rgba(0,0,0, 0.7)",
-            Success = Colors.Green.Accent4
+            Success = Colors.Green.Accent4,
+            Error = Colors.Red.Accent4,
+            Warning = Colors.Yellow.Accent4,
         }
     };
 
@@ -99,14 +101,16 @@ public class ThemeService
     {
         PaletteDark = new PaletteDark
         {
-            Primary = Colors.Blue.Lighten1,
-            Secondary = Colors.Green.Accent4,
-            AppbarBackground = Colors.Blue.Darken4,
-            Background = Colors.Shades.Black,
-            DrawerBackground = Colors.Shades.Black,
+            Primary = Colors.Gray.Lighten4,
+            Secondary = "rgb(236, 179, 101)",
+            AppbarBackground = "rgb(4, 41, 58)",
+            Background = "rgb(4, 28, 50)",
+            DrawerBackground = "rgb(4, 28, 50)",
             DrawerText = "rgba(255,255,255, 0.7)",
             DrawerIcon = "rgba(255,255,255, 0.7)",
-            Success = Colors.Green.Accent4
+            Success = Colors.Green.Accent4,
+            Error = Colors.Red.Accent4,
+            Warning = Colors.Yellow.Accent4,
         }
     };
 } 

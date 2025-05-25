@@ -1,10 +1,11 @@
-using API.Dtos;
+using Shared.Models.Dtos;
 using API.Models.Classes;
-using API.Models.Enums;
 using API.Repositories;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Shared.Models.Enums;
+using Status = Shared.Models.Enums.Status;
 
 namespace API.Services;
 
