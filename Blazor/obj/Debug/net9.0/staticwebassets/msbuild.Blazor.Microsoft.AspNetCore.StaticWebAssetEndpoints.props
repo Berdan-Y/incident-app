@@ -63,14 +63,26 @@
     <StaticWebAssetEndpoint Include="_content/Blazor/js/camera.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\camera.js'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-txaz\u002BS/W\u002BKUKWqlhpvCbNFcLrdPET0zpHT1AtAL8BYc="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1140"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022txaz\u002BS/W\u002BKUKWqlhpvCbNFcLrdPET0zpHT1AtAL8BYc=\u0022"},{"Name":"Last-Modified","Value":"Sun, 25 May 2025 14:31:10 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-Eq0alMhh5ziGWnr7on0RyA/RvwnXYbxAat7yqLzQy1M="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1139"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022Eq0alMhh5ziGWnr7on0RyA/RvwnXYbxAat7yqLzQy1M=\u0022"},{"Name":"Last-Modified","Value":"Thu, 29 May 2025 16:11:56 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/Blazor/js/camera.rv83v6jxqy.js">
+    <StaticWebAssetEndpoint Include="_content/Blazor/js/camera.mm8pje3lr1.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\camera.js'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"rv83v6jxqy"},{"Name":"integrity","Value":"sha256-txaz\u002BS/W\u002BKUKWqlhpvCbNFcLrdPET0zpHT1AtAL8BYc="},{"Name":"label","Value":"_content/Blazor/js/camera.js"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1140"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022txaz\u002BS/W\u002BKUKWqlhpvCbNFcLrdPET0zpHT1AtAL8BYc=\u0022"},{"Name":"Last-Modified","Value":"Sun, 25 May 2025 14:31:10 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"mm8pje3lr1"},{"Name":"integrity","Value":"sha256-Eq0alMhh5ziGWnr7on0RyA/RvwnXYbxAat7yqLzQy1M="},{"Name":"label","Value":"_content/Blazor/js/camera.js"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1139"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022Eq0alMhh5ziGWnr7on0RyA/RvwnXYbxAat7yqLzQy1M=\u0022"},{"Name":"Last-Modified","Value":"Thu, 29 May 2025 16:11:56 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/Blazor/js/googleMaps.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\googleMaps.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-XDgFmuJei\u002Bs23wVysE\u002BwnZWMu5Fx9x5b35Z2eON3Lug="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"4637"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022XDgFmuJei\u002Bs23wVysE\u002BwnZWMu5Fx9x5b35Z2eON3Lug=\u0022"},{"Name":"Last-Modified","Value":"Sun, 25 May 2025 18:25:59 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/Blazor/js/googleMaps.wrbb0mt96a.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\googleMaps.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"wrbb0mt96a"},{"Name":"integrity","Value":"sha256-XDgFmuJei\u002Bs23wVysE\u002BwnZWMu5Fx9x5b35Z2eON3Lug="},{"Name":"label","Value":"_content/Blazor/js/googleMaps.js"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"4637"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022XDgFmuJei\u002Bs23wVysE\u002BwnZWMu5Fx9x5b35Z2eON3Lug=\u0022"},{"Name":"Last-Modified","Value":"Sun, 25 May 2025 18:25:59 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/Blazor/lib/bootstrap/dist/css/bootstrap-grid.bqjiyaj88i.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\css\bootstrap-grid.css'))</AssetFile>

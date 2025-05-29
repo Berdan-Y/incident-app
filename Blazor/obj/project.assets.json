@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     "net9.0": {
+      "GoogleMaps/1.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/GoogleMaps.dll": {}
+        },
+        "runtime": {
+          "lib/GoogleMaps.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Authorization/9.0.1": {
         "type": "package",
         "dependencies": {
@@ -265,6 +274,18 @@
     }
   },
   "libraries": {
+    "GoogleMaps/1.0.1": {
+      "sha512": "SuDlS6Pe+Do0s+wA0c6O80/Yz1Cot7rXBxdRCZLAGYW+Jn3jA1MQ++uRQ+7Sw+5zYFjyT/zXWDrxslw6Lg03Vg==",
+      "type": "package",
+      "path": "googlemaps/1.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "googlemaps.1.0.1.nupkg.sha512",
+        "googlemaps.nuspec",
+        "lib/GoogleMaps.dll"
+      ]
+    },
     "Microsoft.AspNetCore.Authorization/9.0.1": {
       "sha512": "WgLlLBlMczb2+QLNG6sM95OUZ0EBztz60k/N75tjIgpyu0SdpIfYytAmX/7JJAjRTZF0c/CrWaQV+SH9FuGsrA==",
       "type": "package",
@@ -656,6 +677,7 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "GoogleMaps >= 1.0.1",
       "Microsoft.AspNetCore.Components.Web >= 9.0.1",
       "MudBlazor >= 8.6.0",
       "Shared >= 1.0.0"
@@ -709,6 +731,10 @@
       "net9.0": {
         "targetAlias": "net9.0",
         "dependencies": {
+          "GoogleMaps": {
+            "target": "Package",
+            "version": "[1.0.1, )"
+          },
           "Microsoft.AspNetCore.Components.Web": {
             "target": "Package",
             "version": "[9.0.1, )"
@@ -740,5 +766,17 @@
         "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'GoogleMaps 1.0.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0'. This package may not be fully compatible with your project.",
+      "libraryId": "GoogleMaps",
+      "targetGraphs": [
+        "net9.0"
+      ]
+    }
+  ]
 }

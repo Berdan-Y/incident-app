@@ -25,6 +25,10 @@
       "PackagePath": "staticwebassets/js/camera.js"
     },
     {
+      "Id": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/js/googleMaps.js",
+      "PackagePath": "staticwebassets/js/googleMaps.js"
+    },
+    {
       "Id": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.css"
     },

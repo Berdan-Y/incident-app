@@ -88,5 +88,7 @@
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/Blazor.pdb
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/Blazor.genruntimeconfig.cache
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/ref/Blazor.dll
-/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/d0ac1up9i5-rv83v6jxqy.gz
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/ivef3mez61-uxoqvs4pkg.gz
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/GoogleMaps.dll
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/1k2xn9efdj-wrbb0mt96a.gz
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/d0ac1up9i5-mm8pje3lr1.gz

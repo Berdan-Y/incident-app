@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "pNgI77OnM4M=",
+  "dgSpecHash": "sUZnTnB4cHE=",
   "success": true,
   "projectFilePath": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/Blazor.csproj",
   "expectedPackageFiles": [
+    "/Users/berdanyilmaz/.nuget/packages/googlemaps/1.0.1/googlemaps.1.0.1.nupkg.sha512",
     "/Users/berdanyilmaz/.nuget/packages/microsoft.aspnetcore.authorization/9.0.1/microsoft.aspnetcore.authorization.9.0.1.nupkg.sha512",
     "/Users/berdanyilmaz/.nuget/packages/microsoft.aspnetcore.components/9.0.1/microsoft.aspnetcore.components.9.0.1.nupkg.sha512",
     "/Users/berdanyilmaz/.nuget/packages/microsoft.aspnetcore.components.analyzers/9.0.1/microsoft.aspnetcore.components.analyzers.9.0.1.nupkg.sha512",
@@ -20,5 +21,16 @@
     "/Users/berdanyilmaz/.nuget/packages/microsoft.jsinterop/9.0.1/microsoft.jsinterop.9.0.1.nupkg.sha512",
     "/Users/berdanyilmaz/.nuget/packages/mudblazor/8.6.0/mudblazor.8.6.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'GoogleMaps 1.0.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0'. This package may not be fully compatible with your project.",
+      "libraryId": "GoogleMaps",
+      "targetGraphs": [
+        "net9.0"
+      ]
+    }
+  ]
 }

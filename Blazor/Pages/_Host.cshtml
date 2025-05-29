@@ -23,6 +23,46 @@
     <script src="_framework/blazor.server.js"></script>
     <script src="_content/MudBlazor/MudBlazor.min.js"></script>
     <script src="js/camera.js"></script>
+    <script>
+        window.triggerFileInput = () => {
+            const fileInput = document.getElementById('file-upload');
+            if (fileInput) fileInput.click();
+        }
+    </script>
     <script src="js/app.js"></script>
+    <script src="js/googleMaps.js"></script>
+    <script>
+        // Define the callback function before loading the API
+        window.initMap = function() {
+            console.log('Google Maps API loaded');
+            if (window.google && window.google.maps) {
+                window.mapInitialized = true;
+                // Trigger any pending initializations
+                if (window.pendingInitialization) {
+                    window.initializeGoogleMaps(
+                        window.pendingInitialization.mapElementId,
+                        window.pendingInitialization.dotNetReference,
+                        window.pendingInitialization.initialLat,
+                        window.pendingInitialization.initialLng
+                    );
+                    window.pendingInitialization = null;
+                }
+            } else {
+                console.error('Google Maps API failed to load properly');
+            }
+        };
+
+        // Load the Google Maps API
+        (function loadGoogleMaps() {
+            const script = document.createElement('script');
+            script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDsQd3FtHLZnQYThk_PsGiCCpfDksexAoE&libraries=places&callback=initMap';
+            script.async = true;
+            script.defer = true;
+            script.onerror = function() {
+                console.error('Failed to load Google Maps API');
+            };
+            document.head.appendChild(script);
+        })();
+    </script>
 </body>
 </html> 

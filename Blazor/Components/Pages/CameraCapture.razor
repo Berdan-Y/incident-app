@@ -1,27 +1,49 @@
 @inject IJSRuntime JS
 
 <MudPaper Class="pa-4" Style="max-width: 450px; margin:auto;">
-    <MudButton Color="Color.Secondary"
-               Variant="Variant.Outlined"
-               StartIcon="@Icons.Material.Filled.CameraAlt"
-               OnClick="StartCamera"
-               Disabled="isCameraRunning"
-               Class="mb-2">
-        Start Camera
-    </MudButton>
+    <MudTabs>
+        <MudTabPanel Text="Camera">
+            <MudButton Color="Color.Secondary"
+                      Variant="Variant.Outlined"
+                      StartIcon="@Icons.Material.Filled.CameraAlt"
+                      OnClick="StartCamera"
+                      Disabled="isCameraRunning"
+                      Class="mb-2">
+                Start Camera
+            </MudButton>
 
-    <MudButton Color="Color.Primary"
-               Variant="Variant.Filled"
-               StartIcon="@Icons.Material.Filled.PhotoCamera"
-               OnClick="TakePhoto"
-               Disabled="!isCameraRunning"
-               Class="mb-2 ml-2">
-        Take Photo
-    </MudButton>
+            <MudButton Color="Color.Primary"
+                      Variant="Variant.Filled"
+                      StartIcon="@Icons.Material.Filled.PhotoCamera"
+                      OnClick="TakePhoto"
+                      Disabled="!isCameraRunning"
+                      Class="mb-2 ml-2">
+                Take Photo
+            </MudButton>
 
-    <div>
-        <video id="video" autoplay playsinline width="400" style="border-radius:8px; background:#000"></video>
-    </div>
+            <div>
+                <video id="video" autoplay playsinline width="400" style="border-radius:8px; background:#000"></video>
+            </div>
+        </MudTabPanel>
+        
+        <MudTabPanel Text="Upload">
+            <MudButton Variant="Variant.Filled"
+                       Color="Color.Secondary"
+                       StartIcon="@Icons.Material.Filled.CloudUpload"
+                       OnClick="TriggerFileInput">
+                Select Photos
+            </MudButton>
+
+            <InputFile id="file-upload" OnChange="OnFilesChanged" multiple style="display:none;" />
+
+            <MudText Typo="Typo.body2" Class="mt-2">
+                Supported formats: JPG, JPEG, PNG
+            </MudText>
+            <MudText Typo="Typo.body2" Class="mt-1">
+                Maximum file size: 5MB
+            </MudText>
+        </MudTabPanel>
+    </MudTabs>
 
     <div class="mt-4">
         @if (capturedImages != null && capturedImages.Count > 0)
@@ -41,11 +63,11 @@
                 }
             </MudGrid>
             <MudButton Color="Color.Error"
-                       Variant="Variant.Text"
-                       StartIcon="@Icons.Material.Filled.Delete"
-                       OnClick="@ClearPhotos"
-                       Disabled="@(!capturedImages.Any())"
-                       Class="mb-2">
+                      Variant="Variant.Text"
+                      StartIcon="@Icons.Material.Filled.Delete"
+                      OnClick="@ClearPhotos"
+                      Disabled="@(!capturedImages.Any())"
+                      Class="mb-2">
                 Clear All Photos
             </MudButton>
         }
@@ -55,6 +77,7 @@
 @code {
     private bool isCameraRunning = false;
     private List<string> capturedImages = new();
+    private ElementReference fileInput;
 
     [Parameter]
     public EventCallback<List<string>> OnImagesCaptured { get; set; }
@@ -67,6 +90,41 @@
         await OnImagesCaptured.InvokeAsync(capturedImages);
     }
 
+    private async Task TriggerFileInput()
+    {
+        await JS.InvokeVoidAsync("triggerFileInput");
+    }
+
+    private async Task OnFilesChanged(InputFileChangeEventArgs e)
+    {
+        foreach (var file in e.GetMultipleFiles())
+        {
+            if (!file.ContentType.StartsWith("image/"))
+            {
+                Console.WriteLine($"Skipped file '{file.Name}' - not an image.");
+                continue;
+            }
+
+            if (file.Size > 5 * 1024 * 1024)
+            {
+                Console.WriteLine($"File '{file.Name}' exceeds size limit of 5MB.");
+                continue;
+            }
+
+            using var stream = file.OpenReadStream(maxAllowedSize: 5 * 1024 * 1024);
+            using var ms = new MemoryStream();
+            await stream.CopyToAsync(ms);
+            var base64 = Convert.ToBase64String(ms.ToArray());
+            var dataUrl = $"data:{file.ContentType};base64,{base64}";
+            
+            capturedImages.Add(dataUrl);
+        }
+        
+        await JS.InvokeVoidAsync("setCapturedImages", capturedImages);
+        await OnImagesCaptured.InvokeAsync(capturedImages);
+        StateHasChanged();
+    }
+    
     private async Task TakePhoto()
     {
         try

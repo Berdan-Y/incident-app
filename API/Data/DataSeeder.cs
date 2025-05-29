@@ -17,13 +17,18 @@ public class DataSeeder
         // Clean existing data
         await CleanDataAsync();
 
-        // Seed roles
-        var roles = new List<Role>
+        // Seed roles if they don't exist
+        if (!await _context.Roles.AnyAsync())
         {
-            new() { Id = Role.AdminId, Name = Role.Admin },
-            new() { Id = Role.FieldEmployeeId, Name = Role.FieldEmployee },
-            new() { Id = Role.MemberId, Name = Role.Member }
-        };
+            var roles = new List<Role>
+            {
+                new() { Name = Role.Admin },
+                new() { Name = Role.FieldEmployee },
+                new() { Name = Role.Member }
+            };
+            await _context.Roles.AddRangeAsync(roles);
+            await _context.SaveChangesAsync();
+        }
 
         var now = DateTime.UtcNow;
         var adminUser = new User
@@ -45,11 +50,11 @@ public class DataSeeder
             Password = BCrypt.Net.BCrypt.HashPassword("password"),
             FirstName = "Test",
             LastName = "User",
+            RoleJson = "{\"Name\":\"Member\"}",
             CreatedAt = now,
             UpdatedAt = now
         };
 
-        await _context.Roles.AddRangeAsync(roles);
         await _context.Users.AddRangeAsync(adminUser, testUser);
         await _context.SaveChangesAsync();
 
@@ -57,12 +62,17 @@ public class DataSeeder
         var adminRole = await _context.Roles.FindAsync(Role.AdminId);
         var memberRole = await _context.Roles.FindAsync(Role.MemberId);
 
+        if (adminRole == null || memberRole == null)
+        {
+            throw new InvalidOperationException("Required roles not found in database");
+        }
+
         var adminUserRole = new UserRole
         {
             UserId = adminUser.Id,
             RoleId = Role.AdminId,
             User = adminUser,
-            Role = adminRole!
+            Role = adminRole
         };
 
         var testUserRole = new UserRole
@@ -70,7 +80,7 @@ public class DataSeeder
             UserId = testUser.Id,
             RoleId = Role.MemberId,
             User = testUser,
-            Role = memberRole!
+            Role = memberRole
         };
 
         await _context.UserRoles.AddRangeAsync(adminUserRole, testUserRole);
@@ -84,6 +94,8 @@ public class DataSeeder
         _context.Users.RemoveRange(await _context.Users.ToListAsync());
         _context.Roles.RemoveRange(await _context.Roles.ToListAsync());
         _context.Incidents.RemoveRange(await _context.Incidents.ToListAsync());
+        _context.InvalidatedTokens.RemoveRange(await _context.InvalidatedTokens.ToListAsync());
+        _context.IncidentPhotos.RemoveRange(await _context.IncidentPhotos.ToListAsync());
 
         await _context.SaveChangesAsync();
     }

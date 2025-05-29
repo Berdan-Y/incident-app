@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "5wuzMabCJT5FCC9gr5/KZLlcbyMB9f8UvGl2m7mIuek=",
+  "Hash": "aIXknZKNJCqJ2Bwwm7dWzc7XojymXYTQ8anZILL8+kk=",
   "Source": "Blazor",
   "BasePath": "_content/Blazor",
   "Mode": "Default",
@@ -204,6 +204,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css"
+    },
+    {
+      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/1k2xn9efdj-wrbb0mt96a.gz",
+      "SourceId": "Blazor",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/",
+      "BasePath": "_content/Blazor",
+      "RelativePath": "js/googleMaps#[.{fingerprint=wrbb0mt96a}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/js/googleMaps.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "nt6m72s0qj",
+      "Integrity": "CzuUMZzygas8yEe1yGFPCosPgr+l8pEcvNTGQu7v1PA=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/js/googleMaps.js"
     },
     {
       "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/279efj3h0q-k8d9w2qqmf.gz",
@@ -500,12 +521,12 @@
       "OriginalItemSpec": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/index.html"
     },
     {
-      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/d0ac1up9i5-rv83v6jxqy.gz",
+      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/d0ac1up9i5-mm8pje3lr1.gz",
       "SourceId": "Blazor",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/",
       "BasePath": "_content/Blazor",
-      "RelativePath": "js/camera#[.{fingerprint=rv83v6jxqy}]?.js.gz",
+      "RelativePath": "js/camera#[.{fingerprint=mm8pje3lr1}]?.js.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -514,8 +535,8 @@
       "RelatedAsset": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/js/camera.js",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "1bjlaoaomw",
-      "Integrity": "/Z5hao7IOPhzbF9xSDjyU1yB+Kvf+vtnZHu+zPnF/r4=",
+      "Fingerprint": "8cel6op3oc",
+      "Integrity": "2LGTwqhz9U0K0oVGAYGGWCq7IrE4Mi9Rxqf7YL3KjMg=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/js/camera.js"
@@ -1291,11 +1312,32 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "rv83v6jxqy",
-      "Integrity": "txaz+S/W+KUKWqlhpvCbNFcLrdPET0zpHT1AtAL8BYc=",
+      "Fingerprint": "mm8pje3lr1",
+      "Integrity": "Eq0alMhh5ziGWnr7on0RyA/RvwnXYbxAat7yqLzQy1M=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/js/camera.js"
+    },
+    {
+      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/js/googleMaps.js",
+      "SourceId": "Blazor",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/",
+      "BasePath": "_content/Blazor",
+      "RelativePath": "js/googleMaps#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "wrbb0mt96a",
+      "Integrity": "XDgFmuJei+s23wVysE+wnZWMu5Fx9x5b35Z2eON3Lug=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/googleMaps.js"
     },
     {
       "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
@@ -4161,7 +4203,7 @@
     },
     {
       "Route": "js/camera.js",
-      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/d0ac1up9i5-rv83v6jxqy.gz",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/d0ac1up9i5-mm8pje3lr1.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -4180,11 +4222,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"/Z5hao7IOPhzbF9xSDjyU1yB+Kvf+vtnZHu+zPnF/r4=\""
+          "Value": "\"2LGTwqhz9U0K0oVGAYGGWCq7IrE4Mi9Rxqf7YL3KjMg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 25 May 2025 14:31:10 GMT"
+          "Value": "Thu, 29 May 2025 16:11:56 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4204,13 +4246,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"txaz+S/W+KUKWqlhpvCbNFcLrdPET0zpHT1AtAL8BYc=\""
+          "Value": "W/\"Eq0alMhh5ziGWnr7on0RyA/RvwnXYbxAat7yqLzQy1M=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-txaz+S/W+KUKWqlhpvCbNFcLrdPET0zpHT1AtAL8BYc="
+          "Value": "sha256-Eq0alMhh5ziGWnr7on0RyA/RvwnXYbxAat7yqLzQy1M="
         }
       ]
     },
@@ -4225,7 +4267,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1140"
+          "Value": "1139"
         },
         {
           "Name": "Content-Type",
@@ -4233,11 +4275,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"txaz+S/W+KUKWqlhpvCbNFcLrdPET0zpHT1AtAL8BYc=\""
+          "Value": "\"Eq0alMhh5ziGWnr7on0RyA/RvwnXYbxAat7yqLzQy1M=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 25 May 2025 14:31:10 GMT"
+          "Value": "Thu, 29 May 2025 16:11:56 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4247,13 +4289,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-txaz+S/W+KUKWqlhpvCbNFcLrdPET0zpHT1AtAL8BYc="
+          "Value": "sha256-Eq0alMhh5ziGWnr7on0RyA/RvwnXYbxAat7yqLzQy1M="
         }
       ]
     },
     {
       "Route": "js/camera.js.gz",
-      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/d0ac1up9i5-rv83v6jxqy.gz",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/d0ac1up9i5-mm8pje3lr1.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4270,11 +4312,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"/Z5hao7IOPhzbF9xSDjyU1yB+Kvf+vtnZHu+zPnF/r4=\""
+          "Value": "\"2LGTwqhz9U0K0oVGAYGGWCq7IrE4Mi9Rxqf7YL3KjMg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 25 May 2025 14:31:10 GMT"
+          "Value": "Thu, 29 May 2025 16:11:56 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4292,13 +4334,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-/Z5hao7IOPhzbF9xSDjyU1yB+Kvf+vtnZHu+zPnF/r4="
+          "Value": "sha256-2LGTwqhz9U0K0oVGAYGGWCq7IrE4Mi9Rxqf7YL3KjMg="
         }
       ]
     },
     {
-      "Route": "js/camera.rv83v6jxqy.js",
-      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/d0ac1up9i5-rv83v6jxqy.gz",
+      "Route": "js/camera.mm8pje3lr1.js",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/d0ac1up9i5-mm8pje3lr1.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -4317,11 +4359,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"/Z5hao7IOPhzbF9xSDjyU1yB+Kvf+vtnZHu+zPnF/r4=\""
+          "Value": "\"2LGTwqhz9U0K0oVGAYGGWCq7IrE4Mi9Rxqf7YL3KjMg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 25 May 2025 14:31:10 GMT"
+          "Value": "Thu, 29 May 2025 16:11:56 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4341,13 +4383,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"txaz+S/W+KUKWqlhpvCbNFcLrdPET0zpHT1AtAL8BYc=\""
+          "Value": "W/\"Eq0alMhh5ziGWnr7on0RyA/RvwnXYbxAat7yqLzQy1M=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "rv83v6jxqy"
+          "Value": "mm8pje3lr1"
         },
         {
           "Name": "label",
@@ -4355,12 +4397,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-txaz+S/W+KUKWqlhpvCbNFcLrdPET0zpHT1AtAL8BYc="
+          "Value": "sha256-Eq0alMhh5ziGWnr7on0RyA/RvwnXYbxAat7yqLzQy1M="
         }
       ]
     },
     {
-      "Route": "js/camera.rv83v6jxqy.js",
+      "Route": "js/camera.mm8pje3lr1.js",
       "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/js/camera.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -4370,7 +4412,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1140"
+          "Value": "1139"
         },
         {
           "Name": "Content-Type",
@@ -4378,11 +4420,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"txaz+S/W+KUKWqlhpvCbNFcLrdPET0zpHT1AtAL8BYc=\""
+          "Value": "\"Eq0alMhh5ziGWnr7on0RyA/RvwnXYbxAat7yqLzQy1M=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 25 May 2025 14:31:10 GMT"
+          "Value": "Thu, 29 May 2025 16:11:56 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4392,7 +4434,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "rv83v6jxqy"
+          "Value": "mm8pje3lr1"
         },
         {
           "Name": "label",
@@ -4400,13 +4442,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-txaz+S/W+KUKWqlhpvCbNFcLrdPET0zpHT1AtAL8BYc="
+          "Value": "sha256-Eq0alMhh5ziGWnr7on0RyA/RvwnXYbxAat7yqLzQy1M="
         }
       ]
     },
     {
-      "Route": "js/camera.rv83v6jxqy.js.gz",
-      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/d0ac1up9i5-rv83v6jxqy.gz",
+      "Route": "js/camera.mm8pje3lr1.js.gz",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/d0ac1up9i5-mm8pje3lr1.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4423,11 +4465,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"/Z5hao7IOPhzbF9xSDjyU1yB+Kvf+vtnZHu+zPnF/r4=\""
+          "Value": "\"2LGTwqhz9U0K0oVGAYGGWCq7IrE4Mi9Rxqf7YL3KjMg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 25 May 2025 14:31:10 GMT"
+          "Value": "Thu, 29 May 2025 16:11:56 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4445,7 +4487,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "rv83v6jxqy"
+          "Value": "mm8pje3lr1"
         },
         {
           "Name": "label",
@@ -4453,7 +4495,305 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-/Z5hao7IOPhzbF9xSDjyU1yB+Kvf+vtnZHu+zPnF/r4="
+          "Value": "sha256-2LGTwqhz9U0K0oVGAYGGWCq7IrE4Mi9Rxqf7YL3KjMg="
+        }
+      ]
+    },
+    {
+      "Route": "js/googleMaps.js",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/1k2xn9efdj-wrbb0mt96a.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000765696784"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1305"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"CzuUMZzygas8yEe1yGFPCosPgr+l8pEcvNTGQu7v1PA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 25 May 2025 18:25:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"XDgFmuJei+s23wVysE+wnZWMu5Fx9x5b35Z2eON3Lug=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-XDgFmuJei+s23wVysE+wnZWMu5Fx9x5b35Z2eON3Lug="
+        }
+      ]
+    },
+    {
+      "Route": "js/googleMaps.js",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/js/googleMaps.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4637"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"XDgFmuJei+s23wVysE+wnZWMu5Fx9x5b35Z2eON3Lug=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 25 May 2025 18:25:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-XDgFmuJei+s23wVysE+wnZWMu5Fx9x5b35Z2eON3Lug="
+        }
+      ]
+    },
+    {
+      "Route": "js/googleMaps.js.gz",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/1k2xn9efdj-wrbb0mt96a.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1305"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"CzuUMZzygas8yEe1yGFPCosPgr+l8pEcvNTGQu7v1PA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 25 May 2025 18:25:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-CzuUMZzygas8yEe1yGFPCosPgr+l8pEcvNTGQu7v1PA="
+        }
+      ]
+    },
+    {
+      "Route": "js/googleMaps.wrbb0mt96a.js",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/1k2xn9efdj-wrbb0mt96a.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000765696784"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1305"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"CzuUMZzygas8yEe1yGFPCosPgr+l8pEcvNTGQu7v1PA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 25 May 2025 18:25:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"XDgFmuJei+s23wVysE+wnZWMu5Fx9x5b35Z2eON3Lug=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "wrbb0mt96a"
+        },
+        {
+          "Name": "label",
+          "Value": "js/googleMaps.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-XDgFmuJei+s23wVysE+wnZWMu5Fx9x5b35Z2eON3Lug="
+        }
+      ]
+    },
+    {
+      "Route": "js/googleMaps.wrbb0mt96a.js",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/js/googleMaps.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4637"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"XDgFmuJei+s23wVysE+wnZWMu5Fx9x5b35Z2eON3Lug=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 25 May 2025 18:25:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "wrbb0mt96a"
+        },
+        {
+          "Name": "label",
+          "Value": "js/googleMaps.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-XDgFmuJei+s23wVysE+wnZWMu5Fx9x5b35Z2eON3Lug="
+        }
+      ]
+    },
+    {
+      "Route": "js/googleMaps.wrbb0mt96a.js.gz",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/1k2xn9efdj-wrbb0mt96a.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1305"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"CzuUMZzygas8yEe1yGFPCosPgr+l8pEcvNTGQu7v1PA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 25 May 2025 18:25:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "wrbb0mt96a"
+        },
+        {
+          "Name": "label",
+          "Value": "js/googleMaps.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-CzuUMZzygas8yEe1yGFPCosPgr+l8pEcvNTGQu7v1PA="
         }
       ]
     },

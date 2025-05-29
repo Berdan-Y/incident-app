@@ -1,4 +1,6 @@
 @page "/incidents/report"
+@using GoogleMaps
+@using GoogleMaps.Markers
 @using Shared.Models.Enums
 @using Shared.Models.Dtos
 @using Microsoft.Extensions.Logging
@@ -34,34 +36,11 @@
             <MudRadioGroup T="LocationInputMethod" 
                           @bind-Value="locationInputMethod"
                           Class="mb-4">
-                <MudRadio T="LocationInputMethod" Value="@LocationInputMethod.Coordinates" Color="Color.Primary">Coordinates (Latitude/Longitude)</MudRadio>
-                <MudRadio T="LocationInputMethod" Value="@LocationInputMethod.Address" Color="Color.Primary">Address</MudRadio>
+                <MudRadio T="LocationInputMethod" Value="@LocationInputMethod.GoogleMaps" Color="Color.Primary">Google Maps</MudRadio>
+                <MudRadio T="LocationInputMethod" Value="@LocationInputMethod.Address" Color="Color.Primary">Manual Address</MudRadio>
             </MudRadioGroup>
             
-            @if (locationInputMethod == LocationInputMethod.Coordinates)
-            {
-                <MudGrid>
-                    <MudItem xs="12" sm="6">
-                        <MudNumericField @bind-Value="incident.Latitude" 
-                                       Label="Latitude" 
-                                       Required="true"
-                                       RequiredError="Latitude is required!"
-                                       Min="-90" 
-                                       Max="90"
-                                       Class="mb-4"/>
-                    </MudItem>
-                    <MudItem xs="12" sm="6">
-                        <MudNumericField @bind-Value="incident.Longitude" 
-                                       Label="Longitude" 
-                                       Required="true"
-                                       RequiredError="Longitude is required!"
-                                       Min="-180" 
-                                       Max="180"
-                                       Class="mb-4"/>
-                    </MudItem>
-                </MudGrid>
-            }
-            else
+            @if (locationInputMethod != LocationInputMethod.GoogleMaps)
             {
                 <MudTextField @bind-Value="incident.Address" 
                              Label="Address" 
@@ -78,17 +57,6 @@
                              Class="mb-4"/>
             }
             
-            <MudFileUpload T="IBrowserFile" 
-                           FilesChanged="@((file) => OnFilesChanged(new[] { file }))" 
-                           Accept=".jpg,.jpeg,.png" 
-                           Class="mb-4"
-                           label="Upload Photos"
-                           buttonColor="Color.Secondary"
-                           buttonVariant="Variant.Filled"
-                           startIcon="@Icons.Material.Filled.CloudUpload"
-                           multiple="true"
-                           maxSize="5242880"
-                           maxSizeText="Maximum file size is 5MB"/>
             <CameraCapture OnImagesCaptured="HandleCapturedImages" />
             
             <MudButton Variant="Variant.Filled" 
@@ -113,7 +81,11 @@
         Priority = Priority.Unknown
     };
     private List<UploadedFile> uploadedFiles = new();
-    private LocationInputMethod _locationInputMethod = LocationInputMethod.Coordinates;
+    private LocationInputMethod _locationInputMethod = LocationInputMethod.Address;
+    private string searchAddress = string.Empty;
+    private GoogleMap? map;
+    private Marker? marker;
+    private DotNetObjectReference<CreateIncident>? objRef;
     
     private LocationInputMethod locationInputMethod
     {
@@ -130,7 +102,7 @@
     
     public enum LocationInputMethod
     {
-        Coordinates,
+        GoogleMaps,
         Address
     }
     
@@ -313,7 +285,7 @@
     protected override async Task OnInitializedAsync()
     {
         // Set initial values based on the default location method
-        if (locationInputMethod == LocationInputMethod.Coordinates)
+        if (locationInputMethod == LocationInputMethod.GoogleMaps)
         {
             incident.Address = string.Empty;
             incident.ZipCode = string.Empty;
@@ -329,20 +301,41 @@
 
     private async Task HandleLocationMethodChange(LocationInputMethod method)
     {
-        // Clear the other method's values
-        if (method == LocationInputMethod.Coordinates)
+        if (method == LocationInputMethod.GoogleMaps)
         {
-            incident.Address = string.Empty;
-            incident.ZipCode = string.Empty;
+            try
+            {
+                // Initialize map first with default coordinates
+                await InitializeGoogleMaps();
+                
+                // Then request location permission
+                var position = await JS.InvokeAsync<GeolocationPosition>("getCurrentPosition");
+                if (position != null && position.Coords != null)
+                {
+                    incident.Latitude = position.Coords.Latitude;
+                    incident.Longitude = position.Coords.Longitude;
+                    
+                    // Update map with current position
+                    await JS.InvokeVoidAsync("updateMapMarker", incident.Latitude, incident.Longitude);
+                    
+                    // Get address from coordinates
+                    var address = await ReverseGeocode(incident.Latitude, incident.Longitude);
+                    incident.Address = address;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWarning(ex, "Location permission denied or error getting location");
+                await InvokeAsync(() => Snackbar.Add("Location access denied. You can still use the map to select a location.", Severity.Warning));
+            }
         }
         else
         {
-            incident.Latitude = 0.0;
-            incident.Longitude = 0.0;
+            // Clear coordinates when switching to manual address
+            incident.Latitude = 0;
+            incident.Longitude = 0;
         }
-
-        // Revalidate the form
-        await form.Validate();
+        
         await InvokeAsync(StateHasChanged);
     }
 
@@ -362,33 +355,24 @@
                 // Create a temporary file name
                 var fileName = $"captured_{DateTime.UtcNow.Ticks}.jpg";
 
-                // Get file data from JavaScript
-                var fileData = await JS.InvokeAsync<FileData>("createFileFromBytes", 
-                    imageBytes, 
-                    fileName, 
-                    "image/jpeg");
-
-                if (fileData != null)
+                // Create a browser file from the memory stream
+                var browserFile = new BrowserFile
                 {
-                    // Create a browser file from the memory stream
-                    var browserFile = new BrowserFile
-                    {
-                        Name = fileData.Name,
-                        ContentType = fileData.ContentType,
-                        Size = fileData.Size,
-                        LastModified = DateTimeOffset.UtcNow
-                    };
-                    browserFile.SetData(fileData.Data);
+                    Name = fileName,
+                    ContentType = "image/jpeg",
+                    Size = imageBytes.Length,
+                    LastModified = DateTimeOffset.UtcNow
+                };
+                browserFile.SetData(imageBytes);
 
-                    // Add to uploaded files
-                    var url = await GetImageUrl(browserFile);
-                    uploadedFiles.Add(new UploadedFile
-                    {
-                        Name = fileName,
-                        Url = url,
-                        File = browserFile
-                    });
-                }
+                // Add to uploaded files
+                var url = await GetImageUrl(browserFile);
+                uploadedFiles.Add(new UploadedFile
+                {
+                    Name = fileName,
+                    Url = url,
+                    File = browserFile
+                });
             }
 
             await InvokeAsync(StateHasChanged);
@@ -396,7 +380,7 @@
         catch (Exception ex)
         {
             Logger.LogError(ex, "Error processing captured images");
-            await InvokeAsync(() => Snackbar.Add($"Error processing captured images: {ex.Message}", Severity.Error));
+            await InvokeAsync(() => Snackbar.Add($"Error processing images: {ex.Message}", Severity.Error));
         }
     }
 
@@ -430,5 +414,156 @@
             // Create a new MemoryStream with the data but don't dispose it
             return new MemoryStream(_data, false);
         }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            objRef = DotNetObjectReference.Create(this);
+        }
+    }
+    
+    public void Dispose()
+    {
+        objRef?.Dispose();
+    }
+    
+    private async Task InitializeGoogleMaps()
+    {
+        try
+        {
+            // Initialize map with default coordinates (e.g., city center)
+            const double defaultLat = 51.5074; // London coordinates as default
+            const double defaultLng = -0.1278;
+            
+            incident.Latitude = defaultLat;
+            incident.Longitude = defaultLng;
+            
+            await JS.InvokeVoidAsync("initializeGoogleMaps", "map", objRef, defaultLat, defaultLng);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Error initializing Google Maps");
+            await InvokeAsync(() => Snackbar.Add("Error initializing Google Maps. Please try again.", Severity.Error));
+            throw;
+        }
+    }
+    
+    [JSInvokable]
+    public async Task OnMapClick(double lat, double lng)
+    {
+        incident.Latitude = lat;
+        incident.Longitude = lng;
+        
+        try
+        {
+            var address = await ReverseGeocode(lat, lng);
+            incident.Address = address;
+            await InvokeAsync(StateHasChanged);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Error reverse geocoding");
+        }
+    }
+    
+    private async Task HandleAddressSearch(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            try
+            {
+                var result = await GeocodeAddress(searchAddress);
+                if (result != null)
+                {
+                    incident.Latitude = result.Latitude;
+                    incident.Longitude = result.Longitude;
+                    incident.Address = result.Address;
+                    incident.ZipCode = result.ZipCode;
+                    
+                    await JS.InvokeVoidAsync("updateMapMarker", incident.Latitude, incident.Longitude);
+                    await InvokeAsync(StateHasChanged);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex, "Error geocoding address");
+                await InvokeAsync(() => Snackbar.Add("Error finding location", Severity.Error));
+            }
+        }
+    }
+    
+    private async Task<GeocodeResult?> GeocodeAddress(string address)
+    {
+        try
+        {
+            var httpClient = HttpClientFactory.CreateClient("API");
+            var response = await httpClient.GetAsync($"api/Geocode?address={Uri.EscapeDataString(address)}");
+            
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadFromJsonAsync<GeocodeResult>();
+            }
+            
+            return null;
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Error in geocoding");
+            throw;
+        }
+    }
+    
+    private async Task<string> ReverseGeocode(double? lat, double? lng)
+    {
+        if (!lat.HasValue || !lng.HasValue)
+        {
+            return string.Empty;
+        }
+
+        try
+        {
+            var httpClient = HttpClientFactory.CreateClient("API");
+            var response = await httpClient.GetAsync($"api/Geocode/Reverse?lat={lat.Value}&lng={lng.Value}");
+            
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadFromJsonAsync<GeocodeResult>();
+                return result?.Address ?? string.Empty;
+            }
+            
+            return string.Empty;
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Error in reverse geocoding");
+            throw;
+        }
+    }
+    
+    private class GeocodeResult
+    {
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+        public string Address { get; set; } = string.Empty;
+        public string ZipCode { get; set; } = string.Empty;
+    }
+
+    private class GeolocationPosition
+    {
+        public GeolocationCoordinates Coords { get; set; } = new();
+        public long Timestamp { get; set; }
+    }
+
+    private class GeolocationCoordinates
+    {
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+        public double Accuracy { get; set; }
+        public double? Altitude { get; set; }
+        public double? AltitudeAccuracy { get; set; }
+        public double? Heading { get; set; }
+        public double? Speed { get; set; }
     }
 }
