@@ -22,9 +22,9 @@ public class DataSeeder
         {
             var roles = new List<Role>
             {
-                new() { Name = Role.Admin },
-                new() { Name = Role.FieldEmployee },
-                new() { Name = Role.Member }
+                new() { Id = Role.AdminId, Name = Role.Admin },
+                new() { Id = Role.FieldEmployeeId, Name = Role.FieldEmployee },
+                new() { Id = Role.MemberId, Name = Role.Member }
             };
             await _context.Roles.AddRangeAsync(roles);
             await _context.SaveChangesAsync();
