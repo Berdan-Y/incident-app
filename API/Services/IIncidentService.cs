@@ -1,6 +1,6 @@
-using API.Dtos;
-using API.Models.Enums;
-using Microsoft.AspNetCore.Http;
+using Shared.Models.Dtos;
+using Shared.Models.Enums;
+using Status = Shared.Models.Enums.Status;
 
 namespace API.Services;
 

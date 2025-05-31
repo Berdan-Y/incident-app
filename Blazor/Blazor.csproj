@@ -10,4 +10,10 @@
       <ProjectReference Include="..\Shared\Shared.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="GoogleMaps" Version="1.0.1" />
+      <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.1" />
+      <PackageReference Include="MudBlazor" Version="8.6.0" />
+    </ItemGroup>
+
 </Project>

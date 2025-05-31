@@ -1,0 +1,569 @@
+@page "/incidents/report"
+@using GoogleMaps
+@using GoogleMaps.Markers
+@using Shared.Models.Enums
+@using Shared.Models.Dtos
+@using Microsoft.Extensions.Logging
+@inject ThemeService ThemeService
+@inject NavigationManager NavigationManager
+@inject IHttpClientFactory HttpClientFactory
+@inject ISnackbar Snackbar
+@inject ILogger<CreateIncident> Logger
+@inject IJSRuntime JS
+
+<PageTitle>Report Incident</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.Small" Class="mt-16">
+    <MudPaper Class="pa-4">
+        <MudText Typo="Typo.h4" Class="mb-4">Report New Incident</MudText>
+        
+        <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
+            <MudTextField @bind-Value="incident.Title" 
+                         Label="Title" 
+                         Required="true" 
+                         RequiredError="Title is required!"
+                         MaxLength="200"
+                         Class="mb-4"/>
+            
+            <MudTextField @bind-Value="incident.Description" 
+                         Label="Description" 
+                         Required="true" 
+                         RequiredError="Description is required!"
+                         Lines="3"
+                         Class="mb-4"/>
+            
+            <MudText Typo="Typo.subtitle1" Class="mb-2">Location Information</MudText>
+            <MudRadioGroup T="LocationInputMethod" 
+                          @bind-Value="locationInputMethod"
+                          Class="mb-4">
+                <MudRadio T="LocationInputMethod" Value="@LocationInputMethod.GoogleMaps" Color="Color.Primary">Google Maps</MudRadio>
+                <MudRadio T="LocationInputMethod" Value="@LocationInputMethod.Address" Color="Color.Primary">Manual Address</MudRadio>
+            </MudRadioGroup>
+            
+            @if (locationInputMethod != LocationInputMethod.GoogleMaps)
+            {
+                <MudTextField @bind-Value="incident.Address" 
+                             Label="Address" 
+                             Required="true"
+                             RequiredError="Address is required!"
+                             MaxLength="500"
+                             Class="mb-4"/>
+                
+                <MudTextField @bind-Value="incident.ZipCode" 
+                             Label="Zip Code" 
+                             Required="true"
+                             RequiredError="Zip Code is required!"
+                             MaxLength="20"
+                             Class="mb-4"/>
+            }
+            
+            <CameraCapture OnImagesCaptured="HandleCapturedImages" />
+            
+            <MudButton Variant="Variant.Filled" 
+                      Color="Color.Primary" 
+                      OnClick="Submit" 
+                      Disabled="@(!success)"
+                      Class="mt-4">
+                Submit Report
+            </MudButton>
+        </MudForm>
+    </MudPaper>
+</MudContainer>
+
+@code {
+    private MudForm form = null!;
+    private bool success;
+    private string[] errors = Array.Empty<string>();
+    private IncidentCreateDto incident = new()
+    {
+        Title = string.Empty,
+        Description = string.Empty,
+        Priority = Priority.Unknown
+    };
+    private List<UploadedFile> uploadedFiles = new();
+    private LocationInputMethod _locationInputMethod = LocationInputMethod.Address;
+    private string searchAddress = string.Empty;
+    private GoogleMap? map;
+    private Marker? marker;
+    private DotNetObjectReference<CreateIncident>? objRef;
+    
+    private LocationInputMethod locationInputMethod
+    {
+        get => _locationInputMethod;
+        set
+        {
+            if (_locationInputMethod != value)
+            {
+                _locationInputMethod = value;
+                HandleLocationMethodChange(value);
+            }
+        }
+    }
+    
+    public enum LocationInputMethod
+    {
+        GoogleMaps,
+        Address
+    }
+    
+    private class UploadedFile
+    {
+        public required string Name { get; set; }
+        public required string Url { get; set; }
+        public required IBrowserFile File { get; set; }
+    }
+    
+    private async Task OnFilesChanged(IBrowserFile[] files)
+    {
+        try
+        {
+            Logger.LogInformation($"Files selected: {files.Length} files");
+            await JS.InvokeVoidAsync("console.log", $"Files selected: {files.Length} files");
+            
+            foreach (var file in files)
+            {
+                Logger.LogInformation($"Processing file: {file.Name}, Size: {file.Size} bytes, ContentType: {file.ContentType}");
+                await JS.InvokeVoidAsync("console.log", $"Processing file: {file.Name}, Size: {file.Size} bytes, ContentType: {file.ContentType}");
+                
+                if (uploadedFiles.Count >= 10)
+                {
+                    Logger.LogWarning("Maximum file limit reached");
+                    await InvokeAsync(() => Snackbar.Add("Maximum 10 photos allowed", Severity.Warning));
+                    return;
+                }
+                
+                if (file.Size > 5 * 1024 * 1024) // 5MB limit
+                {
+                    Logger.LogWarning($"File {file.Name} exceeds size limit");
+                    await InvokeAsync(() => Snackbar.Add("File size must be less than 5MB", Severity.Warning));
+                    return;
+                }
+                
+                var url = await GetImageUrl(file);
+                uploadedFiles.Add(new UploadedFile
+                {
+                    Name = file.Name,
+                    Url = url,
+                    File = file
+                });
+                
+                Logger.LogInformation($"Successfully added file {file.Name} to upload queue");
+                await JS.InvokeVoidAsync("console.log", $"Successfully added file {file.Name} to upload queue");
+            }
+            
+            await InvokeAsync(StateHasChanged);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Error processing files");
+            await JS.InvokeVoidAsync("console.error", $"Error processing files: {ex.Message}");
+            await InvokeAsync(() => Snackbar.Add($"Error processing files: {ex.Message}", Severity.Error));
+        }
+    }
+    
+    private async Task RemoveFile(UploadedFile file)
+    {
+        uploadedFiles.Remove(file);
+        
+        // If it's a captured file, notify the CameraCapture component
+        if (file.Name.StartsWith("captured_"))
+        {
+            // Get the current list of captured images from the CameraCapture component
+            var capturedImages = await JS.InvokeAsync<List<string>>("getCapturedImages");
+            if (capturedImages != null)
+            {
+                // Remove the corresponding image from the CameraCapture component
+                await JS.InvokeVoidAsync("removeCapturedImage", capturedImages.IndexOf(file.Url));
+            }
+        }
+        
+        await InvokeAsync(StateHasChanged);
+    }
+    
+    private async Task<string> GetImageUrl(IBrowserFile file)
+    {
+        try
+        {
+            Logger.LogInformation($"Creating preview URL for file: {file.Name}");
+            
+            using var stream = file.OpenReadStream(maxAllowedSize: 5 * 1024 * 1024); // 5MB limit
+            using var ms = new MemoryStream();
+            await stream.CopyToAsync(ms);
+            var base64 = Convert.ToBase64String(ms.ToArray());
+            var url = $"data:{file.ContentType};base64,{base64}";
+            
+            Logger.LogInformation($"Successfully created preview URL for {file.Name}");
+            return url;
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, $"Error creating preview URL for {file.Name}");
+            throw;
+        }
+    }
+    
+    private async Task Submit()
+    {
+        try
+        {
+            Logger.LogInformation("Submit method called");
+            
+            if (!form.IsValid)
+            {
+                Logger.LogWarning("Form is not valid");
+                await InvokeAsync(() => Snackbar.Add("Please fill in all required fields", Severity.Warning));
+                return;
+            }
+
+            var httpClient = HttpClientFactory.CreateClient("API");
+            
+            // Create form data
+            using var formData = new MultipartFormDataContent();
+            
+            // Add incident data as JSON
+            var incidentJson = System.Text.Json.JsonSerializer.Serialize(incident);
+            formData.Add(new StringContent(incidentJson, System.Text.Encoding.UTF8, "application/json"), "incident");
+            
+            // Debug: Log the form data content
+            await JS.InvokeVoidAsync("console.log", "Form data content:");
+            await JS.InvokeVoidAsync("console.log", $"Incident JSON: {incidentJson}");
+            await JS.InvokeVoidAsync("console.log", $"Number of files to upload: {uploadedFiles.Count}");
+            
+            // Add photos
+            foreach (var file in uploadedFiles)
+            {
+                try
+                {
+                    // Create a new memory stream for each file
+                    var stream = file.File.OpenReadStream();
+                    var content = new StreamContent(stream);
+                    content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(file.File.ContentType);
+                    
+                    // Debug: Log file details
+                    await JS.InvokeVoidAsync("console.log", $"Adding file: {file.Name}, ContentType: {file.File.ContentType}, Size: {file.File.Size}");
+                    
+                    formData.Add(content, "photos", file.Name);
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogError(ex, $"Error processing file {file.Name}");
+                    throw;
+                }
+            }
+            
+            // Debug: Log the final request
+            await JS.InvokeVoidAsync("console.log", "Sending request to API...");
+            
+            // Send request
+            var response = await httpClient.PostAsync("api/Incident", formData);
+            
+            // Debug: Log the response
+            await JS.InvokeVoidAsync("console.log", $"Response status: {response.StatusCode}");
+            var responseContent = await response.Content.ReadAsStringAsync();
+            await JS.InvokeVoidAsync("console.log", $"Response content: {responseContent}");
+            
+            if (response.IsSuccessStatusCode)
+            {
+                Logger.LogInformation("Incident reported successfully");
+                await InvokeAsync(() => Snackbar.Add("Incident reported successfully", Severity.Success));
+                NavigationManager.NavigateTo("/incidents");
+            }
+            else
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                Logger.LogError("API returned error: {Error}", error);
+                await InvokeAsync(() => Snackbar.Add($"Error: {error}", Severity.Error));
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Error submitting incident");
+            await InvokeAsync(() => Snackbar.Add($"Error: {ex.Message}", Severity.Error));
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Set initial values based on the default location method
+        if (locationInputMethod == LocationInputMethod.GoogleMaps)
+        {
+            incident.Address = string.Empty;
+            incident.ZipCode = string.Empty;
+        }
+        else
+        {
+            incident.Latitude = 0.0;
+            incident.Longitude = 0.0;
+        }
+        
+        await base.OnInitializedAsync();
+    }
+
+    private async Task HandleLocationMethodChange(LocationInputMethod method)
+    {
+        if (method == LocationInputMethod.GoogleMaps)
+        {
+            try
+            {
+                // Initialize map first with default coordinates
+                await InitializeGoogleMaps();
+                
+                // Then request location permission
+                var position = await JS.InvokeAsync<GeolocationPosition>("getCurrentPosition");
+                if (position != null && position.Coords != null)
+                {
+                    incident.Latitude = position.Coords.Latitude;
+                    incident.Longitude = position.Coords.Longitude;
+                    
+                    // Update map with current position
+                    await JS.InvokeVoidAsync("updateMapMarker", incident.Latitude, incident.Longitude);
+                    
+                    // Get address from coordinates
+                    var address = await ReverseGeocode(incident.Latitude, incident.Longitude);
+                    incident.Address = address;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWarning(ex, "Location permission denied or error getting location");
+                await InvokeAsync(() => Snackbar.Add("Location access denied. You can still use the map to select a location.", Severity.Warning));
+            }
+        }
+        else
+        {
+            // Clear coordinates when switching to manual address
+            incident.Latitude = 0;
+            incident.Longitude = 0;
+        }
+        
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async Task HandleCapturedImages(List<string> capturedImages)
+    {
+        try
+        {
+            // Clear existing uploaded files from camera captures
+            uploadedFiles.RemoveAll(f => f.Name.StartsWith("captured_"));
+
+            foreach (var imageDataUrl in capturedImages)
+            {
+                // Convert data URL to byte array
+                var base64Data = imageDataUrl.Split(',')[1];
+                var imageBytes = Convert.FromBase64String(base64Data);
+
+                // Create a temporary file name
+                var fileName = $"captured_{DateTime.UtcNow.Ticks}.jpg";
+
+                // Create a browser file from the memory stream
+                var browserFile = new BrowserFile
+                {
+                    Name = fileName,
+                    ContentType = "image/jpeg",
+                    Size = imageBytes.Length,
+                    LastModified = DateTimeOffset.UtcNow
+                };
+                browserFile.SetData(imageBytes);
+
+                // Add to uploaded files
+                var url = await GetImageUrl(browserFile);
+                uploadedFiles.Add(new UploadedFile
+                {
+                    Name = fileName,
+                    Url = url,
+                    File = browserFile
+                });
+            }
+
+            await InvokeAsync(StateHasChanged);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Error processing captured images");
+            await InvokeAsync(() => Snackbar.Add($"Error processing images: {ex.Message}", Severity.Error));
+        }
+    }
+
+    private class FileData
+    {
+        public string Name { get; set; } = string.Empty;
+        public long Size { get; set; }
+        public string ContentType { get; set; } = string.Empty;
+        public byte[] Data { get; set; } = Array.Empty<byte>();
+    }
+
+    private class BrowserFile : IBrowserFile
+    {
+        public string Name { get; set; } = string.Empty;
+        public string ContentType { get; set; } = string.Empty;
+        public long Size { get; set; }
+        public DateTimeOffset LastModified { get; set; } = DateTimeOffset.UtcNow;
+        private byte[] _data = Array.Empty<byte>();
+
+        public void SetData(byte[] data)
+        {
+            _data = data;
+        }
+
+        public Stream OpenReadStream(long maxAllowedSize = 512000, CancellationToken cancellationToken = default)
+        {
+            if (_data.Length > maxAllowedSize)
+            {
+                throw new IOException($"File size ({_data.Length} bytes) exceeds the maximum allowed size of {maxAllowedSize} bytes");
+            }
+            // Create a new MemoryStream with the data but don't dispose it
+            return new MemoryStream(_data, false);
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            objRef = DotNetObjectReference.Create(this);
+        }
+    }
+    
+    public void Dispose()
+    {
+        objRef?.Dispose();
+    }
+    
+    private async Task InitializeGoogleMaps()
+    {
+        try
+        {
+            // Initialize map with default coordinates (e.g., city center)
+            const double defaultLat = 51.5074; // London coordinates as default
+            const double defaultLng = -0.1278;
+            
+            incident.Latitude = defaultLat;
+            incident.Longitude = defaultLng;
+            
+            await JS.InvokeVoidAsync("initializeGoogleMaps", "map", objRef, defaultLat, defaultLng);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Error initializing Google Maps");
+            await InvokeAsync(() => Snackbar.Add("Error initializing Google Maps. Please try again.", Severity.Error));
+            throw;
+        }
+    }
+    
+    [JSInvokable]
+    public async Task OnMapClick(double lat, double lng)
+    {
+        incident.Latitude = lat;
+        incident.Longitude = lng;
+        
+        try
+        {
+            var address = await ReverseGeocode(lat, lng);
+            incident.Address = address;
+            await InvokeAsync(StateHasChanged);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Error reverse geocoding");
+        }
+    }
+    
+    private async Task HandleAddressSearch(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            try
+            {
+                var result = await GeocodeAddress(searchAddress);
+                if (result != null)
+                {
+                    incident.Latitude = result.Latitude;
+                    incident.Longitude = result.Longitude;
+                    incident.Address = result.Address;
+                    incident.ZipCode = result.ZipCode;
+                    
+                    await JS.InvokeVoidAsync("updateMapMarker", incident.Latitude, incident.Longitude);
+                    await InvokeAsync(StateHasChanged);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex, "Error geocoding address");
+                await InvokeAsync(() => Snackbar.Add("Error finding location", Severity.Error));
+            }
+        }
+    }
+    
+    private async Task<GeocodeResult?> GeocodeAddress(string address)
+    {
+        try
+        {
+            var httpClient = HttpClientFactory.CreateClient("API");
+            var response = await httpClient.GetAsync($"api/Geocode?address={Uri.EscapeDataString(address)}");
+            
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadFromJsonAsync<GeocodeResult>();
+            }
+            
+            return null;
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Error in geocoding");
+            throw;
+        }
+    }
+    
+    private async Task<string> ReverseGeocode(double? lat, double? lng)
+    {
+        if (!lat.HasValue || !lng.HasValue)
+        {
+            return string.Empty;
+        }
+
+        try
+        {
+            var httpClient = HttpClientFactory.CreateClient("API");
+            var response = await httpClient.GetAsync($"api/Geocode/Reverse?lat={lat.Value}&lng={lng.Value}");
+            
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadFromJsonAsync<GeocodeResult>();
+                return result?.Address ?? string.Empty;
+            }
+            
+            return string.Empty;
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Error in reverse geocoding");
+            throw;
+        }
+    }
+    
+    private class GeocodeResult
+    {
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+        public string Address { get; set; } = string.Empty;
+        public string ZipCode { get; set; } = string.Empty;
+    }
+
+    private class GeolocationPosition
+    {
+        public GeolocationCoordinates Coords { get; set; } = new();
+        public long Timestamp { get; set; }
+    }
+
+    private class GeolocationCoordinates
+    {
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+        public double Accuracy { get; set; }
+        public double? Altitude { get; set; }
+        public double? AltitudeAccuracy { get; set; }
+        public double? Heading { get; set; }
+        public double? Speed { get; set; }
+    }
+}

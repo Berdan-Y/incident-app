@@ -1,4 +1,4 @@
-using API.Dtos;
+using Shared.Models.Dtos;
 using API.Models.Classes;
 
 namespace API.Repositories;

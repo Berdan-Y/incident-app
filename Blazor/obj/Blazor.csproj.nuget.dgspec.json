@@ -48,6 +48,20 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
+          "dependencies": {
+            "GoogleMaps": {
+              "target": "Package",
+              "version": "[1.0.1, )"
+            },
+            "Microsoft.AspNetCore.Components.Web": {
+              "target": "Package",
+              "version": "[9.0.1, )"
+            },
+            "MudBlazor": {
+              "target": "Package",
+              "version": "[8.6.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

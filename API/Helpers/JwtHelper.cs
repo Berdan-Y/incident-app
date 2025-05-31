@@ -25,7 +25,7 @@ public sealed class JwtHelper
             .Where(ur => ur.UserId == user.Id)
             .Select(ur => ur.Role.Name)
             .ToListAsync();
-        
+
         List<Claim> claims = [
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new Claim(ClaimTypes.Email, user.Email),
@@ -41,7 +41,7 @@ public sealed class JwtHelper
             expires: DateTime.Now.AddMinutes(Convert.ToDouble(_config["JwtSettings:ExpiresInMinutes"])),
             signingCredentials: creds
         );
-        
+
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
 }

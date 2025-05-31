@@ -3,7 +3,6 @@ using API.Data;
 using API.Helpers;
 using API.Middleware;
 using API.Models.Classes;
-using API.Models.Enums;
 using API.Repositories;
 using API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -18,6 +17,19 @@ var key = Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"] ?? thr
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+
+// Add CORS
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins("http://localhost:5292", "https://localhost:5292")
+              .AllowAnyMethod()
+              .AllowAnyHeader()
+              .AllowCredentials();
+    });
+});
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
@@ -26,7 +38,7 @@ builder.Services.AddSwaggerGen(c =>
         Version = "v1",
         Description = "API for Incident Management System"
     });
-    
+
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Type = SecuritySchemeType.Http,
@@ -57,7 +69,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddDbContext<IncidentDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<JwtHelper>();
 builder.Services.AddScoped<DataSeeder>();
 
@@ -85,6 +97,17 @@ builder.Services.AddAuthentication(options =>
             ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
             ValidAudience = builder.Configuration["JwtSettings:Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(key)
+        };
+        options.Events = new JwtBearerEvents
+        {
+            OnAuthenticationFailed = context =>
+            {
+                if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
+                {
+                    context.Response.Headers.Add("Token-Expired", "true");
+                }
+                return Task.CompletedTask;
+            }
         };
     });
 
@@ -123,13 +146,16 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Incident API v1");
         c.RoutePrefix = "swagger";
-        
+
         // Add custom JavaScript to handle the token automatically
         c.InjectJavascript("/swagger-ui/custom.js");
     });
 }
 
 app.UseHttpsRedirection();
+
+// Add CORS before authentication
+app.UseCors();
 
 // Add JWT middleware before authentication
 app.UseMiddleware<JwtMiddleware>();
@@ -212,7 +238,7 @@ app.MapGet("/swagger-ui/custom.js", async context =>
 }, 500);
 ";
 
-    
+
     context.Response.ContentType = "application/javascript";
     await context.Response.WriteAsync(js);
 });

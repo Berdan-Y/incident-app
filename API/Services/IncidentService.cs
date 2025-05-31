@@ -1,10 +1,11 @@
-using API.Dtos;
+using Shared.Models.Dtos;
 using API.Models.Classes;
-using API.Models.Enums;
 using API.Repositories;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Shared.Models.Enums;
+using Status = Shared.Models.Enums.Status;
 
 namespace API.Services;
 
@@ -174,7 +175,7 @@ public class IncidentService : IIncidentService
             throw new InvalidOperationException("Maximum number of photos (10) reached for this incident");
 
         var filePath = await _fileService.SaveFileAsync(photo, "uploads/incidents");
-        
+
         var photoEntity = new IncidentPhoto
         {
             FileName = photo.FileName,

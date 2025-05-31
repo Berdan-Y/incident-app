@@ -1,7 +1,11 @@
-using API.Dtos;
-using API.Models.Enums;
+using Shared.Models.Dtos;
+using Shared.Models.Enums;
 using API.Models.Classes;
 using AutoMapper;
+using IncidentCreateDto = Shared.Models.Dtos.IncidentCreateDto;
+using IncidentPhotoDto = Shared.Models.Dtos.IncidentPhotoDto;
+using IncidentResponseDto = Shared.Models.Dtos.IncidentResponseDto;
+using UserDto = Shared.Models.Dtos.UserDto;
 
 namespace API.Mapping;
 
@@ -28,4 +32,4 @@ public class MappingProfile : Profile
 
         CreateMap<IncidentPhoto, IncidentPhotoDto>();
     }
-} 
+}

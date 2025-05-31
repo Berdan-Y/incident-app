@@ -6,7 +6,7 @@ namespace API.Data;
 
 public sealed class IncidentDbContext : DbContext
 {
-    public IncidentDbContext(DbContextOptions<IncidentDbContext> options) 
+    public IncidentDbContext(DbContextOptions<IncidentDbContext> options)
         : base(options)
     {
     }
@@ -28,5 +28,6 @@ public sealed class IncidentDbContext : DbContext
             .IsUnique();
 
         modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
+        modelBuilder.ApplyConfiguration(new RoleConfiguration());
     }
 }

@@ -1,4 +1,7 @@
 is_global = true
+build_property.MudDebugAnalyzer = 
+build_property.MudAllowedAttributePattern = 
+build_property.MudAllowedAttributeList = 
 build_property.TargetFramework = net9.0
 build_property.TargetPlatformMinVersion = 
 build_property.UsingMicrosoftNETSdkWeb = true
@@ -24,8 +27,16 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/Components/Pages/CameraCapture.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9DYW1lcmFDYXB0dXJlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/Components/Pages/Counter.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Db3VudGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/Components/Pages/CreateIncident.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9DcmVhdGVJbmNpZGVudC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/Components/Pages/Error.razor]
@@ -36,12 +47,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Ib21lLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/Components/Pages/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Mb2dpbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/Components/Pages/Weather.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9XZWF0aGVyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/Components/Routes.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9Sb3V0ZXMucmF6b3I=
+[/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/Components/RedirectToLogin.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9SZWRpcmVjdFRvTG9naW4ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/Components/_Imports.razor]
@@ -55,3 +70,7 @@ build_metadata.AdditionalFiles.CssScope = b-povkajn6p7
 [/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/Components/Layout/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvTmF2TWVudS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-th16srcc6z
+
+[/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/Pages/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX0hvc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 

@@ -1,5 +1,5 @@
 using API.Data;
-using API.Dtos;
+using Shared.Models.Dtos;
 using API.Models.Classes;
 using Microsoft.EntityFrameworkCore;
 
@@ -46,7 +46,7 @@ public class IncidentRepository : IIncidentRepository
     {
         _context.Incidents.Add(incident);
         await _context.SaveChangesAsync();
-        
+
         // Reload the incident with related entities
         return await _context.Incidents
             .Include(i => i.CreatedBy)
@@ -58,7 +58,7 @@ public class IncidentRepository : IIncidentRepository
     {
         _context.Entry(incident).State = EntityState.Modified;
         await _context.SaveChangesAsync();
-        
+
         // Reload the incident with related entities
         return await _context.Incidents
             .Include(i => i.CreatedBy)
@@ -107,59 +107,37 @@ public class IncidentRepository : IIncidentRepository
 
         // Apply filters
         if (!string.IsNullOrEmpty(filter.Title))
-        {
             query = query.Where(i => i.Title.Contains(filter.Title));
-        }
 
         if (!string.IsNullOrEmpty(filter.Description))
-        {
             query = query.Where(i => i.Description.Contains(filter.Description));
-        }
 
         if (filter.Status.HasValue)
-        {
             query = query.Where(i => i.Status == filter.Status.Value);
-        }
 
         if (filter.Priority.HasValue)
-        {
             query = query.Where(i => i.Priority == filter.Priority.Value);
-        }
 
         if (filter.AssignedToId.HasValue)
-        {
             query = query.Where(i => i.AssignedToId == filter.AssignedToId.Value);
-        }
 
         if (filter.ReportedById.HasValue)
-        {
             query = query.Where(i => i.ReportedById == filter.ReportedById.Value);
-        }
 
         if (filter.CreatedFrom.HasValue)
-        {
             query = query.Where(i => i.CreatedAt >= filter.CreatedFrom.Value);
-        }
 
         if (filter.CreatedTo.HasValue)
-        {
             query = query.Where(i => i.CreatedAt <= filter.CreatedTo.Value);
-        }
 
         if (filter.UpdatedFrom.HasValue)
-        {
             query = query.Where(i => i.UpdatedAt >= filter.UpdatedFrom.Value);
-        }
 
         if (filter.UpdatedTo.HasValue)
-        {
             query = query.Where(i => i.UpdatedAt <= filter.UpdatedTo.Value);
-        }
 
         if (!string.IsNullOrEmpty(filter.Location))
-        {
             query = query.Where(i => i.Address.Contains(filter.Location) || i.ZipCode.Contains(filter.Location));
-        }
 
         // Apply distance filter if coordinates and distance are provided
         if (filter.Latitude.HasValue && filter.Longitude.HasValue && filter.DistanceInKm.HasValue)
@@ -169,7 +147,7 @@ public class IncidentRepository : IIncidentRepository
             var lat = filter.Latitude.Value;
             var lon = filter.Longitude.Value;
 
-            query = query.Where(i => 
+            query = query.Where(i =>
                 (6371 * Math.Acos(
                     Math.Cos(lat * Math.PI / 180) * Math.Cos(i.Latitude * Math.PI / 180) *
                     Math.Cos((lon - i.Longitude) * Math.PI / 180) +
@@ -183,7 +161,7 @@ public class IncidentRepository : IIncidentRepository
         {
             query = filter.SortBy.ToLower() switch
             {
-                "title" => filter.SortDescending 
+                "title" => filter.SortDescending
                     ? query.OrderByDescending(i => i.Title)
                     : query.OrderBy(i => i.Title),
                 "description" => filter.SortDescending
@@ -201,21 +179,21 @@ public class IncidentRepository : IIncidentRepository
                 "assignee" => filter.SortDescending
                     ? query.OrderByDescending(i => i.AssignedTo.FirstName + " " + i.AssignedTo.LastName)
                     : query.OrderBy(i => i.AssignedTo.FirstName + " " + i.AssignedTo.LastName),
-                "createdat" => filter.SortDescending 
+                "createdat" => filter.SortDescending
                     ? query.OrderByDescending(i => i.CreatedAt)
                     : query.OrderBy(i => i.CreatedAt),
                 "updatedat" => filter.SortDescending
                     ? query.OrderByDescending(i => i.UpdatedAt)
                     : query.OrderBy(i => i.UpdatedAt),
-                "location" when filter.Latitude.HasValue && filter.Longitude.HasValue => 
+                "location" when filter.Latitude.HasValue && filter.Longitude.HasValue =>
                     filter.SortDescending
-                        ? query.OrderByDescending(i => 
+                        ? query.OrderByDescending(i =>
                             (6371 * Math.Acos(
                                 Math.Cos(filter.Latitude.Value * Math.PI / 180) * Math.Cos(i.Latitude * Math.PI / 180) *
                                 Math.Cos((filter.Longitude.Value - i.Longitude) * Math.PI / 180) +
                                 Math.Sin(filter.Latitude.Value * Math.PI / 180) * Math.Sin(i.Latitude * Math.PI / 180)
                             )))
-                        : query.OrderBy(i => 
+                        : query.OrderBy(i =>
                             (6371 * Math.Acos(
                                 Math.Cos(filter.Latitude.Value * Math.PI / 180) * Math.Cos(i.Latitude * Math.PI / 180) *
                                 Math.Cos((filter.Longitude.Value - i.Longitude) * Math.PI / 180) +
