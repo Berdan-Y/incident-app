@@ -27,7 +27,7 @@ public class CustomAuthStateProvider : AuthenticationStateProvider
 
         var identity = new ClaimsIdentity(claims, "CustomAuth");
         _authenticatedUser = new ClaimsPrincipal(identity);
-        
+
         NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
         return Task.CompletedTask;
     }
@@ -38,4 +38,4 @@ public class CustomAuthStateProvider : AuthenticationStateProvider
         NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
         return Task.CompletedTask;
     }
-} 
+}

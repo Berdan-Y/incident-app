@@ -9,7 +9,7 @@ internal sealed class RoleConfiguration : IEntityTypeConfiguration<Role>
     {
         builder.HasKey(r => r.Id);
         builder.Property(r => r.Name).IsRequired().HasMaxLength(50);
-        
+
         // Configure Id to not be an identity column
         builder.Property(r => r.Id)
             .ValueGeneratedNever();
