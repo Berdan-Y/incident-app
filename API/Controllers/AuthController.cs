@@ -2,7 +2,7 @@ using System.Text.Json;
 using API.Data;
 using Shared.Models.Dtos;
 using API.Helpers;
-using API.Models.Classes;
+using Shared.Models.Classes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

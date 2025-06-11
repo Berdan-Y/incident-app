@@ -1,5 +1,5 @@
 using System.Text.Json;
-using API.Models.Classes;
+using Shared.Models.Classes;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data;

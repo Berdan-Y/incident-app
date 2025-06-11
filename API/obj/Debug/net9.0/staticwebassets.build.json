@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "njRZtQzunju1L6ktJMNIOuCLomeCd6IZRGtto934fEg=",
+  "Hash": "YsvNbe8LwgmfdpJynG7u28RenncjH9gS4JzYEgSYrGc=",
   "Source": "API",
   "BasePath": "_content/API",
   "Mode": "Default",
@@ -185,6 +185,27 @@
       "OriginalItemSpec": "wwwroot/uploads/incidents/3b3a6d49-3027-409a-a77c-6ff1728d1f75.jpg"
     },
     {
+      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/468bc767-9ab6-48cd-acc2-c0ffdb8df9ba.jpg",
+      "SourceId": "API",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/",
+      "BasePath": "_content/API",
+      "RelativePath": "uploads/incidents/468bc767-9ab6-48cd-acc2-c0ffdb8df9ba#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "02wxgbq7t7",
+      "Integrity": "eGOk+fMw/QzHAtRNJ8choyGi4gw9ohec5SJfOMzv2y8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/incidents/468bc767-9ab6-48cd-acc2-c0ffdb8df9ba.jpg"
+    },
+    {
       "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/52d5bdc1-8399-476d-9f66-30179194936c.jpg",
       "SourceId": "API",
       "SourceType": "Discovered",
@@ -246,6 +267,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/uploads/incidents/5a1cbe8d-c0a2-4478-9e0e-8976cc996c8a.jpg"
+    },
+    {
+      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/5ea59b89-1c2c-48f7-baf2-4402d9a04201.jpg",
+      "SourceId": "API",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/",
+      "BasePath": "_content/API",
+      "RelativePath": "uploads/incidents/5ea59b89-1c2c-48f7-baf2-4402d9a04201#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "53oj3qz5y4",
+      "Integrity": "TwSIl8mye+LsfBx8l7EshwM3/SQXuxdSBZ6PSJIOI3w=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/incidents/5ea59b89-1c2c-48f7-baf2-4402d9a04201.jpg"
     },
     {
       "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/632b71d0-1690-4f6a-8ebc-40c90c0d3725.jpg",
@@ -330,6 +372,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/uploads/incidents/7ff6bfac-c65b-4ec2-83ce-6b1604326cd3.jpg"
+    },
+    {
+      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/8d186f92-20bd-4de8-b8c7-a18da17d8ac2.jpg",
+      "SourceId": "API",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/",
+      "BasePath": "_content/API",
+      "RelativePath": "uploads/incidents/8d186f92-20bd-4de8-b8c7-a18da17d8ac2#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "bssmeia1da",
+      "Integrity": "O3HwLYc6fV42ib/835gW22/CC7+81p1+ZN/c0LVZxKE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/incidents/8d186f92-20bd-4de8-b8c7-a18da17d8ac2.jpg"
     },
     {
       "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/8ef652f0-61d5-421b-9ddf-326470e9d862.jpg",
@@ -456,6 +519,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/uploads/incidents/e64fad89-b13b-47f2-8d90-65500ffb5358.jpg"
+    },
+    {
+      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/f0a37e0d-d5c7-4085-a6e7-1e7dd86076bb.jpg",
+      "SourceId": "API",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/",
+      "BasePath": "_content/API",
+      "RelativePath": "uploads/incidents/f0a37e0d-d5c7-4085-a6e7-1e7dd86076bb#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "fooe73h63g",
+      "Integrity": "b1c2ZId24458TGM4EoFvRIqa9QoJvmTwhcAQOreQQ4M=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/incidents/f0a37e0d-d5c7-4085-a6e7-1e7dd86076bb.jpg"
     },
     {
       "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/fa7246a6-ce9f-4655-8cd6-560b9ace909c.jpg",
@@ -585,7 +669,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 29 May 2025 15:21:15 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -630,7 +714,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 29 May 2025 15:21:15 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -667,7 +751,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 29 May 2025 16:17:15 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -712,7 +796,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 29 May 2025 16:17:15 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -749,7 +833,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 25 May 2025 17:07:27 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -794,7 +878,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 25 May 2025 17:07:27 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -831,7 +915,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 25 May 2025 16:51:14 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -868,7 +952,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 25 May 2025 16:51:14 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -995,7 +1079,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 25 May 2025 14:58:22 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1040,7 +1124,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 25 May 2025 14:58:22 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1137,6 +1221,88 @@
       ]
     },
     {
+      "Route": "uploads/incidents/468bc767-9ab6-48cd-acc2-c0ffdb8df9ba.02wxgbq7t7.jpg",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/468bc767-9ab6-48cd-acc2-c0ffdb8df9ba.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "11666"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"eGOk+fMw/QzHAtRNJ8choyGi4gw9ohec5SJfOMzv2y8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "02wxgbq7t7"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/incidents/468bc767-9ab6-48cd-acc2-c0ffdb8df9ba.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-eGOk+fMw/QzHAtRNJ8choyGi4gw9ohec5SJfOMzv2y8="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/incidents/468bc767-9ab6-48cd-acc2-c0ffdb8df9ba.jpg",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/468bc767-9ab6-48cd-acc2-c0ffdb8df9ba.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "11666"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"eGOk+fMw/QzHAtRNJ8choyGi4gw9ohec5SJfOMzv2y8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-eGOk+fMw/QzHAtRNJ8choyGi4gw9ohec5SJfOMzv2y8="
+        }
+      ]
+    },
+    {
       "Route": "uploads/incidents/52d5bdc1-8399-476d-9f66-30179194936c.jpg",
       "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/52d5bdc1-8399-476d-9f66-30179194936c.jpg",
       "Selectors": [],
@@ -1159,7 +1325,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 25 May 2025 17:07:27 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1196,7 +1362,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 25 May 2025 17:07:27 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1241,7 +1407,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 29 May 2025 15:21:14 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1286,7 +1452,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 29 May 2025 15:21:14 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1323,7 +1489,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 29 May 2025 16:17:15 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1360,7 +1526,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 29 May 2025 16:17:15 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1379,6 +1545,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-E89mvQ9dUvaF3hWbJIF57Nj4gZw82wXtT4jkSmurcEs="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/incidents/5ea59b89-1c2c-48f7-baf2-4402d9a04201.53oj3qz5y4.jpg",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/5ea59b89-1c2c-48f7-baf2-4402d9a04201.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "10772"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"TwSIl8mye+LsfBx8l7EshwM3/SQXuxdSBZ6PSJIOI3w=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "53oj3qz5y4"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/incidents/5ea59b89-1c2c-48f7-baf2-4402d9a04201.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-TwSIl8mye+LsfBx8l7EshwM3/SQXuxdSBZ6PSJIOI3w="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/incidents/5ea59b89-1c2c-48f7-baf2-4402d9a04201.jpg",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/5ea59b89-1c2c-48f7-baf2-4402d9a04201.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "10772"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"TwSIl8mye+LsfBx8l7EshwM3/SQXuxdSBZ6PSJIOI3w=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-TwSIl8mye+LsfBx8l7EshwM3/SQXuxdSBZ6PSJIOI3w="
         }
       ]
     },
@@ -1405,7 +1653,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 29 May 2025 16:17:15 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1450,7 +1698,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 29 May 2025 16:17:15 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1487,7 +1735,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 29 May 2025 16:13:43 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1524,7 +1772,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 29 May 2025 16:13:43 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1569,7 +1817,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 25 May 2025 14:58:22 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1614,7 +1862,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 25 May 2025 14:58:22 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1651,7 +1899,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 25 May 2025 16:51:14 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1696,7 +1944,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 25 May 2025 16:51:14 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1707,6 +1955,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-bpU/vNYCKXmoMSTQtgpCdYbjGKcvL0SVTUphVecSNiE="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/incidents/8d186f92-20bd-4de8-b8c7-a18da17d8ac2.bssmeia1da.jpg",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/8d186f92-20bd-4de8-b8c7-a18da17d8ac2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "106606"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"O3HwLYc6fV42ib/835gW22/CC7+81p1+ZN/c0LVZxKE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "bssmeia1da"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/incidents/8d186f92-20bd-4de8-b8c7-a18da17d8ac2.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-O3HwLYc6fV42ib/835gW22/CC7+81p1+ZN/c0LVZxKE="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/incidents/8d186f92-20bd-4de8-b8c7-a18da17d8ac2.jpg",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/8d186f92-20bd-4de8-b8c7-a18da17d8ac2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "106606"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"O3HwLYc6fV42ib/835gW22/CC7+81p1+ZN/c0LVZxKE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-O3HwLYc6fV42ib/835gW22/CC7+81p1+ZN/c0LVZxKE="
         }
       ]
     },
@@ -1733,7 +2063,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 25 May 2025 16:51:13 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1770,7 +2100,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 25 May 2025 16:51:13 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1815,7 +2145,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 25 May 2025 17:07:26 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1852,7 +2182,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 25 May 2025 17:07:26 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1897,7 +2227,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 25 May 2025 16:51:14 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1934,7 +2264,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 25 May 2025 16:51:14 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1979,7 +2309,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 29 May 2025 16:13:43 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2024,7 +2354,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 29 May 2025 16:13:43 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2061,7 +2391,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 25 May 2025 16:51:14 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2106,7 +2436,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 25 May 2025 16:51:14 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2143,7 +2473,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 25 May 2025 16:51:14 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2180,7 +2510,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 25 May 2025 16:51:14 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2199,6 +2529,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-vP2U5RBSkY44ULxIp6XBMBUoNDWxFYlJ8X9Hy6XqNfA="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/incidents/f0a37e0d-d5c7-4085-a6e7-1e7dd86076bb.fooe73h63g.jpg",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/f0a37e0d-d5c7-4085-a6e7-1e7dd86076bb.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "11400"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"b1c2ZId24458TGM4EoFvRIqa9QoJvmTwhcAQOreQQ4M=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "fooe73h63g"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/incidents/f0a37e0d-d5c7-4085-a6e7-1e7dd86076bb.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-b1c2ZId24458TGM4EoFvRIqa9QoJvmTwhcAQOreQQ4M="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/incidents/f0a37e0d-d5c7-4085-a6e7-1e7dd86076bb.jpg",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/f0a37e0d-d5c7-4085-a6e7-1e7dd86076bb.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "11400"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"b1c2ZId24458TGM4EoFvRIqa9QoJvmTwhcAQOreQQ4M=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-b1c2ZId24458TGM4EoFvRIqa9QoJvmTwhcAQOreQQ4M="
         }
       ]
     },
@@ -2225,7 +2637,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 25 May 2025 17:07:27 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2262,7 +2674,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 25 May 2025 17:07:27 GMT"
+          "Value": "Sat, 31 May 2025 12:44:14 GMT"
         },
         {
           "Name": "Cache-Control",

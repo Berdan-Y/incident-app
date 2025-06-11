@@ -2,7 +2,7 @@ using System.Text;
 using API.Data;
 using API.Helpers;
 using API.Middleware;
-using API.Models.Classes;
+using Shared.Models.Classes;
 using API.Repositories;
 using API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

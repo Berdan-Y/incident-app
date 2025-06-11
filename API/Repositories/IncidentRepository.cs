@@ -1,6 +1,6 @@
 using API.Data;
 using Shared.Models.Dtos;
-using API.Models.Classes;
+using Shared.Models.Classes;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Repositories;

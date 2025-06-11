@@ -1,5 +1,5 @@
 using Shared.Models.Dtos;
-using API.Models.Classes;
+using Shared.Models.Classes;
 using API.Repositories;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;

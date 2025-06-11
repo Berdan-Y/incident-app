@@ -1,5 +1,5 @@
 using Shared.Models.Enums;
-using API.Models.Classes;
+using Shared.Models.Classes;
 using API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

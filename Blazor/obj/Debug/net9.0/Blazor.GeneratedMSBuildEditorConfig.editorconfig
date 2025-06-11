@@ -27,6 +27,10 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/Components/Pages/AllIncidents.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9BbGxJbmNpZGVudHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/Components/Pages/CameraCapture.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9DYW1lcmFDYXB0dXJlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 

@@ -1,6 +1,6 @@
 using Shared.Models.Dtos;
 using Shared.Models.Enums;
-using API.Models.Classes;
+using Shared.Models.Classes;
 using AutoMapper;
 using IncidentCreateDto = Shared.Models.Dtos.IncidentCreateDto;
 using IncidentPhotoDto = Shared.Models.Dtos.IncidentPhotoDto;

@@ -1,5 +1,5 @@
 using Shared.Models.Dtos;
-using API.Models.Classes;
+using Shared.Models.Classes;
 
 namespace API.Repositories;
 
