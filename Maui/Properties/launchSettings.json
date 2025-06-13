@@ -1,8 +1,25 @@
 {
   "profiles": {
-    "Windows Machine": {
+    "Android": {
       "commandName": "Project",
-      "nativeDebugging": false
+      "nativeDebugging": false,
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    },
+    "iOS": {
+      "commandName": "Project",
+      "nativeDebugging": false,
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    },
+    "MacCatalyst": {
+      "commandName": "Project",
+      "nativeDebugging": false,
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
     }
   }
 }

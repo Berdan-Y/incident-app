@@ -18,11 +18,10 @@ public class IncidentCreateDto
     [Range(-180, 180)]
     public double Longitude { get; set; }
 
-    [StringLength(500)]
-    public string Address { get; set; }
+    public string? Address { get; set; }
 
     [StringLength(20)]
-    public string ZipCode { get; set; }
+    public string? ZipCode { get; set; }
 
     [Required]
     public Priority Priority { get; set; }

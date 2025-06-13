@@ -2,10 +2,11 @@ namespace Shared.Models.Dtos;
 
 public class UserDto
 {
-    public Guid Id { get; set; }
-    public required string FirstName { get; set; }
-    public required string LastName { get; set; }
-    public required string Email { get; set; }
+    public string Id { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
+    public string FirstName { get; set; } = string.Empty;
+    public string LastName { get; set; } = string.Empty;
+    public string Role { get; set; } = string.Empty;
     public string? PhoneNumber { get; set; }
     public string? ProfilePictureUrl { get; set; }
 }

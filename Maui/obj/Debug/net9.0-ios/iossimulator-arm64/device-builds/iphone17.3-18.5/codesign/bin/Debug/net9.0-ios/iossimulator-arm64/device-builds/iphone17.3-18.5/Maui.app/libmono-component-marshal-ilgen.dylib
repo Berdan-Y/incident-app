@@ -1,0 +1,1 @@
+-v --force --timestamp=none --sign - /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/device-builds/iphone17.3-18.5/Maui.app/libmono-component-marshal-ilgen.dylib
