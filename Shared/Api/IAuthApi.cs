@@ -14,4 +14,4 @@ public interface IAuthApi
 
     [Post("/api/Auth/logout")]
     Task<IApiResponse<bool>> LogoutAsync();
-} 
+}

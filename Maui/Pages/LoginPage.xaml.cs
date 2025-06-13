@@ -32,11 +32,15 @@ namespace Maui.Pages
 
                 if (response.IsSuccessStatusCode)
                 {
-                    await DisplayAlert("Success", $"Login successful! Token: {response.Content}", "OK");
+                    await DisplayAlert("Success", "Login successful!", "OK");
+                }
+                else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    await DisplayAlert("Error", $"Login failed: Incorrect credentials", "OK");
                 }
                 else
                 {
-                    await DisplayAlert("Error", $"Login failed: {response.StatusCode} - {response.Error?.Message}", "OK");
+                    await DisplayAlert("Error", $"Login failed: {response.StatusCode} - {response.Content}", "OK");
                 }
             }
             catch (ApiException apiEx)
@@ -49,4 +53,4 @@ namespace Maui.Pages
             }
         }
     }
-} 
+}

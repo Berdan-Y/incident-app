@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Maui.Pages.LoginPage">
     <VerticalStackLayout Padding="30">
-        <Entry x:Name="UsernameEntry" Placeholder="Username" />
-        <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="True" />
-        <Button Text="Login" Clicked="OnLoginButtonClicked" />
+        <Entry x:Name="UsernameEntry" Placeholder="Username" Margin="0,0,0,10" />
+        <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="True" Margin="0,0,0,10" />
+        <Button Text="Login" Clicked="OnLoginButtonClicked" Margin="0,0,0,10" />
     </VerticalStackLayout>
 </ContentPage> 

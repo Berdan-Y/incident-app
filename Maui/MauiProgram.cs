@@ -18,15 +18,15 @@ public static class MauiProgram
 
         // Configure API Services
         var baseAddress = "http://localhost:5007"; // Replace with your actual API base URL
-        
+
         builder.Services
             .AddRefitClient<IIncidentApi>()
             .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseAddress));
-            
+
         builder.Services
             .AddRefitClient<IUserApi>()
             .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseAddress));
-            
+
         builder.Services
             .AddRefitClient<IAuthApi>()
             .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseAddress));

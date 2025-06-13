@@ -9,4 +9,4 @@ public class CreateIncidentRequest
     public string? AssigneeId { get; set; }
     public List<PhotoDto>? Photos { get; set; }
     public string? CreatedBy { get; set; }
-} 
+}

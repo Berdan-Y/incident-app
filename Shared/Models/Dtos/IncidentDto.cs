@@ -10,4 +10,4 @@ public class IncidentDto
     public string Priority { get; set; } = string.Empty;
     public string AssignedTo { get; set; } = string.Empty;
     public string CreatedBy { get; set; } = string.Empty;
-} 
+}

@@ -47,4 +47,4 @@ public interface IIncidentApi
 
     [Delete("/api/incidents/photos/{id}")]
     Task<IApiResponse> DeletePhotoAsync(string id);
-} 
+}

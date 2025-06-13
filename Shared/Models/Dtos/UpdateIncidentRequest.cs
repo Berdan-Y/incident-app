@@ -8,4 +8,4 @@ public class UpdateIncidentRequest
     public string? Priority { get; set; }
     public string? AssigneeId { get; set; }
     public List<PhotoDto>? Photos { get; set; }
-} 
+}

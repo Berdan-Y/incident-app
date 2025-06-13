@@ -6,4 +6,4 @@ public class LoginResponseDto
     public Guid UserId { get; set; }
     public List<string> Roles { get; set; } = new();
     public string Message { get; set; } = "";
-} 
+}

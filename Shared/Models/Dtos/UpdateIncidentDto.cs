@@ -7,4 +7,4 @@ public class UpdateIncidentDto
     public string Status { get; set; } = string.Empty;
     public string Priority { get; set; } = string.Empty;
     public string? AssignedTo { get; set; }
-} 
+}
