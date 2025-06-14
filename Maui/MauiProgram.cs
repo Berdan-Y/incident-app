@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Maui.Devices;
 using Refit;
 using Shared.Api;
+using System.Net.Http;
 
 namespace Maui;
 
@@ -17,19 +19,41 @@ public static class MauiProgram
             });
 
         // Configure API Services
-        var baseAddress = "http://localhost:5007"; // Replace with your actual API base URL
+        var baseAddress = DeviceInfo.Platform == DevicePlatform.Android 
+            ? "http://10.0.2.2:5007"  // Android emulator special DNS
+            : "http://localhost:5007"; // iOS and other platforms
+
+        var httpClientHandler = new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
+        };
 
         builder.Services
             .AddRefitClient<IIncidentApi>()
-            .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseAddress));
+            .ConfigureHttpClient(c => 
+            {
+                c.BaseAddress = new Uri(baseAddress);
+                c.Timeout = TimeSpan.FromSeconds(30);
+            })
+            .ConfigurePrimaryHttpMessageHandler(() => httpClientHandler);
 
         builder.Services
             .AddRefitClient<IUserApi>()
-            .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseAddress));
+            .ConfigureHttpClient(c => 
+            {
+                c.BaseAddress = new Uri(baseAddress);
+                c.Timeout = TimeSpan.FromSeconds(30);
+            })
+            .ConfigurePrimaryHttpMessageHandler(() => httpClientHandler);
 
         builder.Services
             .AddRefitClient<IAuthApi>()
-            .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseAddress));
+            .ConfigureHttpClient(c => 
+            {
+                c.BaseAddress = new Uri(baseAddress);
+                c.Timeout = TimeSpan.FromSeconds(30);
+            })
+            .ConfigurePrimaryHttpMessageHandler(() => httpClientHandler);
 
 #if DEBUG
         builder.Logging.AddDebug();
