@@ -18,15 +18,15 @@ namespace Maui.Pages
 
         private async void OnLoginButtonClicked(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(UsernameEntry?.Text) || string.IsNullOrEmpty(PasswordEntry?.Text))
+            if (string.IsNullOrEmpty(EmailEntry?.Text) || string.IsNullOrEmpty(PasswordEntry?.Text))
             {
-                await DisplayAlert("Error", "Please enter both username and password", "OK");
+                await DisplayAlert("Error", "Please enter both email and password", "OK");
                 return;
             }
 
             var loginDto = new LoginDto
             {
-                Email = UsernameEntry.Text,
+                Email = EmailEntry.Text,
                 Password = PasswordEntry.Text
             };
 

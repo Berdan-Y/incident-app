@@ -17,6 +17,10 @@
             Title="Login"
             ContentTemplate="{DataTemplate pages:LoginPage}"
             Route="login" />
+        <ShellContent
+            Title="Register"
+            ContentTemplate="{DataTemplate pages:RegistrationPage}"
+            Route="register" />
     </TabBar>
 
 </Shell>

@@ -43,6 +43,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = Maui.Pages.LoginPage.xaml
 build_metadata.AdditionalFiles.TargetPath = Pages/LoginPage.xaml
 build_metadata.AdditionalFiles.RelativePath = Pages/LoginPage.xaml
 
+[/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/Pages/RegistrationPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Maui.Pages.RegistrationPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Pages/RegistrationPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Pages/RegistrationPage.xaml
+
 [/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/Resources/Styles/Colors.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Maui.Resources.Styles.Colors.xaml

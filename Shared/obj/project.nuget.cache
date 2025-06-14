@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "mEPFEeJT6y0=",
+  "dgSpecHash": "2zHxHVYaVIo=",
   "success": true,
   "projectFilePath": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Shared/Shared.csproj",
   "expectedPackageFiles": [
@@ -96,7 +96,8 @@
       "message": "Package 'Refit' 7.2.1 has a known critical severity vulnerability, https://github.com/advisories/GHSA-3hxg-fxwm-8gf7",
       "libraryId": "Refit",
       "targetGraphs": [
-        "net9.0"
+        "net9.0",
+        "net9.0/iossimulator-arm64"
       ]
     }
   ]
