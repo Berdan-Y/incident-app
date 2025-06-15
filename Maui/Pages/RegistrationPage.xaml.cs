@@ -50,6 +50,8 @@ namespace Maui.Pages
                 if (response.IsSuccessStatusCode)
                 {
                     await DisplayAlert("Success", "Successfully registered!", "OK");
+                    // Navigate to login page after successful registration
+                    await Shell.Current.GoToAsync("//LoginPage");
                 }
                 else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
                 {

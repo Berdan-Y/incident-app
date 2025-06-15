@@ -83,6 +83,7 @@
     <Import Project="$(NuGetPackageRoot)microsoft.maui.resizetizer/9.0.51/buildTransitive/Microsoft.Maui.Resizetizer.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.maui.resizetizer/9.0.51/buildTransitive/Microsoft.Maui.Resizetizer.targets')" />
     <Import Project="$(NuGetPackageRoot)microsoft.maui.core/9.0.51/buildTransitive/Microsoft.Maui.Core.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.maui.core/9.0.51/buildTransitive/Microsoft.Maui.Core.targets')" />
     <Import Project="$(NuGetPackageRoot)microsoft.maui.controls.build.tasks/9.0.51/buildTransitive/netstandard2.0/Microsoft.Maui.Controls.Build.Tasks.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.maui.controls.build.tasks/9.0.51/buildTransitive/netstandard2.0/Microsoft.Maui.Controls.Build.Tasks.targets')" />
+    <Import Project="$(NuGetPackageRoot)communitytoolkit.mvvm/8.2.2/buildTransitive/netstandard2.1/CommunityToolkit.Mvvm.targets" Condition="Exists('$(NuGetPackageRoot)communitytoolkit.mvvm/8.2.2/buildTransitive/netstandard2.1/CommunityToolkit.Mvvm.targets')" />
   </ImportGroup>
   <ImportGroup Condition=" '$(TargetFramework)' == 'net9.0-ios' AND '$(ExcludeRestorePackageImports)' != 'true' ">
     <Import Project="$(NuGetPackageRoot)system.text.json/9.0.5/buildTransitive/net8.0/System.Text.Json.targets" Condition="Exists('$(NuGetPackageRoot)system.text.json/9.0.5/buildTransitive/net8.0/System.Text.Json.targets')" />
@@ -95,5 +96,6 @@
     <Import Project="$(NuGetPackageRoot)microsoft.maui.resizetizer/9.0.51/buildTransitive/Microsoft.Maui.Resizetizer.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.maui.resizetizer/9.0.51/buildTransitive/Microsoft.Maui.Resizetizer.targets')" />
     <Import Project="$(NuGetPackageRoot)microsoft.maui.core/9.0.51/buildTransitive/Microsoft.Maui.Core.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.maui.core/9.0.51/buildTransitive/Microsoft.Maui.Core.targets')" />
     <Import Project="$(NuGetPackageRoot)microsoft.maui.controls.build.tasks/9.0.51/buildTransitive/net6.0-ios10.0/Microsoft.Maui.Controls.Build.Tasks.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.maui.controls.build.tasks/9.0.51/buildTransitive/net6.0-ios10.0/Microsoft.Maui.Controls.Build.Tasks.targets')" />
+    <Import Project="$(NuGetPackageRoot)communitytoolkit.mvvm/8.2.2/buildTransitive/netstandard2.1/CommunityToolkit.Mvvm.targets" Condition="Exists('$(NuGetPackageRoot)communitytoolkit.mvvm/8.2.2/buildTransitive/netstandard2.1/CommunityToolkit.Mvvm.targets')" />
   </ImportGroup>
 </Project>

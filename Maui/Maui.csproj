@@ -25,7 +25,7 @@
         <ApplicationTitle>Maui</ApplicationTitle>
 
         <!-- App Identifier -->
-        <ApplicationId>com.companyname.maui</ApplicationId>
+        <ApplicationId>com.companyname.incident-app</ApplicationId>
 
         <!-- Versions -->
         <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -44,6 +44,24 @@
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
         <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+    </PropertyGroup>
+
+    <!-- iOS Specific Configuration -->
+    <PropertyGroup Condition="$(TargetFramework.Contains('-ios'))">
+        <CreatePackage>false</CreatePackage>
+        <RuntimeIdentifier>iossimulator-arm64</RuntimeIdentifier>
+        <CodesignEntitlements></CodesignEntitlements>
+        <CodesignKey>-</CodesignKey>
+        <CodesignProvision></CodesignProvision>
+        <MtouchDebug>true</MtouchDebug>
+        <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
+        <MtouchFastDev>true</MtouchFastDev>
+        <Platform>iPhoneSimulator</Platform>
+        <MtouchLink>None</MtouchLink>
+        <EnableCodeSigning>false</EnableCodeSigning>
+        <EnablePackageSigning>false</EnablePackageSigning>
+        <UseHardenedRuntime>false</UseHardenedRuntime>
+        <IOSDebugOverWiFi>false</IOSDebugOverWiFi>
     </PropertyGroup>
 
     <!-- Android Specific Configuration -->
@@ -76,6 +94,9 @@
         <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)"/>
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0"/>
         <PackageReference Include="System.Net.Http" Version="4.3.4" />
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.4.0" />
+        <PackageReference Include="Refit" Version="7.2.1" />
     </ItemGroup>
 
     <ItemGroup>

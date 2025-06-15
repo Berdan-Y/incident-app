@@ -5,22 +5,47 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Maui"
     xmlns:pages="clr-namespace:Maui.Pages"
+    x:Name="AppShellPage"
     Title="Maui">
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="#455A64" />
+                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.TitleColor" Value="White" />
+                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF" />
+            </Style>
+        </ResourceDictionary>
+    </Shell.Resources>
 
     <TabBar>
         <ShellContent
             Title="Home"
+            Icon="{FontImage FontFamily=MaterialIcons, Glyph=&#xe88a;}"
             ContentTemplate="{DataTemplate local:MainPage}"
             Route="MainPage" />
 
         <ShellContent
             Title="Login"
+            Icon="{FontImage FontFamily=MaterialIcons, Glyph=&#xe7fd;}"
             ContentTemplate="{DataTemplate pages:LoginPage}"
-            Route="login" />
+            Route="LoginPage"
+            IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:AppShell}}, Path=BindingContext.IsLoggedIn, Converter={StaticResource InverseBoolConverter}}" />
+                
         <ShellContent
             Title="Register"
+            Icon="{FontImage FontFamily=MaterialIcons, Glyph=&#xe7fe;}"
             ContentTemplate="{DataTemplate pages:RegistrationPage}"
-            Route="register" />
+            Route="RegistrationPage"
+            IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:AppShell}}, Path=BindingContext.IsLoggedIn, Converter={StaticResource InverseBoolConverter}}" />
+
+        <ShellContent
+            Title="Logout"
+            Icon="{FontImage FontFamily=MaterialIcons, Glyph=&#xe9ba;}"
+            ContentTemplate="{DataTemplate pages:LogoutPage}"
+            Route="LogoutPage"
+            IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:AppShell}}, Path=BindingContext.IsLoggedIn}" />
     </TabBar>
 
 </Shell>

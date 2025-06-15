@@ -1,14 +1,12 @@
-﻿namespace Maui;
+﻿using Microsoft.Extensions.DependencyInjection;
+
+namespace Maui;
 
 public partial class App : Application
 {
-    public App()
+    public App(IServiceProvider services)
     {
         InitializeComponent();
-    }
-
-    protected override Window CreateWindow(IActivationState? activationState)
-    {
-        return new Window(new AppShell());
+        MainPage = services.GetRequiredService<AppShell>();
     }
 }

@@ -2,6 +2,10 @@
 using Microsoft.Maui.Devices;
 using Refit;
 using Shared.Api;
+using Maui.Services;
+using Maui.ViewModels;
+using Maui.Pages;
+using Maui.Converters;
 using System.Net.Http;
 
 namespace Maui;
@@ -17,6 +21,12 @@ public static class MauiProgram
             {
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
+
+        // Register App itself
+        builder.Services.AddSingleton<App>();
+
+        // Register Converters
+        builder.Services.AddSingleton<InverseBoolConverter>();
 
         // Configure API Services
         var baseAddress = DeviceInfo.Platform == DevicePlatform.Android 
@@ -54,6 +64,20 @@ public static class MauiProgram
                 c.Timeout = TimeSpan.FromSeconds(30);
             })
             .ConfigurePrimaryHttpMessageHandler(() => httpClientHandler);
+
+        // Register Services
+        builder.Services.AddSingleton<ITokenService, TokenService>();
+        builder.Services.AddSingleton<AuthService>();
+
+        // Register ViewModels
+        builder.Services.AddSingleton<LogoutViewModel>();
+        builder.Services.AddTransient<LoginViewModel>();
+
+        // Register Shell and Pages
+        builder.Services.AddSingleton<AppShell>();
+        builder.Services.AddTransient<LoginPage>();
+        builder.Services.AddTransient<RegistrationPage>();
+        builder.Services.AddTransient<LogoutPage>();
 
 #if DEBUG
         builder.Logging.AddDebug();
