@@ -21,12 +21,12 @@ public class TokenService : ITokenService, IDisposable
     public TokenService()
     {
         _preferences = Preferences.Default;
-        
+
         // Initialize token validation timer
         _tokenValidationTimer = Application.Current.Dispatcher.CreateTimer();
         _tokenValidationTimer.Interval = TimeSpan.FromSeconds(TokenValidationIntervalSeconds);
         _tokenValidationTimer.Tick += TokenValidationTimer_Tick;
-        
+
         _ = InitializeAsync();
     }
 
@@ -92,10 +92,10 @@ public class TokenService : ITokenService, IDisposable
         try
         {
             Debug.WriteLine($"Attempting to validate and store token: {token.Substring(0, Math.Min(50, token.Length))}...");
-            
+
             var handler = new JwtSecurityTokenHandler();
             var jwtToken = handler.ReadJwtToken(token);
-            
+
             Debug.WriteLine($"Token validation results:");
             Debug.WriteLine($"Valid From: {jwtToken.ValidFrom}");
             Debug.WriteLine($"Valid To: {jwtToken.ValidTo}");
@@ -119,7 +119,7 @@ public class TokenService : ITokenService, IDisposable
                 // Fallback to preferences if secure storage fails
                 _preferences.Set(TokenKey, token);
             }
-            
+
             _isLoggedIn = true;
             _tokenValidationTimer.Start();
             LoggedIn?.Invoke(this, EventArgs.Empty);
@@ -139,7 +139,7 @@ public class TokenService : ITokenService, IDisposable
         _token = null;
         _isLoggedIn = false;
         _tokenValidationTimer.Stop();
-        
+
         try
         {
             SecureStorage.Default.Remove(TokenKey);
@@ -232,4 +232,4 @@ public class TokenService : ITokenService, IDisposable
             return null;
         }
     }
-} 
+}

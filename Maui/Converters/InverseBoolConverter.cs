@@ -21,4 +21,4 @@ public class InverseBoolConverter : IValueConverter
         }
         return value;
     }
-} 
+}

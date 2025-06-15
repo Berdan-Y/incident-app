@@ -21,12 +21,12 @@ public partial class LogoutViewModel : ObservableObject
         _tokenService.LoggedIn += OnLoginStateChanged;
         _tokenService.LoggedOut += OnLoginStateChanged;
     }
-    
+
     private void OnLoginStateChanged(object sender, EventArgs e)
     {
         IsLoggedIn = _tokenService.IsLoggedIn;
     }
-    
+
     [RelayCommand]
     private async Task LogoutAsync()
     {
@@ -43,4 +43,4 @@ public partial class LogoutViewModel : ObservableObject
             IsLoggedIn = false;
         }
     }
-} 
+}

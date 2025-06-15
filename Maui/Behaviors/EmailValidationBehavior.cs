@@ -17,10 +17,10 @@ public class EmailValidationBehavior : Behavior<Entry>
         _entry = entry;
         entry.Unfocused += OnEntryUnfocused;
         entry.TextChanged += OnEntryTextChanged;
-        
+
         // Find the error label in the same parent layout
         _errorLabel = FindErrorLabel(entry);
-        
+
         base.OnAttachedTo(entry);
     }
 
@@ -53,7 +53,7 @@ public class EmailValidationBehavior : Behavior<Entry>
     private void ValidateEmailField(string email)
     {
         bool isValid = ValidateEmail(email);
-        
+
         // Visual feedback on the entry
         if (_entry != null)
         {
@@ -104,4 +104,4 @@ public class EmailValidationBehavior : Behavior<Entry>
 
         return EmailRegex.IsMatch(email);
     }
-} 
+}

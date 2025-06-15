@@ -8,24 +8,24 @@ public partial class AppShell : Shell
 {
     private readonly AuthService _authService;
     private readonly LogoutViewModel _logoutViewModel;
-    
+
     public AppShell(AuthService authService, LogoutViewModel logoutViewModel)
     {
         InitializeComponent();
-        
+
         _authService = authService;
         _logoutViewModel = logoutViewModel;
         BindingContext = _logoutViewModel;
-        
+
         // Register routes
         Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
         Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
         Routing.RegisterRoute(nameof(RegistrationPage), typeof(RegistrationPage));
         Routing.RegisterRoute(nameof(LogoutPage), typeof(LogoutPage));
-        
+
         // Subscribe to authentication state changes
         _authService.PropertyChanged += OnAuthStateChanged;
-        
+
         // Initial visibility update
         UpdateNavigationVisibility();
     }

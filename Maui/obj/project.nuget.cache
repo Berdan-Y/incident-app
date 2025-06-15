@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "d40lf/J4rRw=",
+  "dgSpecHash": "Zs/qmIAD85o=",
   "success": true,
   "projectFilePath": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/Maui.csproj",
   "expectedPackageFiles": [
@@ -259,8 +259,12 @@
       "libraryId": "Refit",
       "targetGraphs": [
         "net9.0-android35.0",
+        "net9.0-android35.0/android-arm64",
+        "net9.0-android35.0/android-x64",
         "net9.0-android35.0/iossimulator-arm64",
         "net9.0-ios18.4",
+        "net9.0-ios18.4/android-arm64",
+        "net9.0-ios18.4/android-x64",
         "net9.0-ios18.4/iossimulator-arm64"
       ]
     }

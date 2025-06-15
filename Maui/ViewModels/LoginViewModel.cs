@@ -15,13 +15,13 @@ public class LoginResponseDto
 {
     [JsonPropertyName("token")]
     public string Token { get; set; }
-    
+
     [JsonPropertyName("userId")]
     public Guid UserId { get; set; }
-    
+
     [JsonPropertyName("roles")]
     public List<string> Roles { get; set; }
-    
+
     [JsonPropertyName("message")]
     public string Message { get; set; }
 
@@ -35,7 +35,7 @@ public partial class LoginViewModel : ObservableObject
 {
     private readonly IAuthApi _authApi;
     private readonly ITokenService _tokenService;
-    
+
     [ObservableProperty]
     private bool _isLoading;
 
@@ -76,7 +76,7 @@ public partial class LoginViewModel : ObservableObject
             };
 
             var response = await _authApi.LoginAsync(loginDto);
-            
+
             if (response.IsSuccessStatusCode && response.Content != null)
             {
                 try
@@ -90,11 +90,11 @@ public partial class LoginViewModel : ObservableObject
 
                     // Parse the JSON response
                     var loginResponse = JsonSerializer.Deserialize<LoginResponseDto>(response.Content, options);
-                    
+
                     if (loginResponse?.Token != null)
                     {
                         await _tokenService.SetTokenAsync(loginResponse.Token);
-                        
+
                         // Reset fields
                         Email = string.Empty;
                         Password = string.Empty;
@@ -153,4 +153,4 @@ public partial class LoginViewModel : ObservableObject
             IsLoading = false;
         }
     }
-} 
+}

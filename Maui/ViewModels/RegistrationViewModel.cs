@@ -108,4 +108,4 @@ public partial class RegistrationViewModel : ObservableObject
             IsLoading = false;
         }
     }
-} 
+}

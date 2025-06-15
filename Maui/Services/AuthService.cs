@@ -27,8 +27,8 @@ public class AuthService : INotifyPropertyChanged
         _tokenService = tokenService;
         _tokenService.LoggedIn += (s, e) => IsAuthenticated = true;
         _tokenService.LoggedOut += (s, e) => IsAuthenticated = false;
-        
+
         // Set initial state
         IsAuthenticated = _tokenService.IsLoggedIn;
     }
-} 
+}

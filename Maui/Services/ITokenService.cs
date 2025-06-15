@@ -14,4 +14,4 @@ public interface ITokenService
     string? GetUserId();
     string? GetUserName();
     string? GetEmail();
-} 
+}

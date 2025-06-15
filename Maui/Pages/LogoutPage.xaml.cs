@@ -9,4 +9,4 @@ public partial class LogoutPage : ContentPage
         InitializeComponent();
         BindingContext = viewModel;
     }
-} 
+}

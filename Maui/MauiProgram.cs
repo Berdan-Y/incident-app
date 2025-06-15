@@ -29,7 +29,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<InverseBoolConverter>();
 
         // Configure API Services
-        var baseAddress = DeviceInfo.Platform == DevicePlatform.Android 
+        var baseAddress = DeviceInfo.Platform == DevicePlatform.Android
             ? "http://10.0.2.2:5007"  // Android emulator special DNS
             : "http://localhost:5007"; // iOS and other platforms
 
@@ -40,7 +40,7 @@ public static class MauiProgram
 
         builder.Services
             .AddRefitClient<IIncidentApi>()
-            .ConfigureHttpClient(c => 
+            .ConfigureHttpClient(c =>
             {
                 c.BaseAddress = new Uri(baseAddress);
                 c.Timeout = TimeSpan.FromSeconds(30);
@@ -49,7 +49,7 @@ public static class MauiProgram
 
         builder.Services
             .AddRefitClient<IUserApi>()
-            .ConfigureHttpClient(c => 
+            .ConfigureHttpClient(c =>
             {
                 c.BaseAddress = new Uri(baseAddress);
                 c.Timeout = TimeSpan.FromSeconds(30);
@@ -58,7 +58,7 @@ public static class MauiProgram
 
         builder.Services
             .AddRefitClient<IAuthApi>()
-            .ConfigureHttpClient(c => 
+            .ConfigureHttpClient(c =>
             {
                 c.BaseAddress = new Uri(baseAddress);
                 c.Timeout = TimeSpan.FromSeconds(30);
