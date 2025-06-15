@@ -7,6 +7,8 @@ using Maui.ViewModels;
 using Maui.Pages;
 using Maui.Converters;
 using System.Net.Http;
+using Microsoft.Maui.Controls.Maps;
+using Microsoft.Maui.Maps;
 
 namespace Maui;
 
@@ -17,6 +19,7 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
+            .UseMauiMaps()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
@@ -73,12 +76,18 @@ public static class MauiProgram
         builder.Services.AddSingleton<LogoutViewModel>();
         builder.Services.AddTransient<LoginViewModel>();
         builder.Services.AddTransient<RegistrationViewModel>();
+        builder.Services.AddTransient<ReportIncidentViewModel>();
 
         // Register Shell and Pages
         builder.Services.AddSingleton<AppShell>();
         builder.Services.AddTransient<LoginPage>();
         builder.Services.AddTransient<RegistrationPage>();
         builder.Services.AddTransient<LogoutPage>();
+        builder.Services.AddTransient<ReportIncidentPage>();
+
+        // Register Maps
+        builder.Services.AddSingleton<IGeolocation>(Geolocation.Default);
+        builder.Services.AddSingleton<Microsoft.Maui.Maps.IMap>(serviceProvider => new Microsoft.Maui.Controls.Maps.Map());
 
 #if DEBUG
         builder.Logging.AddDebug();

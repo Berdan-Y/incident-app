@@ -52,10 +52,12 @@
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/Microsoft.IdentityModel.Logging.dll
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/Microsoft.IdentityModel.Tokens.dll
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/Microsoft.Maui.Controls.dll
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/Microsoft.Maui.Controls.Maps.dll
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/Microsoft.Maui.Controls.Xaml.dll
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/Microsoft.Maui.dll
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/Microsoft.Maui.Essentials.dll
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/Microsoft.Maui.Graphics.dll
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/Microsoft.Maui.Maps.dll
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/Microsoft.Net.Http.Headers.dll
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/Refit.dll
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/Refit.HttpClientFactory.dll
@@ -411,10 +413,12 @@
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-ios/iossimulator-arm64/resourcestamps/Microsoft.IdentityModel.Logging.stamp
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-ios/iossimulator-arm64/resourcestamps/Microsoft.IdentityModel.Tokens.stamp
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-ios/iossimulator-arm64/resourcestamps/Microsoft.Maui.Controls.stamp
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-ios/iossimulator-arm64/resourcestamps/Microsoft.Maui.Controls.Maps.stamp
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-ios/iossimulator-arm64/resourcestamps/Microsoft.Maui.Controls.Xaml.stamp
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-ios/iossimulator-arm64/resourcestamps/Microsoft.Maui.stamp
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-ios/iossimulator-arm64/resourcestamps/Microsoft.Maui.Essentials.stamp
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-ios/iossimulator-arm64/resourcestamps/Microsoft.Maui.Graphics.stamp
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-ios/iossimulator-arm64/resourcestamps/Microsoft.Maui.Maps.stamp
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-ios/iossimulator-arm64/resourcestamps/Microsoft.Net.Http.Headers.stamp
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-ios/iossimulator-arm64/resourcestamps/Refit.stamp
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-ios/iossimulator-arm64/resourcestamps/Refit.HttpClientFactory.stamp

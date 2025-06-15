@@ -22,6 +22,7 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
         Routing.RegisterRoute(nameof(RegistrationPage), typeof(RegistrationPage));
         Routing.RegisterRoute(nameof(LogoutPage), typeof(LogoutPage));
+        Routing.RegisterRoute(nameof(ReportIncidentPage), typeof(ReportIncidentPage));
 
         // Subscribe to authentication state changes
         _authService.PropertyChanged += OnAuthStateChanged;
@@ -69,7 +70,7 @@ public partial class AppShell : Shell
                 {
                     "LoginPage" or "RegistrationPage" => !isAuthenticated,
                     "LogoutPage" => isAuthenticated,
-                    "MainPage" => true,
+                    "MainPage" or "ReportIncidentPage" => true,
                     _ => content.IsVisible
                 };
                 break;

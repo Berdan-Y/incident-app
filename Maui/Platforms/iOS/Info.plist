@@ -36,5 +36,11 @@
 	<array>
 		<string>$(AppIdentifierPrefix)com.companyname.incident-app</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need access to location when the app is being used to show your current location on the map.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We need access to location when the app is in background to track your location for incident reporting.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>We need access to location to show your current location on the map and for incident reporting.</string>
 </dict>
 </plist>

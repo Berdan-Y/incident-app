@@ -25,6 +25,12 @@
             Icon="{FontImage FontFamily=MaterialIcons, Glyph=&#xe88a;}"
             ContentTemplate="{DataTemplate local:MainPage}"
             Route="MainPage" />
+        
+        <ShellContent
+           Title="Report"
+           Icon="{FontImage FontFamily=MaterialIcons, Glyph=&#xe88a;}"
+           ContentTemplate="{DataTemplate pages:ReportIncidentPage}"
+           Route="ReportIncidentPage" />
 
         <ShellContent
             Title="Login"

@@ -62,7 +62,15 @@
         <EnablePackageSigning>false</EnablePackageSigning>
         <UseHardenedRuntime>false</UseHardenedRuntime>
         <IOSDebugOverWiFi>false</IOSDebugOverWiFi>
+        <!-- iOS Location Permissions -->
+        <ProvisioningType>automatic</ProvisioningType>
     </PropertyGroup>
+
+    <!-- iOS Info.plist Values -->
+    <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
+        <InfoPlistValue Include="NSLocationWhenInUseUsageDescription" Text="This app needs access to location services to show your current location." />
+        <InfoPlistValue Include="NSLocationAlwaysUsageDescription" Text="This app needs access to location services to show your current location." />
+    </ItemGroup>
 
     <!-- Android Specific Configuration -->
     <PropertyGroup Condition="$(TargetFramework.Contains('-android'))">
@@ -70,6 +78,7 @@
         <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
         <AndroidUseAapt2>true</AndroidUseAapt2>
         <AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
+        <AndroidUseIntermediateDesignerFile>false</AndroidUseIntermediateDesignerFile>
     </PropertyGroup>
 
     <ItemGroup>
@@ -97,6 +106,8 @@
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
         <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.4.0" />
         <PackageReference Include="Refit" Version="7.2.1" />
+        <PackageReference Include="Microsoft.Maui.Controls.Maps" Version="9.0.0" />
+        <PackageReference Include="Microsoft.Maui.Maps" Version="9.0.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -107,6 +118,9 @@
       <MauiXaml Update="Pages\RegistrationPage.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>
+      <MauiXaml Update="Pages\ReportIncidentPage.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
     </ItemGroup>
 
     <ItemGroup>
@@ -114,6 +128,24 @@
         <DependentUpon>RegistrationPage.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
+      <Compile Update="Pages\ReportIncidentPage.xaml.cs">
+        <DependentUpon>ReportIncidentPage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
+
+    <!-- Android Permissions -->
+    <ItemGroup>
+      <AndroidPermission Include="android.permission.ACCESS_COARSE_LOCATION" />
+      <AndroidPermission Include="android.permission.ACCESS_FINE_LOCATION" />
+    </ItemGroup>
+
+    <!-- Android Resources -->
+    <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
+      <AndroidResource Include="Platforms\Android\Resources\values\strings.xml">
+        <SubType></SubType>
+        <Generator></Generator>
+      </AndroidResource>
     </ItemGroup>
 
 </Project>

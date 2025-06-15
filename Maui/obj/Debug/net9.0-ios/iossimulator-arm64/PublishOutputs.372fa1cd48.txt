@@ -84,10 +84,12 @@
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/publish/../Maui.app/Microsoft.IdentityModel.Logging.dll
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/publish/../Maui.app/Microsoft.IdentityModel.Tokens.dll
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/publish/../Maui.app/Microsoft.Maui.Controls.dll
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/publish/../Maui.app/Microsoft.Maui.Controls.Maps.dll
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/publish/../Maui.app/Microsoft.Maui.Controls.Xaml.dll
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/publish/../Maui.app/Microsoft.Maui.dll
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/publish/../Maui.app/Microsoft.Maui.Essentials.dll
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/publish/../Maui.app/Microsoft.Maui.Graphics.dll
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/publish/../Maui.app/Microsoft.Maui.Maps.dll
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/publish/../Maui.app/Microsoft.Net.Http.Headers.dll
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/publish/../Maui.app/Refit.dll
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/publish/../Maui.app/Refit.HttpClientFactory.dll
