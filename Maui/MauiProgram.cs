@@ -72,6 +72,7 @@ public static class MauiProgram
         // Register ViewModels
         builder.Services.AddSingleton<LogoutViewModel>();
         builder.Services.AddTransient<LoginViewModel>();
+        builder.Services.AddTransient<RegistrationViewModel>();
 
         // Register Shell and Pages
         builder.Services.AddSingleton<AppShell>();

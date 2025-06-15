@@ -3,32 +3,47 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:Maui.ViewModels"
              xmlns:converters="clr-namespace:Maui.Converters"
+             xmlns:behaviors="clr-namespace:Maui.Behaviors"
              x:Class="Maui.Pages.LoginPage"
              x:DataType="viewmodels:LoginViewModel">
 
     <Grid RowDefinitions="*,Auto,*"
           Padding="20">
         <VerticalStackLayout Grid.Row="1"
-                            Spacing="20">
+                            Spacing="5">
             <Label Text="Login"
                    FontSize="32"
-                   HorizontalOptions="Center" />
+                   HorizontalOptions="Center"
+                   Margin="0,0,0,15" />
 
             <Entry Text="{Binding Email}"
                    Placeholder="Email"
-                   Keyboard="Email" />
+                   Keyboard="Email">
+                <Entry.Behaviors>
+                    <behaviors:EmailValidationBehavior />
+                </Entry.Behaviors>
+            </Entry>
+            
+            <Label StyleId="EmailErrorLabel"
+                   TextColor="Red"
+                   FontSize="12"
+                   IsVisible="False"
+                   Margin="0,0,0,10" />
 
             <Entry Text="{Binding Password}"
                    Placeholder="Password"
-                   IsPassword="True" />
+                   IsPassword="True"
+                   Margin="0,10,0,0" />
 
             <Label Text="{Binding ErrorMessage}"
                    TextColor="Red"
-                   IsVisible="{Binding ErrorMessage, Mode=OneWay}" />
+                   IsVisible="{Binding ErrorMessage, Mode=OneWay}"
+                   Margin="0,10,0,0" />
 
             <Button Text="Login"
                     Command="{Binding LoginCommand}"
-                    IsEnabled="{Binding Path=IsLoading, Mode=OneWay, Converter={StaticResource InverseBoolConverter}}" />
+                    IsEnabled="{Binding Path=IsLoading, Mode=OneWay, Converter={StaticResource InverseBoolConverter}}"
+                    Margin="0,10,0,0" />
 
             <ActivityIndicator IsRunning="{Binding IsLoading}"
                              IsVisible="{Binding IsLoading}"
