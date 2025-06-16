@@ -71,6 +71,9 @@
             <inheritdoc/>
             <inheritdoc/>
         </member>
+        <member name="P:Maui.ViewModels.ReportIncidentViewModel.IsAnonymous">
+            <inheritdoc cref="F:Maui.ViewModels.ReportIncidentViewModel.isAnonymous"/>
+        </member>
         <member name="P:Maui.ViewModels.ReportIncidentViewModel.Title">
             <inheritdoc cref="F:Maui.ViewModels.ReportIncidentViewModel.title"/>
         </member>
@@ -101,6 +104,15 @@
         <member name="P:Maui.ViewModels.ReportIncidentViewModel.MapPins">
             <inheritdoc cref="F:Maui.ViewModels.ReportIncidentViewModel.mapPins"/>
         </member>
+        <member name="P:Maui.ViewModels.ReportIncidentViewModel.LocationStatus">
+            <inheritdoc cref="F:Maui.ViewModels.ReportIncidentViewModel.locationStatus"/>
+        </member>
+        <member name="P:Maui.ViewModels.ReportIncidentViewModel.ShowMap">
+            <inheritdoc cref="F:Maui.ViewModels.ReportIncidentViewModel.showMap"/>
+        </member>
+        <member name="P:Maui.ViewModels.ReportIncidentViewModel.InitialMapPosition">
+            <inheritdoc cref="F:Maui.ViewModels.ReportIncidentViewModel.initialMapPosition"/>
+        </member>
         <member name="M:Maui.ViewModels.ReportIncidentViewModel.OnUseCurrentLocationChanged(System.Boolean)">
             <summary>Executes the logic for when <see cref="P:Maui.ViewModels.ReportIncidentViewModel.UseCurrentLocation"/> just changed.</summary>
             <param name="value">The new property value that was set.</param>
@@ -110,6 +122,11 @@
             <summary>Executes the logic for when <see cref="P:Maui.ViewModels.ReportIncidentViewModel.UseManualLocation"/> just changed.</summary>
             <param name="value">The new property value that was set.</param>
             <remarks>This method is invoked right after the value of <see cref="P:Maui.ViewModels.ReportIncidentViewModel.UseManualLocation"/> is changed.</remarks>
+        </member>
+        <member name="M:Maui.ViewModels.ReportIncidentViewModel.OnIsLoadingChanged(System.Boolean)">
+            <summary>Executes the logic for when <see cref="P:Maui.ViewModels.ReportIncidentViewModel.IsLoading"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:Maui.ViewModels.ReportIncidentViewModel.IsLoading"/> is changed.</remarks>
         </member>
         <member name="F:Maui.ViewModels.ReportIncidentViewModel.submitReportCommand">
             <summary>The backing field for <see cref="P:Maui.ViewModels.ReportIncidentViewModel.SubmitReportCommand"/>.</summary>
@@ -150,6 +167,9 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.LastName">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "LastName" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsAnonymous">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsAnonymous" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Title">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Title" generated properties.</summary>
         </member>
@@ -176,6 +196,15 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.MapPins">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "MapPins" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.LocationStatus">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "LocationStatus" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ShowMap">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ShowMap" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.InitialMapPosition">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "InitialMapPosition" generated properties.</summary>
         </member>
         <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs">
             <summary>
@@ -204,6 +233,9 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.LastName">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "LastName" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsAnonymous">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsAnonymous" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Title">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Title" generated properties.</summary>
         </member>
@@ -230,6 +262,15 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.MapPins">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "MapPins" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.LocationStatus">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "LocationStatus" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ShowMap">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ShowMap" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.InitialMapPosition">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "InitialMapPosition" generated properties.</summary>
         </member>
     </members>
 </doc>

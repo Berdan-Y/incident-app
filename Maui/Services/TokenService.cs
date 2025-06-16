@@ -1,9 +1,11 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Diagnostics;
+using System.Security.Claims;
+using System.ComponentModel;
 
 namespace Maui.Services;
 
-public class TokenService : ITokenService, IDisposable
+public class TokenService : ITokenService, IDisposable, INotifyPropertyChanged
 {
     private string? _token;
     private bool _isLoggedIn;
@@ -12,10 +14,22 @@ public class TokenService : ITokenService, IDisposable
     private readonly IDispatcherTimer _tokenValidationTimer;
     private const int TokenValidationIntervalSeconds = 5;
 
+    public event PropertyChangedEventHandler? PropertyChanged;
     public event EventHandler? LoggedIn;
     public event EventHandler? LoggedOut;
 
-    public bool IsLoggedIn => _isLoggedIn;
+    public bool IsLoggedIn
+    {
+        get => _isLoggedIn;
+        private set
+        {
+            if (_isLoggedIn != value)
+            {
+                _isLoggedIn = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsLoggedIn)));
+            }
+        }
+    }
     public bool IsInitializing { get; private set; } = true;
 
     public TokenService()
@@ -59,7 +73,7 @@ public class TokenService : ITokenService, IDisposable
             if (!string.IsNullOrEmpty(token) && !IsTokenExpired(token))
             {
                 _token = token;
-                _isLoggedIn = true;
+                IsLoggedIn = true;
                 _tokenValidationTimer.Start();
             }
         }
@@ -71,7 +85,7 @@ public class TokenService : ITokenService, IDisposable
             if (!string.IsNullOrEmpty(token) && !IsTokenExpired(token))
             {
                 _token = token;
-                _isLoggedIn = true;
+                IsLoggedIn = true;
                 _tokenValidationTimer.Start();
             }
         }
@@ -120,7 +134,7 @@ public class TokenService : ITokenService, IDisposable
                 _preferences.Set(TokenKey, token);
             }
 
-            _isLoggedIn = true;
+            IsLoggedIn = true;
             _tokenValidationTimer.Start();
             LoggedIn?.Invoke(this, EventArgs.Empty);
             Debug.WriteLine("Token successfully stored and validated");
@@ -137,7 +151,7 @@ public class TokenService : ITokenService, IDisposable
     public Task LogoutAsync()
     {
         _token = null;
-        _isLoggedIn = false;
+        IsLoggedIn = false;
         _tokenValidationTimer.Stop();
 
         try
@@ -185,7 +199,7 @@ public class TokenService : ITokenService, IDisposable
         {
             var handler = new JwtSecurityTokenHandler();
             var jwtToken = handler.ReadJwtToken(_token);
-            return jwtToken.Subject;
+            return jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
         }
         catch (Exception ex)
         {

@@ -23,12 +23,5 @@ public class IncidentCreateDto
     [StringLength(20)]
     public string? ZipCode { get; set; }
 
-    [Required]
-    public Priority Priority { get; set; }
-
-    // Optional - will be null for new incidents, can be assigned later
-    public Guid? AssignedToId { get; set; }
-
-    // Optional - can be set to identify who reported the incident
     public Guid? ReportedById { get; set; }
 }

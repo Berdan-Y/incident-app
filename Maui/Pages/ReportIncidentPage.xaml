@@ -9,8 +9,9 @@
              x:DataType="viewmodels:ReportIncidentViewModel">
 
     <ScrollView>
-        <Grid RowDefinitions="Auto,Auto,Auto,*"
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto"
               Padding="20">
+            <!-- Report Details -->
             <VerticalStackLayout Grid.Row="0"
                                 Spacing="5">
                 <Label Text="Report Incident"
@@ -39,40 +40,57 @@
                             GroupName="LocationChoice"/>
             </VerticalStackLayout>
 
-            <maps:Map Grid.Row="1"
-                      x:Name="LocationMap"
-                      IsVisible="{Binding ShowMap}"
-                      IsShowingUser="True"
-                      ItemsSource="{Binding MapPins}"
-                      MapType="Street"
-                      Loaded="OnMapLoaded"
-                      Margin="0,10,0,10"
-                      HeightRequest="200"/>
+            <!-- Manual Location Input -->
+            <VerticalStackLayout Grid.Row="1"
+                                Spacing="5"
+                                IsVisible="{Binding UseManualLocation}">
+                <Entry Text="{Binding Address}"
+                       Placeholder="Address"/>
+                <Entry Text="{Binding Zipcode}"
+                       Placeholder="Zipcode"
+                       Margin="0,10,0,0"/>
+            </VerticalStackLayout>
 
-            <Label Grid.Row="2"
-                   Text="{Binding LocationStatus}"
-                   IsVisible="{Binding UseCurrentLocation}"
-                   HorizontalOptions="Center"
-                   Margin="0,5,0,10"
-                   TextColor="{OnPlatform iOS='#007AFF', Android='#512BD4'}"
-                   FontSize="14"/>
+            <!-- Map -->
+            <VerticalStackLayout Grid.Row="2"
+                                Spacing="5"
+                                IsVisible="{Binding UseCurrentLocation}">
+                <maps:Map x:Name="LocationMap"
+                         IsVisible="{Binding ShowMap}"
+                         IsShowingUser="True"
+                         ItemsSource="{Binding MapPins}"
+                         MapType="Street"
+                         Loaded="OnMapLoaded"
+                         Margin="0,10,0,10"
+                         HeightRequest="200"/>
 
-            <VerticalStackLayout Grid.Row="3"
-                                Spacing="5">
-                <VerticalStackLayout IsVisible="{Binding UseManualLocation}"
-                                   Spacing="5"
-                                   Margin="0,10,0,0">
-                    <Entry Text="{Binding Address}"
-                           Placeholder="Address"/>
-                    <Entry Text="{Binding Zipcode}"
-                           Placeholder="Zipcode"
-                           Margin="0,10,0,0"/>
-                </VerticalStackLayout>
+                <Label Text="{Binding LocationStatus}"
+                       HorizontalOptions="Center"
+                       Margin="0,5,0,10"
+                       TextColor="{OnPlatform iOS='#007AFF', Android='#512BD4'}"
+                       FontSize="14"/>
+            </VerticalStackLayout>
 
+            <!-- Anonymous Reporting -->
+            <VerticalStackLayout Grid.Row="3" 
+                               IsVisible="{Binding IsLoggedIn}"
+                               Spacing="5"
+                               Margin="0,10,0,10">
+                <Label Text="Report anonymously"
+                      FontSize="16"/>
+                <HorizontalStackLayout Spacing="10">
+                    <CheckBox IsChecked="{Binding IsAnonymous}"/>
+                    <Label Text="Submit this report anonymously"
+                           VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <!-- Submit Button -->
+            <VerticalStackLayout Grid.Row="4">
                 <Button Text="Submit Report"
                         Command="{Binding SubmitReportCommand}"
                         IsEnabled="{Binding IsNotLoading}"
-                        Margin="0,20,0,0" />
+                        Margin="0,30,0,0" />
 
                 <ActivityIndicator IsRunning="{Binding IsLoading}"
                                  IsVisible="{Binding IsLoading}"

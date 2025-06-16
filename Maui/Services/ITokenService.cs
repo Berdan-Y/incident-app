@@ -1,8 +1,9 @@
+using System.ComponentModel;
 using System.IdentityModel.Tokens.Jwt;
 
 namespace Maui.Services;
 
-public interface ITokenService
+public interface ITokenService : INotifyPropertyChanged
 {
     bool IsLoggedIn { get; }
     bool IsInitializing { get; }

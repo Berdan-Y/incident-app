@@ -4,16 +4,28 @@ using Microsoft.Maui.Devices.Sensors;
 using Microsoft.Maui.Maps;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using Maui.Services;
 using Microsoft.Maui.Controls.Maps;
 using IMap = Microsoft.Maui.Maps.IMap;
 using Microsoft.Maui.Controls;
+using Shared.Api;
+using Shared.Models.Dtos;
+using Shared.Models.Enums;
 
 namespace Maui.ViewModels;
 
-public partial class ReportIncidentViewModel : ObservableObject
+public partial class ReportIncidentViewModel : ObservableObject, IDisposable
 {
     private readonly IGeolocation _geolocation;
     private readonly IMap _map;
+    private readonly IIncidentApi _incidentApi;
+    private readonly ITokenService _tokenService;
+    private bool _disposed;
+
+    [ObservableProperty]
+    private bool isAnonymous;
+
+    public bool IsLoggedIn => _tokenService.IsLoggedIn;
 
     [ObservableProperty]
     private string title;
@@ -54,18 +66,55 @@ public partial class ReportIncidentViewModel : ObservableObject
     [ObservableProperty]
     private MapSpan initialMapPosition;
 
+    partial void OnIsLoadingChanged(bool value)
+    {
+        OnPropertyChanged(nameof(IsNotLoading));
+    }
+
     public bool IsNotLoading => !IsLoading;
 
-    public ReportIncidentViewModel(IGeolocation geolocation, IMap map)
+    public ReportIncidentViewModel(IGeolocation geolocation, IMap map, IIncidentApi incidentApi, ITokenService tokenService)
     {
         _geolocation = geolocation;
         _map = map;
+        _incidentApi = incidentApi;
+        _tokenService = tokenService;
+
+        // Subscribe to token service property changes
+        _tokenService.PropertyChanged += TokenService_PropertyChanged;
+
         MapPins = new ObservableCollection<Pin>();
         ShowMap = false;
 
         if (useCurrentLocation)
         {
             MainThread.BeginInvokeOnMainThread(async () => await RequestLocationPermission());
+        }
+    }
+
+    private void TokenService_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(ITokenService.IsLoggedIn))
+        {
+            OnPropertyChanged(nameof(IsLoggedIn));
+        }
+    }
+
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!_disposed)
+        {
+            if (disposing)
+            {
+                _tokenService.PropertyChanged -= TokenService_PropertyChanged;
+            }
+            _disposed = true;
         }
     }
 
@@ -223,13 +272,55 @@ public partial class ReportIncidentViewModel : ObservableObject
         try
         {
             IsLoading = true;
-            // TODO: Implement your API call here to submit the report
-            // await _apiService.SubmitReport(new ReportModel { ... });
+            Guid? reportedById = null;
+
+            if (IsLoggedIn && !IsAnonymous)
+            {
+                var userId = _tokenService.GetUserId();
+                if (!string.IsNullOrEmpty(userId) && Guid.TryParse(userId, out Guid parsedId))
+                {
+                    reportedById = parsedId;
+                }
+            }
+
+            var incident = new IncidentCreateDto()
+            {
+                Title = Title,
+                Description = Description,
+                Latitude = UseCurrentLocation ? Latitude : null,
+                Longitude = UseCurrentLocation ? Longitude : 0.0,
+                Address = UseManualLocation ? Address : null,
+                ZipCode = UseManualLocation ? Zipcode : null,
+                ReportedById = reportedById
+            };
+
+            var response = await _incidentApi.CreateIncidentAsync(incident);
+
+            if (response.IsSuccessStatusCode)
+            {
+                // Reset fields after successful submission
+                Title = string.Empty;
+                Description = string.Empty;
+                Address = string.Empty;
+                Zipcode = string.Empty;
+
+                await Application.Current.MainPage.DisplayAlert("Success",
+                    "Incident report submitted successfully!", "OK");
+            }
+            else if (response.Error != null)
+            {
+                await Application.Current.MainPage.DisplayAlert("Submission Failed", $"Something went wrong - {response.Error.Content} - {response.Error.StatusCode}", "OK");
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Submission Failed",
+                    "An unexpected error occurred. Please try again later.", "OK");
+            }
         }
         catch (Exception ex)
         {
             await Application.Current.MainPage.DisplayAlert("Error",
-                "Failed to submit report. Please try again.", "OK");
+                $"Failed to submit report. Please try again. - {ex.Message}", "OK");
         }
         finally
         {

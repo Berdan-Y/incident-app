@@ -1,50 +1,52 @@
 using Refit;
 using Shared.Models;
 using Shared.Models.Dtos;
+using System.Net.Http;
 
 namespace Shared.Api;
 
 public interface IIncidentApi
 {
-    [Get("/api/incidents")]
+    [Get("/api/incident")]
     Task<IApiResponse<List<IncidentDto>>> GetIncidentsAsync();
 
-    [Get("/api/incidents/{id}")]
+    [Get("/api/incident/{id}")]
     Task<IApiResponse<IncidentDto>> GetIncidentByIdAsync(int id);
 
-    [Post("/api/incidents")]
-    Task<IApiResponse<IncidentDto>> CreateIncidentAsync([Body] CreateIncidentDto incident);
+    [Multipart]
+    [Post("/api/incident")]
+    Task<IApiResponse<IncidentDto>> CreateIncidentAsync([AliasAs("incident")] IncidentCreateDto incident);
 
-    [Put("/api/incidents/{id}")]
+    [Put("/api/incident/{id}")]
     Task<IApiResponse<IncidentDto>> UpdateIncidentAsync(int id, [Body] UpdateIncidentDto incident);
 
-    [Delete("/api/incidents/{id}")]
+    [Delete("/api/incident/{id}")]
     Task<IApiResponse<bool>> DeleteIncidentAsync(int id);
 
-    [Get("/api/incidents/my-incidents")]
+    [Get("/api/incident/my-incidents")]
     Task<IApiResponse<List<IncidentDto>>> GetMyIncidentsAsync();
 
-    [Get("/api/incidents/assigned-to-me")]
+    [Get("/api/incident/assigned-to-me")]
     Task<IApiResponse<List<IncidentDto>>> GetIncidentsAssignedToMeAsync();
 
-    [Patch("/api/incidents/{id}/status")]
+    [Patch("/api/incident/{id}/status")]
     Task<IApiResponse<IncidentDto>> UpdateIncidentStatusAsync(string id, [Body] UpdateIncidentStatusRequest request);
 
-    [Patch("/api/incidents/{id}/priority")]
+    [Patch("/api/incident/{id}/priority")]
     Task<IApiResponse<IncidentDto>> UpdateIncidentPriorityAsync(string id, [Body] UpdateIncidentPriorityRequest request);
 
-    [Patch("/api/incidents/{id}/assign")]
+    [Patch("/api/incident/{id}/assign")]
     Task<IApiResponse<IncidentDto>> AssignIncidentAsync(string id, [Body] AssignIncidentRequest request);
 
-    [Post("/api/incidents/{id}/photos")]
+    [Post("/api/incident/{id}/photos")]
     Task<IApiResponse<List<PhotoDto>>> UploadIncidentPhotosAsync(string id, [Body] UploadPhotosRequest request);
 
-    [Get("/api/incidents/{id}/photos")]
+    [Get("/api/incident/{id}/photos")]
     Task<IApiResponse<List<PhotoDto>>> GetIncidentPhotosAsync(string id);
 
-    [Get("/api/incidents/photos/{id}")]
+    [Get("/api/incident/photos/{id}")]
     Task<IApiResponse<PhotoDto>> GetPhotoByIdAsync(string id);
 
-    [Delete("/api/incidents/photos/{id}")]
+    [Delete("/api/incident/photos/{id}")]
     Task<IApiResponse> DeletePhotoAsync(string id);
 }
