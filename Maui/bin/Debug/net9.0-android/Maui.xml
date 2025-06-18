@@ -113,6 +113,16 @@
         <member name="P:Maui.ViewModels.ReportIncidentViewModel.InitialMapPosition">
             <inheritdoc cref="F:Maui.ViewModels.ReportIncidentViewModel.initialMapPosition"/>
         </member>
+        <member name="M:Maui.ViewModels.ReportIncidentViewModel.OnAddressChanged(System.String)">
+            <summary>Executes the logic for when <see cref="P:Maui.ViewModels.ReportIncidentViewModel.Address"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:Maui.ViewModels.ReportIncidentViewModel.Address"/> is changed.</remarks>
+        </member>
+        <member name="M:Maui.ViewModels.ReportIncidentViewModel.OnZipcodeChanged(System.String)">
+            <summary>Executes the logic for when <see cref="P:Maui.ViewModels.ReportIncidentViewModel.Zipcode"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:Maui.ViewModels.ReportIncidentViewModel.Zipcode"/> is changed.</remarks>
+        </member>
         <member name="M:Maui.ViewModels.ReportIncidentViewModel.OnUseCurrentLocationChanged(System.Boolean)">
             <summary>Executes the logic for when <see cref="P:Maui.ViewModels.ReportIncidentViewModel.UseCurrentLocation"/> just changed.</summary>
             <param name="value">The new property value that was set.</param>

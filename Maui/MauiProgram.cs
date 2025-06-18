@@ -10,6 +10,7 @@ using System.Net.Http;
 using Microsoft.Maui.Controls.Maps;
 using Microsoft.Maui.Maps;
 using CommunityToolkit.Maui;
+using Microsoft.Extensions.Configuration;
 
 namespace Maui;
 
@@ -29,6 +30,12 @@ public static class MauiProgram
                 fonts.AddFont("MaterialIcons-Regular.ttf", "MaterialIcons");
             });
 
+        // Add configuration
+        builder.Configuration.AddInMemoryCollection(new Dictionary<string, string>
+        {
+            { "GoogleMaps:ApiKey", "AIzaSyDsQd3FtHLZnQYThk_PsGiCCpfDksexAoE" }
+        });
+
         // Register App itself
         builder.Services.AddSingleton<App>();
 
@@ -47,6 +54,12 @@ public static class MauiProgram
 
         // Add authorization message handler
         builder.Services.AddTransient<AuthorizationMessageHandler>();
+
+        // Register HttpClient for geocoding
+        builder.Services.AddHttpClient();
+
+        // Register Geocoding Service
+        builder.Services.AddSingleton<IGeocodingService, GoogleGeocodingService>();
 
         builder.Services
             .AddRefitClient<IIncidentApi>()
@@ -80,6 +93,7 @@ public static class MauiProgram
         // Register Services
         builder.Services.AddSingleton<ITokenService, TokenService>();
         builder.Services.AddSingleton<AuthService>();
+        builder.Services.AddSingleton<IDirectionsService, GoogleDirectionsService>();
 
         // Register ViewModels
         builder.Services.AddSingleton<LogoutViewModel>();

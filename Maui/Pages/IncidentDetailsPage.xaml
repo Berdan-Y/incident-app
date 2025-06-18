@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:Maui.ViewModels"
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+             xmlns:maps1="clr-namespace:Microsoft.Maui.Maps;assembly=Microsoft.Maui.Maps"
              x:Class="Maui.Pages.IncidentDetailsPage"
              Title="Incident Details">
 
@@ -24,7 +26,7 @@
             <!-- Incident Details -->
             <Grid Grid.Row="1" 
                   IsVisible="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}"
-                  RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                  RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
                   RowSpacing="15">
 
                 <!-- Title -->
@@ -66,11 +68,25 @@
                            FontSize="16" />
                 </VerticalStackLayout>
 
-                <!-- Location -->
+                <!-- Location Map -->
                 <VerticalStackLayout Grid.Row="3" Spacing="5">
                     <Label Text="Location"
                            FontAttributes="Bold"
                            FontSize="16" />
+                    <maps:Map x:Name="LocationMap"
+                            IsVisible="{Binding HasValidCoordinates}"
+                            IsShowingUser="False"
+                            MapType="Street"
+                            HeightRequest="200"/>
+                    <Label Text="No location data available"
+                           IsVisible="{Binding HasValidCoordinates, Converter={StaticResource InverseBoolConverter}}"
+                           TextColor="Gray"
+                           FontSize="14"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+                <!-- Location Details -->
+                <VerticalStackLayout Grid.Row="4" Spacing="5">
                     <Label Text="{Binding Incident.Address}"
                            FontSize="16" />
                     <Label Text="{Binding Incident.ZipCode}"
@@ -89,7 +105,7 @@
                 </VerticalStackLayout>
 
                 <!-- Reporter -->
-                <VerticalStackLayout Grid.Row="4" Spacing="5">
+                <VerticalStackLayout Grid.Row="5" Spacing="5">
                     <Label Text="Reported By"
                            FontAttributes="Bold"
                            FontSize="16" />
@@ -98,7 +114,7 @@
                 </VerticalStackLayout>
 
                 <!-- Assignee -->
-                <VerticalStackLayout Grid.Row="5" Spacing="5">
+                <VerticalStackLayout Grid.Row="6" Spacing="5">
                     <Label Text="Assigned To"
                            FontAttributes="Bold"
                            FontSize="16" />
@@ -107,7 +123,7 @@
                 </VerticalStackLayout>
 
                 <!-- Dates -->
-                <Grid Grid.Row="6" ColumnDefinitions="*,*" ColumnSpacing="15">
+                <Grid Grid.Row="7" ColumnDefinitions="*,*" ColumnSpacing="15">
                     <VerticalStackLayout Grid.Column="0" Spacing="5">
                         <Label Text="Created At"
                                FontAttributes="Bold"

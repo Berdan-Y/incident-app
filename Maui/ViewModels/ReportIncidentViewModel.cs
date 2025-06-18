@@ -20,6 +20,7 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
     private readonly IMap _map;
     private readonly IIncidentApi _incidentApi;
     private readonly ITokenService _tokenService;
+    private readonly IGeocodingService _geocodingService;
     private bool _disposed;
 
     [ObservableProperty]
@@ -73,12 +74,18 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
 
     public bool IsNotLoading => !IsLoading;
 
-    public ReportIncidentViewModel(IGeolocation geolocation, IMap map, IIncidentApi incidentApi, ITokenService tokenService)
+    public ReportIncidentViewModel(
+        IGeolocation geolocation, 
+        IMap map, 
+        IIncidentApi incidentApi, 
+        ITokenService tokenService,
+        IGeocodingService geocodingService)
     {
         _geolocation = geolocation;
         _map = map;
         _incidentApi = incidentApi;
         _tokenService = tokenService;
+        _geocodingService = geocodingService;
 
         // Subscribe to token service property changes
         _tokenService.PropertyChanged += TokenService_PropertyChanged;
@@ -240,6 +247,79 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
         }
     }
 
+    private async Task ValidateAndGeocodeAddress()
+    {
+        if (string.IsNullOrWhiteSpace(Address) || string.IsNullOrWhiteSpace(Zipcode))
+        {
+            LocationStatus = "Please enter both address and zipcode.";
+            return;
+        }
+
+        try
+        {
+            IsLoading = true;
+            LocationStatus = "Validating address...";
+            ShowMap = false;
+
+            var result = await _geocodingService.GeocodeAddressAsync(Address, Zipcode);
+
+            if (!result.success)
+            {
+                LocationStatus = result.errorMessage ?? "Failed to validate address.";
+                await Application.Current.MainPage.DisplayAlert("Invalid Address",
+                    "The provided address could not be found. Please check and try again.", "OK");
+                return;
+            }
+
+            Latitude = result.latitude ?? 0;
+            Longitude = result.longitude ?? 0;
+
+            MapPins.Clear();
+            var pin = new Pin
+            {
+                Location = new Location(Latitude, Longitude),
+                Label = "Incident Location",
+                Type = PinType.Generic
+            };
+            MapPins.Add(pin);
+
+            InitialMapPosition = MapSpan.FromCenterAndRadius(
+                new Location(Latitude, Longitude),
+                Distance.FromKilometers(0.5)
+            );
+
+            await Task.Delay(100); // Small delay to ensure binding updates
+            ShowMap = true;
+            LocationStatus = "Address validated successfully!";
+        }
+        catch (Exception ex)
+        {
+            LocationStatus = "Failed to validate address. Please try again.";
+            await Application.Current.MainPage.DisplayAlert("Error",
+                "Failed to validate address. Please try again.", "OK");
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
+
+    partial void OnAddressChanged(string value)
+    {
+        if (UseManualLocation && !string.IsNullOrWhiteSpace(value) && !string.IsNullOrWhiteSpace(Zipcode))
+        {
+            MainThread.BeginInvokeOnMainThread(async () => await ValidateAndGeocodeAddress());
+        }
+    }
+
+    partial void OnZipcodeChanged(string value)
+    {
+        if (UseManualLocation && !string.IsNullOrWhiteSpace(Address) && !string.IsNullOrWhiteSpace(value))
+        {
+            MainThread.BeginInvokeOnMainThread(async () => await ValidateAndGeocodeAddress());
+        }
+    }
+
     [RelayCommand]
     private async Task SubmitReport()
     {
@@ -262,11 +342,26 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
             return;
         }
 
-        if (UseManualLocation && (string.IsNullOrWhiteSpace(Address) || string.IsNullOrWhiteSpace(Zipcode)))
+        if (UseManualLocation)
         {
-            await Application.Current.MainPage.DisplayAlert("Validation Error",
-                "Address and Zipcode are required when setting location manually.", "OK");
-            return;
+            if (string.IsNullOrWhiteSpace(Address) || string.IsNullOrWhiteSpace(Zipcode))
+            {
+                await Application.Current.MainPage.DisplayAlert("Validation Error",
+                    "Address and Zipcode are required when setting location manually.", "OK");
+                return;
+            }
+
+            // Validate address before submission
+            var geocodeResult = await _geocodingService.GeocodeAddressAsync(Address, Zipcode);
+            if (!geocodeResult.success)
+            {
+                await Application.Current.MainPage.DisplayAlert("Invalid Address",
+                    geocodeResult.errorMessage ?? "The provided address is invalid. Please check and try again.", "OK");
+                return;
+            }
+
+            Latitude = geocodeResult.latitude ?? 0;
+            Longitude = geocodeResult.longitude ?? 0;
         }
 
         try
@@ -287,8 +382,8 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
             {
                 Title = Title,
                 Description = Description,
-                Latitude = UseCurrentLocation ? Latitude : null,
-                Longitude = UseCurrentLocation ? Longitude : 0.0,
+                Latitude = Latitude,
+                Longitude = Longitude,
                 Address = UseManualLocation ? Address : null,
                 ZipCode = UseManualLocation ? Zipcode : null,
                 ReportedById = reportedById
@@ -309,7 +404,8 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
             }
             else if (response.Error != null)
             {
-                await Application.Current.MainPage.DisplayAlert("Submission Failed", $"Something went wrong - {response.Error.Content} - {response.Error.StatusCode}", "OK");
+                await Application.Current.MainPage.DisplayAlert("Submission Failed", 
+                    $"Something went wrong - {response.Error.Content} - {response.Error.StatusCode}", "OK");
             }
             else
             {
