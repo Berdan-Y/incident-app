@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "Pr2LhB9hEUI=",
+  "dgSpecHash": "TK1vTsyBsH8=",
   "success": true,
   "projectFilePath": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/Maui.csproj",
   "expectedPackageFiles": [
     "/Users/berdanyilmaz/.nuget/packages/automapper/14.0.0/automapper.14.0.0.nupkg.sha512",
     "/Users/berdanyilmaz/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
+    "/Users/berdanyilmaz/.nuget/packages/communitytoolkit.maui/5.3.0/communitytoolkit.maui.5.3.0.nupkg.sha512",
+    "/Users/berdanyilmaz/.nuget/packages/communitytoolkit.maui.core/5.3.0/communitytoolkit.maui.core.5.3.0.nupkg.sha512",
     "/Users/berdanyilmaz/.nuget/packages/communitytoolkit.mvvm/8.2.2/communitytoolkit.mvvm.8.2.2.nupkg.sha512",
     "/Users/berdanyilmaz/.nuget/packages/googlegson/2.11.0.5/googlegson.2.11.0.5.nupkg.sha512",
     "/Users/berdanyilmaz/.nuget/packages/microsoft.aspnetcore.hosting.abstractions/2.2.0/microsoft.aspnetcore.hosting.abstractions.2.2.0.nupkg.sha512",

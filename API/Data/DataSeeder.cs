@@ -33,7 +33,7 @@ public class DataSeeder
         var now = DateTime.UtcNow;
         var adminUser = new User
         {
-            Id = Guid.NewGuid(),
+            Id = Guid.Parse("8e3c8453-2192-408b-ab06-2fb8e37a8de3"),
             Email = "admin@gmail.com",
             Password = BCrypt.Net.BCrypt.HashPassword("password"),
             FirstName = "Admin",
@@ -42,6 +42,8 @@ public class DataSeeder
             CreatedAt = now,
             UpdatedAt = now
         };
+
+        Console.WriteLine($"Created admin user with ID: {adminUser.Id}");
 
         var testUser = new User
         {
@@ -85,6 +87,56 @@ public class DataSeeder
 
         await _context.UserRoles.AddRangeAsync(adminUserRole, testUserRole);
         await _context.SaveChangesAsync();
+
+        // Add some test incidents
+        var testIncident1 = new Incident
+        {
+            Id = Guid.NewGuid(),
+            Title = "Test Incident 1",
+            Description = "This is a test incident for the test user",
+            Status = Shared.Models.Enums.Status.Todo,
+            Priority = Shared.Models.Enums.Priority.Medium,
+            ReportedById = adminUser.Id,
+            CreatedAt = now,
+            UpdatedAt = now,
+            Latitude = 37.7749,
+            Longitude = -122.4194,
+            Address = "123 Test St, Test City",
+            ZipCode = "12345"
+        };
+
+        Console.WriteLine($"Creating test incident 1 with ID: {testIncident1.Id}, ReportedById: {testIncident1.ReportedById}");
+
+        var testIncident2 = new Incident
+        {
+            Id = Guid.NewGuid(),
+            Title = "Test Incident 2",
+            Description = "This is another test incident for the test user",
+            Status = Shared.Models.Enums.Status.InProgress,
+            Priority = Shared.Models.Enums.Priority.High,
+            ReportedById = adminUser.Id,
+            CreatedAt = now,
+            UpdatedAt = now,
+            Latitude = 37.7749,
+            Longitude = -122.4194,
+            Address = "456 Test St, Test City",
+            ZipCode = "12345"
+        };
+
+        Console.WriteLine($"Creating test incident 2 with ID: {testIncident2.Id}, ReportedById: {testIncident2.ReportedById}");
+
+        await _context.Incidents.AddRangeAsync(testIncident1, testIncident2);
+        await _context.SaveChangesAsync();
+
+        Console.WriteLine("Incidents saved to database");
+
+        // Verify incidents were saved
+        var savedIncidents = await _context.Incidents.ToListAsync();
+        Console.WriteLine($"Total incidents in database: {savedIncidents.Count}");
+        foreach (var incident in savedIncidents)
+        {
+            Console.WriteLine($"Incident {incident.Id}: Title={incident.Title}, ReportedById={incident.ReportedById}");
+        }
     }
 
     private async Task CleanDataAsync()

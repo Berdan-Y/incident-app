@@ -11,26 +11,6 @@ using System.Text.Json.Serialization;
 
 namespace Maui.ViewModels;
 
-public class LoginResponseDto
-{
-    [JsonPropertyName("token")]
-    public string Token { get; set; }
-
-    [JsonPropertyName("userId")]
-    public Guid UserId { get; set; }
-
-    [JsonPropertyName("roles")]
-    public List<string> Roles { get; set; }
-
-    [JsonPropertyName("message")]
-    public string Message { get; set; }
-
-    public override string ToString()
-    {
-        return $"Token: {Token}\nUserId: {UserId}\nRoles: {string.Join(", ", Roles ?? new List<string>())}\nMessage: {Message}";
-    }
-}
-
 public partial class LoginViewModel : ObservableObject
 {
     private readonly IAuthApi _authApi;
@@ -94,10 +74,21 @@ public partial class LoginViewModel : ObservableObject
                     if (loginResponse?.Token != null)
                     {
                         await _tokenService.SetTokenAsync(loginResponse.Token);
+                        
+                        var roles = loginResponse.Roles != null && loginResponse.Roles.Count > 0
+                            ? string.Join(", ", loginResponse.Roles)
+                            : "";
+                        
+                        await _tokenService.SetRolesAsync(roles);
 
                         // Reset fields
                         Email = string.Empty;
                         Password = string.Empty;
+
+                        if (loginResponse?.Roles != null)
+                        {
+                            
+                        }
 
                         // Show success popup
                         await Application.Current.MainPage.DisplayAlert(

@@ -35,6 +35,8 @@
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/publish/../Maui.app/runtimeconfig.bin
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/publish/../Maui.app/AutoMapper.dll
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/publish/../Maui.app/BCrypt.Net-Next.dll
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/publish/../Maui.app/CommunityToolkit.Maui.dll
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/publish/../Maui.app/CommunityToolkit.Maui.Core.dll
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/publish/../Maui.app/CommunityToolkit.Mvvm.dll
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/publish/../Maui.app/Microsoft.AspNetCore.Hosting.Abstractions.dll
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/bin/Debug/net9.0-ios/iossimulator-arm64/publish/../Maui.app/Microsoft.AspNetCore.Hosting.Server.Abstractions.dll

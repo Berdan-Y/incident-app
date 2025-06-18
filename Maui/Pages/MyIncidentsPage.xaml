@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Maui.ViewModels"
+             xmlns:models="clr-namespace:Shared.Models.Dtos;assembly=Shared"
+             x:Class="Maui.Pages.MyIncidentsPage"
+             Title="My Incidents">
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Refresh and Error Message Row -->
+        <VerticalStackLayout Grid.Row="0" Padding="15">
+            <Label Text="{Binding ErrorMessage}"
+                   IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotEmptyConverter}}"
+                   TextColor="Red"
+                   HorizontalOptions="Center" />
+        </VerticalStackLayout>
+
+        <!-- Loading Indicator -->
+        <ActivityIndicator Grid.Row="1"
+                          IsRunning="{Binding IsLoading}"
+                          IsVisible="{Binding IsLoading}"
+                          HorizontalOptions="Center"
+                          VerticalOptions="Center" />
+
+        <!-- Incidents List -->
+        <CollectionView Grid.Row="1"
+                       ItemsSource="{Binding Incidents}"
+                       IsVisible="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}"
+                       SelectionMode="Single"
+                       SelectionChanged="OnIncidentSelected">
+            
+            <CollectionView.EmptyView>
+                <VerticalStackLayout Padding="15" 
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center">
+                    <Label Text="No incidents found"
+                           FontSize="18"
+                           HorizontalOptions="Center" />
+                    <Label Text="You haven't reported any incidents yet. Tap the 'Report Incident' tab to create one."
+                           FontSize="14"
+                           TextColor="Gray"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:IncidentResponseDto">
+                    <Frame Margin="15,7.5" 
+                           Padding="15"
+                           BorderColor="{Binding Priority, Converter={StaticResource PriorityToColorConverter}}"
+                           HasShadow="True">
+                        <Grid RowDefinitions="Auto,Auto,Auto,Auto" 
+                              ColumnDefinitions="*,Auto">
+                            
+                            <Label Grid.Row="0" Grid.Column="0"
+                                   Text="{Binding Title}"
+                                   FontSize="18"
+                                   FontAttributes="Bold" />
+                            
+                            <Label Grid.Row="0" Grid.Column="1"
+                                   Text="{Binding Status}"
+                                   FontSize="14"
+                                   TextColor="{Binding Status, Converter={StaticResource StatusToColorConverter}}" />
+                            
+                            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                   Text="{Binding Description}"
+                                   FontSize="14"
+                                   LineBreakMode="TailTruncation"
+                                   MaxLines="2" />
+                            
+                            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                                   Text="{Binding CreatedAt, StringFormat='{0:g}'}"
+                                   FontSize="12"
+                                   TextColor="Gray" />
+                            
+                            <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                                    Text="View Details"
+                                    Margin="0,10,0,0"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MyIncidentsViewModel}}, Path=ViewIncidentDetailsCommand}"
+                                    CommandParameter="{Binding .}" />
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage> 

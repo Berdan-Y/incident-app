@@ -5,6 +5,8 @@ public class MonoPackageManager_Resources {
 		"Maui.dll",
 		"AutoMapper.dll",
 		"BCrypt.Net-Next.dll",
+		"CommunityToolkit.Maui.dll",
+		"CommunityToolkit.Maui.Core.dll",
 		"CommunityToolkit.Mvvm.dll",
 		"GoogleGson.dll",
 		"Microsoft.AspNetCore.Hosting.Abstractions.dll",

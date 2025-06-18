@@ -26,11 +26,18 @@
             ContentTemplate="{DataTemplate local:MainPage}"
             Route="MainPage" />
         
-        <ShellContent
-           Title="Report"
-           Icon="{FontImage FontFamily=MaterialIcons, Glyph=&#xe88a;}"
-           ContentTemplate="{DataTemplate pages:ReportIncidentPage}"
-           Route="ReportIncidentPage" />
+        <Tab Title="Reports" Icon="{FontImage FontFamily=MaterialIcons, Glyph=&#xe88a;}">
+            <ShellContent
+                Title="Report Incident"
+                ContentTemplate="{DataTemplate pages:ReportIncidentPage}"
+                Route="ReportIncidentPage" />
+                
+            <ShellContent
+                Title="My Incidents"
+                ContentTemplate="{DataTemplate pages:MyIncidentsPage}"
+                Route="MyIncidentsPage"
+                IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:AppShell}}, Path=BindingContext.IsLoggedIn}" />
+        </Tab>
 
         <ShellContent
             Title="Login"

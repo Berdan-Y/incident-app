@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Maui.ViewModels"
+             x:Class="Maui.Pages.IncidentDetailsPage"
+             Title="Incident Details">
+
+    <ScrollView>
+        <Grid RowDefinitions="Auto,*" Padding="15">
+            <!-- Header with Refresh and Error Message -->
+            <VerticalStackLayout Grid.Row="0" Spacing="10">
+                <Label Text="{Binding ErrorMessage}"
+                       IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotEmptyConverter}}"
+                       TextColor="Red"
+                       HorizontalOptions="Center" />
+            </VerticalStackLayout>
+
+            <!-- Loading Indicator -->
+            <ActivityIndicator Grid.Row="1"
+                             IsVisible="{Binding IsLoading}"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center" />
+
+            <!-- Incident Details -->
+            <Grid Grid.Row="1" 
+                  IsVisible="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}"
+                  RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                  RowSpacing="15">
+
+                <!-- Title -->
+                <VerticalStackLayout Grid.Row="0" Spacing="5">
+                    <Label Text="Title"
+                           FontAttributes="Bold"
+                           FontSize="16" />
+                    <Label Text="{Binding Incident.Title}"
+                           FontSize="18" />
+                </VerticalStackLayout>
+
+                <!-- Status and Priority -->
+                <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="15">
+                    <VerticalStackLayout Grid.Column="0" Spacing="5">
+                        <Label Text="Status"
+                               FontAttributes="Bold"
+                               FontSize="16" />
+                        <Label Text="{Binding Incident.Status}"
+                               TextColor="{Binding Incident.Status, Converter={StaticResource StatusToColorConverter}}"
+                               FontSize="16" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Column="1" Spacing="5">
+                        <Label Text="Priority"
+                               FontAttributes="Bold"
+                               FontSize="16" />
+                        <Label Text="{Binding Incident.Priority}"
+                               TextColor="{Binding Incident.Priority, Converter={StaticResource PriorityToColorConverter}}"
+                               FontSize="16" />
+                    </VerticalStackLayout>
+                </Grid>
+
+                <!-- Description -->
+                <VerticalStackLayout Grid.Row="2" Spacing="5">
+                    <Label Text="Description"
+                           FontAttributes="Bold"
+                           FontSize="16" />
+                    <Label Text="{Binding Incident.Description}"
+                           FontSize="16" />
+                </VerticalStackLayout>
+
+                <!-- Location -->
+                <VerticalStackLayout Grid.Row="3" Spacing="5">
+                    <Label Text="Location"
+                           FontAttributes="Bold"
+                           FontSize="16" />
+                    <Label Text="{Binding Incident.Address}"
+                           FontSize="16" />
+                    <Label Text="{Binding Incident.ZipCode}"
+                           FontSize="14"
+                           TextColor="Gray" />
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Coordinates: " FontSize="14" TextColor="Gray" />
+                                <Span Text="{Binding Incident.Latitude, StringFormat='{0:F6}'}" FontSize="14" TextColor="Gray" />
+                                <Span Text=", " FontSize="14" TextColor="Gray" />
+                                <Span Text="{Binding Incident.Longitude, StringFormat='{0:F6}'}" FontSize="14" TextColor="Gray" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </VerticalStackLayout>
+
+                <!-- Reporter -->
+                <VerticalStackLayout Grid.Row="4" Spacing="5">
+                    <Label Text="Reported By"
+                           FontAttributes="Bold"
+                           FontSize="16" />
+                    <Label Text="{Binding Incident.CreatedBy.Email}"
+                           FontSize="16" />
+                </VerticalStackLayout>
+
+                <!-- Assignee -->
+                <VerticalStackLayout Grid.Row="5" Spacing="5">
+                    <Label Text="Assigned To"
+                           FontAttributes="Bold"
+                           FontSize="16" />
+                    <Label Text="{Binding Incident.AssignedTo.Email}"
+                           FontSize="16" />
+                </VerticalStackLayout>
+
+                <!-- Dates -->
+                <Grid Grid.Row="6" ColumnDefinitions="*,*" ColumnSpacing="15">
+                    <VerticalStackLayout Grid.Column="0" Spacing="5">
+                        <Label Text="Created At"
+                               FontAttributes="Bold"
+                               FontSize="16" />
+                        <Label Text="{Binding Incident.CreatedAt, StringFormat='{0:g}'}"
+                               FontSize="14"
+                               TextColor="Gray" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Column="1" Spacing="5">
+                        <Label Text="Last Updated"
+                               FontAttributes="Bold"
+                               FontSize="16" />
+                        <Label Text="{Binding Incident.UpdatedAt, StringFormat='{0:g}'}"
+                               FontSize="14"
+                               TextColor="Gray" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Grid>
+        </Grid>
+    </ScrollView>
+</ContentPage> 

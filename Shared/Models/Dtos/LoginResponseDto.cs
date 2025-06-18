@@ -1,9 +1,23 @@
+using System.Text.Json.Serialization;
+
 namespace Shared.Models.Dtos;
 
 public class LoginResponseDto
 {
-    public string Token { get; set; } = "";
+    [JsonPropertyName("token")]
+    public string Token { get; set; }
+
+    [JsonPropertyName("userId")]
     public Guid UserId { get; set; }
-    public List<string> Roles { get; set; } = new();
-    public string Message { get; set; } = "";
+
+    [JsonPropertyName("roles")]
+    public List<string> Roles { get; set; }
+
+    [JsonPropertyName("message")]
+    public string Message { get; set; }
+
+    public override string ToString()
+    {
+        return $"Token: {Token}\nUserId: {UserId}\nRoles: {string.Join(", ", Roles ?? new List<string>())}\nMessage: {Message}";
+    }
 }

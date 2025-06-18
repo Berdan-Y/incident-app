@@ -263,7 +263,10 @@ public class IncidentController : ControllerBase
     public async Task<ActionResult<IEnumerable<IncidentResponseDto>>> GetMyIncidents()
     {
         var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException());
+        Console.WriteLine($"GetMyIncidents called for user ID: {userId}");
         var incidents = await _incidentService.GetIncidentsByUserAsync(userId);
+        Console.WriteLine($"Found {incidents.Count()} incidents for user {userId}");
+        Console.WriteLine($"{incidents.Select(i => $"Incident ID: {i.Id}, Title: {i.Title}").Aggregate((a, b) => a + "\n" + b)}");
         return Ok(incidents);
     }
 

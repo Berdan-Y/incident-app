@@ -15,4 +15,6 @@ public interface ITokenService : INotifyPropertyChanged
     string? GetUserId();
     string? GetUserName();
     string? GetEmail();
+    Task SetRolesAsync(string roles);
+    List<string> GetRoles();
 }

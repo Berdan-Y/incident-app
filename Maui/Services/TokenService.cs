@@ -10,6 +10,7 @@ public class TokenService : ITokenService, IDisposable, INotifyPropertyChanged
     private string? _token;
     private bool _isLoggedIn;
     private const string TokenKey = "auth_token";
+    private const string RolesKey = "user_roles";
     private readonly IPreferences _preferences;
     private readonly IDispatcherTimer _tokenValidationTimer;
     private const int TokenValidationIntervalSeconds = 5;
@@ -157,12 +158,14 @@ public class TokenService : ITokenService, IDisposable, INotifyPropertyChanged
         try
         {
             SecureStorage.Default.Remove(TokenKey);
+            SecureStorage.Default.Remove(RolesKey);
         }
         catch
         {
             // Ignore secure storage errors during logout
         }
         _preferences.Remove(TokenKey);
+        _preferences.Remove(RolesKey);
         LoggedOut?.Invoke(this, EventArgs.Empty);
         return Task.CompletedTask;
     }
@@ -245,5 +248,74 @@ public class TokenService : ITokenService, IDisposable, INotifyPropertyChanged
             Debug.WriteLine($"Error getting email from token: {ex.Message}");
             return null;
         }
+    }
+
+    public async Task SetRolesAsync(string roles)
+    {
+        Debug.WriteLine($"TokenService.SetRolesAsync called with roles: {roles}");
+        try
+        {
+            if (string.IsNullOrEmpty(roles))
+            {
+                await SecureStorage.Default.SetAsync(RolesKey, string.Empty);
+                _preferences.Set(RolesKey, string.Empty);
+            }
+            else
+            {
+                await SecureStorage.Default.SetAsync(RolesKey, roles);
+                // Fallback storage
+                _preferences.Set(RolesKey, roles);
+            }
+            Debug.WriteLine("Roles successfully stored");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Error storing roles in SecureStorage: {ex.Message}");
+            // Ensure roles are at least stored in preferences
+            _preferences.Set(RolesKey, roles ?? string.Empty);
+        }
+    }
+
+    public List<string> GetRoles()
+    {
+        try
+        {
+            // Try to get from SecureStorage first
+            var rolesString = SecureStorage.Default.GetAsync(RolesKey).Result;
+            
+            // If not found in SecureStorage, try preferences
+            if (string.IsNullOrEmpty(rolesString))
+            {
+                rolesString = _preferences.Get(RolesKey, string.Empty);
+            }
+
+            Debug.WriteLine($"Retrieved roles: {rolesString}");
+
+            if (string.IsNullOrEmpty(rolesString))
+            {
+                return new List<string>();
+            }
+
+            return rolesString.Split(',').Select(r => r.Trim()).ToList();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Error retrieving roles: {ex.Message}");
+            // Try preferences as fallback
+            var rolesString = _preferences.Get(RolesKey, string.Empty);
+            return string.IsNullOrEmpty(rolesString) 
+                ? new List<string>() 
+                : rolesString.Split(',').Select(r => r.Trim()).ToList();
+        }
+    }
+
+    public bool HasRole(string role)
+    {
+        if (string.IsNullOrEmpty(role)) return false;
+        
+        var roles = GetRoles();
+        var hasRole = roles.Contains(role, StringComparer.OrdinalIgnoreCase);
+        Debug.WriteLine($"HasRole check - Role: {role}, User roles: {string.Join(", ", roles)}, Has role: {hasRole}");
+        return hasRole;
     }
 }

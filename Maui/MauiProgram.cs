@@ -9,6 +9,7 @@ using Maui.Converters;
 using System.Net.Http;
 using Microsoft.Maui.Controls.Maps;
 using Microsoft.Maui.Maps;
+using CommunityToolkit.Maui;
 
 namespace Maui;
 
@@ -19,10 +20,13 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
+            .UseMauiCommunityToolkit()
             .UseMauiMaps()
             .ConfigureFonts(fonts =>
             {
+                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                fonts.AddFont("MaterialIcons-Regular.ttf", "MaterialIcons");
             });
 
         // Register App itself
@@ -41,6 +45,9 @@ public static class MauiProgram
             ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
         };
 
+        // Add authorization message handler
+        builder.Services.AddTransient<AuthorizationMessageHandler>();
+
         builder.Services
             .AddRefitClient<IIncidentApi>()
             .ConfigureHttpClient(c =>
@@ -48,6 +55,7 @@ public static class MauiProgram
                 c.BaseAddress = new Uri(baseAddress);
                 c.Timeout = TimeSpan.FromSeconds(30);
             })
+            .AddHttpMessageHandler<AuthorizationMessageHandler>()
             .ConfigurePrimaryHttpMessageHandler(() => httpClientHandler);
 
         builder.Services
@@ -57,6 +65,7 @@ public static class MauiProgram
                 c.BaseAddress = new Uri(baseAddress);
                 c.Timeout = TimeSpan.FromSeconds(30);
             })
+            .AddHttpMessageHandler<AuthorizationMessageHandler>()
             .ConfigurePrimaryHttpMessageHandler(() => httpClientHandler);
 
         builder.Services
@@ -77,6 +86,8 @@ public static class MauiProgram
         builder.Services.AddTransient<LoginViewModel>();
         builder.Services.AddTransient<RegistrationViewModel>();
         builder.Services.AddTransient<ReportIncidentViewModel>();
+        builder.Services.AddTransient<MyIncidentsViewModel>();
+        builder.Services.AddTransient<IncidentDetailsViewModel>();
 
         // Register Shell and Pages
         builder.Services.AddSingleton<AppShell>();
@@ -84,6 +95,8 @@ public static class MauiProgram
         builder.Services.AddTransient<RegistrationPage>();
         builder.Services.AddTransient<LogoutPage>();
         builder.Services.AddTransient<ReportIncidentPage>();
+        builder.Services.AddTransient<MyIncidentsPage>();
+        builder.Services.AddTransient<IncidentDetailsPage>();
 
         // Register Maps
         builder.Services.AddSingleton<IGeolocation>(Geolocation.Default);
