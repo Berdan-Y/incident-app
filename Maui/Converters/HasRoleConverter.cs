@@ -35,16 +35,19 @@ public class HasRoleConverter : IValueConverter
             return false;
         }
 
-        var requiredRole = parameter.ToString();
-        if (string.IsNullOrEmpty(requiredRole))
+        var requiredRoles = parameter.ToString()?.Split(',').Select(r => r.Trim());
+        if (requiredRoles == null || !requiredRoles.Any())
         {
-            Debug.WriteLine("HasRoleConverter: Required role is empty, returning false");
+            Debug.WriteLine("HasRoleConverter: Required roles list is empty, returning false");
             return false;
         }
 
-        var hasRole = tokenService.HasRole(requiredRole);
-        Debug.WriteLine($"HasRoleConverter: Has required role '{requiredRole}'? {hasRole}");
-        return hasRole;
+        Debug.WriteLine($"HasRoleConverter: Checking for roles: {string.Join(", ", requiredRoles)}");
+        
+        // Check if user has any of the required roles
+        var hasAnyRole = requiredRoles.Any(role => tokenService.HasRole(role));
+        Debug.WriteLine($"HasRoleConverter: Has any required role? {hasAnyRole}");
+        return hasAnyRole;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

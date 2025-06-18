@@ -49,7 +49,7 @@
                 <ShellContent.IsVisible>
                     <MultiBinding Converter="{StaticResource MultiBindingBoolConverter}">
                         <Binding Path="IsLoggedIn" />
-                        <Binding Path="TokenService" Converter="{StaticResource HasRoleConverter}" ConverterParameter="Admin" />
+                        <Binding Path="TokenService" Converter="{StaticResource HasRoleConverter}" ConverterParameter="Admin,FieldEmployee" />
                     </MultiBinding>
                 </ShellContent.IsVisible>
             </ShellContent>

@@ -61,22 +61,13 @@ public partial class LoginViewModel : ObservableObject
             {
                 try
                 {
-                    // Configure JSON options
-                    var options = new JsonSerializerOptions
-                    {
-                        PropertyNameCaseInsensitive = true,
-                        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-                    };
-
-                    // Parse the JSON response
-                    var loginResponse = JsonSerializer.Deserialize<LoginResponseDto>(response.Content, options);
-
+                    var loginResponse = response.Content;
                     if (loginResponse?.Token != null)
                     {
                         await _tokenService.SetTokenAsync(loginResponse.Token);
                         
                         var roles = loginResponse.Roles != null && loginResponse.Roles.Count > 0
-                            ? string.Join(", ", loginResponse.Roles)
+                            ? string.Join(",", loginResponse.Roles)
                             : "";
                         
                         await _tokenService.SetRolesAsync(roles);
@@ -84,11 +75,6 @@ public partial class LoginViewModel : ObservableObject
                         // Reset fields
                         Email = string.Empty;
                         Password = string.Empty;
-
-                        if (loginResponse?.Roles != null)
-                        {
-                            
-                        }
 
                         // Show success popup
                         await Application.Current.MainPage.DisplayAlert(

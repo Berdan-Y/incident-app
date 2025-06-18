@@ -7,7 +7,7 @@ namespace Shared.Api;
 public interface IAuthApi
 {
     [Post("/api/Auth/login")]
-    Task<IApiResponse<string>> LoginAsync([Body] LoginDto loginDto);
+    Task<IApiResponse<LoginResponseDto>> LoginAsync([Body] LoginDto loginDto);
 
     [Post("/api/Auth/register")]
     Task<IApiResponse<string>> RegisterAsync([Body] RegisterDto registerDto);

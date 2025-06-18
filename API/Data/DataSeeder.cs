@@ -56,15 +56,28 @@ public class DataSeeder
             CreatedAt = now,
             UpdatedAt = now
         };
+        
+        var fieldEmployeeUser = new User
+        {
+            Id = Guid.NewGuid(),
+            Email = "employee@gmail.com",
+            Password = BCrypt.Net.BCrypt.HashPassword("password"),
+            FirstName = "Employee",
+            LastName = "Field",
+            RoleJson = "{\"Name\":\"FieldEmployee\"}",
+            CreatedAt = now,
+            UpdatedAt = now
+        };
 
-        await _context.Users.AddRangeAsync(adminUser, testUser);
+        await _context.Users.AddRangeAsync(adminUser, testUser, fieldEmployeeUser);
         await _context.SaveChangesAsync();
 
         // Create UserRole entries
         var adminRole = await _context.Roles.FindAsync(Role.AdminId);
         var memberRole = await _context.Roles.FindAsync(Role.MemberId);
+        var fieldEmployeeRole = await _context.Roles.FindAsync(Role.FieldEmployeeId);
 
-        if (adminRole == null || memberRole == null)
+        if (adminRole == null || memberRole == null || fieldEmployeeRole == null)
         {
             throw new InvalidOperationException("Required roles not found in database");
         }
@@ -84,8 +97,16 @@ public class DataSeeder
             User = testUser,
             Role = memberRole
         };
+        
+        var fieldEmployeeUserRole = new UserRole
+        {
+            UserId = fieldEmployeeUser.Id,
+            RoleId = Role.FieldEmployeeId,
+            User = fieldEmployeeUser,
+            Role = fieldEmployeeRole
+        };
 
-        await _context.UserRoles.AddRangeAsync(adminUserRole, testUserRole);
+        await _context.UserRoles.AddRangeAsync(adminUserRole, testUserRole, fieldEmployeeUserRole);
         await _context.SaveChangesAsync();
 
         // Add some test incidents
