@@ -9,14 +9,6 @@
 
     <ScrollView>
         <Grid RowDefinitions="Auto,*" Padding="15">
-            <!-- Header with Refresh and Error Message -->
-            <VerticalStackLayout Grid.Row="0" Spacing="10">
-                <Label Text="{Binding ErrorMessage}"
-                       IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotEmptyConverter}}"
-                       TextColor="Red"
-                       HorizontalOptions="Center" />
-            </VerticalStackLayout>
-
             <!-- Loading Indicator -->
             <ActivityIndicator Grid.Row="1"
                              IsVisible="{Binding IsLoading}"

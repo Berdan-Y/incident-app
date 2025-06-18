@@ -5,11 +5,15 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Maui"
     xmlns:pages="clr-namespace:Maui.Pages"
+    xmlns:converters="clr-namespace:Maui.Converters"
     x:Name="AppShellPage"
     Title="Maui">
 
     <Shell.Resources>
         <ResourceDictionary>
+            <converters:AccountTabTitleConverter x:Key="AccountTabTitleConverter"/>
+            <converters:HasRoleConverter x:Key="HasRoleConverter"/>
+            <converters:MultiBindingBoolConverter x:Key="MultiBindingBoolConverter"/>
             <Style x:Key="BaseStyle" TargetType="Element">
                 <Setter Property="Shell.BackgroundColor" Value="#455A64" />
                 <Setter Property="Shell.ForegroundColor" Value="White" />
@@ -37,28 +41,42 @@
                 ContentTemplate="{DataTemplate pages:MyIncidentsPage}"
                 Route="MyIncidentsPage"
                 IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:AppShell}}, Path=BindingContext.IsLoggedIn}" />
+                
+            <ShellContent
+                Title="All Incidents"
+                ContentTemplate="{DataTemplate pages:AllIncidentsPage}"
+                Route="AllIncidentsPage">
+                <ShellContent.IsVisible>
+                    <MultiBinding Converter="{StaticResource MultiBindingBoolConverter}">
+                        <Binding Path="IsLoggedIn" />
+                        <Binding Path="TokenService" Converter="{StaticResource HasRoleConverter}" ConverterParameter="Admin" />
+                    </MultiBinding>
+                </ShellContent.IsVisible>
+            </ShellContent>
         </Tab>
 
-        <ShellContent
-            Title="Login"
-            Icon="{FontImage FontFamily=MaterialIcons, Glyph=&#xe7fd;}"
-            ContentTemplate="{DataTemplate pages:LoginPage}"
-            Route="LoginPage"
-            IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:AppShell}}, Path=BindingContext.IsLoggedIn, Converter={StaticResource InverseBoolConverter}}" />
-                
-        <ShellContent
-            Title="Register"
-            Icon="{FontImage FontFamily=MaterialIcons, Glyph=&#xe7fe;}"
-            ContentTemplate="{DataTemplate pages:RegistrationPage}"
-            Route="RegistrationPage"
-            IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:AppShell}}, Path=BindingContext.IsLoggedIn, Converter={StaticResource InverseBoolConverter}}" />
+        <Tab Title="Account" Icon="{FontImage FontFamily=MaterialIcons, Glyph=&#xe7fd;}">
+            <ShellContent
+                x:Name="LoginContent"
+                Title="Login"
+                ContentTemplate="{DataTemplate pages:LoginPage}"
+                Route="LoginPage"
+                IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:AppShell}}, Path=BindingContext.IsLoggedIn, Converter={StaticResource InverseBoolConverter}}" />
+                    
+            <ShellContent
+                x:Name="RegisterContent"
+                Title="Register"
+                ContentTemplate="{DataTemplate pages:RegistrationPage}"
+                Route="RegistrationPage"
+                IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:AppShell}}, Path=BindingContext.IsLoggedIn, Converter={StaticResource InverseBoolConverter}}" />
 
-        <ShellContent
-            Title="Logout"
-            Icon="{FontImage FontFamily=MaterialIcons, Glyph=&#xe9ba;}"
-            ContentTemplate="{DataTemplate pages:LogoutPage}"
-            Route="LogoutPage"
-            IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:AppShell}}, Path=BindingContext.IsLoggedIn}" />
+            <ShellContent
+                x:Name="LogoutContent"
+                Title="Logout"
+                ContentTemplate="{DataTemplate pages:LogoutPage}"
+                Route="LogoutPage"
+                IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:AppShell}}, Path=BindingContext.IsLoggedIn}" />
+        </Tab>
     </TabBar>
 
 </Shell>

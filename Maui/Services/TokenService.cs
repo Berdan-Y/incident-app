@@ -14,6 +14,7 @@ public class TokenService : ITokenService, IDisposable, INotifyPropertyChanged
     private readonly IPreferences _preferences;
     private readonly IDispatcherTimer _tokenValidationTimer;
     private const int TokenValidationIntervalSeconds = 5;
+    private List<string> _roles = new();
 
     public event PropertyChangedEventHandler? PropertyChanged;
     public event EventHandler? LoggedIn;
@@ -32,6 +33,16 @@ public class TokenService : ITokenService, IDisposable, INotifyPropertyChanged
         }
     }
     public bool IsInitializing { get; private set; } = true;
+
+    public List<string> Roles
+    {
+        get => _roles;
+        private set
+        {
+            _roles = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Roles)));
+        }
+    }
 
     public TokenService()
     {
@@ -149,24 +160,48 @@ public class TokenService : ITokenService, IDisposable, INotifyPropertyChanged
 
     public string? GetToken() => _token;
 
+    private void ClearAllStorage()
+    {
+        Debug.WriteLine("Clearing all storage...");
+        try
+        {
+            // Clear SecureStorage
+            SecureStorage.Default.RemoveAll();
+            Debug.WriteLine("SecureStorage cleared");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Error clearing SecureStorage: {ex.Message}");
+        }
+
+        // Clear Preferences
+        try
+        {
+            _preferences.Clear();
+            Debug.WriteLine("Preferences cleared");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Error clearing Preferences: {ex.Message}");
+        }
+    }
+
     public Task LogoutAsync()
     {
+        Debug.WriteLine("LogoutAsync called - clearing all user data");
+        
         _token = null;
         IsLoggedIn = false;
         _tokenValidationTimer.Stop();
 
-        try
-        {
-            SecureStorage.Default.Remove(TokenKey);
-            SecureStorage.Default.Remove(RolesKey);
-        }
-        catch
-        {
-            // Ignore secure storage errors during logout
-        }
-        _preferences.Remove(TokenKey);
-        _preferences.Remove(RolesKey);
+        // Clear all storage
+        ClearAllStorage();
+        
+        // Notify that both login state and roles have changed
         LoggedOut?.Invoke(this, EventArgs.Empty);
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Roles"));
+        
+        Debug.WriteLine("Logout complete");
         return Task.CompletedTask;
     }
 
@@ -259,54 +294,33 @@ public class TokenService : ITokenService, IDisposable, INotifyPropertyChanged
             {
                 await SecureStorage.Default.SetAsync(RolesKey, string.Empty);
                 _preferences.Set(RolesKey, string.Empty);
+                Roles = new List<string>();
             }
             else
             {
                 await SecureStorage.Default.SetAsync(RolesKey, roles);
                 // Fallback storage
                 _preferences.Set(RolesKey, roles);
+                Roles = roles.Split(',').Select(r => r.Trim()).ToList();
             }
-            Debug.WriteLine("Roles successfully stored");
+            Debug.WriteLine($"Roles successfully stored. Current roles: {string.Join(", ", Roles)}");
         }
         catch (Exception ex)
         {
             Debug.WriteLine($"Error storing roles in SecureStorage: {ex.Message}");
             // Ensure roles are at least stored in preferences
             _preferences.Set(RolesKey, roles ?? string.Empty);
+            Roles = string.IsNullOrEmpty(roles) 
+                ? new List<string>() 
+                : roles.Split(',').Select(r => r.Trim()).ToList();
         }
     }
 
     public List<string> GetRoles()
     {
-        try
-        {
-            // Try to get from SecureStorage first
-            var rolesString = SecureStorage.Default.GetAsync(RolesKey).Result;
-            
-            // If not found in SecureStorage, try preferences
-            if (string.IsNullOrEmpty(rolesString))
-            {
-                rolesString = _preferences.Get(RolesKey, string.Empty);
-            }
-
-            Debug.WriteLine($"Retrieved roles: {rolesString}");
-
-            if (string.IsNullOrEmpty(rolesString))
-            {
-                return new List<string>();
-            }
-
-            return rolesString.Split(',').Select(r => r.Trim()).ToList();
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine($"Error retrieving roles: {ex.Message}");
-            // Try preferences as fallback
-            var rolesString = _preferences.Get(RolesKey, string.Empty);
-            return string.IsNullOrEmpty(rolesString) 
-                ? new List<string>() 
-                : rolesString.Split(',').Select(r => r.Trim()).ToList();
-        }
+        Debug.WriteLine("GetRoles called");
+        Debug.WriteLine($"Returning cached roles: {string.Join(", ", _roles)}");
+        return _roles;
     }
 
     public bool HasRole(string role)

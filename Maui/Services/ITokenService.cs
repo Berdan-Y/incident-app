@@ -7,6 +7,7 @@ public interface ITokenService : INotifyPropertyChanged
 {
     bool IsLoggedIn { get; }
     bool IsInitializing { get; }
+    List<string> Roles { get; }
     event EventHandler? LoggedIn;
     event EventHandler? LoggedOut;
     Task SetTokenAsync(string token);
@@ -17,4 +18,5 @@ public interface ITokenService : INotifyPropertyChanged
     string? GetEmail();
     Task SetRolesAsync(string roles);
     List<string> GetRoles();
+    bool HasRole(string role);
 }

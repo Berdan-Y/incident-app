@@ -1,21 +1,45 @@
 ﻿using Maui.Pages;
 using Maui.Services;
 using Maui.ViewModels;
+using System.ComponentModel;
+using System.Diagnostics;
 
 namespace Maui;
 
-public partial class AppShell : Shell
+public partial class AppShell : Shell, INotifyPropertyChanged
 {
     private readonly AuthService _authService;
     private readonly LogoutViewModel _logoutViewModel;
+    private readonly ITokenService _tokenService;
 
-    public AppShell(AuthService authService, LogoutViewModel logoutViewModel)
+    public ITokenService TokenService 
+    { 
+        get
+        {
+            Debug.WriteLine($"TokenService getter called, returning {_tokenService}");
+            return _tokenService;
+        }
+    }
+
+    public bool IsLoggedIn => _tokenService.IsLoggedIn;
+
+    public AppShell(AuthService authService, LogoutViewModel logoutViewModel, ITokenService tokenService)
     {
         InitializeComponent();
 
         _authService = authService;
         _logoutViewModel = logoutViewModel;
-        BindingContext = _logoutViewModel;
+        _tokenService = tokenService;
+        
+        // Subscribe to TokenService property changes
+        _tokenService.PropertyChanged += (s, e) =>
+        {
+            Debug.WriteLine($"TokenService property changed: {e.PropertyName}");
+            OnPropertyChanged(nameof(TokenService));
+            OnPropertyChanged(nameof(IsLoggedIn));
+        };
+
+        BindingContext = this;
 
         // Register routes
         Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
@@ -25,6 +49,7 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(ReportIncidentPage), typeof(ReportIncidentPage));
         Routing.RegisterRoute(nameof(MyIncidentsPage), typeof(MyIncidentsPage));
         Routing.RegisterRoute(nameof(IncidentDetailsPage), typeof(IncidentDetailsPage));
+        Routing.RegisterRoute(nameof(AllIncidentsPage), typeof(AllIncidentsPage));
 
         // Subscribe to authentication state changes
         _authService.PropertyChanged += OnAuthStateChanged;
@@ -68,6 +93,10 @@ public partial class AppShell : Shell
         switch (item)
         {
             case ShellContent content:
+                // Skip visibility update for AllIncidentsPage to respect its binding
+                if (content.Route == "AllIncidentsPage")
+                    break;
+
                 content.IsVisible = content.Route switch
                 {
                     "LoginPage" or "RegistrationPage" => !isAuthenticated,

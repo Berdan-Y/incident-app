@@ -16,6 +16,7 @@
             <converters:StringNotEmptyConverter x:Key="StringNotEmptyConverter" />
             <converters:StatusToColorConverter x:Key="StatusToColorConverter" />
             <converters:PriorityToColorConverter x:Key="PriorityToColorConverter" />
+            <converters:MultiBindingBoolConverter x:Key="MultiBindingBoolConverter" />
 
             <!-- Styles -->
             <Style TargetType="Button">
