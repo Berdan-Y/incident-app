@@ -1,22 +1,18 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Maui.Services;
-using Shared.Api;
 using Shared.Models.Dtos;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
 using Maui.Pages;
 
 namespace Maui.ViewModels;
 
 public partial class AllIncidentsViewModel : BaseIncidentsViewModel
 {
-    private readonly IIncidentApi _incidentApi;
     private readonly ITokenService _tokenService;
 
-    public AllIncidentsViewModel(IIncidentApi incidentApi, ITokenService tokenService)
+    public AllIncidentsViewModel(IIncidentService incidentService, ITokenService tokenService)
+        : base(incidentService)
     {
-        _incidentApi = incidentApi;
         _tokenService = tokenService;
 
         EmptyMessage = "No incidents have been reported yet.";
@@ -50,34 +46,16 @@ public partial class AllIncidentsViewModel : BaseIncidentsViewModel
                 return;
             }
 
-            var response = await _incidentApi.GetIncidentsAsync();
-            Debug.WriteLine($"Response received - IsSuccessStatusCode: {response.IsSuccessStatusCode}, StatusCode: {response.StatusCode}");
-
-            if (response.IsSuccessStatusCode && response.Content != null)
+            var incidents = await _incidentService.GetAllIncidentsAsync();
+            Incidents.Clear();
+            foreach (var incident in incidents)
             {
-                Incidents.Clear();
-                foreach (var incident in response.Content)
-                {
-                    Debug.WriteLine($"Adding incident: ID={incident.Id}, Title={incident.Title}, Status={incident.Status}");
-                    Incidents.Add(incident);
-                }
-                ErrorMessage = string.Empty;
-            }
-            else if (response.Error != null)
-            {
-                ErrorMessage = $"Failed to load incidents: {response.Error.Content}";
-                Debug.WriteLine($"Error loading incidents: {response.Error.Content}");
-            }
-            else
-            {
-                ErrorMessage = "Failed to load incidents. Please try again later.";
-                Debug.WriteLine("Error loading incidents: Unknown error");
+                Incidents.Add(incident);
             }
         }
         catch (Exception ex)
         {
-            ErrorMessage = $"Failed to load incidents: {ex.Message}";
-            Debug.WriteLine($"Exception in LoadIncidents: {ex}");
+            ErrorMessage = ex.Message;
         }
         finally
         {
@@ -89,4 +67,4 @@ public partial class AllIncidentsViewModel : BaseIncidentsViewModel
     {
         await LoadIncidents();
     }
-} 
+}

@@ -254,12 +254,32 @@ public class IncidentController : ControllerBase
     [ProducesResponseType(typeof(IEnumerable<IncidentResponseDto>), StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<IncidentResponseDto>>> GetMyIncidents()
     {
-        var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException());
-        Console.WriteLine($"GetMyIncidents called for user ID: {userId}");
-        var incidents = await _incidentService.GetIncidentsByUserAsync(userId);
-        Console.WriteLine($"Found {incidents.Count()} incidents for user {userId}");
-        Console.WriteLine($"{incidents.Select(i => $"Incident ID: {i.Id}, Title: {i.Title}").Aggregate((a, b) => a + "\n" + b)}");
-        return Ok(incidents);
+        try
+        {
+            var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException());
+            Console.WriteLine($"GetMyIncidents called for user ID: {userId}");
+
+            var incidents = await _incidentService.GetIncidentsByUserAsync(userId);
+
+            // Ensure incidents is not null
+            incidents ??= Enumerable.Empty<IncidentResponseDto>();
+
+            var incidentCount = incidents.Count();
+            Console.WriteLine($"Found {incidentCount} incidents for user {userId}");
+
+            // Log each incident individually without using Aggregate or Select
+            foreach (var incident in incidents)
+            {
+                Console.WriteLine($"Incident available: {incident.Id} - {incident.Title}");
+            }
+
+            return Ok(incidents);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error in GetMyIncidents: {ex}");
+            throw;
+        }
     }
 
     [HttpGet("assigned-to-me")]

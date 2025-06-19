@@ -56,7 +56,7 @@ public class DataSeeder
             CreatedAt = now,
             UpdatedAt = now
         };
-        
+
         var fieldEmployeeUser = new User
         {
             Id = Guid.NewGuid(),
@@ -97,7 +97,7 @@ public class DataSeeder
             User = testUser,
             Role = memberRole
         };
-        
+
         var fieldEmployeeUserRole = new UserRole
         {
             UserId = fieldEmployeeUser.Id,

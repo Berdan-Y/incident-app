@@ -49,10 +49,10 @@ public class IncidentService : IIncidentService
     public async Task<IncidentResponseDto> CreateIncidentAsync(IncidentCreateDto incidentDto)
     {
         Console.WriteLine($"Creating incident - DTO ReportedById: {incidentDto.ReportedById}");
-        
+
         var incident = _mapper.Map<Incident>(incidentDto);
         Console.WriteLine($"After mapping - incident.ReportedById: {incident.ReportedById}");
-        
+
         // Only set non-ReportedById fields
         incident.AssignedToId = null;
         incident.CreatedAt = DateTime.UtcNow;
@@ -61,7 +61,7 @@ public class IncidentService : IIncidentService
         Console.WriteLine($"Final ReportedById before saving: {incident.ReportedById}");
         var createdIncident = await _incidentRepository.CreateAsync(incident);
         Console.WriteLine($"Created incident with ReportedById: {createdIncident.ReportedById}");
-        
+
         return _mapper.Map<IncidentResponseDto>(createdIncident);
     }
 

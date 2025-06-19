@@ -73,37 +73,52 @@ public class TokenService : ITokenService, IDisposable, INotifyPropertyChanged
 
     private async Task InitializeAsync()
     {
+        Debug.WriteLine("TokenService.InitializeAsync called");
         try
         {
+            // Try to get token from secure storage first
             var token = await SecureStorage.Default.GetAsync(TokenKey);
-            if (string.IsNullOrEmpty(token))
+            var roles = await SecureStorage.Default.GetAsync(RolesKey);
+
+            Debug.WriteLine($"Retrieved from SecureStorage - Token: {(token != null ? "exists" : "null")}, Roles: {roles}");
+
+            // If not found in secure storage, try preferences
+            if (token == null)
             {
-                // Try fallback storage
                 token = _preferences.Get<string>(TokenKey, null);
+                roles = _preferences.Get<string>(RolesKey, null);
+                Debug.WriteLine($"Retrieved from Preferences - Token: {(token != null ? "exists" : "null")}, Roles: {roles}");
             }
 
-            if (!string.IsNullOrEmpty(token) && !IsTokenExpired(token))
+            if (!string.IsNullOrEmpty(token))
             {
                 _token = token;
                 IsLoggedIn = true;
-                _tokenValidationTimer.Start();
+                LoggedIn?.Invoke(this, EventArgs.Empty);
+
+                if (!string.IsNullOrEmpty(roles))
+                {
+                    Roles = roles.Split(',').Select(r => r.Trim()).ToList();
+                    Debug.WriteLine($"Set roles from storage: {string.Join(", ", Roles)}");
+                }
+            }
+            else
+            {
+                IsLoggedIn = false;
+                Roles = new List<string>();
+                Debug.WriteLine("No token found, user is not logged in");
             }
         }
         catch (Exception ex)
         {
             Debug.WriteLine($"Error in InitializeAsync: {ex.Message}");
-            // Try fallback storage
-            var token = _preferences.Get<string>(TokenKey, null);
-            if (!string.IsNullOrEmpty(token) && !IsTokenExpired(token))
-            {
-                _token = token;
-                IsLoggedIn = true;
-                _tokenValidationTimer.Start();
-            }
+            IsLoggedIn = false;
+            Roles = new List<string>();
         }
         finally
         {
             IsInitializing = false;
+            Debug.WriteLine($"InitializeAsync completed. IsLoggedIn: {IsLoggedIn}, Roles: {string.Join(", ", Roles)}");
         }
     }
 
@@ -189,18 +204,18 @@ public class TokenService : ITokenService, IDisposable, INotifyPropertyChanged
     public Task LogoutAsync()
     {
         Debug.WriteLine("LogoutAsync called - clearing all user data");
-        
+
         _token = null;
         IsLoggedIn = false;
         _tokenValidationTimer.Stop();
 
         // Clear all storage
         ClearAllStorage();
-        
+
         // Notify that both login state and roles have changed
         LoggedOut?.Invoke(this, EventArgs.Empty);
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Roles"));
-        
+
         Debug.WriteLine("Logout complete");
         return Task.CompletedTask;
     }
@@ -310,8 +325,8 @@ public class TokenService : ITokenService, IDisposable, INotifyPropertyChanged
             Debug.WriteLine($"Error storing roles in SecureStorage: {ex.Message}");
             // Ensure roles are at least stored in preferences
             _preferences.Set(RolesKey, roles ?? string.Empty);
-            Roles = string.IsNullOrEmpty(roles) 
-                ? new List<string>() 
+            Roles = string.IsNullOrEmpty(roles)
+                ? new List<string>()
                 : roles.Split(',').Select(r => r.Trim()).ToList();
         }
     }
@@ -326,7 +341,7 @@ public class TokenService : ITokenService, IDisposable, INotifyPropertyChanged
     public bool HasRole(string role)
     {
         if (string.IsNullOrEmpty(role)) return false;
-        
+
         var roles = GetRoles();
         var hasRole = roles.Contains(role, StringComparer.OrdinalIgnoreCase);
         Debug.WriteLine($"HasRole check - Role: {role}, User roles: {string.Join(", ", roles)}, Has role: {hasRole}");

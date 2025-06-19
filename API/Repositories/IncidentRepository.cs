@@ -80,7 +80,7 @@ public class IncidentRepository : IIncidentRepository
     public async Task<IEnumerable<Incident>> GetByUserIdAsync(Guid userId)
     {
         Console.WriteLine($"GetByUserIdAsync called for user {userId}");
-        
+
         // First check if the user exists
         var user = await _context.Users.FindAsync(userId);
         Console.WriteLine($"User found: {user != null}, Email: {user?.Email}");

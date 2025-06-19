@@ -8,7 +8,7 @@ public class MultiBindingBoolConverter : IMultiValueConverter
     public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
     {
         Debug.WriteLine($"MultiBindingBoolConverter.Convert called with {values.Length} values");
-        
+
         for (int i = 0; i < values.Length; i++)
         {
             Debug.WriteLine($"Value {i}: {values[i]} (Type: {values[i]?.GetType().Name ?? "null"})");
@@ -39,4 +39,4 @@ public class MultiBindingBoolConverter : IMultiValueConverter
     {
         throw new NotImplementedException();
     }
-} 
+}

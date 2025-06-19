@@ -364,4 +364,3 @@
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-ios/iossimulator-arm64/Maui.csproj.Up2Date
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-ios/iossimulator-arm64/Maui.genruntimeconfig.cache
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-ios/iossimulator-arm64/ref/Maui.dll
-/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-ios/iossimulator-arm64/resourcestamps/Shared.stamp

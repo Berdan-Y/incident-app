@@ -80,9 +80,9 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
     public bool IsNotLoading => !IsLoading;
 
     public ReportIncidentViewModel(
-        IGeolocation geolocation, 
-        IMap map, 
-        IIncidentApi incidentApi, 
+        IGeolocation geolocation,
+        IMap map,
+        IIncidentApi incidentApi,
         ITokenService tokenService,
         IGeocodingService geocodingService)
     {
@@ -329,7 +329,7 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
     private async Task SubmitReport()
     {
         System.Diagnostics.Debug.WriteLine($"SubmitReport called - IsAnonymous: {IsAnonymous}");
-        
+
         if (string.IsNullOrWhiteSpace(Title))
         {
             await Application.Current.MainPage.DisplayAlert("Validation Error", "Title is required.", "OK");
@@ -419,7 +419,7 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
             }
             else if (response.Error != null)
             {
-                await Application.Current.MainPage.DisplayAlert("Submission Failed", 
+                await Application.Current.MainPage.DisplayAlert("Submission Failed",
                     $"Something went wrong - {response.Error.Content} - {response.Error.StatusCode}", "OK");
             }
             else

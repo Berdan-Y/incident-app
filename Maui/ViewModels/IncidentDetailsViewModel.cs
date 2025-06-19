@@ -205,7 +205,7 @@ public class IncidentDetailsViewModel : INotifyPropertyChanged
             MapPins.Clear();
             HasValidCoordinates = false;
             CurrentLocation = new Location(0, 0);
-            
+
             if (Incident == null)
             {
                 System.Diagnostics.Debug.WriteLine("Incident is null");
@@ -213,7 +213,7 @@ public class IncidentDetailsViewModel : INotifyPropertyChanged
             }
 
             System.Diagnostics.Debug.WriteLine($"Raw coordinates - Latitude: {Incident.Latitude}, Longitude: {Incident.Longitude}");
-            
+
             if (Incident.Latitude == 0 || Incident.Longitude == 0)
             {
                 System.Diagnostics.Debug.WriteLine("Coordinates are 0,0 - invalid");
@@ -223,14 +223,14 @@ public class IncidentDetailsViewModel : INotifyPropertyChanged
             // Parse coordinates using invariant culture
             var latStr = Incident.Latitude.ToString("F6").Replace(",", ".");
             var lonStr = Incident.Longitude.ToString("F6").Replace(",", ".");
-            
+
             System.Diagnostics.Debug.WriteLine($"Formatted coordinate strings - Lat: {latStr}, Lon: {lonStr}");
-            
+
             var lat = Convert.ToDouble(latStr, CultureInfo.InvariantCulture);
             var lon = Convert.ToDouble(lonStr, CultureInfo.InvariantCulture);
-            
+
             System.Diagnostics.Debug.WriteLine($"Parsed coordinates - Lat: {lat}, Lon: {lon}");
-            
+
             var location = new Location(lat, lon);
             CurrentLocation = location;  // Set the current location for the static pin
             System.Diagnostics.Debug.WriteLine($"Created Location object - Lat: {location.Latitude}, Lon: {location.Longitude}");
@@ -320,7 +320,7 @@ public class IncidentDetailsViewModel : INotifyPropertyChanged
             var incidentLocation = new Location(Incident.Latitude, Incident.Longitude);
 
             var routePoints = await _directionsService.GetRoutePointsAsync(currentLocation, incidentLocation);
-            
+
             if (!routePoints.Any())
             {
                 ErrorMessage = "Could not find a route to the incident location";
@@ -365,4 +365,4 @@ public class IncidentDetailsViewModel : INotifyPropertyChanged
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
-} 
+}

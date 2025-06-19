@@ -17,4 +17,4 @@ public class StringNotEmptyConverter : IValueConverter
     {
         throw new NotImplementedException();
     }
-} 
+}

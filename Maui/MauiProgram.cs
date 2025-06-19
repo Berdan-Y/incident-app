@@ -94,6 +94,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<ITokenService, TokenService>();
         builder.Services.AddSingleton<AuthService>();
         builder.Services.AddSingleton<IDirectionsService, GoogleDirectionsService>();
+        builder.Services.AddSingleton<IIncidentService, IncidentService>();
 
         // Register ViewModels
         builder.Services.AddSingleton<LogoutViewModel>();
@@ -103,6 +104,8 @@ public static class MauiProgram
         builder.Services.AddTransient<MyIncidentsViewModel>();
         builder.Services.AddTransient<IncidentDetailsViewModel>();
         builder.Services.AddTransient<AllIncidentsViewModel>();
+        builder.Services.AddTransient<AssignedIncidentsViewModel>();
+        builder.Services.AddTransient<EditIncidentViewModel>();
 
         // Register Shell and Pages
         builder.Services.AddSingleton<AppShell>();
@@ -113,10 +116,15 @@ public static class MauiProgram
         builder.Services.AddTransient<MyIncidentsPage>();
         builder.Services.AddTransient<IncidentDetailsPage>();
         builder.Services.AddTransient<AllIncidentsPage>();
+        builder.Services.AddTransient<AssignedIncidentsPage>();
+        builder.Services.AddTransient<EditIncidentPage>();
 
         // Register Maps
         builder.Services.AddSingleton<IGeolocation>(Geolocation.Default);
         builder.Services.AddSingleton<Microsoft.Maui.Maps.IMap>(serviceProvider => new Microsoft.Maui.Controls.Maps.Map());
+
+        // Register platform services
+        builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
 
 #if DEBUG
         builder.Logging.AddDebug();

@@ -9,7 +9,7 @@ public class HasRoleConverter : IValueConverter
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         Debug.WriteLine($"HasRoleConverter.Convert called with value: {value}, parameter: {parameter}");
-        
+
         if (value == null)
         {
             Debug.WriteLine("HasRoleConverter: value is null, returning false");
@@ -43,7 +43,7 @@ public class HasRoleConverter : IValueConverter
         }
 
         Debug.WriteLine($"HasRoleConverter: Checking for roles: {string.Join(", ", requiredRoles)}");
-        
+
         // Check if user has any of the required roles
         var hasAnyRole = requiredRoles.Any(role => tokenService.HasRole(role));
         Debug.WriteLine($"HasRoleConverter: Has any required role? {hasAnyRole}");
@@ -54,4 +54,4 @@ public class HasRoleConverter : IValueConverter
     {
         throw new NotImplementedException();
     }
-} 
+}

@@ -49,6 +49,18 @@ build_metadata.AdditionalFiles.ManifestResourceName = Maui.Pages.AllIncidentsPag
 build_metadata.AdditionalFiles.TargetPath = Pages/AllIncidentsPage.xaml
 build_metadata.AdditionalFiles.RelativePath = Pages/AllIncidentsPage.xaml
 
+[/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/Pages/AssignedIncidentsPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Maui.Pages.AssignedIncidentsPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Pages/AssignedIncidentsPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Pages/AssignedIncidentsPage.xaml
+
+[/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/Pages/EditIncidentPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Maui.Pages.EditIncidentPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Pages/EditIncidentPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Pages/EditIncidentPage.xaml
+
 [/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/Pages/IncidentDetailsPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Maui.Pages.IncidentDetailsPage.xaml

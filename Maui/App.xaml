@@ -17,6 +17,9 @@
             <converters:StatusToColorConverter x:Key="StatusToColorConverter" />
             <converters:PriorityToColorConverter x:Key="PriorityToColorConverter" />
             <converters:MultiBindingBoolConverter x:Key="MultiBindingBoolConverter" />
+            <converters:HasRoleConverter x:Key="HasRoleConverter" />
+            <converters:IsCurrentUserConverter x:Key="IsCurrentUserConverter" />
+            <converters:BoolToColorConverter x:Key="BoolToColorConverter" />
 
             <!-- Styles -->
             <Style TargetType="Button">

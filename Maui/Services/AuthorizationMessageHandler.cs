@@ -16,7 +16,7 @@ public class AuthorizationMessageHandler : DelegatingHandler
     {
         var token = _tokenService.GetToken();
         Debug.WriteLine($"AuthorizationMessageHandler - Token: {token?.Substring(0, Math.Min(50, token?.Length ?? 0))}...");
-        
+
         if (!string.IsNullOrEmpty(token))
         {
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -29,7 +29,7 @@ public class AuthorizationMessageHandler : DelegatingHandler
 
         var response = await base.SendAsync(request, cancellationToken);
         Debug.WriteLine($"AuthorizationMessageHandler - Response status: {response.StatusCode}");
-        
+
         if (!response.IsSuccessStatusCode)
         {
             var content = await response.Content.ReadAsStringAsync();
@@ -38,4 +38,4 @@ public class AuthorizationMessageHandler : DelegatingHandler
 
         return response;
     }
-} 
+}

@@ -25,4 +25,4 @@ public class PriorityToColorConverter : IValueConverter
     {
         throw new NotImplementedException();
     }
-} 
+}

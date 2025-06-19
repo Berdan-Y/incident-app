@@ -80,11 +80,11 @@ public partial class IncidentDetailsPage : ContentPage
         base.OnDisappearing();
         System.Diagnostics.Debug.WriteLine("IncidentDetailsPage OnDisappearing");
         _viewModel.PropertyChanged -= ViewModel_PropertyChanged;
-        
+
         if (_incidentPin != null)
         {
             LocationMap.Pins.Remove(_incidentPin);
             _incidentPin = null;
         }
     }
-} 
+}

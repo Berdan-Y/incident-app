@@ -4,8 +4,12 @@
              xmlns:viewmodels="clr-namespace:Maui.ViewModels"
              xmlns:components="clr-namespace:Maui.Components"
              x:Class="Maui.Pages.MyIncidentsPage"
+             x:DataType="viewmodels:MyIncidentsViewModel"
              Title="My Incidents">
 
-    <components:IncidentsList />
+    <RefreshView Command="{Binding LoadMyReportsCommand}"
+                 IsRefreshing="{Binding IsLoading}">
+        <components:IncidentsList />
+    </RefreshView>
 
 </ContentPage> 

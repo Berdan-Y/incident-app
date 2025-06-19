@@ -43,6 +43,18 @@
                 IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:AppShell}}, Path=BindingContext.IsLoggedIn}" />
                 
             <ShellContent
+                Title="Assigned to me"
+                ContentTemplate="{DataTemplate pages:AssignedIncidentsPage}"
+                Route="AssignedIncidentsPage">
+                <ShellContent.IsVisible>
+                    <MultiBinding Converter="{StaticResource MultiBindingBoolConverter}">
+                        <Binding Path="IsLoggedIn" />
+                        <Binding Path="TokenService" Converter="{StaticResource HasRoleConverter}" ConverterParameter="FieldEmployee" />
+                    </MultiBinding>
+                </ShellContent.IsVisible>
+            </ShellContent>
+                
+            <ShellContent
                 Title="All Incidents"
                 ContentTemplate="{DataTemplate pages:AllIncidentsPage}"
                 Route="AllIncidentsPage">

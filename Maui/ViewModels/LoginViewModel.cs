@@ -65,11 +65,11 @@ public partial class LoginViewModel : ObservableObject
                     if (loginResponse?.Token != null)
                     {
                         await _tokenService.SetTokenAsync(loginResponse.Token);
-                        
+
                         var roles = loginResponse.Roles != null && loginResponse.Roles.Count > 0
                             ? string.Join(",", loginResponse.Roles)
                             : "";
-                        
+
                         await _tokenService.SetRolesAsync(roles);
 
                         // Reset fields

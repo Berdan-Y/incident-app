@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Maui.ViewModels"
+             x:Class="Maui.Pages.EditIncidentPage"
+             x:DataType="viewmodels:EditIncidentViewModel"
+             Title="Edit Incident">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="15" Spacing="15">
+            <!-- Loading Indicator -->
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                             IsVisible="{Binding IsLoading}"
+                             HorizontalOptions="Center" />
+
+            <Grid IsVisible="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}"
+                  RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
+                  RowSpacing="15">
+
+                <!-- Title -->
+                <VerticalStackLayout Grid.Row="0" Spacing="5">
+                    <Label Text="Title"
+                           FontAttributes="Bold" />
+                    <Entry Text="{Binding Title}"
+                           Placeholder="Enter incident title" />
+                </VerticalStackLayout>
+
+                <!-- Description -->
+                <VerticalStackLayout Grid.Row="1" Spacing="5">
+                    <Label Text="Description"
+                           FontAttributes="Bold" />
+                    <Editor Text="{Binding Description}"
+                            Placeholder="Enter incident description"
+                            HeightRequest="100"
+                            AutoSize="TextChanges" />
+                </VerticalStackLayout>
+
+                <!-- Address -->
+                <VerticalStackLayout Grid.Row="2" Spacing="5">
+                    <Label Text="Address"
+                           FontAttributes="Bold" />
+                    <Entry Text="{Binding Address}"
+                           Placeholder="Enter street address" />
+                </VerticalStackLayout>
+
+                <!-- Zip Code -->
+                <VerticalStackLayout Grid.Row="3" Spacing="5">
+                    <Label Text="Zip Code"
+                           FontAttributes="Bold" />
+                    <Entry Text="{Binding ZipCode}"
+                           Placeholder="Enter zip code" />
+                </VerticalStackLayout>
+
+                <!-- Address Validation -->
+                <VerticalStackLayout Grid.Row="4" Spacing="5">
+                    <Button Text="Validate Address"
+                            Command="{Binding ValidateAddressCommand}"
+                            IsEnabled="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}" />
+                    <Label Text="{Binding AddressValidationMessage}"
+                           TextColor="{Binding IsAddressValid, Converter={StaticResource BoolToColorConverter}}"
+                           IsVisible="{Binding AddressValidationMessage, Converter={StaticResource StringNotEmptyConverter}}" />
+                </VerticalStackLayout>
+
+                <!-- Save Button -->
+                <Button Grid.Row="5"
+                        Text="Save Changes"
+                        Command="{Binding SaveCommand}"
+                        IsEnabled="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}" />
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage> 

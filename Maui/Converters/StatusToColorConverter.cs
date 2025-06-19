@@ -24,4 +24,4 @@ public class StatusToColorConverter : IValueConverter
     {
         throw new NotImplementedException();
     }
-} 
+}

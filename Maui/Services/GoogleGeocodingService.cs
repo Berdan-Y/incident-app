@@ -56,4 +56,4 @@ public class GoogleGeocodingService : IGeocodingService
             return (false, null, null, $"Geocoding error: {ex.Message}");
         }
     }
-} 
+}

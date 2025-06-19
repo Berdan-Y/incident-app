@@ -5,7 +5,7 @@ namespace Maui.Pages;
 public partial class AllIncidentsPage : ContentPage
 {
     private readonly AllIncidentsViewModel _viewModel;
-    
+
     public AllIncidentsPage(AllIncidentsViewModel viewModel)
     {
         InitializeComponent();
@@ -18,4 +18,4 @@ public partial class AllIncidentsPage : ContentPage
         base.OnAppearing();
         _viewModel.LoadIncidentsCommand.Execute(null);
     }
-} 
+}

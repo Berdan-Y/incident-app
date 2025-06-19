@@ -12,8 +12,8 @@ public partial class AppShell : Shell, INotifyPropertyChanged
     private readonly LogoutViewModel _logoutViewModel;
     private readonly ITokenService _tokenService;
 
-    public ITokenService TokenService 
-    { 
+    public ITokenService TokenService
+    {
         get
         {
             Debug.WriteLine($"TokenService getter called, returning {_tokenService}");
@@ -30,7 +30,7 @@ public partial class AppShell : Shell, INotifyPropertyChanged
         _authService = authService;
         _logoutViewModel = logoutViewModel;
         _tokenService = tokenService;
-        
+
         // Subscribe to TokenService property changes
         _tokenService.PropertyChanged += (s, e) =>
         {
@@ -50,6 +50,8 @@ public partial class AppShell : Shell, INotifyPropertyChanged
         Routing.RegisterRoute(nameof(MyIncidentsPage), typeof(MyIncidentsPage));
         Routing.RegisterRoute(nameof(IncidentDetailsPage), typeof(IncidentDetailsPage));
         Routing.RegisterRoute(nameof(AllIncidentsPage), typeof(AllIncidentsPage));
+        Routing.RegisterRoute(nameof(AssignedIncidentsPage), typeof(AssignedIncidentsPage));
+        Routing.RegisterRoute(nameof(EditIncidentPage), typeof(EditIncidentPage));
 
         // Subscribe to authentication state changes
         _authService.PropertyChanged += OnAuthStateChanged;
@@ -90,20 +92,27 @@ public partial class AppShell : Shell, INotifyPropertyChanged
 
     private void UpdateItemVisibility(BaseShellItem item, bool isAuthenticated)
     {
+        Debug.WriteLine($"UpdateItemVisibility called for {item.GetType().Name} - {item.Route}, isAuthenticated: {isAuthenticated}");
+
         switch (item)
         {
             case ShellContent content:
-                // Skip visibility update for AllIncidentsPage to respect its binding
-                if (content.Route == "AllIncidentsPage")
+                // Skip visibility update for pages with role-based visibility
+                if (content.Route is "AllIncidentsPage" or "AssignedIncidentsPage")
+                {
+                    Debug.WriteLine($"Skipping visibility update for {content.Route} to respect its binding");
                     break;
+                }
 
-                content.IsVisible = content.Route switch
+                var newVisibility = content.Route switch
                 {
                     "LoginPage" or "RegistrationPage" => !isAuthenticated,
                     "LogoutPage" or "MyIncidentsPage" => isAuthenticated,
                     "MainPage" or "ReportIncidentPage" => true,
                     _ => content.IsVisible
                 };
+                Debug.WriteLine($"Setting visibility for {content.Route} to {newVisibility}");
+                content.IsVisible = newVisibility;
                 break;
 
             case TabBar tabBar:
