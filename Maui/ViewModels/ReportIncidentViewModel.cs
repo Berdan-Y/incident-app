@@ -211,8 +211,21 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
             {
                 Latitude = location.Latitude;
                 Longitude = location.Longitude;
-                Address = null;
-                Zipcode = null;
+
+                // Get address from coordinates
+                var reverseGeocodeResult = await _geocodingService.ReverseGeocodeAsync(Latitude, Longitude);
+                if (reverseGeocodeResult.success)
+                {
+                    Address = reverseGeocodeResult.address;
+                    Zipcode = reverseGeocodeResult.zipCode;
+                    LocationStatus = "Location and address details retrieved successfully!";
+                }
+                else
+                {
+                    Address = null;
+                    Zipcode = null;
+                    LocationStatus = "Got location coordinates, but couldn't retrieve address details.";
+                }
 
                 MapPins.Clear();
                 var pin = new Pin
@@ -231,7 +244,6 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
 
                 await Task.Delay(100); // Small delay to ensure binding updates
                 ShowMap = true;
-                LocationStatus = "We got your location!";
             }
             else
             {
@@ -398,8 +410,8 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
                 Description = Description,
                 Latitude = Latitude,
                 Longitude = Longitude,
-                Address = UseManualLocation ? Address : null,
-                ZipCode = UseManualLocation ? Zipcode : null,
+                Address = Address,
+                ZipCode = Zipcode,
                 ReportedById = reportedById  // Will be null for anonymous reports
             };
 
@@ -407,11 +419,17 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
 
             if (response.IsSuccessStatusCode)
             {
-                // Reset fields after successful submission
+                // Reset only title and description
                 Title = string.Empty;
                 Description = string.Empty;
-                Address = string.Empty;
-                Zipcode = string.Empty;
+                
+                // Only reset address and zipcode if using manual location
+                if (UseManualLocation)
+                {
+                    Address = string.Empty;
+                    Zipcode = string.Empty;
+                }
+                
                 IsAnonymous = false;  // Reset anonymous flag
 
                 await Application.Current.MainPage.DisplayAlert("Success",

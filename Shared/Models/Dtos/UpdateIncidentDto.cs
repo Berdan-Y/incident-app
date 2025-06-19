@@ -10,5 +10,6 @@ public class UpdateIncidentDto
     public string? ZipCode { get; set; }
     public string Status { get; set; } = string.Empty;
     public string Priority { get; set; } = string.Empty;
+    public Guid? ReportedById { get; set; }
     public string? AssignedTo { get; set; }
 }

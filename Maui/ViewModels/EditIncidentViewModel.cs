@@ -1,8 +1,10 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Maui.Services;
+using Microsoft.Maui.Controls.Maps;
 using Shared.Api;
 using Shared.Models.Dtos;
+using System.Collections.ObjectModel;
 
 namespace Maui.ViewModels;
 
@@ -11,6 +13,7 @@ public partial class EditIncidentViewModel : ObservableObject
     private readonly IIncidentApi _incidentApi;
     private readonly IGeocodingService _geocodingService;
     private Guid _incidentId;
+    private string? _reportedByUserId;
 
     [ObservableProperty]
     private bool isLoading;
@@ -33,10 +36,34 @@ public partial class EditIncidentViewModel : ObservableObject
     [ObservableProperty]
     private string addressValidationMessage;
 
+    [ObservableProperty]
+    private bool showMap;
+
+    [ObservableProperty]
+    private ObservableCollection<Pin> mapPins;
+
+    private double? currentLatitude;
+    private double? currentLongitude;
+
+    public bool CanSave => !IsLoading && 
+                          !string.IsNullOrWhiteSpace(Title) && 
+                          !string.IsNullOrWhiteSpace(Description) && 
+                          IsAddressValid;
+
     public EditIncidentViewModel(IIncidentApi incidentApi, IGeocodingService geocodingService)
     {
         _incidentApi = incidentApi;
         _geocodingService = geocodingService;
+        MapPins = new ObservableCollection<Pin>();
+
+        PropertyChanged += (s, e) =>
+        {
+            if (e.PropertyName is nameof(IsLoading) or nameof(Title) or 
+                nameof(Description) or nameof(IsAddressValid))
+            {
+                OnPropertyChanged(nameof(CanSave));
+            }
+        };
     }
 
     public async Task LoadIncident(Guid id)
@@ -53,7 +80,18 @@ public partial class EditIncidentViewModel : ObservableObject
                 Description = response.Content.Description;
                 Address = response.Content.Address ?? string.Empty;
                 ZipCode = response.Content.ZipCode ?? string.Empty;
-                IsAddressValid = true;
+                _reportedByUserId = response.Content.CreatedBy?.Id;
+                
+                // If we have coordinates, show them on the map
+                if (response.Content.Latitude != 0 && response.Content.Longitude != 0)
+                {
+                    currentLatitude = response.Content.Latitude;
+                    currentLongitude = response.Content.Longitude;
+                    await UpdateMapPins(response.Content.Latitude, response.Content.Longitude);
+                    ShowMap = true;
+                }
+
+                IsAddressValid = !string.IsNullOrEmpty(Address) && !string.IsNullOrEmpty(ZipCode);
             }
             else
             {
@@ -72,6 +110,51 @@ public partial class EditIncidentViewModel : ObservableObject
         }
     }
 
+    private async Task UpdateMapPins(double latitude, double longitude)
+    {
+        try
+        {
+            var pin = new Pin
+            {
+                Location = new Location(latitude, longitude),
+                Label = "Incident Location",
+                Type = PinType.Place
+            };
+
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                MapPins.Clear();
+                MapPins.Add(pin);
+            });
+        }
+        catch (Exception ex)
+        {
+            AddressValidationMessage = $"Error updating map: {ex.Message}";
+        }
+    }
+
+    private string GetUserFriendlyErrorMessage(string? errorMessage)
+    {
+        if (string.IsNullOrEmpty(errorMessage))
+            return "Could not validate this address. Please check and try again.";
+
+        // Clean up the error message
+        var cleanedMessage = errorMessage
+            .Replace("Geocoding Failed:", "")
+            .Replace("Geocoding failed:", "")
+            .Trim();
+
+        return cleanedMessage.ToUpperInvariant() switch
+        {
+            "ZERO_RESULTS" => "No matching address found. Please check the address and try again.",
+            "INVALID_REQUEST" => "The address information is incomplete. Please provide both street address and zip code.",
+            "REQUEST_DENIED" => "Unable to validate address at this time. Please try again later.",
+            "OVER_QUERY_LIMIT" => "Address validation service is temporarily unavailable. Please try again later.",
+            "UNKNOWN_ERROR" => "An unexpected error occurred. Please try again later.",
+            _ => $"Address validation failed: {cleanedMessage}"
+        };
+    }
+
     [RelayCommand]
     private async Task ValidateAddress()
     {
@@ -79,29 +162,43 @@ public partial class EditIncidentViewModel : ObservableObject
         {
             IsAddressValid = false;
             AddressValidationMessage = "Both address and zip code are required";
+            ShowMap = false;
             return;
         }
 
         try
         {
             IsLoading = true;
+            AddressValidationMessage = "Validating address...";
             var result = await _geocodingService.GeocodeAddressAsync(Address, ZipCode);
 
             if (!result.success)
             {
                 IsAddressValid = false;
-                AddressValidationMessage = result.errorMessage ?? "Could not validate this address. Please check and try again.";
+                AddressValidationMessage = GetUserFriendlyErrorMessage(result.errorMessage);
+                ShowMap = false;
+            }
+            else if (result.latitude == null || result.longitude == null)
+            {
+                IsAddressValid = false;
+                AddressValidationMessage = "Address found but coordinates are invalid. Please try a different address.";
+                ShowMap = false;
             }
             else
             {
                 IsAddressValid = true;
-                AddressValidationMessage = "Address validated successfully";
+                AddressValidationMessage = $"Address validated: {Address}, {ZipCode}";
+                currentLatitude = result.latitude;
+                currentLongitude = result.longitude;
+                await UpdateMapPins(result.latitude.Value, result.longitude.Value);
+                ShowMap = true;
             }
         }
         catch (Exception ex)
         {
             IsAddressValid = false;
             AddressValidationMessage = $"Address validation failed: {ex.Message}";
+            ShowMap = false;
         }
         finally
         {
@@ -128,7 +225,6 @@ public partial class EditIncidentViewModel : ObservableObject
         {
             IsLoading = true;
 
-            // Get coordinates for the address
             var geocodeResult = await _geocodingService.GeocodeAddressAsync(Address, ZipCode);
             if (!geocodeResult.success)
             {
@@ -136,7 +232,7 @@ public partial class EditIncidentViewModel : ObservableObject
                 return;
             }
 
-            var updateDto = new UpdateIncidentDto
+            var updateDto = new UpdateIncidentDetailsDto
             {
                 Title = Title,
                 Description = Description,
@@ -146,7 +242,7 @@ public partial class EditIncidentViewModel : ObservableObject
                 Longitude = geocodeResult.longitude ?? 0
             };
 
-            var response = await _incidentApi.UpdateIncidentAsync(_incidentId, updateDto);
+            var response = await _incidentApi.UpdateIncidentDetailsAsync(_incidentId, updateDto);
             if (response.IsSuccessStatusCode)
             {
                 await Shell.Current.DisplayAlert("Success", "Incident updated successfully", "OK");

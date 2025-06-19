@@ -73,6 +73,11 @@ public partial class MyIncidentsViewModel : BaseIncidentsViewModel
                 // Optionally refresh the list to ensure consistency
                 await LoadMyReports();
             }
+            catch (UnauthorizedAccessException)
+            {
+                Debug.WriteLine("Unauthorized access - redirecting to login");
+                await HandleUnauthorizedAccess();
+            }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Error deleting incident: {ex}");
@@ -83,6 +88,16 @@ public partial class MyIncidentsViewModel : BaseIncidentsViewModel
                 IsLoading = false;
             }
         }
+    }
+
+    private async Task HandleUnauthorizedAccess()
+    {
+        await _tokenService.LogoutAsync();
+        await MainThread.InvokeOnMainThreadAsync(async () =>
+        {
+            await Shell.Current.DisplayAlert("Session Expired", "Your session has expired. Please log in again.", "OK");
+            await Shell.Current.GoToAsync("//LoginPage");
+        });
     }
 
     [RelayCommand]
@@ -102,6 +117,7 @@ public partial class MyIncidentsViewModel : BaseIncidentsViewModel
             {
                 ErrorMessage = "Please log in to view your incidents.";
                 Incidents.Clear(); // Clear the collection if not authenticated
+                await HandleUnauthorizedAccess();
                 return;
             }
 
@@ -120,6 +136,11 @@ public partial class MyIncidentsViewModel : BaseIncidentsViewModel
                 }
                 Debug.WriteLine($"Loaded {incidents?.Count ?? 0} incidents");
             });
+        }
+        catch (UnauthorizedAccessException)
+        {
+            Debug.WriteLine("Unauthorized access - redirecting to login");
+            await HandleUnauthorizedAccess();
         }
         catch (Exception ex)
         {

@@ -2,6 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Diagnostics;
 using System.Security.Claims;
 using System.ComponentModel;
+using Microsoft.Maui.Controls;
 
 namespace Maui.Services;
 
@@ -68,6 +69,11 @@ public class TokenService : ITokenService, IDisposable, INotifyPropertyChanged
         {
             Debug.WriteLine("Token expired during validation check");
             await LogoutAsync();
+            await MainThread.InvokeOnMainThreadAsync(async () =>
+            {
+                await Shell.Current.DisplayAlert("Session Expired", "Your session has expired. Please log in again.", "OK");
+                await Shell.Current.GoToAsync("//LoginPage");
+            });
         }
     }
 
@@ -201,23 +207,26 @@ public class TokenService : ITokenService, IDisposable, INotifyPropertyChanged
         }
     }
 
-    public Task LogoutAsync()
+    public async Task LogoutAsync()
     {
-        Debug.WriteLine("LogoutAsync called - clearing all user data");
-
-        _token = null;
-        IsLoggedIn = false;
+        Debug.WriteLine("LogoutAsync called");
         _tokenValidationTimer.Stop();
-
+        
+        // Clear the token and roles
+        _token = null;
+        Roles.Clear();
+        
         // Clear all storage
         ClearAllStorage();
-
-        // Notify that both login state and roles have changed
+        
+        // Update state
+        IsLoggedIn = false;
+        
+        // Notify listeners
         LoggedOut?.Invoke(this, EventArgs.Empty);
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Roles"));
-
-        Debug.WriteLine("Logout complete");
-        return Task.CompletedTask;
+        
+        Debug.WriteLine("Logout completed");
+        await Task.CompletedTask;
     }
 
     private bool IsTokenExpired(string token)

@@ -1,4 +1,6 @@
 using Maui.ViewModels;
+using Microsoft.Maui.Controls.Maps;
+using Microsoft.Maui.Maps;
 
 namespace Maui.Pages;
 
@@ -15,6 +17,14 @@ public partial class EditIncidentPage : ContentPage
             {
                 MainThread.BeginInvokeOnMainThread(async () => await _viewModel.LoadIncident(id));
             }
+            else
+            {
+                MainThread.BeginInvokeOnMainThread(async () => 
+                {
+                    await Shell.Current.DisplayAlert("Error", "Invalid incident ID", "OK");
+                    await Shell.Current.GoToAsync("..");
+                });
+            }
         }
     }
 
@@ -23,5 +33,19 @@ public partial class EditIncidentPage : ContentPage
         InitializeComponent();
         _viewModel = viewModel;
         BindingContext = _viewModel;
+    }
+
+    private void OnMapLoaded(object sender, EventArgs e)
+    {
+        if (sender is Microsoft.Maui.Controls.Maps.Map map && 
+            BindingContext is EditIncidentViewModel viewModel && 
+            viewModel.MapPins.Count > 0)
+        {
+            var pin = viewModel.MapPins[0];
+            map.MoveToRegion(MapSpan.FromCenterAndRadius(
+                pin.Location,
+                Distance.FromKilometers(1)
+            ));
+        }
     }
 }
