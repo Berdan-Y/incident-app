@@ -46,15 +46,22 @@ public class IncidentService : IIncidentService
         return _mapper.Map<IEnumerable<IncidentResponseDto>>(incidents);
     }
 
-    public async Task<IncidentResponseDto> CreateIncidentAsync(IncidentCreateDto incidentDto, Guid? userId = null)
+    public async Task<IncidentResponseDto> CreateIncidentAsync(IncidentCreateDto incidentDto)
     {
+        Console.WriteLine($"Creating incident - DTO ReportedById: {incidentDto.ReportedById}");
+        
         var incident = _mapper.Map<Incident>(incidentDto);
-        incident.ReportedById = incidentDto.ReportedById ?? userId;
+        Console.WriteLine($"After mapping - incident.ReportedById: {incident.ReportedById}");
+        
+        // Only set non-ReportedById fields
         incident.AssignedToId = null;
         incident.CreatedAt = DateTime.UtcNow;
         incident.UpdatedAt = DateTime.UtcNow;
 
+        Console.WriteLine($"Final ReportedById before saving: {incident.ReportedById}");
         var createdIncident = await _incidentRepository.CreateAsync(incident);
+        Console.WriteLine($"Created incident with ReportedById: {createdIncident.ReportedById}");
+        
         return _mapper.Map<IncidentResponseDto>(createdIncident);
     }
 

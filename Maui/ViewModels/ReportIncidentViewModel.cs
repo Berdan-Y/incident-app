@@ -26,6 +26,11 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
     [ObservableProperty]
     private bool isAnonymous;
 
+    partial void OnIsAnonymousChanged(bool value)
+    {
+        System.Diagnostics.Debug.WriteLine($"IsAnonymous changed to: {value}");
+    }
+
     public bool IsLoggedIn => _tokenService.IsLoggedIn;
 
     [ObservableProperty]
@@ -323,6 +328,8 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
     [RelayCommand]
     private async Task SubmitReport()
     {
+        System.Diagnostics.Debug.WriteLine($"SubmitReport called - IsAnonymous: {IsAnonymous}");
+        
         if (string.IsNullOrWhiteSpace(Title))
         {
             await Application.Current.MainPage.DisplayAlert("Validation Error", "Title is required.", "OK");
@@ -369,14 +376,21 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
             IsLoading = true;
             Guid? reportedById = null;
 
-            if (IsLoggedIn && !IsAnonymous)
+            System.Diagnostics.Debug.WriteLine($"SubmitReport - IsAnonymous: {IsAnonymous}, IsLoggedIn: {IsLoggedIn}");
+
+            // Only set reportedById if not anonymous and logged in
+            if (!IsAnonymous && IsLoggedIn)
             {
                 var userId = _tokenService.GetUserId();
+                System.Diagnostics.Debug.WriteLine($"Non-anonymous report - userId from token: {userId}");
                 if (!string.IsNullOrEmpty(userId) && Guid.TryParse(userId, out Guid parsedId))
                 {
                     reportedById = parsedId;
+                    System.Diagnostics.Debug.WriteLine($"Setting reportedById to: {parsedId}");
                 }
             }
+
+            System.Diagnostics.Debug.WriteLine($"Final reportedById value: {reportedById}");
 
             var incident = new IncidentCreateDto()
             {
@@ -386,7 +400,7 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
                 Longitude = Longitude,
                 Address = UseManualLocation ? Address : null,
                 ZipCode = UseManualLocation ? Zipcode : null,
-                ReportedById = reportedById
+                ReportedById = reportedById  // Will be null for anonymous reports
             };
 
             var response = await _incidentApi.CreateIncidentAsync(incident);
@@ -398,6 +412,7 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
                 Description = string.Empty;
                 Address = string.Empty;
                 Zipcode = string.Empty;
+                IsAnonymous = false;  // Reset anonymous flag
 
                 await Application.Current.MainPage.DisplayAlert("Success",
                     "Incident report submitted successfully!", "OK");

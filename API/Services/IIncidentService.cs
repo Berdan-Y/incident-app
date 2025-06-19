@@ -11,7 +11,7 @@ public interface IIncidentService
     Task<IncidentResponseDto?> GetIncidentByIdAsync(Guid id);
     Task<IEnumerable<IncidentResponseDto>> GetIncidentsByUserAsync(Guid userId);
     Task<IEnumerable<IncidentResponseDto>> GetIncidentsAssignedToUserAsync(Guid userId);
-    Task<IncidentResponseDto> CreateIncidentAsync(IncidentCreateDto incidentDto, Guid? userId = null);
+    Task<IncidentResponseDto> CreateIncidentAsync(IncidentCreateDto incidentDto);
     Task<IncidentResponseDto?> UpdateIncidentAsync(Guid id, IncidentCreateDto incidentDto);
     Task<IncidentResponseDto?> PatchIncidentAsync(Guid id, IncidentPatchDto patchDto);
     Task<IncidentResponseDto?> UpdateIncidentStatusAsync(Guid id, Status status);

@@ -79,7 +79,7 @@
                 <Label Text="Report anonymously"
                       FontSize="16"/>
                 <HorizontalStackLayout Spacing="10">
-                    <CheckBox IsChecked="{Binding IsAnonymous}"/>
+                    <CheckBox IsChecked="{Binding IsAnonymous, Mode=TwoWay}"/>
                     <Label Text="Submit this report anonymously"
                            VerticalOptions="Center"/>
                 </HorizontalStackLayout>

@@ -95,7 +95,6 @@ public class IncidentController : ControllerBase
     {
         // Get the incident data from form
         var incidentData = form["incident"];
-        Console.WriteLine($"Received incident data: {incidentData}");
 
         if (string.IsNullOrEmpty(incidentData))
             return BadRequest("Incident data is required");
@@ -115,15 +114,8 @@ public class IncidentController : ControllerBase
         if (string.IsNullOrEmpty(incidentDto.Description))
             return BadRequest("Description is required");
 
-        // Get the user ID if authenticated
-        Guid? userId = null;
-        if (User.Identity?.IsAuthenticated == true)
-        {
-            userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException());
-        }
-
-        // Create the incident
-        var incident = await _incidentService.CreateIncidentAsync(incidentDto, userId);
+        // Create the incident with whatever ReportedById was sent in the DTO
+        var incident = await _incidentService.CreateIncidentAsync(incidentDto);
 
         // Handle photos if any
         var photos = form.Files.Where(f => f.Name.StartsWith("photos"));

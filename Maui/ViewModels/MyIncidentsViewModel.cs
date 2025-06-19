@@ -9,63 +9,30 @@ using System.Text.Json.Nodes;
 using System.Windows.Input;
 using Maui.Pages;
 using Microsoft.Maui.Controls;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Maui.ViewModels;
 
-public class MyIncidentsViewModel : INotifyPropertyChanged
+public partial class MyIncidentsViewModel : BaseIncidentsViewModel
 {
     private readonly IIncidentApi _incidentApi;
     private readonly ITokenService _tokenService;
-    private ObservableCollection<IncidentResponseDto> _incidents;
-    private bool _isLoading;
-    private string _errorMessage;
-    
-    public ObservableCollection<IncidentResponseDto> Incidents
-    {
-        get => _incidents;
-        set
-        {
-            _incidents = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public bool IsLoading
-    {
-        get => _isLoading;
-        set
-        {
-            _isLoading = value;
-            OnPropertyChanged();
-            ((Command)LoadMyReportsCommand).ChangeCanExecute();
-        }
-    }
-
-    public string ErrorMessage
-    {
-        get => _errorMessage;
-        set
-        {
-            _errorMessage = value;
-            OnPropertyChanged();
-        }
-    }
 
     public ICommand LoadMyReportsCommand { get; }
-    public ICommand ViewIncidentDetailsCommand { get; }
-    
+
     public MyIncidentsViewModel(IIncidentApi incidentApi, ITokenService tokenService)
     {
         _incidentApi = incidentApi;
         _tokenService = tokenService;
-        _incidents = new ObservableCollection<IncidentResponseDto>();
 
         LoadMyReportsCommand = new Command(
             execute: async () => await LoadMyReportsAsync(),
             canExecute: () => !IsLoading
         );
-        
+
         ViewIncidentDetailsCommand = new Command<IncidentResponseDto>(async (incident) => await OnViewIncidentDetails(incident));
+
+        EmptyMessage = "You haven't reported any incidents yet. Tap the 'Report Incident' tab to create one.";
 
         // Load incidents when the ViewModel is created
         MainThread.BeginInvokeOnMainThread(async () => await LoadMyReportsAsync());
@@ -129,19 +96,5 @@ public class MyIncidentsViewModel : INotifyPropertyChanged
         {
             IsLoading = false;
         }
-    }
-
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-    
-    public async Task NavigateToIncidentDetails(IncidentResponseDto incident)
-    {
-        if (incident == null) return;
-
-        await Shell.Current.GoToAsync($"{nameof(IncidentDetailsPage)}?id={incident.Id}");
     }
 }

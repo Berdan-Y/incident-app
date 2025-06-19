@@ -22,7 +22,8 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Status, opt => opt.MapFrom(src => Status.Todo))
             .ForMember(dest => dest.Priority, opt => opt.MapFrom(src => Priority.Unknown))
             .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => DateTime.UtcNow))
-            .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => DateTime.UtcNow));
+            .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => DateTime.UtcNow))
+            .ForMember(dest => dest.ReportedById, opt => opt.MapFrom(src => src.ReportedById));
 
         CreateMap<IncidentUpdateDto, Incident>()
             .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => DateTime.UtcNow))
