@@ -45,6 +45,11 @@ public partial class EditIncidentViewModel : ObservableObject
     private double? currentLatitude;
     private double? currentLongitude;
 
+    private double? _originalLatitude;
+    private double? _originalLongitude;
+    private string? _originalAddress;
+    private string? _originalZipCode;
+
     public bool CanSave => !IsLoading && 
                           !string.IsNullOrWhiteSpace(Title) && 
                           !string.IsNullOrWhiteSpace(Description) && 
@@ -81,6 +86,12 @@ public partial class EditIncidentViewModel : ObservableObject
                 Address = response.Content.Address ?? string.Empty;
                 ZipCode = response.Content.ZipCode ?? string.Empty;
                 _reportedByUserId = response.Content.CreatedBy?.Id;
+                
+                // Store original values
+                _originalAddress = Address;
+                _originalZipCode = ZipCode;
+                _originalLatitude = response.Content.Latitude;
+                _originalLongitude = response.Content.Longitude;
                 
                 // If we have coordinates, show them on the map
                 if (response.Content.Latitude != 0 && response.Content.Longitude != 0)
@@ -188,8 +199,8 @@ public partial class EditIncidentViewModel : ObservableObject
             {
                 IsAddressValid = true;
                 AddressValidationMessage = $"Address validated: {Address}, {ZipCode}";
-                currentLatitude = result.latitude;
-                currentLongitude = result.longitude;
+                currentLatitude = result.latitude.Value;
+                currentLongitude = result.longitude.Value;
                 await UpdateMapPins(result.latitude.Value, result.longitude.Value);
                 ShowMap = true;
             }
@@ -209,49 +220,62 @@ public partial class EditIncidentViewModel : ObservableObject
     [RelayCommand]
     private async Task Save()
     {
-        if (string.IsNullOrWhiteSpace(Title) || string.IsNullOrWhiteSpace(Description))
-        {
-            await Shell.Current.DisplayAlert("Validation Error", "Title and Description are required", "OK");
+        if (IsLoading || !CanSave)
             return;
-        }
-
-        if (!IsAddressValid)
-        {
-            await Shell.Current.DisplayAlert("Validation Error", "Please validate the address first", "OK");
-            return;
-        }
 
         try
         {
             IsLoading = true;
 
-            var geocodeResult = await _geocodingService.GeocodeAddressAsync(Address, ZipCode);
-            if (!geocodeResult.success)
+            // Only geocode if address has changed
+            if (Address != _originalAddress || ZipCode != _originalZipCode)
             {
-                await Shell.Current.DisplayAlert("Error", "Failed to geocode the address", "OK");
-                return;
-            }
+                var geocodeResult = await _geocodingService.GeocodeAddressAsync(Address, ZipCode);
+                if (!geocodeResult.success)
+                {
+                    await Shell.Current.DisplayAlert("Error", "Failed to geocode the address", "OK");
+                    return;
+                }
 
-            var updateDto = new UpdateIncidentDetailsDto
-            {
-                Title = Title,
-                Description = Description,
-                Address = Address,
-                ZipCode = ZipCode,
-                Latitude = geocodeResult.latitude ?? 0,
-                Longitude = geocodeResult.longitude ?? 0
-            };
+                var updateDto = new UpdateIncidentDetailsDto
+                {
+                    Title = Title,
+                    Description = Description,
+                    Address = Address,
+                    ZipCode = ZipCode,
+                    Latitude = geocodeResult.latitude ?? 0,
+                    Longitude = geocodeResult.longitude ?? 0
+                };
 
-            var response = await _incidentApi.UpdateIncidentDetailsAsync(_incidentId, updateDto);
-            if (response.IsSuccessStatusCode)
-            {
-                await Shell.Current.DisplayAlert("Success", "Incident updated successfully", "OK");
-                await Shell.Current.GoToAsync("..");
+                var response = await _incidentApi.UpdateIncidentDetailsAsync(_incidentId, updateDto);
+                if (!response.IsSuccessStatusCode)
+                {
+                    await Shell.Current.DisplayAlert("Error", "Failed to update Incident", "OK");
+                    return;
+                }
             }
             else
             {
-                await Shell.Current.DisplayAlert("Error", "Failed to update incident", "OK");
+                // If address hasn't changed, just update title and description
+                var updateDto = new UpdateIncidentDetailsDto
+                {
+                    Title = Title,
+                    Description = Description,
+                    Address = Address,
+                    ZipCode = ZipCode,
+                    Latitude = _originalLatitude ?? 0,
+                    Longitude = _originalLongitude ?? 0
+                };
+
+                var response = await _incidentApi.UpdateIncidentDetailsAsync(_incidentId, updateDto);
+                if (!response.IsSuccessStatusCode)
+                {
+                    await Shell.Current.DisplayAlert("Error", "Failed to update Incident", "OK");
+                    return;
+                }
             }
+
+            await Shell.Current.GoToAsync("..");
         }
         catch (Exception ex)
         {

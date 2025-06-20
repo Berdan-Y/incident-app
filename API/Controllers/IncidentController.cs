@@ -198,10 +198,9 @@ public class IncidentController : ControllerBase
             // Members can only update certain fields
             if (User.IsInRole(Role.Member))
             {
-                // Members can only update title, description, and address
+                // Members can update title, description, address, zipcode, and coordinates
                 if (patchDto.Status.HasValue || patchDto.Priority.HasValue ||
-                    patchDto.AssignedToId.HasValue || patchDto.Latitude.HasValue ||
-                    patchDto.Longitude.HasValue || patchDto.ZipCode != null)
+                    patchDto.AssignedToId.HasValue)
                 {
                     return Forbid();
                 }
