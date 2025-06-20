@@ -82,6 +82,7 @@
                                         Clicked="OnViewDetailsClicked"
                                         CommandParameter="{Binding .}" />
 
+                                <!-- Edit button for incident creators (in MyIncidentsPage) -->
                                 <Button Text="Edit"
                                         Clicked="OnEditClicked"
                                         CommandParameter="{Binding .}"

@@ -77,10 +77,18 @@ public class IncidentController : ControllerBase
         if (incident == null)
             return NotFound();
 
+        var currentUserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException());
+        Console.WriteLine($"[GetIncidentById] Current User ID: {currentUserId}");
+        Console.WriteLine($"[GetIncidentById] Incident AssignedToId: {incident.AssignedTo?.Id}");
+        Console.WriteLine($"[GetIncidentById] User Roles: {string.Join(", ", User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value))}");
+
         // Check if user is authorized to view this incident
         var authResult = await _authorizationService.AuthorizeAsync(User, incident, "CanViewAllIncidents");
-        if (!authResult.Succeeded && incident.ReportedById != Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException()))
+        Console.WriteLine($"[GetIncidentById] CanViewAllIncidents result: {authResult.Succeeded}");
+
+        if (!authResult.Succeeded && incident.ReportedById != currentUserId)
         {
+            Console.WriteLine($"[GetIncidentById] Access denied - User is not reporter and cannot view all incidents");
             return Forbid();
         }
 
@@ -180,28 +188,68 @@ public class IncidentController : ControllerBase
         if (incident == null)
             return NotFound();
 
+        var currentUserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException());
+        Console.WriteLine($"Current User ID: {currentUserId}");
+        Console.WriteLine($"Incident AssignedToId: {incident.AssignedToId}");
+        Console.WriteLine($"User Roles: {string.Join(", ", User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value))}");
+        Console.WriteLine($"Is Field Employee: {User.IsInRole(Role.FieldEmployee)}");
+
         // Check if user is authorized to update this incident
         var authResult = await _authorizationService.AuthorizeAsync(User, incident, "CanUpdateAnyIncident");
+        Console.WriteLine($"CanUpdateAnyIncident result: {authResult.Succeeded}");
         if (!authResult.Succeeded)
         {
-            // If not admin, check if user is the reporter and can update their own incidents
-            if (incident.ReportedById != Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException()))
+            // Check if user is the reporter
+            bool isReporter = incident.ReportedById == currentUserId;
+            Console.WriteLine($"Is Reporter: {isReporter}");
+            
+            // Check if user is the assigned field employee
+            bool isAssignedFieldEmployee = User.IsInRole(Role.FieldEmployee) && incident.AssignedToId == currentUserId;
+            Console.WriteLine($"Is Assigned Field Employee: {isAssignedFieldEmployee}");
+
+            if (!isReporter && !isAssignedFieldEmployee)
             {
-                return Forbid();
-            }
-            authResult = await _authorizationService.AuthorizeAsync(User, incident, "CanUpdateOwnIncidents");
-            if (!authResult.Succeeded)
-            {
+                Console.WriteLine("Access denied: User is neither reporter nor assigned field employee");
                 return Forbid();
             }
 
-            // Members can only update certain fields
+            // If reporter, check if they can update their own incidents
+            if (isReporter)
+            {
+                authResult = await _authorizationService.AuthorizeAsync(User, incident, "CanUpdateOwnIncidents");
+                Console.WriteLine($"CanUpdateOwnIncidents result: {authResult.Succeeded}");
+                if (!authResult.Succeeded)
+                {
+                    Console.WriteLine("Access denied: Reporter doesn't have permission to update own incidents");
+                    return Forbid();
+                }
+            }
+
+            // Restrict what fields can be updated based on role
             if (User.IsInRole(Role.Member))
             {
                 // Members can update title, description, address, zipcode, and coordinates
                 if (patchDto.Status.HasValue || patchDto.Priority.HasValue ||
                     patchDto.AssignedToId.HasValue)
                 {
+                    Console.WriteLine("Access denied: Member trying to update restricted fields");
+                    return Forbid();
+                }
+            }
+            else if (isAssignedFieldEmployee)
+            {
+                // Field employees can only update status and description when assigned
+                var allowedFields = new HashSet<string> { nameof(patchDto.Status), nameof(patchDto.Description) };
+                var attemptedFields = typeof(IncidentPatchDto).GetProperties()
+                    .Where(p => p.GetValue(patchDto) != null)
+                    .Select(p => p.Name);
+
+                Console.WriteLine($"Attempted fields: {string.Join(", ", attemptedFields)}");
+                Console.WriteLine($"Allowed fields: {string.Join(", ", allowedFields)}");
+
+                if (attemptedFields.Any(f => !allowedFields.Contains(f)))
+                {
+                    Console.WriteLine("Access denied: Field employee trying to update restricted fields");
                     return Forbid();
                 }
             }

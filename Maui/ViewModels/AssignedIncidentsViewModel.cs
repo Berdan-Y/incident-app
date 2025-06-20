@@ -56,4 +56,13 @@ public partial class AssignedIncidentsViewModel : BaseIncidentsViewModel
             IsLoading = false;
         }
     }
+
+    protected override async Task OnEditIncident(IncidentResponseDto incident)
+    {
+        if (incident == null) return;
+
+        // Since this is the AssignedIncidentsPage, we know the user is a Field Employee
+        // and these are their assigned incidents, so we can directly navigate to edit
+        await Shell.Current.GoToAsync($"/EditIncidentPage?id={incident.Id}");
+    }
 }

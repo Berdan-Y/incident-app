@@ -39,23 +39,9 @@
         </member>
         <member name="T:Maui.ViewModels.EditIncidentViewModel">
             <inheritdoc/>
-            <inheritdoc/>
-            <inheritdoc/>
         </member>
         <member name="P:Maui.ViewModels.EditIncidentViewModel.IsLoading">
             <inheritdoc cref="F:Maui.ViewModels.EditIncidentViewModel.isLoading"/>
-        </member>
-        <member name="P:Maui.ViewModels.EditIncidentViewModel.Title">
-            <inheritdoc cref="F:Maui.ViewModels.EditIncidentViewModel.title"/>
-        </member>
-        <member name="P:Maui.ViewModels.EditIncidentViewModel.Description">
-            <inheritdoc cref="F:Maui.ViewModels.EditIncidentViewModel.description"/>
-        </member>
-        <member name="P:Maui.ViewModels.EditIncidentViewModel.Address">
-            <inheritdoc cref="F:Maui.ViewModels.EditIncidentViewModel.address"/>
-        </member>
-        <member name="P:Maui.ViewModels.EditIncidentViewModel.ZipCode">
-            <inheritdoc cref="F:Maui.ViewModels.EditIncidentViewModel.zipCode"/>
         </member>
         <member name="P:Maui.ViewModels.EditIncidentViewModel.IsAddressValid">
             <inheritdoc cref="F:Maui.ViewModels.EditIncidentViewModel.isAddressValid"/>
@@ -69,17 +55,10 @@
         <member name="P:Maui.ViewModels.EditIncidentViewModel.MapPins">
             <inheritdoc cref="F:Maui.ViewModels.EditIncidentViewModel.mapPins"/>
         </member>
-        <member name="F:Maui.ViewModels.EditIncidentViewModel.validateAddressCommand">
-            <summary>The backing field for <see cref="P:Maui.ViewModels.EditIncidentViewModel.ValidateAddressCommand"/>.</summary>
-        </member>
-        <member name="P:Maui.ViewModels.EditIncidentViewModel.ValidateAddressCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:Maui.ViewModels.EditIncidentViewModel.ValidateAddress"/>.</summary>
-        </member>
-        <member name="F:Maui.ViewModels.EditIncidentViewModel.saveCommand">
-            <summary>The backing field for <see cref="P:Maui.ViewModels.EditIncidentViewModel.SaveCommand"/>.</summary>
-        </member>
-        <member name="P:Maui.ViewModels.EditIncidentViewModel.SaveCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:Maui.ViewModels.EditIncidentViewModel.Save"/>.</summary>
+        <member name="M:Maui.ViewModels.EditIncidentViewModel.OnIsLoadingChanged(System.Boolean)">
+            <summary>Executes the logic for when <see cref="P:Maui.ViewModels.EditIncidentViewModel.IsLoading"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:Maui.ViewModels.EditIncidentViewModel.IsLoading"/> is changed.</remarks>
         </member>
         <member name="T:Maui.ViewModels.LoginViewModel">
             <inheritdoc/>
@@ -369,18 +348,6 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Incidents">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Incidents" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Title">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Title" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Description">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Description" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Address">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Address" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ZipCode">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ZipCode" generated properties.</summary>
-        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsAddressValid">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsAddressValid" generated properties.</summary>
         </member>
@@ -410,6 +377,15 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsAnonymous">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsAnonymous" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Title">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Title" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Description">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Description" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Address">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Address" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Zipcode">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Zipcode" generated properties.</summary>
@@ -450,18 +426,6 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Incidents">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Incidents" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Title">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Title" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Description">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Description" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Address">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Address" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ZipCode">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ZipCode" generated properties.</summary>
-        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsAddressValid">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsAddressValid" generated properties.</summary>
         </member>
@@ -491,6 +455,15 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsAnonymous">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsAnonymous" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Title">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Title" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Description">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Description" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Address">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Address" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Zipcode">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Zipcode" generated properties.</summary>

@@ -20,6 +20,7 @@
             <converters:HasRoleConverter x:Key="HasRoleConverter" />
             <converters:IsCurrentUserConverter x:Key="IsCurrentUserConverter" />
             <converters:BoolToColorConverter x:Key="BoolToColorConverter" />
+            <converters:OrBoolConverter x:Key="OrBoolConverter" />
 
             <!-- Styles -->
             <Style TargetType="Button">

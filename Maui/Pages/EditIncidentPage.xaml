@@ -2,79 +2,124 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:Maui.ViewModels"
+             xmlns:models="clr-namespace:Shared.Models.Enums;assembly=Shared"
              xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
              x:Class="Maui.Pages.EditIncidentPage"
-             x:DataType="viewmodels:EditIncidentViewModel"
              Title="Edit Incident">
 
     <ScrollView>
-        <VerticalStackLayout Padding="15" Spacing="15">
+        <Grid RowDefinitions="Auto,*" Padding="15">
             <!-- Loading Indicator -->
-            <ActivityIndicator IsRunning="{Binding IsLoading}"
+            <ActivityIndicator Grid.Row="0"
                              IsVisible="{Binding IsLoading}"
-                             HorizontalOptions="Center" />
+                             IsRunning="{Binding IsLoading}"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center" />
 
-            <Grid IsVisible="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}"
-                  RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
-                  RowSpacing="15">
+            <!-- Edit Form -->
+            <VerticalStackLayout Grid.Row="1" 
+                               IsVisible="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}"
+                               Spacing="15">
 
                 <!-- Title -->
-                <VerticalStackLayout Grid.Row="0" Spacing="5">
-                    <Label Text="Title"
-                           FontAttributes="Bold" />
-                    <Entry Text="{Binding Title}"
-                           Placeholder="Enter incident title" />
-                </VerticalStackLayout>
+                <Label Text="Title"
+                       FontAttributes="Bold" />
+                <Entry Text="{Binding Title, Mode=TwoWay}"
+                       IsEnabled="{Binding IsCreator}"
+                       Placeholder="Enter title" />
 
                 <!-- Description -->
-                <VerticalStackLayout Grid.Row="1" Spacing="5">
-                    <Label Text="Description"
-                           FontAttributes="Bold" />
-                    <Editor Text="{Binding Description}"
-                            Placeholder="Enter incident description"
-                            HeightRequest="100"
-                            AutoSize="TextChanges" />
-                </VerticalStackLayout>
+                <Label Text="Description"
+                       FontAttributes="Bold" />
+                <Editor Text="{Binding Description, Mode=TwoWay}"
+                        HeightRequest="100"
+                        Placeholder="Enter description">
+                    <Editor.IsEnabled>
+                        <MultiBinding Converter="{StaticResource OrBoolConverter}">
+                            <Binding Path="IsCreator" />
+                            <Binding Path="IsAssignedFieldEmployee" />
+                        </MultiBinding>
+                    </Editor.IsEnabled>
+                </Editor>
 
-                <!-- Location -->
-                <VerticalStackLayout Grid.Row="2" Spacing="5">
-                    <Label Text="Location"
-                           FontSize="18"
-                           FontAttributes="Bold" />
-                           
-                    <Label Text="Address"
-                           FontAttributes="Bold" />
-                    <Entry Text="{Binding Address}"
-                           Placeholder="Enter street address" />
+                <!-- Status -->
+                <Label Text="Status"
+                       FontAttributes="Bold" />
+                <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}"
+                       Padding="15,10"
+                       HasShadow="False"
+                       BorderColor="Transparent"
+                       Opacity="0.7">
+                    <Label Text="{Binding Status, Mode=OneWay}"
+                           TextColor="{Binding Status, Converter={StaticResource StatusToColorConverter}}"
+                           FontSize="16"
+                           Opacity="0.7" />
+                </Frame>
 
-                    <Label Text="Zip Code"
-                           FontAttributes="Bold"
-                           Margin="0,10,0,0" />
-                    <Entry Text="{Binding ZipCode}"
-                           Placeholder="Enter zip code" />
-                           
-                    <Button Text="Validate Address"
-                            Command="{Binding ValidateAddressCommand}"
-                            IsEnabled="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}"
-                            Margin="0,10,0,0" />
-                </VerticalStackLayout>
+                <!-- Priority -->
+                <Label Text="Priority"
+                       FontAttributes="Bold" />
+                <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}"
+                       Padding="15,10"
+                       HasShadow="False"
+                       BorderColor="Transparent"
+                       Opacity="0.7">
+                    <Label Text="{Binding Priority, Mode=OneWay}"
+                           TextColor="{Binding Priority, Converter={StaticResource PriorityToColorConverter}}"
+                           FontSize="16"
+                           Opacity="0.7" />
+                </Frame>
 
-                <!-- Address Validation Message -->
-                <VerticalStackLayout Grid.Row="4" Spacing="5">
-                    <Label Text="{Binding AddressValidationMessage}"
-                           TextColor="{Binding IsAddressValid, Converter={StaticResource BoolToColorConverter}}"
-                           IsVisible="{Binding AddressValidationMessage, Converter={StaticResource StringNotEmptyConverter}}"
-                           Margin="0,5,0,5"
-                           FontSize="14"
-                           LineBreakMode="WordWrap" />
-                </VerticalStackLayout>
+                <!-- Address -->
+                <Label Text="Address"
+                       FontAttributes="Bold" />
+                <Entry Text="{Binding Address, Mode=TwoWay}"
+                       IsEnabled="{Binding IsCreator}"
+                       Placeholder="Enter street address" />
+
+                <!-- Zip Code -->
+                <Label Text="Zip Code"
+                       FontAttributes="Bold" />
+                <Entry Text="{Binding ZipCode, Mode=TwoWay}"
+                       IsEnabled="{Binding IsCreator}"
+                       Placeholder="Enter zip code" />
+
+                <!-- Address Validation -->
+                <Button Text="Validate Address"
+                        Command="{Binding ValidateAddressCommand}"
+                        IsEnabled="{Binding IsCreator}"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White" />
+
+                <Label Text="{Binding AddressValidationMessage}"
+                       TextColor="{Binding IsAddressValid, Converter={StaticResource BoolToColorConverter}}"
+                       IsVisible="{Binding AddressValidationMessage, Converter={StaticResource StringNotEmptyConverter}}" />
+
+                <!-- Map -->
+                <maps:Map x:Name="LocationMap"
+                         IsVisible="{Binding ShowMap}"
+                         ItemsSource="{Binding MapPins}"
+                         IsEnabled="False"
+                         IsShowingUser="False"
+                         HeightRequest="200"
+                         Loaded="OnMapLoaded" />
 
                 <!-- Save Button -->
-                <Button Grid.Row="5"
-                        Text="Save Changes"
+                <Button Text="Save Changes"
                         Command="{Binding SaveCommand}"
-                        IsEnabled="{Binding CanSave}" />
-            </Grid>
-        </VerticalStackLayout>
+                        IsEnabled="{Binding CanSave}"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White"
+                        Margin="0,20,0,0">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button"
+                                   Binding="{Binding CanSave}"
+                                   Value="False">
+                            <Setter Property="Opacity" Value="0.7" />
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+            </VerticalStackLayout>
+        </Grid>
     </ScrollView>
 </ContentPage> 

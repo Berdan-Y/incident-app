@@ -23,6 +23,9 @@ public interface IIncidentApi
     [Patch("/api/incident/{id}")]
     Task<IApiResponse<IncidentDto>> UpdateIncidentDetailsAsync(Guid id, [Body] UpdateIncidentDetailsDto details);
 
+    [Patch("/api/incident/{id}")]
+    Task<IApiResponse<IncidentDto>> PatchIncidentAsync(Guid id, [Body] IncidentPatchDto patchDto);
+
     [Delete("/api/incident/{id}")]
     Task<IApiResponse<bool>> DeleteIncidentAsync(Guid id);
 

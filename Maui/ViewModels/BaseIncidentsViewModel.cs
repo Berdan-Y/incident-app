@@ -38,7 +38,7 @@ public abstract partial class BaseIncidentsViewModel : ObservableObject
     protected virtual async Task OnEditIncident(IncidentResponseDto incident)
     {
         if (incident == null) return;
-        await Shell.Current.GoToAsync($"{nameof(EditIncidentPage)}?id={incident.Id}");
+        await Shell.Current.GoToAsync($"/EditIncidentPage?id={incident.Id}");
     }
 
     protected virtual async Task OnDeleteIncident(IncidentResponseDto incident)
