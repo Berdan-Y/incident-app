@@ -53,6 +53,7 @@ public partial class AppShell : Shell, INotifyPropertyChanged
         Routing.RegisterRoute(nameof(AssignedIncidentsPage), typeof(AssignedIncidentsPage));
         Routing.RegisterRoute(nameof(EditIncidentPage), typeof(EditIncidentPage));
         Routing.RegisterRoute(nameof(NotificationsPage), typeof(NotificationsPage));
+        Routing.RegisterRoute("/FieldEmployeeEditPage", typeof(FieldEmployeeEditPage));
 
         // Subscribe to authentication state changes
         _authService.PropertyChanged += OnAuthStateChanged;

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Maui.ViewModels"
+             x:Class="Maui.Pages.FieldEmployeeEditPage"
+             Title="Edit Incident">
+
+    <ContentPage.BindingContext>
+        <viewmodels:FieldEmployeeEditViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="15">
+            <!-- Error Message -->
+            <Label Text="{Binding ErrorMessage}"
+                   TextColor="Red"
+                   IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotEmptyConverter}}"
+                   Margin="0,0,0,15" />
+
+            <!-- Loading Indicator -->
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                             IsVisible="{Binding IsLoading}"
+                             HorizontalOptions="Center"
+                             Margin="0,0,0,15" />
+
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" 
+                  IsVisible="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}">
+
+                <!-- Title (Read-only) -->
+                <Label Grid.Row="0" 
+                       Text="Title" 
+                       FontAttributes="Bold" />
+                <Label Grid.Row="1" 
+                       Text="{Binding Title}" 
+                       Margin="0,0,0,15" />
+
+                <!-- Description (Editable) -->
+                <Label Grid.Row="2" 
+                       Text="Description" 
+                       FontAttributes="Bold" />
+                <Editor Grid.Row="3"
+                        Text="{Binding Description}"
+                        HeightRequest="100"
+                        Margin="0,0,0,15" />
+
+                <!-- Status (Editable) -->
+                <Label Grid.Row="4" 
+                       Text="Status" 
+                       FontAttributes="Bold" />
+                <Picker Grid.Row="5"
+                        ItemsSource="{Binding StatusOptions}"
+                        SelectedItem="{Binding Status}"
+                        Margin="0,0,0,15" />
+
+                <!-- Address (Read-only) -->
+                <Label Grid.Row="6" 
+                       Text="Address" 
+                       FontAttributes="Bold" />
+                <Label Grid.Row="7" 
+                       Text="{Binding Address}" 
+                       Margin="0,0,0,15" />
+
+                <!-- Save and Cancel Buttons -->
+                <HorizontalStackLayout Grid.Row="9" 
+                                     Spacing="10">
+                    <Button Text="Save"
+                            Command="{Binding SaveCommand}"
+                            BackgroundColor="{StaticResource Primary}" />
+                    <Button Text="Cancel"
+                            Command="{Binding CancelCommand}"
+                            BackgroundColor="Gray" />
+                </HorizontalStackLayout>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage> 

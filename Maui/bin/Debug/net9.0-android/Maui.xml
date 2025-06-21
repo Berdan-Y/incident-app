@@ -72,6 +72,44 @@
             <param name="value">The new property value that was set.</param>
             <remarks>This method is invoked right after the value of <see cref="P:Maui.ViewModels.EditIncidentViewModel.IsLoading"/> is changed.</remarks>
         </member>
+        <member name="T:Maui.ViewModels.FieldEmployeeEditViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:Maui.ViewModels.FieldEmployeeEditViewModel.IsLoading">
+            <inheritdoc cref="F:Maui.ViewModels.FieldEmployeeEditViewModel.isLoading"/>
+        </member>
+        <member name="P:Maui.ViewModels.FieldEmployeeEditViewModel.ErrorMessage">
+            <inheritdoc cref="F:Maui.ViewModels.FieldEmployeeEditViewModel.errorMessage"/>
+        </member>
+        <member name="P:Maui.ViewModels.FieldEmployeeEditViewModel.Title">
+            <inheritdoc cref="F:Maui.ViewModels.FieldEmployeeEditViewModel.title"/>
+        </member>
+        <member name="P:Maui.ViewModels.FieldEmployeeEditViewModel.Description">
+            <inheritdoc cref="F:Maui.ViewModels.FieldEmployeeEditViewModel.description"/>
+        </member>
+        <member name="P:Maui.ViewModels.FieldEmployeeEditViewModel.Address">
+            <inheritdoc cref="F:Maui.ViewModels.FieldEmployeeEditViewModel.address"/>
+        </member>
+        <member name="P:Maui.ViewModels.FieldEmployeeEditViewModel.ZipCode">
+            <inheritdoc cref="F:Maui.ViewModels.FieldEmployeeEditViewModel.zipCode"/>
+        </member>
+        <member name="P:Maui.ViewModels.FieldEmployeeEditViewModel.Status">
+            <inheritdoc cref="F:Maui.ViewModels.FieldEmployeeEditViewModel.status"/>
+        </member>
+        <member name="F:Maui.ViewModels.FieldEmployeeEditViewModel.saveCommand">
+            <summary>The backing field for <see cref="P:Maui.ViewModels.FieldEmployeeEditViewModel.SaveCommand"/>.</summary>
+        </member>
+        <member name="P:Maui.ViewModels.FieldEmployeeEditViewModel.SaveCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:Maui.ViewModels.FieldEmployeeEditViewModel.Save"/>.</summary>
+        </member>
+        <member name="F:Maui.ViewModels.FieldEmployeeEditViewModel.cancelCommand">
+            <summary>The backing field for <see cref="P:Maui.ViewModels.FieldEmployeeEditViewModel.CancelCommand"/>.</summary>
+        </member>
+        <member name="P:Maui.ViewModels.FieldEmployeeEditViewModel.CancelCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:Maui.ViewModels.FieldEmployeeEditViewModel.Cancel"/>.</summary>
+        </member>
         <member name="T:Maui.ViewModels.LoginViewModel">
             <inheritdoc/>
             <inheritdoc/>
@@ -393,6 +431,18 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.MapPins">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "MapPins" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Description">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Description" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Address">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Address" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ZipCode">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ZipCode" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Status">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Status" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Email">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Email" generated properties.</summary>
         </member>
@@ -416,12 +466,6 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsAnonymous">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsAnonymous" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Description">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Description" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Address">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Address" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Zipcode">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Zipcode" generated properties.</summary>
@@ -483,6 +527,18 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.MapPins">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "MapPins" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Description">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Description" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Address">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Address" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ZipCode">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ZipCode" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Status">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Status" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Email">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Email" generated properties.</summary>
         </member>
@@ -506,12 +562,6 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsAnonymous">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsAnonymous" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Description">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Description" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Address">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Address" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Zipcode">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Zipcode" generated properties.</summary>

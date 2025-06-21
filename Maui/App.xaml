@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Maui"
              xmlns:converters="clr-namespace:Maui.Converters"
+             xmlns:services="clr-namespace:Maui.Services"
              x:Class="Maui.App">
     <Application.Resources>
         <ResourceDictionary>
@@ -10,6 +11,9 @@
             <Color x:Key="Primary">#455A64</Color>
             <Color x:Key="Secondary">#78909C</Color>
             <Color x:Key="Tertiary">#90A4AE</Color>
+
+            <!-- Services -->
+            <services:TokenService x:Key="TokenService" />
 
             <!-- Converters -->
             <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
@@ -23,6 +27,7 @@
             <converters:OrBoolConverter x:Key="OrBoolConverter" />
             <converters:BoolToBackgroundColorConverter x:Key="BoolToBackgroundColorConverter" />
             <converters:BoolToReadUnreadConverter x:Key="BoolToReadUnreadConverter" />
+            <converters:IsAssignedFieldEmployeeConverter x:Key="IsAssignedFieldEmployeeConverter" />
 
             <!-- Styles -->
             <Style TargetType="Button">

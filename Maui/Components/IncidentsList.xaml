@@ -3,7 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:Maui.ViewModels"
              xmlns:models="clr-namespace:Shared.Models.Dtos;assembly=Shared"
+             xmlns:services="clr-namespace:Maui.Services"
              x:Class="Maui.Components.IncidentsList">
+
+    <ContentView.Resources>
+        <services:TokenService x:Key="TokenService" />
+    </ContentView.Resources>
 
     <Grid RowDefinitions="Auto,*">
         <!-- Error Message Row -->
@@ -87,6 +92,13 @@
                                         Clicked="OnEditClicked"
                                         CommandParameter="{Binding .}"
                                         IsVisible="{Binding CreatedBy, Converter={StaticResource IsCurrentUserConverter}}"
+                                        BackgroundColor="Orange" />
+
+                                <!-- Edit button for assigned field employees -->
+                                <Button Text="Edit Status"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:BaseIncidentsViewModel}}, Path=FieldEmployeeEditCommand}"
+                                        CommandParameter="{Binding .}"
+                                        IsVisible="{Binding ., Converter={StaticResource IsAssignedFieldEmployeeConverter}}"
                                         BackgroundColor="Orange" />
 
                                 <Button Text="Delete"

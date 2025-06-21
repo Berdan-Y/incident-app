@@ -26,6 +26,7 @@ public abstract partial class BaseIncidentsViewModel : ObservableObject
     public ICommand ViewIncidentDetailsCommand { get; protected set; }
     public ICommand EditIncidentCommand { get; protected set; }
     public ICommand DeleteIncidentCommand { get; protected set; }
+    public ICommand FieldEmployeeEditCommand { get; protected set; }
 
     protected BaseIncidentsViewModel(IIncidentService incidentService)
     {
@@ -33,6 +34,7 @@ public abstract partial class BaseIncidentsViewModel : ObservableObject
         Incidents = new ObservableCollection<IncidentResponseDto>();
         EditIncidentCommand = new Command<IncidentResponseDto>(async (incident) => await OnEditIncident(incident));
         DeleteIncidentCommand = new Command<IncidentResponseDto>(async (incident) => await OnDeleteIncident(incident));
+        FieldEmployeeEditCommand = new Command<IncidentResponseDto>(async (incident) => await OnFieldEmployeeEditIncident(incident));
     }
 
     protected virtual async Task OnEditIncident(IncidentResponseDto incident)
@@ -68,5 +70,11 @@ public abstract partial class BaseIncidentsViewModel : ObservableObject
                 IsLoading = false;
             }
         }
+    }
+
+    protected virtual async Task OnFieldEmployeeEditIncident(IncidentResponseDto incident)
+    {
+        if (incident == null) return;
+        await Shell.Current.GoToAsync($"/FieldEmployeeEditPage?id={incident.Id}");
     }
 }

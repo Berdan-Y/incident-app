@@ -81,6 +81,24 @@ public partial class IncidentsList : ContentView
         }
     }
 
+    private void OnFieldEmployeeEditClicked(object sender, EventArgs e)
+    {
+        Debug.WriteLine("OnFieldEmployeeEditClicked called");
+        if (sender is Button button && button.CommandParameter is IncidentResponseDto incident)
+        {
+            var parentPage = GetParentPage();
+            if (parentPage?.BindingContext is BaseIncidentsViewModel vm)
+            {
+                Debug.WriteLine($"Executing FieldEmployeeEditCommand for incident {incident.Id}");
+                vm.FieldEmployeeEditCommand.Execute(incident);
+            }
+            else
+            {
+                Debug.WriteLine("Could not find parent page or ViewModel");
+            }
+        }
+    }
+
     private void OnDeleteClicked(object sender, EventArgs e)
     {
         Debug.WriteLine("OnDeleteClicked called");

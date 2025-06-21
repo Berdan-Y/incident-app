@@ -107,6 +107,7 @@ public static class MauiProgram
         builder.Services.AddTransient<AssignedIncidentsViewModel>();
         builder.Services.AddTransient<EditIncidentViewModel>();
         builder.Services.AddTransient<NotificationsViewModel>();
+        builder.Services.AddTransient<FieldEmployeeEditViewModel>();
 
         // Register Shell and Pages
         builder.Services.AddSingleton<AppShell>();
@@ -120,6 +121,7 @@ public static class MauiProgram
         builder.Services.AddTransient<AssignedIncidentsPage>();
         builder.Services.AddTransient<EditIncidentPage>();
         builder.Services.AddTransient<NotificationsPage>();
+        builder.Services.AddTransient<FieldEmployeeEditPage>();
 
         // Register Maps
         builder.Services.AddSingleton<IGeolocation>(Geolocation.Default);

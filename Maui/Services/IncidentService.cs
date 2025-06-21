@@ -260,4 +260,130 @@ public class IncidentService : IIncidentService
             throw new Exception("Failed to update incident. Please try again.");
         }
     }
+
+    public async Task<IncidentResponseDto> UpdateIncidentDetailsAsync(Guid id, UpdateIncidentDetailsDto details)
+    {
+        try
+        {
+            var response = await _incidentApi.UpdateIncidentDetailsAsync(id, details);
+            
+            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                throw new UnauthorizedAccessException("Your session has expired. Please log in again.");
+            }
+            
+            if (!response.IsSuccessStatusCode || response.Content == null)
+            {
+                string errorContent = "Failed to update incident details";
+                try
+                {
+                    if (response.Error?.Content != null)
+                    {
+                        errorContent = response.Error.Content;
+                    }
+                }
+                catch (ObjectDisposedException)
+                {
+                    // If the error content is disposed, just use the default message
+                }
+                throw new Exception(errorContent);
+            }
+
+            // After updating, fetch the latest version of the incident to get the full IncidentResponseDto
+            return await GetIncidentByIdAsync(id);
+        }
+        catch (UnauthorizedAccessException)
+        {
+            throw; // Re-throw unauthorized access exceptions
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Error in UpdateIncidentDetailsAsync: {ex}");
+            throw new Exception("Failed to update incident details. Please try again.");
+        }
+    }
+
+    public async Task<IncidentResponseDto> UpdateIncidentStatusAsync(Guid id, int status)
+    {
+        try
+        {
+            var response = await _incidentApi.UpdateIncidentStatusAsync(id, status);
+            
+            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                throw new UnauthorizedAccessException("Your session has expired. Please log in again.");
+            }
+            
+            if (!response.IsSuccessStatusCode)
+            {
+                string errorContent = "Failed to update incident status";
+                try
+                {
+                    if (response.Error?.Content != null)
+                    {
+                        errorContent = response.Error.Content;
+                    }
+                }
+                catch (ObjectDisposedException)
+                {
+                    // If the error content is disposed, just use the default message
+                }
+                throw new Exception(errorContent);
+            }
+
+            // After updating, fetch the latest version of the incident to get the full IncidentResponseDto
+            return await GetIncidentByIdAsync(id);
+        }
+        catch (UnauthorizedAccessException)
+        {
+            throw; // Re-throw unauthorized access exceptions
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Error in UpdateIncidentStatusAsync: {ex}");
+            throw new Exception("Failed to update incident status. Please try again.");
+        }
+    }
+
+    public async Task<IncidentResponseDto> PatchIncidentAsync(Guid id, IncidentPatchDto patchDto)
+    {
+        try
+        {
+            var response = await _incidentApi.PatchIncidentAsync(id, patchDto);
+            
+            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                throw new UnauthorizedAccessException("Your session has expired. Please log in again.");
+            }
+            
+            if (!response.IsSuccessStatusCode || response.Content == null)
+            {
+                string errorContent = "Failed to update incident";
+                try
+                {
+                    if (response.Error?.Content != null)
+                    {
+                        errorContent = response.Error.Content;
+                    }
+                }
+                catch (ObjectDisposedException)
+                {
+                    // If the error content is disposed, just use the default message
+                }
+                throw new Exception(errorContent);
+            }
+
+            // After updating, fetch the latest version of the incident to get the full IncidentResponseDto
+            return await GetIncidentByIdAsync(id);
+        }
+        catch (UnauthorizedAccessException)
+        {
+            throw; // Re-throw unauthorized access exceptions
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Error in PatchIncidentAsync: {ex}");
+            throw new Exception("Failed to update incident. Please try again.");
+        }
+    }
 }
