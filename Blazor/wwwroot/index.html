@@ -10,6 +10,13 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+    <style>
+        .map-container {
+            height: 600px;
+            width: 100%;
+            margin-top: 16px;
+        }
+    </style>
 </head>
 
 <body>
@@ -33,6 +40,43 @@
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
     <script src="_content/MudBlazor/MudBlazor.min.js"></script>
+    <script>
+        window.mapsConfig = {
+            apiKey: 'AIzaSyDsQd3FtHLZnQYThk_PsGiCCpfDksexAoE',
+            maps: new Map(),
+            currentMapId: 0
+        };
+
+        window.initializeMap = function (element) {
+            const mapId = ++window.mapsConfig.currentMapId;
+            const map = new google.maps.Map(element, {
+                zoom: 10,
+                center: { lat: 0, lng: 0 }
+            });
+            window.mapsConfig.maps.set(mapId, map);
+            return mapId;
+        };
+
+        window.addMarker = function (mapId, lat, lng, title) {
+            const map = window.mapsConfig.maps.get(mapId);
+            if (!map) return null;
+
+            const marker = new google.maps.Marker({
+                position: { lat: lat, lng: lng },
+                map: map,
+                title: title
+            });
+
+            // Center map on first marker
+            if (map.markers === undefined || map.markers.length === 0) {
+                map.setCenter({ lat: lat, lng: lng });
+                map.markers = [];
+            }
+            map.markers.push(marker);
+            return marker;
+        };
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsQd3FtHLZnQYThk_PsGiCCpfDksexAoE"></script>
 </body>
 
 </html>

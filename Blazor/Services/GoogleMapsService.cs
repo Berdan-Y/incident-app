@@ -1,18 +1,37 @@
 using System.Net.Http.Json;
 using Microsoft.Extensions.Configuration;
+using Microsoft.JSInterop;
+using Microsoft.AspNetCore.Components;
 
 namespace Blazor.Services;
+
+public interface IGoogleMapsService
+{
+    ValueTask<int> InitializeMapAsync(ElementReference element);
+    ValueTask AddMarkerAsync(int mapId, double lat, double lng, string title);
+    Task<GeocodingResponse?> ValidateAndGetCoordinatesAsync(string address, string zipCode);
+}
+
+public class GeocodingResponse
+{
+    public bool IsValid { get; set; }
+    public double Latitude { get; set; }
+    public double Longitude { get; set; }
+    public string FormattedAddress { get; set; } = string.Empty;
+}
 
 public class GoogleMapsService : IGoogleMapsService
 {
     private readonly HttpClient _httpClient;
     private readonly string _apiKey;
+    private readonly IJSRuntime _jsRuntime;
 
-    public GoogleMapsService(HttpClient httpClient, IConfiguration configuration)
+    public GoogleMapsService(HttpClient httpClient, IConfiguration configuration, IJSRuntime jsRuntime)
     {
         _httpClient = httpClient;
         _apiKey = configuration["GoogleMaps:ApiKey"] ?? throw new ArgumentNullException("GoogleMaps:ApiKey not configured");
         _httpClient.BaseAddress = new Uri("https://maps.googleapis.com/maps/api/");
+        _jsRuntime = jsRuntime;
     }
 
     public async Task<GeocodingResponse?> ValidateAndGetCoordinatesAsync(string address, string zipCode)
@@ -42,6 +61,16 @@ public class GoogleMapsService : IGoogleMapsService
             Console.WriteLine($"Error validating address: {ex.Message}");
             return new GeocodingResponse { IsValid = false };
         }
+    }
+
+    public async ValueTask<int> InitializeMapAsync(ElementReference element)
+    {
+        return await _jsRuntime.InvokeAsync<int>("initializeMap", element);
+    }
+
+    public async ValueTask AddMarkerAsync(int mapId, double lat, double lng, string title)
+    {
+        await _jsRuntime.InvokeVoidAsync("addMarker", mapId, lat, lng, title);
     }
 
     private class GoogleMapsApiResponse

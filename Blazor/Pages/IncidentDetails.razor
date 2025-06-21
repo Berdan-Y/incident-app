@@ -334,8 +334,8 @@
 
                     if (result?.IsValid == true)
                     {
-                        editModel.Latitude = result.Latitude ?? 0;
-                        editModel.Longitude = result.Longitude ?? 0;
+                        editModel.Latitude = result.Latitude;
+                        editModel.Longitude = result.Longitude;
                         addressValidationMessage = $"Valid address: {result.FormattedAddress}";
                         isAddressValid = true;
                     }

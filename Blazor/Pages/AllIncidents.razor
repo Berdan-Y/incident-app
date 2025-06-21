@@ -2,11 +2,25 @@
 @using Shared.Models.Dtos
 @using Shared.Api
 @using Shared.Models.Enums
+@using Blazor.Services
 @inject IIncidentApi IncidentApi
+@inject IGoogleMapsService GoogleMapsService
 @inject NavigationManager NavigationManager
 
 <MudContainer Class="mt-4">
-    <MudText Typo="Typo.h3" Class="mb-4">All Incidents</MudText>
+    <div class="d-flex justify-space-between align-center mb-4">
+        <MudText Typo="Typo.h3">All Incidents</MudText>
+        <MudButtonGroup Color="Color.Primary" Variant="Variant.Outlined">
+            <MudButton OnClick="@(() => viewType = ViewType.Cards)" 
+                      Variant="@(viewType == ViewType.Cards ? Variant.Filled : Variant.Outlined)">
+                <MudIcon Icon="@Icons.Material.Filled.ViewModule" Class="mr-2"/>Cards
+            </MudButton>
+            <MudButton OnClick="@(() => viewType = ViewType.Map)"
+                      Variant="@(viewType == ViewType.Map ? Variant.Filled : Variant.Outlined)">
+                <MudIcon Icon="@Icons.Material.Filled.Map" Class="mr-2"/>Map
+            </MudButton>
+        </MudButtonGroup>
+    </div>
 
     @if (incidents == null)
     {
@@ -18,77 +32,93 @@
     }
     else
     {
-        <MudGrid>
-            @foreach (var incident in incidents)
-            {
-                <MudItem xs="12" sm="6" md="4">
-                    <MudCard Elevation="3" Class="mb-4">
-                        <MudCardHeader>
-                            <MudText Typo="Typo.h6">@incident.Title</MudText>
-                        </MudCardHeader>
-                        <MudCardContent>
-                            <MudStack>
-                                <MudText Class="d-flex align-center">
-                                    <MudIcon Icon="@Icons.Material.Filled.Flag" Class="mr-2" />
-                                    Status: <MudChip Color="@GetStatusColor(incident.Status.ToString())" Size="Size.Small" Class="ml-1">@incident.Status</MudChip>
-                                </MudText>
-                                <MudText Class="d-flex align-center">
-                                    <MudIcon Icon="@Icons.Material.Filled.PriorityHigh" Class="mr-2" />
-                                    Priority: 
-                                    @if (editingPriorityId != incident.Id)
-                                    {
-                                        <span class="d-flex align-center">
-                                            <MudChip Color="@GetPriorityColor(incident.Priority.ToString())" Size="Size.Small" Class="ml-1 mr-2">@incident.Priority</MudChip>
-                                            <MudIconButton Size="Size.Small"
-                                                         Icon="@Icons.Material.Filled.Edit"
-                                                         OnClick="@(() => editingPriorityId = incident.Id)"
-                                                         Class="pa-0 ml-1" />
-                                        </span>
-                                    }
-                                    else
-                                    {
-                                        <span class="d-flex align-center ml-1">
-                                            <MudSelect T="Priority" 
-                                                     Value="@incident.Priority"
-                                                     ValueChanged="@(async (Priority p) => await UpdatePriorityAsync(incident.Id, p))"
-                                                     Dense="true"
-                                                     Style="min-width: 120px;">
-                                                @foreach (var priority in Enum.GetValues<Priority>())
-                                                {
-                                                    <MudSelectItem Value="@priority">@priority</MudSelectItem>
-                                                }
-                                            </MudSelect>
-                                            <MudIconButton Size="Size.Small"
-                                                         Icon="@Icons.Material.Filled.Close"
-                                                         OnClick="@(() => editingPriorityId = Guid.Empty)"
-                                                         Class="ml-2" />
-                                        </span>
-                                    }
-                                </MudText>
-                                <MudText Class="d-flex align-center">
-                                    <MudIcon Icon="@Icons.Material.Filled.CalendarToday" Class="mr-2" />
-                                    Created: @incident.CreatedAt.ToLocalTime().ToString("g")
-                                </MudText>
-                            </MudStack>
-                        </MudCardContent>
-                        <MudCardActions>
-                            <MudButton Variant="Variant.Filled" 
-                                     Color="Color.Primary" 
-                                     OnClick="@(() => ViewDetails(incident.Id))"
-                                     StartIcon="@Icons.Material.Filled.Visibility">
-                                View Details
-                            </MudButton>
-                        </MudCardActions>
-                    </MudCard>
-                </MudItem>
-            }
-        </MudGrid>
+        @if (viewType == ViewType.Cards)
+        {
+            <MudGrid>
+                @foreach (var incident in incidents)
+                {
+                    <MudItem xs="12" sm="6" md="4">
+                        <MudCard Elevation="3" Class="mb-4">
+                            <MudCardHeader>
+                                <MudText Typo="Typo.h6">@incident.Title</MudText>
+                            </MudCardHeader>
+                            <MudCardContent>
+                                <MudStack>
+                                    <MudText Class="d-flex align-center">
+                                        <MudIcon Icon="@Icons.Material.Filled.Flag" Class="mr-2" />
+                                        Status: <MudChip Color="@GetStatusColor(incident.Status.ToString())" Size="Size.Small" Class="ml-1">@incident.Status</MudChip>
+                                    </MudText>
+                                    <MudText Class="d-flex align-center">
+                                        <MudIcon Icon="@Icons.Material.Filled.PriorityHigh" Class="mr-2" />
+                                        Priority: 
+                                        @if (editingPriorityId != incident.Id)
+                                        {
+                                            <span class="d-flex align-center">
+                                                <MudChip Color="@GetPriorityColor(incident.Priority.ToString())" Size="Size.Small" Class="ml-1 mr-2">@incident.Priority</MudChip>
+                                                <MudIconButton Size="Size.Small"
+                                                             Icon="@Icons.Material.Filled.Edit"
+                                                             OnClick="@(() => editingPriorityId = incident.Id)"
+                                                             Class="pa-0 ml-1" />
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="d-flex align-center ml-1">
+                                                <MudSelect T="Priority" 
+                                                         Value="@incident.Priority"
+                                                         ValueChanged="@(async (Priority p) => await UpdatePriorityAsync(incident.Id, p))"
+                                                         Dense="true"
+                                                         Style="min-width: 120px;">
+                                                    @foreach (var priority in Enum.GetValues<Priority>())
+                                                    {
+                                                        <MudSelectItem Value="@priority">@priority</MudSelectItem>
+                                                    }
+                                                </MudSelect>
+                                                <MudIconButton Size="Size.Small"
+                                                             Icon="@Icons.Material.Filled.Close"
+                                                             OnClick="@(() => editingPriorityId = Guid.Empty)"
+                                                             Class="ml-2" />
+                                            </span>
+                                        }
+                                    </MudText>
+                                    <MudText Class="d-flex align-center">
+                                        <MudIcon Icon="@Icons.Material.Filled.CalendarToday" Class="mr-2" />
+                                        Created: @incident.CreatedAt.ToLocalTime().ToString("g")
+                                    </MudText>
+                                </MudStack>
+                            </MudCardContent>
+                            <MudCardActions>
+                                <MudButton Variant="Variant.Filled" 
+                                         Color="Color.Primary" 
+                                         OnClick="@(() => ViewDetails(incident.Id))"
+                                         StartIcon="@Icons.Material.Filled.Visibility">
+                                    View Details
+                                </MudButton>
+                            </MudCardActions>
+                        </MudCard>
+                    </MudItem>
+                }
+            </MudGrid>
+        }
+        else
+        {
+            <div class="map-container" @ref="mapElement"></div>
+        }
     }
 </MudContainer>
 
 @code {
     private List<IncidentResponseDto> incidents;
     private Guid editingPriorityId = Guid.Empty;
+    private ViewType viewType = ViewType.Cards;
+    private ElementReference mapElement;
+    private int? mapId;
+
+    private enum ViewType
+    {
+        Cards,
+        Map
+    }
 
     protected override async Task OnInitializedAsync()
     {
@@ -108,6 +138,29 @@
         catch (Exception ex)
         {
             Console.WriteLine($"Exception: {ex.Message}");
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (viewType == ViewType.Map && mapId == null)
+        {
+            mapId = await GoogleMapsService.InitializeMapAsync(mapElement);
+            if (incidents != null)
+            {
+                foreach (var incident in incidents)
+                {
+                    if (incident.Latitude != 0 || incident.Longitude != 0)
+                    {
+                        await GoogleMapsService.AddMarkerAsync(
+                            mapId.Value,
+                            incident.Latitude,
+                            incident.Longitude,
+                            incident.Title
+                        );
+                    }
+                }
+            }
         }
     }
 
