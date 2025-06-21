@@ -6,6 +6,7 @@
 @inject IIncidentApi IncidentApi
 @inject IGoogleMapsService GoogleMapsService
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
 
 <MudContainer Class="mt-4">
     <div class="d-flex justify-space-between align-center mb-4">
@@ -91,9 +92,19 @@
                                 <MudButton Variant="Variant.Filled" 
                                          Color="Color.Primary" 
                                          OnClick="@(() => ViewDetails(incident.Id))"
-                                         StartIcon="@Icons.Material.Filled.Visibility">
+                                         StartIcon="@Icons.Material.Filled.Visibility"
+                                         Class="mr-2">
                                     View Details
                                 </MudButton>
+                                @if (incident.Latitude != 0 || incident.Longitude != 0)
+                                {
+                                    <MudButton Variant="Variant.Filled"
+                                               Color="Color.Secondary"
+                                               OnClick="@(() => OpenDirections(incident.Latitude, incident.Longitude))"
+                                               StartIcon="@Icons.Material.Filled.Directions">
+                                        Get Directions
+                                    </MudButton>
+                                }
                             </MudCardActions>
                         </MudCard>
                     </MudItem>
@@ -208,4 +219,9 @@
         "unknown" => Color.Default,
         _ => Color.Default
     };
+
+    private async Task OpenDirections(double lat, double lng)
+    {
+        await JSRuntime.InvokeVoidAsync("openGoogleMapsDirections", lat, lng);
+    }
 } 

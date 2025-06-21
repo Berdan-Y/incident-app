@@ -67,6 +67,22 @@
                 title: title
             });
 
+            // Create info window with directions button
+            const infoWindow = new google.maps.InfoWindow({
+                content: `
+                    <div>
+                        <h4>${title}</h4>
+                        <button onclick="window.openGoogleMapsDirections(${lat}, ${lng})" 
+                                style="background-color: #1976d2; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
+                            Get Directions
+                        </button>
+                    </div>`
+            });
+
+            marker.addListener('click', () => {
+                infoWindow.open(map, marker);
+            });
+
             // Center map on first marker
             if (map.markers === undefined || map.markers.length === 0) {
                 map.setCenter({ lat: lat, lng: lng });
@@ -74,6 +90,27 @@
             }
             map.markers.push(marker);
             return marker;
+        };
+
+        window.openGoogleMapsDirections = function (destLat, destLng) {
+            // Open Google Maps in a new tab with directions from current location
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const url = `https://www.google.com/maps/dir/?api=1&origin=${position.coords.latitude},${position.coords.longitude}&destination=${destLat},${destLng}`;
+                        window.open(url, '_blank');
+                    },
+                    () => {
+                        // If location access is denied, just navigate to destination
+                        const url = `https://www.google.com/maps/dir/?api=1&destination=${destLat},${destLng}`;
+                        window.open(url, '_blank');
+                    }
+                );
+            } else {
+                // If geolocation is not supported, just navigate to destination
+                const url = `https://www.google.com/maps/dir/?api=1&destination=${destLat},${destLng}`;
+                window.open(url, '_blank');
+            }
         };
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsQd3FtHLZnQYThk_PsGiCCpfDksexAoE"></script>
