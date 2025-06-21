@@ -61,11 +61,16 @@
                 InputType="InputType.Password"
                 Validation="@(new Func<string, string>(ValidatePasswordConfirmation))" />
 
-            <MudSelect T="Role?" @bind-Value="registerRequest.Role" Label="Role" Required="true" RequiredError="Role is required">
-                @foreach (var role in Enum.GetValues<Role>())
-                {
-                    <MudSelectItem Value="@role">@role.ToString()</MudSelectItem>
-                }
+            <MudSelect T="string" 
+                      Label="Role" 
+                      Required="true" 
+                      RequiredError="Role is required"
+                      Value="@(registerRequest.Role?.ToString() ?? "Member")"
+                      ValueChanged="@(HandleRoleChange)"
+                      AnchorOrigin="Origin.BottomCenter">
+                <MudSelectItem Value="@("Member")">Member</MudSelectItem>
+                <MudSelectItem Value="@("FieldEmployee")">Field Employee</MudSelectItem>
+                <MudSelectItem Value="@("Admin")">Admin</MudSelectItem>
             </MudSelect>
 
             <div class="d-flex align-center justify-space-between mt-6">
@@ -100,7 +105,8 @@
         FirstName = string.Empty,
         LastName = string.Empty,
         Email = string.Empty,
-        Password = string.Empty
+        Password = string.Empty,
+        Role = Role.Member
     };
 
     private string ValidatePasswordConfirmation(string confirmPassword)
@@ -125,7 +131,7 @@
                 Password = registerRequest.Password!,
                 FirstName = registerRequest.FirstName!,
                 LastName = registerRequest.LastName!,
-                Role = registerRequest.Role!.Value
+                Role = registerRequest.Role
             };
             
             if (await AuthService.RegisterAsync(registerDto))
@@ -145,6 +151,21 @@
         finally
         {
             _processing = false;
+        }
+    }
+
+    private void HandleRoleChange(string value)
+    {
+        Console.WriteLine($"Selected role string: {value}");
+        if (Enum.TryParse<Shared.Models.Enums.Role>(value, out var role))
+        {
+            Console.WriteLine($"Parsed role enum: {role} (value: {(int)role})");
+            registerRequest.Role = role;
+        }
+        else
+        {
+            Console.WriteLine($"Failed to parse role. Using default Member role");
+            registerRequest.Role = Shared.Models.Enums.Role.Member;
         }
     }
 } 

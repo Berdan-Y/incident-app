@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "Blazor",
   "resources": {
-    "hash": "sha256-owanuCpoo3dyzwlxHn1jSrislEZ7PBYAVVSsfdpfGXs=",
+    "hash": "sha256-/PBRiNdt0TVbo3Hd9kq4H/adprn5PyiveVgLkjBqsik=",
     "fingerprinting": {
       "AutoMapper.totk3ghnq9.wasm": "AutoMapper.wasm",
       "BCrypt.Net-Next.atqw2jgj6x.wasm": "BCrypt.Net-Next.wasm",
@@ -249,10 +249,10 @@
       "icudt_CJK.tjcz0u77k5.dat": "icudt_CJK.dat",
       "icudt_EFIGS.tptq2av103.dat": "icudt_EFIGS.dat",
       "icudt_no_CJK.lfu7j35m59.dat": "icudt_no_CJK.dat",
-      "Shared.9glo823s06.wasm": "Shared.wasm",
-      "Shared.z5j4kxm5pn.pdb": "Shared.pdb",
-      "Blazor.rams3ksq3n.wasm": "Blazor.wasm",
-      "Blazor.qsysf535t9.pdb": "Blazor.pdb"
+      "Shared.b3buw3x7ah.wasm": "Shared.wasm",
+      "Shared.pseoqyjt11.pdb": "Shared.pdb",
+      "Blazor.rhritfyv8t.wasm": "Blazor.wasm",
+      "Blazor.c1fi71dlki.pdb": "Blazor.pdb"
     },
     "jsModuleNative": {
       "dotnet.native.uhsveqo9bs.js": "sha256-/ifJokfQvXKw1hEziCkYR9SOJIKSdGG/UKw5gbLWrj0="
@@ -510,12 +510,12 @@
       "WindowsBase.pe1q66fox7.wasm": "sha256-X+jubl681x6U1UjhhKVz+cjOvMv1wDBWIyyFenqJnPc=",
       "mscorlib.ypkr78tz1c.wasm": "sha256-Wkc7KpMw/bTWNoLCRv9T8olIOmCpEiJSeUZsUQEnwrA=",
       "netstandard.ifx8vojh9u.wasm": "sha256-PqpRCbO73PFsE8ik5zmAuG1kKax3c7bGhjOOeuiUcyY=",
-      "Shared.9glo823s06.wasm": "sha256-mQKoxszmd/w87+lSdn0gL7Dg7EL52atgTsAYKtNVfUk=",
-      "Blazor.rams3ksq3n.wasm": "sha256-41LN1zCGoORUNMBmU3N72xIvJNpBKooaT7+EiwkeEak="
+      "Shared.b3buw3x7ah.wasm": "sha256-p28cVgXfEQw6lFNjZ7+V0Zmf6EX82U9Ymz760Hyj178=",
+      "Blazor.rhritfyv8t.wasm": "sha256-rxQqd2Z0QIFJiyZ7dfC/lUYH8NdIArwJfKdqoSrSwhc="
     },
     "pdb": {
-      "Shared.z5j4kxm5pn.pdb": "sha256-B5I6XGreH3kgqM2HiCleJWPhdX63zz69DFcMmrtfPTw=",
-      "Blazor.qsysf535t9.pdb": "sha256-KrKfSvYggnM9KaS0Db4+8JSi5rXh/vd53XxrZzdTu3w="
+      "Shared.pseoqyjt11.pdb": "sha256-6fJFE7agFS49WaiID1c9TiBfmTSSdam0blS4/4VceoQ=",
+      "Blazor.c1fi71dlki.pdb": "sha256-oDdWyLGYJa8RTucjlwHUhJx3pjVNmlMnwO3LJ8yHdns="
     }
   },
   "cacheBootResources": true,

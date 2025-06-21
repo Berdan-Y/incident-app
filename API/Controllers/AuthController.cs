@@ -49,15 +49,36 @@ public class AuthController : ControllerBase
         };
 
         _context.Users.Add(user);
+        
+        Console.WriteLine($"Role from request (raw): {registerDto.Role}");
+        Console.WriteLine($"Role from request (int): {(int?)registerDto.Role}");
+        Console.WriteLine($"Role from request (string): {registerDto.Role?.ToString()}");
 
-        var role = _context.Roles.Find(Role.MemberId);
+        // Map enum values to database role IDs
+        var roleId = registerDto.Role switch
+        {
+            Shared.Models.Enums.Role.Admin => Role.AdminId,            // Enum value 2 -> DB ID 1
+            Shared.Models.Enums.Role.FieldEmployee => Role.FieldEmployeeId,  // Enum value 1 -> DB ID 2
+            Shared.Models.Enums.Role.Member => Role.MemberId,          // Enum value 0 -> DB ID 3
+            _ => Role.MemberId
+        };
+
+        // Also set the RoleJson property
+        user.RoleJson = JsonSerializer.Serialize(new { Name = registerDto.Role?.ToString() ?? "Member" });
+
+        Console.WriteLine($"Mapped roleId: {roleId}");
+        var role = _context.Roles.Find(roleId);
         if (role == null)
-            return BadRequest(new { message = "Default role not found" });
+        {
+            Console.WriteLine($"Role not found in database for roleId: {roleId}");
+            return BadRequest(new { message = "Selected role not found" });
+        }
+        Console.WriteLine($"Found role in database: {role.Name} (ID: {role.Id})");
 
         var userRole = new UserRole
         {
             UserId = user.Id,
-            RoleId = Role.MemberId,
+            RoleId = roleId,
             User = user,
             Role = role
         };

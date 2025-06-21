@@ -166,29 +166,23 @@ public class AuthenticationService : IAuthenticationService
         try
         {
             var response = await _httpClient.PostAsJsonAsync("api/Auth/register", request);
-            if (!response.IsSuccessStatusCode) return false;
-
-            var authResponse = await response.Content.ReadFromJsonAsync<AuthResponse>();
-            if (authResponse?.Token == null) return false;
-
-            await _tokenService.SetTokenAsync(authResponse.Token);
+            Console.WriteLine($"Register response status: {response.StatusCode}");
             
-            var roles = string.Join(",", authResponse.Roles);
-            if (!string.IsNullOrEmpty(roles))
+            if (!response.IsSuccessStatusCode)
             {
-                await _tokenService.SetRolesAsync(roles);
+                var error = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Registration failed with error: {error}");
+                return false;
             }
-            
-            _userEmail = authResponse.UserName;
-            UserRole = authResponse.Roles.Contains("Admin", StringComparer.OrdinalIgnoreCase) ? Role.Admin : Role.Member;
-            
-            // Notify state change after everything is set
-            NotifyAuthenticationStateChanged();
+
+            var responseContent = await response.Content.ReadFromJsonAsync<AuthResponse>();
+            Console.WriteLine($"Registration success with message: {responseContent?.Message}");
             
             return true;
         }
-        catch
+        catch (Exception ex)
         {
+            Console.WriteLine($"Registration exception: {ex.Message}");
             return false;
         }
     }
