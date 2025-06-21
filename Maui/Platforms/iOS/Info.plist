@@ -37,10 +37,16 @@
 		<string>$(AppIdentifierPrefix)com.companyname.incident-app</string>
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We need access to location when the app is being used to show your current location on the map.</string>
+	<string>This app needs access to location when open to report incidents at your current location.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>We need access to location when the app is in background to track your location for incident reporting.</string>
+	<string>This app needs access to location when in the background to report incidents at your current location.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>We need access to location to show your current location on the map and for incident reporting.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app needs access to the camera to take photos of incidents.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app needs access to photos to select photos of incidents.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>This app needs access to the photo gallery to save photos of incidents.</string>
 </dict>
 </plist>

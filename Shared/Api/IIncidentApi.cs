@@ -16,7 +16,7 @@ public interface IIncidentApi
 
     [Multipart]
     [Post("/api/incident")]
-    Task<IApiResponse<IncidentDto>> CreateIncidentAsync([AliasAs("incident")] IncidentCreateDto incident);
+    Task<IApiResponse<IncidentResponseDto>> CreateIncidentAsync([AliasAs("content")] HttpContent content);
 
     [Put("/api/incident/{id}")]
     Task<IApiResponse<IncidentDto>> UpdateIncidentAsync(Guid id, [Body] UpdateIncidentDto incident);

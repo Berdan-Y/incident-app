@@ -11,6 +11,11 @@ using Microsoft.Maui.Controls;
 using Shared.Api;
 using Shared.Models.Dtos;
 using Shared.Models.Enums;
+using System.Text;
+using System.Text.Json;
+using System.Net.Http.Json;
+using System.Net.Http.Headers;
+using Microsoft.Maui.Media;
 
 namespace Maui.ViewModels;
 
@@ -22,6 +27,9 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
     private readonly ITokenService _tokenService;
     private readonly IGeocodingService _geocodingService;
     private bool _disposed;
+
+    [ObservableProperty]
+    private ObservableCollection<FileResult> selectedPhotos;
 
     [ObservableProperty]
     private bool isAnonymous;
@@ -91,6 +99,9 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
         _incidentApi = incidentApi;
         _tokenService = tokenService;
         _geocodingService = geocodingService;
+
+        // Initialize photos collection
+        SelectedPhotos = new ObservableCollection<FileResult>();
 
         // Subscribe to token service property changes
         _tokenService.PropertyChanged += TokenService_PropertyChanged;
@@ -338,6 +349,81 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
     }
 
     [RelayCommand]
+    private async Task TakePhoto()
+    {
+        try
+        {
+            if (!MediaPicker.Default.IsCaptureSupported)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", 
+                    "Camera capture is not supported on this device.", "OK");
+                return;
+            }
+
+            var status = await Permissions.RequestAsync<Permissions.Camera>();
+            if (status != PermissionStatus.Granted)
+            {
+                await Application.Current.MainPage.DisplayAlert("Permission Required", 
+                    "Camera permission is required to take photos.", "OK");
+                return;
+            }
+
+            var photo = await MediaPicker.Default.CapturePhotoAsync();
+            if (photo != null)
+            {
+                SelectedPhotos.Add(photo);
+            }
+        }
+        catch (Exception ex)
+        {
+            await Application.Current.MainPage.DisplayAlert("Error", 
+                $"Failed to take photo: {ex.Message}", "OK");
+        }
+    }
+
+    [RelayCommand]
+    private async Task PickPhotos()
+    {
+        try
+        {
+            var status = await Permissions.RequestAsync<Permissions.Photos>();
+            if (status != PermissionStatus.Granted)
+            {
+                await Application.Current.MainPage.DisplayAlert("Permission Required", 
+                    "Photo library access is required to select photos.", "OK");
+                return;
+            }
+
+            var photos = await FilePicker.Default.PickMultipleAsync(new PickOptions
+            {
+                FileTypes = FilePickerFileType.Images
+            });
+
+            if (photos != null)
+            {
+                foreach (var photo in photos)
+                {
+                    SelectedPhotos.Add(photo);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            await Application.Current.MainPage.DisplayAlert("Error", 
+                $"Failed to pick photos: {ex.Message}", "OK");
+        }
+    }
+
+    [RelayCommand]
+    private void RemovePhoto(FileResult photo)
+    {
+        if (photo != null && SelectedPhotos.Contains(photo))
+        {
+            SelectedPhotos.Remove(photo);
+        }
+    }
+
+    [RelayCommand]
     private async Task SubmitReport()
     {
         System.Diagnostics.Debug.WriteLine($"SubmitReport called - IsAnonymous: {IsAnonymous}");
@@ -404,6 +490,10 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
 
             System.Diagnostics.Debug.WriteLine($"Final reportedById value: {reportedById}");
 
+            // Create multipart form content
+            var content = new MultipartFormDataContent();
+
+            // Add incident data as JSON
             var incident = new IncidentCreateDto()
             {
                 Title = Title,
@@ -415,7 +505,19 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
                 ReportedById = reportedById  // Will be null for anonymous reports
             };
 
-            var response = await _incidentApi.CreateIncidentAsync(incident);
+            var incidentJson = JsonSerializer.Serialize(incident);
+            content.Add(new StringContent(incidentJson, Encoding.UTF8, "application/json"), "incident");
+
+            // Add photos
+            foreach (var photo in SelectedPhotos)
+            {
+                var stream = await photo.OpenReadAsync();
+                var streamContent = new StreamContent(stream);
+                streamContent.Headers.ContentType = new MediaTypeHeaderValue(photo.ContentType);
+                content.Add(streamContent, "photos", photo.FileName);
+            }
+
+            var response = await _incidentApi.CreateIncidentAsync(content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -431,6 +533,7 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
                 }
                 
                 IsAnonymous = false;  // Reset anonymous flag
+                SelectedPhotos.Clear();
 
                 await Application.Current.MainPage.DisplayAlert("Success",
                     "Incident report submitted successfully!", "OK");

@@ -9,7 +9,7 @@
              x:DataType="viewmodels:ReportIncidentViewModel">
 
     <ScrollView>
-        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
               Padding="20">
             <!-- Report Details -->
             <VerticalStackLayout Grid.Row="0"
@@ -71,8 +71,59 @@
                        FontSize="14"/>
             </VerticalStackLayout>
 
+            <!-- Photo Section -->
+            <VerticalStackLayout Grid.Row="3"
+                               Spacing="10"
+                               Margin="0,20,0,0">
+                <Label Text="Add Photos"
+                      FontSize="18"/>
+                
+                <HorizontalStackLayout Spacing="10">
+                    <Button Text="Take Photo"
+                            Command="{Binding TakePhotoCommand}"
+                            HorizontalOptions="FillAndExpand"
+                            WidthRequest="150"/>
+                    
+                    <Button Text="Choose Photos"
+                            Command="{Binding PickPhotosCommand}"
+                            HorizontalOptions="FillAndExpand"
+                            WidthRequest="150"/>
+                </HorizontalStackLayout>
+
+                <CollectionView ItemsSource="{Binding SelectedPhotos}"
+                              HeightRequest="120"
+                              Margin="0,10,0,0">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal"
+                                         ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid WidthRequest="100"
+                                  HeightRequest="100">
+                                <Image Source="{Binding FullPath}"
+                                       Aspect="AspectFill"/>
+                                <Button Text="X"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ReportIncidentViewModel}}, Path=RemovePhotoCommand}"
+                                        CommandParameter="{Binding .}"
+                                        HorizontalOptions="End"
+                                        VerticalOptions="Start"
+                                        Padding="5"
+                                        BackgroundColor="Red"
+                                        TextColor="White"
+                                        FontSize="10"
+                                        CornerRadius="10"
+                                        HeightRequest="20"
+                                        WidthRequest="20"
+                                        Margin="0,5,5,0"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
             <!-- Anonymous Reporting -->
-            <VerticalStackLayout Grid.Row="3" 
+            <VerticalStackLayout Grid.Row="4" 
                                IsVisible="{Binding IsLoggedIn}"
                                Spacing="5"
                                Margin="0,10,0,10">
@@ -86,7 +137,7 @@
             </VerticalStackLayout>
 
             <!-- Submit Button -->
-            <VerticalStackLayout Grid.Row="4">
+            <VerticalStackLayout Grid.Row="5">
                 <Button Text="Submit Report"
                         Command="{Binding SubmitReportCommand}"
                         IsEnabled="{Binding IsNotLoading}"
