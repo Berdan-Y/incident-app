@@ -1,0 +1,394 @@
+@page "/incident/{Id:guid}"
+@using Shared.Models.Dtos
+@using Shared.Api
+@using Shared.Models
+@using Shared.Models.Enums
+@using Blazor.Services
+@inject IIncidentApi IncidentApi
+@inject IUserApi UserApi
+@inject NavigationManager NavigationManager
+@inject IGoogleMapsService GoogleMapsService
+
+<MudContainer Class="mt-4">
+    @if (_loading)
+    {
+        <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+    }
+    else if (incident == null)
+    {
+        <MudAlert Severity="Severity.Error">Incident not found</MudAlert>
+    }
+    else
+    {
+        <MudPaper Elevation="3" Class="pa-4">
+            <MudToolBar DisableGutters="true" Dense="true">
+                <MudText Typo="Typo.h4">@incident.Title</MudText>
+                <MudSpacer />
+                <MudButton Variant="Variant.Filled"
+                          Color="Color.Primary"
+                          StartIcon="@Icons.Material.Filled.Edit"
+                          OnClick="@(() => isEditDialogOpen = true)"
+                          Class="mx-2">
+                    Edit
+                </MudButton>
+                <MudButton Variant="Variant.Filled"
+                          Color="Color.Error"
+                          StartIcon="@Icons.Material.Filled.Delete"
+                          OnClick="DeleteIncidentAsync"
+                          Class="mx-2">
+                    Delete
+                </MudButton>
+                <MudButton Variant="Variant.Outlined"
+                          Color="Color.Primary"
+                          StartIcon="@Icons.Material.Filled.ArrowBack"
+                          OnClick="GoBack"
+                          Class="ml-2">
+                    Back to List
+                </MudButton>
+            </MudToolBar>
+
+            <MudGrid Class="mt-4">
+                <MudItem xs="12">
+                    <MudPaper Class="pa-4">
+                        <MudGrid>
+                            <MudItem xs="12" sm="6">
+                                <MudSelect T="Status" Label="Status" Value="@incident.Status" ValueChanged="@UpdateStatusAsync">
+                                    @foreach (var status in Enum.GetValues<Status>())
+                                    {
+                                        <MudSelectItem Value="@status">@status</MudSelectItem>
+                                    }
+                                </MudSelect>
+                            </MudItem>
+                            <MudItem xs="12" sm="6">
+                                <MudSelect T="Priority" Label="Priority" Value="@incident.Priority" ValueChanged="@UpdatePriorityAsync">
+                                    @foreach (var priority in Enum.GetValues<Priority>())
+                                    {
+                                        <MudSelectItem Value="@priority">@priority</MudSelectItem>
+                                    }
+                                </MudSelect>
+                            </MudItem>
+                            <MudItem xs="12">
+                                <MudSelect T="UserDto" Label="Assign Field Employee" 
+                                         Value="@selectedFieldEmployee" 
+                                         ValueChanged="@AssignFieldEmployeeAsync"
+                                         ToStringFunc="@(u => u == null ? string.Empty : $"{u.FirstName} {u.LastName}")">
+                                    @if (fieldEmployees != null)
+                                    {
+                                        @foreach (var employee in fieldEmployees)
+                                        {
+                                            <MudSelectItem Value="@employee">@employee.FirstName @employee.LastName</MudSelectItem>
+                                        }
+                                    }
+                                </MudSelect>
+                            </MudItem>
+                        </MudGrid>
+                    </MudPaper>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudText Typo="Typo.h6">Description</MudText>
+                    <MudText>@incident.Description</MudText>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudText Typo="Typo.h6">Location</MudText>
+                    <MudText>@incident.Address</MudText>
+                    <MudText>@incident.ZipCode</MudText>
+                </MudItem>
+
+                @if (photos?.Any() == true)
+                {
+                    <MudItem xs="12">
+                        <MudText Typo="Typo.h6">Photos</MudText>
+                        <MudGrid>
+                            @foreach (var photo in photos)
+                            {
+                                <MudItem xs="12" sm="6" md="4">
+                                    <MudImage Src="@photo.Url" Alt="Incident photo" Width="200" Height="200" ObjectFit="ObjectFit.Cover" />
+                                </MudItem>
+                            }
+                        </MudGrid>
+                    </MudItem>
+                }
+            </MudGrid>
+        </MudPaper>
+    }
+</MudContainer>
+
+@if (incident != null)
+{
+    <MudDialog @bind-IsVisible="isEditDialogOpen" Options="dialogOptions">
+        <TitleContent>
+            <MudText Typo="Typo.h6">Edit Incident</MudText>
+        </TitleContent>
+        <DialogContent>
+            <MudForm @ref="form" @bind-IsValid="@isFormValid">
+                <MudTextField T="string" Label="Title" @bind-Value="editModel.Title" Required="true" />
+                <MudTextField T="string" Label="Description" @bind-Value="editModel.Description" Required="true" Lines="3" />
+                <MudTextField T="string" 
+                             Label="Address" 
+                             @bind-Value="editModel.Address" 
+                             Required="true"
+                             Immediate="true"
+                             OnBlur="@ValidateAddress" />
+                <MudTextField T="string" 
+                             Label="Zipcode" 
+                             @bind-Value="editModel.ZipCode" 
+                             Required="true"
+                             Immediate="true"
+                             OnBlur="@ValidateAddress" />
+                @if (addressValidationMessage != null)
+                {
+                    <MudText Color="@(isAddressValid ? Color.Success : Color.Error)">
+                        @addressValidationMessage
+                    </MudText>
+                }
+            </MudForm>
+        </DialogContent>
+        <DialogActions>
+            <MudButton OnClick="@(() => isEditDialogOpen = false)">Cancel</MudButton>
+            <MudButton Color="Color.Primary" OnClick="SaveEditAsync" Disabled="@(!isFormValid || !isAddressValid)">Save</MudButton>
+        </DialogActions>
+    </MudDialog>
+}
+
+@code {
+    [Parameter]
+    public Guid Id { get; set; }
+
+    private bool _loading = true;
+    private IncidentResponseDto incident;
+    private List<PhotoDto> photos = new();
+    private List<UserDto> fieldEmployees = new();
+    private UserDto selectedFieldEmployee;
+    private bool isEditDialogOpen;
+    private bool isFormValid;
+    private MudForm form;
+    private UpdateIncidentDetailsDto editModel = new();
+    private string? addressValidationMessage;
+    private bool isAddressValid;
+    private Timer? addressValidationTimer;
+
+    private DialogOptions dialogOptions = new()
+    {
+        CloseOnEscapeKey = true,
+        MaxWidth = MaxWidth.Medium,
+        FullWidth = true
+    };
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await LoadIncidentData();
+            await LoadFieldEmployees();
+        }
+        finally
+        {
+            _loading = false;
+        }
+    }
+
+    private async Task LoadIncidentData()
+    {
+        try
+        {
+            var incidentResponse = await IncidentApi.GetIncidentByIdAsync(Id);
+            if (incidentResponse.IsSuccessStatusCode && incidentResponse.Content != null)
+            {
+                incident = incidentResponse.Content;
+                editModel = new UpdateIncidentDetailsDto
+                {
+                    Title = incident.Title,
+                    Description = incident.Description,
+                    Address = incident.Address ?? string.Empty,
+                    ZipCode = incident.ZipCode ?? string.Empty
+                };
+
+                var photosResponse = await IncidentApi.GetIncidentPhotosAsync(Id);
+                if (photosResponse.IsSuccessStatusCode && photosResponse.Content != null)
+                {
+                    photos = photosResponse.Content;
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Error: {incidentResponse.Error?.Content}");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Exception in LoadIncidentData: {ex.Message}");
+        }
+    }
+
+    private async Task LoadFieldEmployees()
+    {
+        try
+        {
+            var response = await UserApi.GetUsersAsync();
+            if (response.IsSuccessStatusCode && response.Content != null)
+            {
+                // Filter users to only get field employees
+                fieldEmployees = response.Content
+                    .Where(u => u.Role.Equals("FieldEmployee", StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+
+                if (incident?.AssignedTo != null)
+                {
+                    selectedFieldEmployee = fieldEmployees.FirstOrDefault(fe => fe.Id == incident.AssignedTo.Id.ToString());
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading field employees: {ex.Message}");
+            fieldEmployees = new List<UserDto>();
+        }
+    }
+
+    private async Task UpdateStatusAsync(Status newStatus)
+    {
+        if (incident == null) return;
+
+        try
+        {
+            var response = await IncidentApi.UpdateIncidentStatusAsync(Id, (int)newStatus);
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadIncidentData();
+                StateHasChanged();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error updating status: {ex.Message}");
+        }
+    }
+
+    private async Task UpdatePriorityAsync(Priority newPriority)
+    {
+        if (incident == null) return;
+
+        try
+        {
+            var response = await IncidentApi.UpdateIncidentPriorityAsync(Id, (int)newPriority);
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadIncidentData();
+                StateHasChanged();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error updating priority: {ex.Message}");
+        }
+    }
+
+    private async Task AssignFieldEmployeeAsync(UserDto employee)
+    {
+        if (incident == null || employee == null) return;
+
+        try
+        {
+            var assigneeId = Guid.Parse(employee.Id);
+            var response = await IncidentApi.AssignIncidentAsync(Id, assigneeId);
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadIncidentData();
+                selectedFieldEmployee = employee;
+                StateHasChanged();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error assigning field employee: {ex.Message}");
+        }
+    }
+
+    private async Task ValidateAddress()
+    {
+        // Reset the validation timer if it exists
+        addressValidationTimer?.Dispose();
+
+        // If either address or zipcode is empty, don't validate
+        if (string.IsNullOrWhiteSpace(editModel.Address) || string.IsNullOrWhiteSpace(editModel.ZipCode))
+        {
+            addressValidationMessage = null;
+            isAddressValid = false;
+            StateHasChanged();
+            return;
+        }
+
+        // Create a new timer with a 500ms delay
+        addressValidationTimer = new Timer(async _ =>
+        {
+            await InvokeAsync(async () =>
+            {
+                try
+                {
+                    var result = await GoogleMapsService.ValidateAndGetCoordinatesAsync(
+                        editModel.Address!,
+                        editModel.ZipCode!
+                    );
+
+                    if (result?.IsValid == true)
+                    {
+                        editModel.Latitude = result.Latitude ?? 0;
+                        editModel.Longitude = result.Longitude ?? 0;
+                        addressValidationMessage = $"Valid address: {result.FormattedAddress}";
+                        isAddressValid = true;
+                    }
+                    else
+                    {
+                        addressValidationMessage = "Invalid address. Please check and try again.";
+                        isAddressValid = false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    addressValidationMessage = "Error validating address. Please try again.";
+                    isAddressValid = false;
+                    Console.WriteLine($"Address validation error: {ex.Message}");
+                }
+                StateHasChanged();
+            });
+        }, null, 500, Timeout.Infinite);
+    }
+
+    private async Task SaveEditAsync()
+    {
+        if (incident == null || !isFormValid || !isAddressValid) return;
+
+        try
+        {
+            var response = await IncidentApi.UpdateIncidentDetailsAsync(Id, editModel);
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadIncidentData();
+                isEditDialogOpen = false;
+                StateHasChanged();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error saving edit: {ex.Message}");
+        }
+    }
+
+    private async Task DeleteIncidentAsync()
+    {
+        if (incident == null) return;
+
+        var result = await IncidentApi.DeleteIncidentAsync(Id);
+        if (result.IsSuccessStatusCode)
+        {
+            NavigationManager.NavigateTo("/all-incidents");
+        }
+    }
+
+    private void GoBack()
+    {
+        NavigationManager.NavigateTo("/all-incidents");
+    }
+} 

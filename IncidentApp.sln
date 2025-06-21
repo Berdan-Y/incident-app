@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maui", "Maui\Maui.csproj", "{2FA700BB-7C82-429E-AD1B-A8B5927082CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor", "Blazor\Blazor.csproj", "{DBD20110-D5C6-475D-9DDA-792DBEFC08B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,18 @@ Global
 		{2FA700BB-7C82-429E-AD1B-A8B5927082CD}.Release|x64.Build.0 = Release|Any CPU
 		{2FA700BB-7C82-429E-AD1B-A8B5927082CD}.Release|x86.ActiveCfg = Release|Any CPU
 		{2FA700BB-7C82-429E-AD1B-A8B5927082CD}.Release|x86.Build.0 = Release|Any CPU
+		{DBD20110-D5C6-475D-9DDA-792DBEFC08B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBD20110-D5C6-475D-9DDA-792DBEFC08B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBD20110-D5C6-475D-9DDA-792DBEFC08B0}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DBD20110-D5C6-475D-9DDA-792DBEFC08B0}.Debug|x64.Build.0 = Debug|Any CPU
+		{DBD20110-D5C6-475D-9DDA-792DBEFC08B0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DBD20110-D5C6-475D-9DDA-792DBEFC08B0}.Debug|x86.Build.0 = Debug|Any CPU
+		{DBD20110-D5C6-475D-9DDA-792DBEFC08B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBD20110-D5C6-475D-9DDA-792DBEFC08B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBD20110-D5C6-475D-9DDA-792DBEFC08B0}.Release|x64.ActiveCfg = Release|Any CPU
+		{DBD20110-D5C6-475D-9DDA-792DBEFC08B0}.Release|x64.Build.0 = Release|Any CPU
+		{DBD20110-D5C6-475D-9DDA-792DBEFC08B0}.Release|x86.ActiveCfg = Release|Any CPU
+		{DBD20110-D5C6-475D-9DDA-792DBEFC08B0}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

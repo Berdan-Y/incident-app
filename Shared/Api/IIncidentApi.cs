@@ -1,6 +1,7 @@
 using Refit;
 using Shared.Models;
 using Shared.Models.Dtos;
+using Shared.Models.Enums;
 using System.Net.Http;
 
 namespace Shared.Api;
@@ -37,13 +38,13 @@ public interface IIncidentApi
     Task<IApiResponse<List<IncidentResponseDto>>> GetIncidentsAssignedToMeAsync();
 
     [Patch("/api/incident/{id}/status")]
-    Task<IApiResponse<IncidentDto>> UpdateIncidentStatusAsync(Guid id, [Body] UpdateIncidentStatusRequest request);
+    Task<IApiResponse<IncidentDto>> UpdateIncidentStatusAsync(Guid id, [Body] int status);
 
     [Patch("/api/incident/{id}/priority")]
-    Task<IApiResponse<IncidentDto>> UpdateIncidentPriorityAsync(Guid id, [Body] UpdateIncidentPriorityRequest request);
+    Task<IApiResponse<IncidentDto>> UpdateIncidentPriorityAsync(Guid id, [Body] int priority);
 
     [Patch("/api/incident/{id}/assign")]
-    Task<IApiResponse<IncidentDto>> AssignIncidentAsync(Guid id, [Body] AssignIncidentRequest request);
+    Task<IApiResponse<IncidentDto>> AssignIncidentAsync(Guid id, [Body] Guid userId);
 
     [Post("/api/incident/{id}/photos")]
     Task<IApiResponse<List<PhotoDto>>> UploadIncidentPhotosAsync(Guid id, [Body] UploadPhotosRequest request);

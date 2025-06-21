@@ -1,0 +1,150 @@
+@page "/register"
+@using System.ComponentModel.DataAnnotations
+@using Blazor.Services
+@using Shared.Models.Dtos
+@using Shared.Models
+@using Shared.Models.Enums
+@inject IAuthenticationService AuthService
+@inject NavigationManager NavigationManager
+@inject ISnackbar Snackbar
+
+@code {
+    protected override void OnInitialized()
+    {
+        try
+        {
+            AuthService.RequireAdmin();
+        }
+        catch
+        {
+            NavigationManager.NavigateTo("/");
+            return;
+        }
+    }
+}
+
+<MudContainer MaxWidth="MaxWidth.Small" Class="d-flex align-center justify-center" Style="height: 100vh;">
+    <MudPaper Class="pa-8" Style="width: 500px;">
+        <MudText Typo="Typo.h4" Class="mb-4">Register New User</MudText>
+        <MudForm @ref="form" @bind-IsValid="@success">
+            <MudTextField 
+                @bind-Value="registerRequest.FirstName" 
+                Label="First Name" 
+                Required="true" 
+                RequiredError="First name is required" />
+
+            <MudTextField 
+                @bind-Value="registerRequest.LastName" 
+                Label="Last Name" 
+                Required="true" 
+                RequiredError="Last name is required" />
+
+            <MudTextField 
+                @bind-Value="registerRequest.Email" 
+                Label="Email" 
+                Required="true" 
+                RequiredError="Email is required"
+                Validation="@(new EmailAddressAttribute() {ErrorMessage = "Invalid email address"})" />
+            
+            <MudTextField 
+                @bind-Value="registerRequest.Password" 
+                Label="Password" 
+                Required="true"
+                RequiredError="Password is required"
+                InputType="InputType.Password" />
+
+            <MudTextField 
+                @bind-Value="_confirmPassword" 
+                Label="Confirm Password" 
+                Required="true"
+                RequiredError="Password confirmation is required"
+                InputType="InputType.Password"
+                Validation="@(new Func<string, string>(ValidatePasswordConfirmation))" />
+
+            <MudSelect T="Role?" @bind-Value="registerRequest.Role" Label="Role" Required="true" RequiredError="Role is required">
+                @foreach (var role in Enum.GetValues<Role>())
+                {
+                    <MudSelectItem Value="@role">@role.ToString()</MudSelectItem>
+                }
+            </MudSelect>
+
+            <div class="d-flex align-center justify-space-between mt-6">
+                <MudButton 
+                    Variant="Variant.Filled" 
+                    Color="Color.Primary" 
+                    Disabled="@(!success || _processing)" 
+                    OnClick="HandleRegister"
+                    Class="ml-auto">
+                    @if (_processing)
+                    {
+                        <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true"/>
+                        <MudText Class="ms-2">Processing</MudText>
+                    }
+                    else
+                    {
+                        <MudText>Register</MudText>
+                    }
+                </MudButton>
+            </div>
+        </MudForm>
+    </MudPaper>
+</MudContainer>
+
+@code {
+    private MudForm form;
+    private bool success;
+    private bool _processing;
+    private string _confirmPassword = string.Empty;
+    private RegisterRequest registerRequest = new()
+    {
+        FirstName = string.Empty,
+        LastName = string.Empty,
+        Email = string.Empty,
+        Password = string.Empty
+    };
+
+    private string ValidatePasswordConfirmation(string confirmPassword)
+    {
+        if (string.IsNullOrWhiteSpace(confirmPassword))
+            return "Password confirmation is required";
+        if (confirmPassword != registerRequest.Password)
+            return "Passwords do not match";
+        return string.Empty;
+    }
+
+    private async Task HandleRegister()
+    {
+        if (!success) return;
+        
+        _processing = true;
+        try
+        {
+            var registerDto = new RegisterDto
+            {
+                Email = registerRequest.Email!,
+                Password = registerRequest.Password!,
+                FirstName = registerRequest.FirstName!,
+                LastName = registerRequest.LastName!,
+                Role = registerRequest.Role!.Value
+            };
+            
+            if (await AuthService.RegisterAsync(registerDto))
+            {
+                Snackbar.Add("User registered successfully", Severity.Success);
+                NavigationManager.NavigateTo("/");
+            }
+            else
+            {
+                Snackbar.Add("Registration failed", Severity.Error);
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Registration failed: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            _processing = false;
+        }
+    }
+} 

@@ -9,6 +9,7 @@ using Shared.Models.Dtos;
 using IncidentCreateDto = Shared.Models.Dtos.IncidentCreateDto;
 using IncidentPhotoDto = Shared.Models.Dtos.IncidentPhotoDto;
 using IncidentResponseDto = Shared.Models.Dtos.IncidentResponseDto;
+using Role = Shared.Models.Classes.Role;
 using Status = Shared.Models.Enums.Status;
 
 namespace API.Controllers;
