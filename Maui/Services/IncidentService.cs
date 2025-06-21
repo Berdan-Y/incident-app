@@ -350,13 +350,12 @@ public class IncidentService : IIncidentService
         try
         {
             var response = await _incidentApi.PatchIncidentAsync(id, patchDto);
-            
             if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
                 throw new UnauthorizedAccessException("Your session has expired. Please log in again.");
             }
             
-            if (!response.IsSuccessStatusCode || response.Content == null)
+            if (!response.IsSuccessStatusCode)
             {
                 string errorContent = "Failed to update incident";
                 try

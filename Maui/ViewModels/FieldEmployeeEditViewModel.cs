@@ -77,8 +77,14 @@ public partial class FieldEmployeeEditViewModel : ObservableObject
             ErrorMessage = string.Empty;
 
             Debug.WriteLine($"Saving incident {_incidentId} with Description: {Description}, Status: {Status}");
+            
+            // Create a patch DTO with only description field
+            var patchDto = new IncidentPatchDto
+            {
+                Description = Description
+            };
 
-            // Only update status since field employees don't have permission to update other details
+            await _incidentService.PatchIncidentAsync(_incidentId, patchDto);
             await _incidentService.UpdateIncidentStatusAsync(_incidentId, (int)Status);
 
             await Shell.Current.GoToAsync("..");
