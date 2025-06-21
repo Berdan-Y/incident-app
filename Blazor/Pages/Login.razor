@@ -56,14 +56,13 @@
 
     private async Task HandleLogin()
     {
-        Console.WriteLine("HandleLogin called");
+        await form.Validate();
         if (!success)
         {
-            Console.WriteLine("Form validation failed");
+            Snackbar.Add("Please fix the validation errors before submitting.", Severity.Warning);
             return;
         }
         
-        Console.WriteLine($"Attempting login with email: {loginRequest.Email}");
         _processing = true;
         try
         {
@@ -74,29 +73,23 @@
                 await Task.Delay(100);
                 
                 var roles = TokenService.GetRoles();
-                Console.WriteLine($"User roles after login: {string.Join(", ", roles)}");
                 
                 if (!AuthService.IsAdmin())
                 {
-                    Console.WriteLine("User does not have Admin role, logging out");
                     await AuthService.LogoutAsync();
                     Snackbar.Add("Unauthorized access. Admin role required.", Severity.Error);
-                    NavigationManager.NavigateTo("/login");
                     return;
                 }
                 
-                Console.WriteLine("Login successful, navigating to home");
                 NavigationManager.NavigateTo("/");
             }
             else
             {
-                Console.WriteLine("Login failed");
                 Snackbar.Add("Invalid email or password", Severity.Error);
             }
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Login error: {ex.Message}");
             Snackbar.Add($"Login failed: {ex.Message}", Severity.Error);
         }
         finally

@@ -17,7 +17,7 @@
         }
         catch
         {
-            NavigationManager.NavigateTo("/");
+            NavigationManager.NavigateTo(NavigationManager.BaseUri);
             return;
         }
     }
@@ -26,32 +26,36 @@
 <MudContainer MaxWidth="MaxWidth.Small" Class="d-flex align-center justify-center" Style="height: 100vh;">
     <MudPaper Class="pa-8" Style="width: 500px;">
         <MudText Typo="Typo.h4" Class="mb-4">Register New User</MudText>
-        <MudForm @ref="form" @bind-IsValid="@success">
+        <MudForm @ref="form" @bind-IsValid="@success" ValidationDelay="0">
             <MudTextField 
                 @bind-Value="registerRequest.FirstName" 
                 Label="First Name" 
                 Required="true" 
-                RequiredError="First name is required" />
+                RequiredError="First name is required"
+                Immediate="true" />
 
             <MudTextField 
                 @bind-Value="registerRequest.LastName" 
                 Label="Last Name" 
                 Required="true" 
-                RequiredError="Last name is required" />
+                RequiredError="Last name is required"
+                Immediate="true" />
 
             <MudTextField 
                 @bind-Value="registerRequest.Email" 
                 Label="Email" 
                 Required="true" 
                 RequiredError="Email is required"
-                Validation="@(new EmailAddressAttribute() {ErrorMessage = "Invalid email address"})" />
+                Validation="@ValidateEmail"
+                Immediate="true" />
             
             <MudTextField 
                 @bind-Value="registerRequest.Password" 
                 Label="Password" 
                 Required="true"
                 RequiredError="Password is required"
-                InputType="InputType.Password" />
+                InputType="InputType.Password"
+                Immediate="true" />
 
             <MudTextField 
                 @bind-Value="_confirmPassword" 
@@ -59,7 +63,8 @@
                 Required="true"
                 RequiredError="Password confirmation is required"
                 InputType="InputType.Password"
-                Validation="@(new Func<string, string>(ValidatePasswordConfirmation))" />
+                Validation="@(new Func<string, string>(ValidatePasswordConfirmation))"
+                Immediate="true" />
 
             <MudSelect T="string" 
                       Label="Role" 
@@ -67,6 +72,7 @@
                       RequiredError="Role is required"
                       Value="@(registerRequest.Role?.ToString() ?? "Member")"
                       ValueChanged="@(HandleRoleChange)"
+                      Immediate="true"
                       AnchorOrigin="Origin.BottomCenter">
                 <MudSelectItem Value="@("Member")">Member</MudSelectItem>
                 <MudSelectItem Value="@("FieldEmployee")">Field Employee</MudSelectItem>
@@ -109,6 +115,15 @@
         Role = Role.Member
     };
 
+    private string ValidateEmail(string email)
+    {
+        if (string.IsNullOrWhiteSpace(email))
+            return "Email is required";
+        if (!new EmailAddressAttribute().IsValid(email))
+            return "Invalid email address";
+        return string.Empty;
+    }
+
     private string ValidatePasswordConfirmation(string confirmPassword)
     {
         if (string.IsNullOrWhiteSpace(confirmPassword))
@@ -120,7 +135,19 @@
 
     private async Task HandleRegister()
     {
-        if (!success) return;
+        await form.Validate();
+        if (!success)
+        {
+            var emailField = form.Errors.FirstOrDefault(e => e.Contains("email", StringComparison.OrdinalIgnoreCase));
+            if (emailField != null)
+            {
+                Snackbar.Add("Please enter a valid email address.", Severity.Warning);
+                return;
+            }
+            
+            Snackbar.Add("Please fix the validation errors before submitting.", Severity.Warning);
+            return;
+        }
         
         _processing = true;
         try
@@ -137,7 +164,7 @@
             if (await AuthService.RegisterAsync(registerDto))
             {
                 Snackbar.Add("User registered successfully", Severity.Success);
-                NavigationManager.NavigateTo("/");
+                NavigationManager.NavigateTo(NavigationManager.BaseUri);
             }
             else
             {
@@ -156,16 +183,13 @@
 
     private void HandleRoleChange(string value)
     {
-        Console.WriteLine($"Selected role string: {value}");
-        if (Enum.TryParse<Shared.Models.Enums.Role>(value, out var role))
+        if (Enum.TryParse<Role>(value, out var role))
         {
-            Console.WriteLine($"Parsed role enum: {role} (value: {(int)role})");
             registerRequest.Role = role;
         }
         else
         {
-            Console.WriteLine($"Failed to parse role. Using default Member role");
-            registerRequest.Role = Shared.Models.Enums.Role.Member;
+            registerRequest.Role = Role.Member;
         }
     }
 } 
