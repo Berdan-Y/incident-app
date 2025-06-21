@@ -106,6 +106,7 @@ public static class MauiProgram
         builder.Services.AddTransient<AllIncidentsViewModel>();
         builder.Services.AddTransient<AssignedIncidentsViewModel>();
         builder.Services.AddTransient<EditIncidentViewModel>();
+        builder.Services.AddTransient<NotificationsViewModel>();
 
         // Register Shell and Pages
         builder.Services.AddSingleton<AppShell>();
@@ -118,6 +119,7 @@ public static class MauiProgram
         builder.Services.AddTransient<AllIncidentsPage>();
         builder.Services.AddTransient<AssignedIncidentsPage>();
         builder.Services.AddTransient<EditIncidentPage>();
+        builder.Services.AddTransient<NotificationsPage>();
 
         // Register Maps
         builder.Services.AddSingleton<IGeolocation>(Geolocation.Default);
@@ -125,6 +127,19 @@ public static class MauiProgram
 
         // Register platform services
         builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
+
+        // Register converters in resources
+        builder.Services.AddSingleton<ResourceDictionary>(new ResourceDictionary
+        {
+            { "BoolToBackgroundColorConverter", new BoolToBackgroundColorConverter() },
+            { "BoolToReadUnreadConverter", new BoolToReadUnreadConverter() }
+        });
+
+        // Register API clients
+        builder.Services.AddRefitClient<INotificationApi>()
+            .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseAddress))
+            .AddHttpMessageHandler<AuthorizationMessageHandler>()
+            .ConfigurePrimaryHttpMessageHandler(() => httpClientHandler);
 
 #if DEBUG
         builder.Logging.AddDebug();

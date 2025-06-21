@@ -52,6 +52,7 @@ public partial class AppShell : Shell, INotifyPropertyChanged
         Routing.RegisterRoute(nameof(AllIncidentsPage), typeof(AllIncidentsPage));
         Routing.RegisterRoute(nameof(AssignedIncidentsPage), typeof(AssignedIncidentsPage));
         Routing.RegisterRoute(nameof(EditIncidentPage), typeof(EditIncidentPage));
+        Routing.RegisterRoute(nameof(NotificationsPage), typeof(NotificationsPage));
 
         // Subscribe to authentication state changes
         _authService.PropertyChanged += OnAuthStateChanged;
@@ -107,7 +108,7 @@ public partial class AppShell : Shell, INotifyPropertyChanged
                 var newVisibility = content.Route switch
                 {
                     "LoginPage" or "RegistrationPage" => !isAuthenticated,
-                    "LogoutPage" or "MyIncidentsPage" => isAuthenticated,
+                    "LogoutPage" or "MyIncidentsPage" or "NotificationsPage" => isAuthenticated,
                     "MainPage" or "ReportIncidentPage" => true,
                     _ => content.IsVisible
                 };

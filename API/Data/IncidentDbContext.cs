@@ -17,6 +17,7 @@ public sealed class IncidentDbContext : DbContext
     public DbSet<UserRole> UserRoles { get; set; }
     public DbSet<InvalidatedToken> InvalidatedTokens { get; set; }
     public DbSet<IncidentPhoto> IncidentPhotos { get; set; }
+    public DbSet<Notification> Notifications { get; set; }
 
     // Optional: Fluent API overrides
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -29,5 +30,18 @@ public sealed class IncidentDbContext : DbContext
 
         modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
         modelBuilder.ApplyConfiguration(new RoleConfiguration());
+
+        // Configure Notification relationships
+        modelBuilder.Entity<Notification>()
+            .HasOne(n => n.User)
+            .WithMany()
+            .HasForeignKey(n => n.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Notification>()
+            .HasOne(n => n.Incident)
+            .WithMany()
+            .HasForeignKey(n => n.IncidentId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

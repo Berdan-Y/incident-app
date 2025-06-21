@@ -18,4 +18,5 @@ public interface IIncidentRepository
     Task<IncidentPhoto?> GetPhotoByIdAsync(Guid photoId);
     Task DeletePhotoAsync(Guid photoId);
     Task<IEnumerable<IncidentPhoto>> GetIncidentPhotosAsync(Guid incidentId);
+    Task<bool> UserExistsAsync(Guid userId);
 }

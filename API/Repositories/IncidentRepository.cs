@@ -264,7 +264,6 @@ public class IncidentRepository : IIncidentRepository
     {
         return await _context.IncidentPhotos
             .Where(p => p.IncidentId == incidentId)
-            .OrderByDescending(p => p.UploadedAt)
             .ToListAsync();
     }
 
@@ -290,5 +289,10 @@ public class IncidentRepository : IIncidentRepository
         }
 
         return await query.ToListAsync();
+    }
+
+    public async Task<bool> UserExistsAsync(Guid userId)
+    {
+        return await _context.Users.AnyAsync(u => u.Id == userId);
     }
 }

@@ -20,11 +20,16 @@ public class IncidentController : ControllerBase
 {
     private readonly IIncidentService _incidentService;
     private readonly IAuthorizationService _authorizationService;
+    private readonly INotificationService _notificationService;
 
-    public IncidentController(IIncidentService incidentService, IAuthorizationService authorizationService)
+    public IncidentController(
+        IIncidentService incidentService, 
+        IAuthorizationService authorizationService,
+        INotificationService notificationService)
     {
         _incidentService = incidentService;
         _authorizationService = authorizationService;
+        _notificationService = notificationService;
     }
 
     [HttpGet]
@@ -169,7 +174,12 @@ public class IncidentController : ControllerBase
 
         try
         {
+            var currentUserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException());
             var updatedIncident = await _incidentService.UpdateIncidentAsync(id, incidentDto);
+            await _notificationService.CreateIncidentUpdateNotificationAsync(
+                id, 
+                "The incident information has been updated",
+                currentUserId);
             return Ok(updatedIncident);
         }
         catch (KeyNotFoundException)
@@ -348,8 +358,17 @@ public class IncidentController : ControllerBase
     {
         try
         {
-            var incident = await _incidentService.UpdateIncidentStatusAsync(id, status);
-            return Ok(incident);
+            var incident = await _incidentService.GetIncidentByIdAsync(id);
+            if (incident == null)
+                return NotFound();
+
+            var currentUserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException());
+            var updatedIncident = await _incidentService.UpdateIncidentStatusAsync(id, status);
+            await _notificationService.CreateIncidentUpdateNotificationAsync(
+                id, 
+                $"The incident status has been changed from {incident.Status} to {status}",
+                currentUserId);
+            return Ok(updatedIncident);
         }
         catch (KeyNotFoundException)
         {
@@ -365,8 +384,17 @@ public class IncidentController : ControllerBase
     {
         try
         {
-            var incident = await _incidentService.UpdateIncidentPriorityAsync(id, priority);
-            return Ok(incident);
+            var incident = await _incidentService.GetIncidentByIdAsync(id);
+            if (incident == null)
+                return NotFound();
+
+            var currentUserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException());
+            var updatedIncident = await _incidentService.UpdateIncidentPriorityAsync(id, priority);
+            await _notificationService.CreateIncidentUpdateNotificationAsync(
+                id, 
+                $"The incident priority has been changed from {incident.Priority} to {priority}",
+                currentUserId);
+            return Ok(updatedIncident);
         }
         catch (KeyNotFoundException)
         {
@@ -382,11 +410,22 @@ public class IncidentController : ControllerBase
     {
         try
         {
-            var incident = await _incidentService.AssignIncidentAsync(id, assigneeId);
+            var incident = await _incidentService.GetIncidentByIdAsync(id);
             if (incident == null)
                 return NotFound();
 
-            return Ok(incident);
+            var currentUserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException());
+            var updatedIncident = await _incidentService.AssignIncidentAsync(id, assigneeId);
+            
+            var oldAssignee = incident.AssignedTo?.FirstName + " " + incident.AssignedTo?.LastName ?? "no one";
+            var newAssignee = updatedIncident.AssignedTo?.FirstName + " " + updatedIncident.AssignedTo?.LastName ?? "no one";
+            
+            await _notificationService.CreateIncidentUpdateNotificationAsync(
+                id, 
+                $"The incident assignee has been changed from {oldAssignee} to {newAssignee}",
+                currentUserId);
+
+            return Ok(updatedIncident);
         }
         catch (Exception)
         {

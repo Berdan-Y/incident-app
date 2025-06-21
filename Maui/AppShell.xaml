@@ -7,13 +7,15 @@
     xmlns:pages="clr-namespace:Maui.Pages"
     xmlns:converters="clr-namespace:Maui.Converters"
     x:Name="AppShellPage"
-    Title="Maui">
+    Title="Maui"
+    Shell.FlyoutBehavior="Disabled">
 
     <Shell.Resources>
         <ResourceDictionary>
             <converters:AccountTabTitleConverter x:Key="AccountTabTitleConverter"/>
             <converters:HasRoleConverter x:Key="HasRoleConverter"/>
             <converters:MultiBindingBoolConverter x:Key="MultiBindingBoolConverter"/>
+            <converters:InverseBoolConverter x:Key="InverseBoolConverter"/>
             <Style x:Key="BaseStyle" TargetType="Element">
                 <Setter Property="Shell.BackgroundColor" Value="#455A64" />
                 <Setter Property="Shell.ForegroundColor" Value="White" />
@@ -67,7 +69,7 @@
             </ShellContent>
         </Tab>
 
-        <Tab Title="Account" Icon="{FontImage FontFamily=MaterialIcons, Glyph=&#xe7fd;}">
+        <Tab Title="Account" Icon="account_icon.png">
             <ShellContent
                 x:Name="LoginContent"
                 Title="Login"
@@ -82,6 +84,13 @@
                 Route="RegistrationPage"
                 IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:AppShell}}, Path=BindingContext.IsLoggedIn, Converter={StaticResource InverseBoolConverter}}" />
 
+            <ShellContent
+                x:Name="NotificationsContent"
+                Title="Notifications"
+                ContentTemplate="{DataTemplate pages:NotificationsPage}"
+                Route="NotificationsPage"
+                IsVisible="{Binding IsLoggedIn}" />
+                
             <ShellContent
                 x:Name="LogoutContent"
                 Title="Logout"

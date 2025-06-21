@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "f5H4tcloElA0AQMfoK3rwNaeg3vbFQzWs/4HPCvONj0=",
+  "Hash": "AeBJsIoGiwBND9VCJsq+zEZCtHUn/ZaBEF4IYuk5V3Y=",
   "Source": "Blazor",
   "BasePath": "/",
   "Mode": "Root",
@@ -115,8 +115,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "manifest",
-      "Fingerprint": "saebrdxdfb",
-      "Integrity": "JLzrc/bR+1cL11zyPbXNOHyifEsVQE87MYn1O/Luphk=",
+      "Fingerprint": "zbtctvtpah",
+      "Integrity": "f0gRpIlxUXltW3cjCiZE3q75dGRLlAiK/7JlizHZr+0=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "obj/Debug/net9.0/blazor.boot.json"
@@ -136,8 +136,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "symbol",
-      "Fingerprint": "8ikzmdycj5",
-      "Integrity": "cGMm1A07IROwPkuSCEXoQt2VGrByrOqt7ruqc7ZvYwk=",
+      "Fingerprint": "3amtjmgxmh",
+      "Integrity": "C2EXplNflsccZQdN/F/TXmT/UD0BPCtSGbvQ5RNo8XY=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "obj/Debug/net9.0/Blazor.pdb"
@@ -157,8 +157,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "runtime",
-      "Fingerprint": "wd3gluoxlg",
-      "Integrity": "3F0mkIq82PSPPNls3l5PjGMGmw1/HQKxE9e8XFpN8N0=",
+      "Fingerprint": "lqi1e0mbnc",
+      "Integrity": "4/wo8MRfX3qZ0CgxSc4rEILzfhVojge1MvkwL2gpc5k=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/webcil/Blazor.wasm"
@@ -1837,8 +1837,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "symbol",
-      "Fingerprint": "yc34tvv5eb",
-      "Integrity": "AjN4d7Ob33kq9EfpkdXRj1PNyuzj8MiCxueMioZeiZU=",
+      "Fingerprint": "v698wb3iv4",
+      "Integrity": "h7wbEtR2qpQsAQAosznxOGPrf7Pzoa0EkaG/2rQxK4c=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Shared/bin/Debug/net9.0/Shared.pdb"
@@ -1858,8 +1858,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "runtime",
-      "Fingerprint": "iysbbj8nek",
-      "Integrity": "Wr6KDO+65SFEYWmK1ukdaKZGmdvoskUiVdOal8bpYsU=",
+      "Fingerprint": "kkq1fvzem4",
+      "Integrity": "PMgHNVNkinq10AB8u3WSCzLIYjOJUVkl16xmlHUfN5g=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/webcil/Shared.wasm"
@@ -7073,12 +7073,12 @@
       "OriginalItemSpec": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Microsoft.AspNetCore.Components.Web.wasm"
     },
     {
-      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/8te7oj6iey-iysbbj8nek.gz",
+      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/8te7oj6iey-kkq1fvzem4.gz",
       "SourceId": "Blazor",
       "SourceType": "Computed",
       "ContentRoot": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/",
       "BasePath": "/",
-      "RelativePath": "_framework/Shared#[.{fingerprint=iysbbj8nek}]!.wasm.gz",
+      "RelativePath": "_framework/Shared#[.{fingerprint=kkq1fvzem4}]!.wasm.gz",
       "AssetKind": "Build",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -7087,8 +7087,8 @@
       "RelatedAsset": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Shared.wasm",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "e4tcea9xbx",
-      "Integrity": "biTnNoOEu5p3VD9OIb/t9BAln1lOPBZ8opXc2Tghicc=",
+      "Fingerprint": "n96314wokc",
+      "Integrity": "e3PiXX4V9FAzOzbUM48O8+ZAoGHQLQ2zI7X7wFtlqgg=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Shared.wasm"
@@ -7430,12 +7430,12 @@
       "OriginalItemSpec": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/System.ComponentModel.Primitives.wasm"
     },
     {
-      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/ar496ongnu-yc34tvv5eb.gz",
+      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/ar496ongnu-v698wb3iv4.gz",
       "SourceId": "Blazor",
       "SourceType": "Computed",
       "ContentRoot": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/",
       "BasePath": "/",
-      "RelativePath": "_framework/Shared#[.{fingerprint=yc34tvv5eb}]!.pdb.gz",
+      "RelativePath": "_framework/Shared#[.{fingerprint=v698wb3iv4}]!.pdb.gz",
       "AssetKind": "Build",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -7444,8 +7444,8 @@
       "RelatedAsset": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Shared.pdb",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "qswubn8qan",
-      "Integrity": "iqi1lj0/jS1FV1DmLK8VbIPqVjbz62qXbItegvRzEug=",
+      "Fingerprint": "3wgthqsenn",
+      "Integrity": "w5MdpkvusuofFnoVLhcZUZtX/a/Bjh2xl1sBlIPgECM=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Shared.pdb"
@@ -9950,7 +9950,7 @@
       "OriginalItemSpec": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/System.IO.FileSystem.AccessControl.wasm"
     },
     {
-      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/peinipbwwh-saebrdxdfb.gz",
+      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/peinipbwwh-zbtctvtpah.gz",
       "SourceId": "Blazor",
       "SourceType": "Computed",
       "ContentRoot": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/",
@@ -9964,8 +9964,8 @@
       "RelatedAsset": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/blazor.boot.json",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "efe93dzgij",
-      "Integrity": "ShjvLW1U3Mk++n/9canCx6pTJkq8Tx9pYjEbRvsCsHA=",
+      "Fingerprint": "6kw8vys78g",
+      "Integrity": "KuKD2aimiZvNe6oVH78C3uBsISK7Ls6xVFgSuj7wVMo=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/blazor.boot.json"
@@ -11084,12 +11084,12 @@
       "OriginalItemSpec": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/System.Diagnostics.TraceSource.wasm"
     },
     {
-      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/vzbwen8neo-8ikzmdycj5.gz",
+      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/vzbwen8neo-3amtjmgxmh.gz",
       "SourceId": "Blazor",
       "SourceType": "Computed",
       "ContentRoot": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/",
       "BasePath": "/",
-      "RelativePath": "_framework/Blazor#[.{fingerprint=8ikzmdycj5}]!.pdb.gz",
+      "RelativePath": "_framework/Blazor#[.{fingerprint=3amtjmgxmh}]!.pdb.gz",
       "AssetKind": "Build",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -11098,8 +11098,8 @@
       "RelatedAsset": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Blazor.pdb",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "n5s86swnd5",
-      "Integrity": "dUkLnyeCKAzD9TayJTWSydPWI1o0WsvIpZh8Sp/MqNE=",
+      "Fingerprint": "uub9p6u9uy",
+      "Integrity": "uqre3dCUWKLqoB2qrPrBXFhhVv/Id+iTHeUHnLJo8es=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Blazor.pdb"
@@ -11840,12 +11840,12 @@
       "OriginalItemSpec": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/System.Threading.Thread.wasm"
     },
     {
-      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/zxnfmdmcxx-wd3gluoxlg.gz",
+      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/zxnfmdmcxx-lqi1e0mbnc.gz",
       "SourceId": "Blazor",
       "SourceType": "Computed",
       "ContentRoot": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/",
       "BasePath": "/",
-      "RelativePath": "_framework/Blazor#[.{fingerprint=wd3gluoxlg}]!.wasm.gz",
+      "RelativePath": "_framework/Blazor#[.{fingerprint=lqi1e0mbnc}]!.wasm.gz",
       "AssetKind": "Build",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -11854,8 +11854,8 @@
       "RelatedAsset": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Blazor.wasm",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "6b1jmbfsrn",
-      "Integrity": "Yl9OiWJi4Z0N/wFGqvtBrA9B/5WNOCX0l7I/AN0thqY=",
+      "Fingerprint": "e9zck4969j",
+      "Integrity": "gnHWcH9SkCMRAr0u479BF931Q4kl8LNaYaDd3kGyW4g=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Blazor.wasm"
@@ -13825,7 +13825,7 @@
       ]
     },
     {
-      "Route": "_framework/Blazor.8ikzmdycj5.pdb",
+      "Route": "_framework/Blazor.3amtjmgxmh.pdb",
       "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Blazor.pdb",
       "Selectors": [],
       "ResponseHeaders": [
@@ -13843,11 +13843,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"cGMm1A07IROwPkuSCEXoQt2VGrByrOqt7ruqc7ZvYwk=\""
+          "Value": "\"C2EXplNflsccZQdN/F/TXmT/UD0BPCtSGbvQ5RNo8XY=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 21 Jun 2025 12:59:55 GMT"
+          "Value": "Sat, 21 Jun 2025 14:07:59 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -13857,7 +13857,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "8ikzmdycj5"
+          "Value": "3amtjmgxmh"
         },
         {
           "Name": "label",
@@ -13865,18 +13865,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-cGMm1A07IROwPkuSCEXoQt2VGrByrOqt7ruqc7ZvYwk="
+          "Value": "sha256-C2EXplNflsccZQdN/F/TXmT/UD0BPCtSGbvQ5RNo8XY="
         }
       ]
     },
     {
-      "Route": "_framework/Blazor.8ikzmdycj5.pdb",
-      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/vzbwen8neo-8ikzmdycj5.gz",
+      "Route": "_framework/Blazor.3amtjmgxmh.pdb",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/vzbwen8neo-3amtjmgxmh.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000019123384"
+          "Quality": "0.000019123018"
         }
       ],
       "ResponseHeaders": [
@@ -13886,15 +13886,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "52291"
+          "Value": "52292"
         },
         {
           "Name": "ETag",
-          "Value": "\"dUkLnyeCKAzD9TayJTWSydPWI1o0WsvIpZh8Sp/MqNE=\""
+          "Value": "\"uqre3dCUWKLqoB2qrPrBXFhhVv/Id+iTHeUHnLJo8es=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 21 Jun 2025 12:59:55 GMT"
+          "Value": "Sat, 21 Jun 2025 14:08:00 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -13914,13 +13914,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"cGMm1A07IROwPkuSCEXoQt2VGrByrOqt7ruqc7ZvYwk=\""
+          "Value": "W/\"C2EXplNflsccZQdN/F/TXmT/UD0BPCtSGbvQ5RNo8XY=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "8ikzmdycj5"
+          "Value": "3amtjmgxmh"
         },
         {
           "Name": "label",
@@ -13928,13 +13928,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-cGMm1A07IROwPkuSCEXoQt2VGrByrOqt7ruqc7ZvYwk="
+          "Value": "sha256-C2EXplNflsccZQdN/F/TXmT/UD0BPCtSGbvQ5RNo8XY="
         }
       ]
     },
     {
-      "Route": "_framework/Blazor.8ikzmdycj5.pdb.gz",
-      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/vzbwen8neo-8ikzmdycj5.gz",
+      "Route": "_framework/Blazor.3amtjmgxmh.pdb.gz",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/vzbwen8neo-3amtjmgxmh.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -13943,7 +13943,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "52291"
+          "Value": "52292"
         },
         {
           "Name": "Content-Type",
@@ -13951,11 +13951,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"dUkLnyeCKAzD9TayJTWSydPWI1o0WsvIpZh8Sp/MqNE=\""
+          "Value": "\"uqre3dCUWKLqoB2qrPrBXFhhVv/Id+iTHeUHnLJo8es=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 21 Jun 2025 12:59:55 GMT"
+          "Value": "Sat, 21 Jun 2025 14:08:00 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -13973,7 +13973,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "8ikzmdycj5"
+          "Value": "3amtjmgxmh"
         },
         {
           "Name": "label",
@@ -13981,7 +13981,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-dUkLnyeCKAzD9TayJTWSydPWI1o0WsvIpZh8Sp/MqNE="
+          "Value": "sha256-uqre3dCUWKLqoB2qrPrBXFhhVv/Id+iTHeUHnLJo8es="
         }
       ]
     },
@@ -14004,11 +14004,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"JLzrc/bR+1cL11zyPbXNOHyifEsVQE87MYn1O/Luphk=\""
+          "Value": "\"f0gRpIlxUXltW3cjCiZE3q75dGRLlAiK/7JlizHZr+0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 21 Jun 2025 12:59:55 GMT"
+          "Value": "Sat, 21 Jun 2025 14:27:45 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -14018,18 +14018,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-JLzrc/bR+1cL11zyPbXNOHyifEsVQE87MYn1O/Luphk="
+          "Value": "sha256-f0gRpIlxUXltW3cjCiZE3q75dGRLlAiK/7JlizHZr+0="
         }
       ]
     },
     {
       "Route": "_framework/blazor.boot.json",
-      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/peinipbwwh-saebrdxdfb.gz",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/peinipbwwh-zbtctvtpah.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000064977258"
+          "Quality": "0.000064956155"
         }
       ],
       "ResponseHeaders": [
@@ -14039,15 +14039,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "15389"
+          "Value": "15394"
         },
         {
           "Name": "ETag",
-          "Value": "\"ShjvLW1U3Mk++n/9canCx6pTJkq8Tx9pYjEbRvsCsHA=\""
+          "Value": "\"KuKD2aimiZvNe6oVH78C3uBsISK7Ls6xVFgSuj7wVMo=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 21 Jun 2025 12:58:14 GMT"
+          "Value": "Sat, 21 Jun 2025 14:07:59 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -14067,19 +14067,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"JLzrc/bR+1cL11zyPbXNOHyifEsVQE87MYn1O/Luphk=\""
+          "Value": "W/\"f0gRpIlxUXltW3cjCiZE3q75dGRLlAiK/7JlizHZr+0=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-JLzrc/bR+1cL11zyPbXNOHyifEsVQE87MYn1O/Luphk="
+          "Value": "sha256-f0gRpIlxUXltW3cjCiZE3q75dGRLlAiK/7JlizHZr+0="
         }
       ]
     },
     {
       "Route": "_framework/blazor.boot.json.gz",
-      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/peinipbwwh-saebrdxdfb.gz",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/peinipbwwh-zbtctvtpah.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -14088,7 +14088,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "15389"
+          "Value": "15394"
         },
         {
           "Name": "Content-Type",
@@ -14096,11 +14096,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ShjvLW1U3Mk++n/9canCx6pTJkq8Tx9pYjEbRvsCsHA=\""
+          "Value": "\"KuKD2aimiZvNe6oVH78C3uBsISK7Ls6xVFgSuj7wVMo=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 21 Jun 2025 12:58:14 GMT"
+          "Value": "Sat, 21 Jun 2025 14:07:59 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -14118,7 +14118,168 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-ShjvLW1U3Mk++n/9canCx6pTJkq8Tx9pYjEbRvsCsHA="
+          "Value": "sha256-KuKD2aimiZvNe6oVH78C3uBsISK7Ls6xVFgSuj7wVMo="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Blazor.lqi1e0mbnc.wasm",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Blazor.wasm",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "110869"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4/wo8MRfX3qZ0CgxSc4rEILzfhVojge1MvkwL2gpc5k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 21 Jun 2025 14:07:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "lqi1e0mbnc"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/Blazor.wasm"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-4/wo8MRfX3qZ0CgxSc4rEILzfhVojge1MvkwL2gpc5k="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Blazor.lqi1e0mbnc.wasm",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/zxnfmdmcxx-lqi1e0mbnc.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000023033514"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "43414"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"gnHWcH9SkCMRAr0u479BF931Q4kl8LNaYaDd3kGyW4g=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 21 Jun 2025 14:08:00 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"4/wo8MRfX3qZ0CgxSc4rEILzfhVojge1MvkwL2gpc5k=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "lqi1e0mbnc"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/Blazor.wasm"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-4/wo8MRfX3qZ0CgxSc4rEILzfhVojge1MvkwL2gpc5k="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Blazor.lqi1e0mbnc.wasm.gz",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/zxnfmdmcxx-lqi1e0mbnc.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "43414"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"gnHWcH9SkCMRAr0u479BF931Q4kl8LNaYaDd3kGyW4g=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 21 Jun 2025 14:08:00 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "lqi1e0mbnc"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/Blazor.wasm.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-gnHWcH9SkCMRAr0u479BF931Q4kl8LNaYaDd3kGyW4g="
         }
       ]
     },
@@ -14141,11 +14302,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"cGMm1A07IROwPkuSCEXoQt2VGrByrOqt7ruqc7ZvYwk=\""
+          "Value": "\"C2EXplNflsccZQdN/F/TXmT/UD0BPCtSGbvQ5RNo8XY=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 21 Jun 2025 12:59:55 GMT"
+          "Value": "Sat, 21 Jun 2025 14:07:59 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -14155,18 +14316,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-cGMm1A07IROwPkuSCEXoQt2VGrByrOqt7ruqc7ZvYwk="
+          "Value": "sha256-C2EXplNflsccZQdN/F/TXmT/UD0BPCtSGbvQ5RNo8XY="
         }
       ]
     },
     {
       "Route": "_framework/Blazor.pdb",
-      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/vzbwen8neo-8ikzmdycj5.gz",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/vzbwen8neo-3amtjmgxmh.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000019123384"
+          "Quality": "0.000019123018"
         }
       ],
       "ResponseHeaders": [
@@ -14176,15 +14337,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "52291"
+          "Value": "52292"
         },
         {
           "Name": "ETag",
-          "Value": "\"dUkLnyeCKAzD9TayJTWSydPWI1o0WsvIpZh8Sp/MqNE=\""
+          "Value": "\"uqre3dCUWKLqoB2qrPrBXFhhVv/Id+iTHeUHnLJo8es=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 21 Jun 2025 12:59:55 GMT"
+          "Value": "Sat, 21 Jun 2025 14:08:00 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -14204,19 +14365,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"cGMm1A07IROwPkuSCEXoQt2VGrByrOqt7ruqc7ZvYwk=\""
+          "Value": "W/\"C2EXplNflsccZQdN/F/TXmT/UD0BPCtSGbvQ5RNo8XY=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-cGMm1A07IROwPkuSCEXoQt2VGrByrOqt7ruqc7ZvYwk="
+          "Value": "sha256-C2EXplNflsccZQdN/F/TXmT/UD0BPCtSGbvQ5RNo8XY="
         }
       ]
     },
     {
       "Route": "_framework/Blazor.pdb.gz",
-      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/vzbwen8neo-8ikzmdycj5.gz",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/vzbwen8neo-3amtjmgxmh.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -14225,7 +14386,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "52291"
+          "Value": "52292"
         },
         {
           "Name": "Content-Type",
@@ -14233,11 +14394,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"dUkLnyeCKAzD9TayJTWSydPWI1o0WsvIpZh8Sp/MqNE=\""
+          "Value": "\"uqre3dCUWKLqoB2qrPrBXFhhVv/Id+iTHeUHnLJo8es=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 21 Jun 2025 12:59:55 GMT"
+          "Value": "Sat, 21 Jun 2025 14:08:00 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -14255,7 +14416,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-dUkLnyeCKAzD9TayJTWSydPWI1o0WsvIpZh8Sp/MqNE="
+          "Value": "sha256-uqre3dCUWKLqoB2qrPrBXFhhVv/Id+iTHeUHnLJo8es="
         }
       ]
     },
@@ -14278,11 +14439,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"3F0mkIq82PSPPNls3l5PjGMGmw1/HQKxE9e8XFpN8N0=\""
+          "Value": "\"4/wo8MRfX3qZ0CgxSc4rEILzfhVojge1MvkwL2gpc5k=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 21 Jun 2025 12:59:55 GMT"
+          "Value": "Sat, 21 Jun 2025 14:07:59 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -14292,18 +14453,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-3F0mkIq82PSPPNls3l5PjGMGmw1/HQKxE9e8XFpN8N0="
+          "Value": "sha256-4/wo8MRfX3qZ0CgxSc4rEILzfhVojge1MvkwL2gpc5k="
         }
       ]
     },
     {
       "Route": "_framework/Blazor.wasm",
-      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/zxnfmdmcxx-wd3gluoxlg.gz",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/zxnfmdmcxx-lqi1e0mbnc.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000023036167"
+          "Quality": "0.000023033514"
         }
       ],
       "ResponseHeaders": [
@@ -14313,15 +14474,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "43409"
+          "Value": "43414"
         },
         {
           "Name": "ETag",
-          "Value": "\"Yl9OiWJi4Z0N/wFGqvtBrA9B/5WNOCX0l7I/AN0thqY=\""
+          "Value": "\"gnHWcH9SkCMRAr0u479BF931Q4kl8LNaYaDd3kGyW4g=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 21 Jun 2025 12:59:55 GMT"
+          "Value": "Sat, 21 Jun 2025 14:08:00 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -14341,19 +14502,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"3F0mkIq82PSPPNls3l5PjGMGmw1/HQKxE9e8XFpN8N0=\""
+          "Value": "W/\"4/wo8MRfX3qZ0CgxSc4rEILzfhVojge1MvkwL2gpc5k=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-3F0mkIq82PSPPNls3l5PjGMGmw1/HQKxE9e8XFpN8N0="
+          "Value": "sha256-4/wo8MRfX3qZ0CgxSc4rEILzfhVojge1MvkwL2gpc5k="
         }
       ]
     },
     {
       "Route": "_framework/Blazor.wasm.gz",
-      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/zxnfmdmcxx-wd3gluoxlg.gz",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/zxnfmdmcxx-lqi1e0mbnc.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -14362,7 +14523,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "43409"
+          "Value": "43414"
         },
         {
           "Name": "Content-Type",
@@ -14370,11 +14531,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Yl9OiWJi4Z0N/wFGqvtBrA9B/5WNOCX0l7I/AN0thqY=\""
+          "Value": "\"gnHWcH9SkCMRAr0u479BF931Q4kl8LNaYaDd3kGyW4g=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 21 Jun 2025 12:59:55 GMT"
+          "Value": "Sat, 21 Jun 2025 14:08:00 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -14392,168 +14553,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Yl9OiWJi4Z0N/wFGqvtBrA9B/5WNOCX0l7I/AN0thqY="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/Blazor.wd3gluoxlg.wasm",
-      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Blazor.wasm",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "110869"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/wasm"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"3F0mkIq82PSPPNls3l5PjGMGmw1/HQKxE9e8XFpN8N0=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 21 Jun 2025 12:59:55 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "wd3gluoxlg"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/Blazor.wasm"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-3F0mkIq82PSPPNls3l5PjGMGmw1/HQKxE9e8XFpN8N0="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/Blazor.wd3gluoxlg.wasm",
-      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/zxnfmdmcxx-wd3gluoxlg.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000023036167"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "43409"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"Yl9OiWJi4Z0N/wFGqvtBrA9B/5WNOCX0l7I/AN0thqY=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 21 Jun 2025 12:59:55 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/wasm"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"3F0mkIq82PSPPNls3l5PjGMGmw1/HQKxE9e8XFpN8N0=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "wd3gluoxlg"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/Blazor.wasm"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-3F0mkIq82PSPPNls3l5PjGMGmw1/HQKxE9e8XFpN8N0="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/Blazor.wd3gluoxlg.wasm.gz",
-      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/zxnfmdmcxx-wd3gluoxlg.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "43409"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/wasm"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"Yl9OiWJi4Z0N/wFGqvtBrA9B/5WNOCX0l7I/AN0thqY=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 21 Jun 2025 12:59:55 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "wd3gluoxlg"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/Blazor.wasm.gz"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-Yl9OiWJi4Z0N/wFGqvtBrA9B/5WNOCX0l7I/AN0thqY="
+          "Value": "sha256-gnHWcH9SkCMRAr0u479BF931Q4kl8LNaYaDd3kGyW4g="
         }
       ]
     },
@@ -37939,7 +37939,7 @@
       ]
     },
     {
-      "Route": "_framework/Shared.iysbbj8nek.wasm",
+      "Route": "_framework/Shared.kkq1fvzem4.wasm",
       "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Shared.wasm",
       "Selectors": [],
       "ResponseHeaders": [
@@ -37949,7 +37949,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "85269"
+          "Value": "98581"
         },
         {
           "Name": "Content-Type",
@@ -37957,11 +37957,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Wr6KDO+65SFEYWmK1ukdaKZGmdvoskUiVdOal8bpYsU=\""
+          "Value": "\"PMgHNVNkinq10AB8u3WSCzLIYjOJUVkl16xmlHUfN5g=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 21 Jun 2025 12:49:09 GMT"
+          "Value": "Sat, 21 Jun 2025 14:07:59 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -37971,7 +37971,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "iysbbj8nek"
+          "Value": "kkq1fvzem4"
         },
         {
           "Name": "label",
@@ -37979,18 +37979,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-Wr6KDO+65SFEYWmK1ukdaKZGmdvoskUiVdOal8bpYsU="
+          "Value": "sha256-PMgHNVNkinq10AB8u3WSCzLIYjOJUVkl16xmlHUfN5g="
         }
       ]
     },
     {
-      "Route": "_framework/Shared.iysbbj8nek.wasm",
-      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/8te7oj6iey-iysbbj8nek.gz",
+      "Route": "_framework/Shared.kkq1fvzem4.wasm",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/8te7oj6iey-kkq1fvzem4.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000032750377"
+          "Quality": "0.000029036005"
         }
       ],
       "ResponseHeaders": [
@@ -38000,15 +38000,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "30533"
+          "Value": "34439"
         },
         {
           "Name": "ETag",
-          "Value": "\"biTnNoOEu5p3VD9OIb/t9BAln1lOPBZ8opXc2Tghicc=\""
+          "Value": "\"e3PiXX4V9FAzOzbUM48O8+ZAoGHQLQ2zI7X7wFtlqgg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 21 Jun 2025 12:49:09 GMT"
+          "Value": "Sat, 21 Jun 2025 14:08:00 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -38028,13 +38028,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"Wr6KDO+65SFEYWmK1ukdaKZGmdvoskUiVdOal8bpYsU=\""
+          "Value": "W/\"PMgHNVNkinq10AB8u3WSCzLIYjOJUVkl16xmlHUfN5g=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "iysbbj8nek"
+          "Value": "kkq1fvzem4"
         },
         {
           "Name": "label",
@@ -38042,13 +38042,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-Wr6KDO+65SFEYWmK1ukdaKZGmdvoskUiVdOal8bpYsU="
+          "Value": "sha256-PMgHNVNkinq10AB8u3WSCzLIYjOJUVkl16xmlHUfN5g="
         }
       ]
     },
     {
-      "Route": "_framework/Shared.iysbbj8nek.wasm.gz",
-      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/8te7oj6iey-iysbbj8nek.gz",
+      "Route": "_framework/Shared.kkq1fvzem4.wasm.gz",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/8te7oj6iey-kkq1fvzem4.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -38057,7 +38057,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "30533"
+          "Value": "34439"
         },
         {
           "Name": "Content-Type",
@@ -38065,11 +38065,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"biTnNoOEu5p3VD9OIb/t9BAln1lOPBZ8opXc2Tghicc=\""
+          "Value": "\"e3PiXX4V9FAzOzbUM48O8+ZAoGHQLQ2zI7X7wFtlqgg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 21 Jun 2025 12:49:09 GMT"
+          "Value": "Sat, 21 Jun 2025 14:08:00 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -38087,7 +38087,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "iysbbj8nek"
+          "Value": "kkq1fvzem4"
         },
         {
           "Name": "label",
@@ -38095,7 +38095,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-biTnNoOEu5p3VD9OIb/t9BAln1lOPBZ8opXc2Tghicc="
+          "Value": "sha256-e3PiXX4V9FAzOzbUM48O8+ZAoGHQLQ2zI7X7wFtlqgg="
         }
       ]
     },
@@ -38110,7 +38110,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "42020"
+          "Value": "46056"
         },
         {
           "Name": "Content-Type",
@@ -38118,11 +38118,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"AjN4d7Ob33kq9EfpkdXRj1PNyuzj8MiCxueMioZeiZU=\""
+          "Value": "\"h7wbEtR2qpQsAQAosznxOGPrf7Pzoa0EkaG/2rQxK4c=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 21 Jun 2025 12:49:08 GMT"
+          "Value": "Sat, 21 Jun 2025 14:03:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -38132,18 +38132,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-AjN4d7Ob33kq9EfpkdXRj1PNyuzj8MiCxueMioZeiZU="
+          "Value": "sha256-h7wbEtR2qpQsAQAosznxOGPrf7Pzoa0EkaG/2rQxK4c="
         }
       ]
     },
     {
       "Route": "_framework/Shared.pdb",
-      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/ar496ongnu-yc34tvv5eb.gz",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/ar496ongnu-v698wb3iv4.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000046210721"
+          "Quality": "0.000042319086"
         }
       ],
       "ResponseHeaders": [
@@ -38153,15 +38153,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "21639"
+          "Value": "23629"
         },
         {
           "Name": "ETag",
-          "Value": "\"iqi1lj0/jS1FV1DmLK8VbIPqVjbz62qXbItegvRzEug=\""
+          "Value": "\"w5MdpkvusuofFnoVLhcZUZtX/a/Bjh2xl1sBlIPgECM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 21 Jun 2025 12:49:09 GMT"
+          "Value": "Sat, 21 Jun 2025 14:08:00 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -38181,19 +38181,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"AjN4d7Ob33kq9EfpkdXRj1PNyuzj8MiCxueMioZeiZU=\""
+          "Value": "W/\"h7wbEtR2qpQsAQAosznxOGPrf7Pzoa0EkaG/2rQxK4c=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-AjN4d7Ob33kq9EfpkdXRj1PNyuzj8MiCxueMioZeiZU="
+          "Value": "sha256-h7wbEtR2qpQsAQAosznxOGPrf7Pzoa0EkaG/2rQxK4c="
         }
       ]
     },
     {
       "Route": "_framework/Shared.pdb.gz",
-      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/ar496ongnu-yc34tvv5eb.gz",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/ar496ongnu-v698wb3iv4.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -38202,7 +38202,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "21639"
+          "Value": "23629"
         },
         {
           "Name": "Content-Type",
@@ -38210,11 +38210,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"iqi1lj0/jS1FV1DmLK8VbIPqVjbz62qXbItegvRzEug=\""
+          "Value": "\"w5MdpkvusuofFnoVLhcZUZtX/a/Bjh2xl1sBlIPgECM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 21 Jun 2025 12:49:09 GMT"
+          "Value": "Sat, 21 Jun 2025 14:08:00 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -38232,7 +38232,168 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-iqi1lj0/jS1FV1DmLK8VbIPqVjbz62qXbItegvRzEug="
+          "Value": "sha256-w5MdpkvusuofFnoVLhcZUZtX/a/Bjh2xl1sBlIPgECM="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Shared.v698wb3iv4.pdb",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Shared.pdb",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "46056"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"h7wbEtR2qpQsAQAosznxOGPrf7Pzoa0EkaG/2rQxK4c=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 21 Jun 2025 14:03:41 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "v698wb3iv4"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/Shared.pdb"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-h7wbEtR2qpQsAQAosznxOGPrf7Pzoa0EkaG/2rQxK4c="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Shared.v698wb3iv4.pdb",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/ar496ongnu-v698wb3iv4.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000042319086"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "23629"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"w5MdpkvusuofFnoVLhcZUZtX/a/Bjh2xl1sBlIPgECM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 21 Jun 2025 14:08:00 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"h7wbEtR2qpQsAQAosznxOGPrf7Pzoa0EkaG/2rQxK4c=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "v698wb3iv4"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/Shared.pdb"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-h7wbEtR2qpQsAQAosznxOGPrf7Pzoa0EkaG/2rQxK4c="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Shared.v698wb3iv4.pdb.gz",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/ar496ongnu-v698wb3iv4.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "23629"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"w5MdpkvusuofFnoVLhcZUZtX/a/Bjh2xl1sBlIPgECM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 21 Jun 2025 14:08:00 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "v698wb3iv4"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/Shared.pdb.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-w5MdpkvusuofFnoVLhcZUZtX/a/Bjh2xl1sBlIPgECM="
         }
       ]
     },
@@ -38247,7 +38408,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "85269"
+          "Value": "98581"
         },
         {
           "Name": "Content-Type",
@@ -38255,11 +38416,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Wr6KDO+65SFEYWmK1ukdaKZGmdvoskUiVdOal8bpYsU=\""
+          "Value": "\"PMgHNVNkinq10AB8u3WSCzLIYjOJUVkl16xmlHUfN5g=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 21 Jun 2025 12:49:09 GMT"
+          "Value": "Sat, 21 Jun 2025 14:07:59 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -38269,18 +38430,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Wr6KDO+65SFEYWmK1ukdaKZGmdvoskUiVdOal8bpYsU="
+          "Value": "sha256-PMgHNVNkinq10AB8u3WSCzLIYjOJUVkl16xmlHUfN5g="
         }
       ]
     },
     {
       "Route": "_framework/Shared.wasm",
-      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/8te7oj6iey-iysbbj8nek.gz",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/8te7oj6iey-kkq1fvzem4.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000032750377"
+          "Quality": "0.000029036005"
         }
       ],
       "ResponseHeaders": [
@@ -38290,15 +38451,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "30533"
+          "Value": "34439"
         },
         {
           "Name": "ETag",
-          "Value": "\"biTnNoOEu5p3VD9OIb/t9BAln1lOPBZ8opXc2Tghicc=\""
+          "Value": "\"e3PiXX4V9FAzOzbUM48O8+ZAoGHQLQ2zI7X7wFtlqgg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 21 Jun 2025 12:49:09 GMT"
+          "Value": "Sat, 21 Jun 2025 14:08:00 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -38318,19 +38479,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"Wr6KDO+65SFEYWmK1ukdaKZGmdvoskUiVdOal8bpYsU=\""
+          "Value": "W/\"PMgHNVNkinq10AB8u3WSCzLIYjOJUVkl16xmlHUfN5g=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Wr6KDO+65SFEYWmK1ukdaKZGmdvoskUiVdOal8bpYsU="
+          "Value": "sha256-PMgHNVNkinq10AB8u3WSCzLIYjOJUVkl16xmlHUfN5g="
         }
       ]
     },
     {
       "Route": "_framework/Shared.wasm.gz",
-      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/8te7oj6iey-iysbbj8nek.gz",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/8te7oj6iey-kkq1fvzem4.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -38339,7 +38500,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "30533"
+          "Value": "34439"
         },
         {
           "Name": "Content-Type",
@@ -38347,11 +38508,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"biTnNoOEu5p3VD9OIb/t9BAln1lOPBZ8opXc2Tghicc=\""
+          "Value": "\"e3PiXX4V9FAzOzbUM48O8+ZAoGHQLQ2zI7X7wFtlqgg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 21 Jun 2025 12:49:09 GMT"
+          "Value": "Sat, 21 Jun 2025 14:08:00 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -38369,168 +38530,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-biTnNoOEu5p3VD9OIb/t9BAln1lOPBZ8opXc2Tghicc="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/Shared.yc34tvv5eb.pdb",
-      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Shared.pdb",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "42020"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"AjN4d7Ob33kq9EfpkdXRj1PNyuzj8MiCxueMioZeiZU=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 21 Jun 2025 12:49:08 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "yc34tvv5eb"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/Shared.pdb"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-AjN4d7Ob33kq9EfpkdXRj1PNyuzj8MiCxueMioZeiZU="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/Shared.yc34tvv5eb.pdb",
-      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/ar496ongnu-yc34tvv5eb.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000046210721"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "21639"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"iqi1lj0/jS1FV1DmLK8VbIPqVjbz62qXbItegvRzEug=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 21 Jun 2025 12:49:09 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"AjN4d7Ob33kq9EfpkdXRj1PNyuzj8MiCxueMioZeiZU=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "yc34tvv5eb"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/Shared.pdb"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-AjN4d7Ob33kq9EfpkdXRj1PNyuzj8MiCxueMioZeiZU="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/Shared.yc34tvv5eb.pdb.gz",
-      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/ar496ongnu-yc34tvv5eb.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "21639"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"iqi1lj0/jS1FV1DmLK8VbIPqVjbz62qXbItegvRzEug=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 21 Jun 2025 12:49:09 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "yc34tvv5eb"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/Shared.pdb.gz"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-iqi1lj0/jS1FV1DmLK8VbIPqVjbz62qXbItegvRzEug="
+          "Value": "sha256-e3PiXX4V9FAzOzbUM48O8+ZAoGHQLQ2zI7X7wFtlqgg="
         }
       ]
     },

@@ -21,6 +21,8 @@
             <converters:IsCurrentUserConverter x:Key="IsCurrentUserConverter" />
             <converters:BoolToColorConverter x:Key="BoolToColorConverter" />
             <converters:OrBoolConverter x:Key="OrBoolConverter" />
+            <converters:BoolToBackgroundColorConverter x:Key="BoolToBackgroundColorConverter" />
+            <converters:BoolToReadUnreadConverter x:Key="BoolToReadUnreadConverter" />
 
             <!-- Styles -->
             <Style TargetType="Button">

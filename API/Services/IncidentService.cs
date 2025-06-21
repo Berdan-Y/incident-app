@@ -1,6 +1,7 @@
 using Shared.Models.Dtos;
 using Shared.Models.Classes;
 using API.Repositories;
+using API.Data;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -14,12 +15,14 @@ public class IncidentService : IIncidentService
     private readonly IIncidentRepository _incidentRepository;
     private readonly IMapper _mapper;
     private readonly IFileService _fileService;
+    private readonly IncidentDbContext _context;
 
-    public IncidentService(IIncidentRepository incidentRepository, IMapper mapper, IFileService fileService)
+    public IncidentService(IIncidentRepository incidentRepository, IMapper mapper, IFileService fileService, IncidentDbContext context)
     {
         _incidentRepository = incidentRepository;
         _mapper = mapper;
         _fileService = fileService;
+        _context = context;
     }
 
     public async Task<IEnumerable<IncidentResponseDto>> GetAllIncidentsAsync()
@@ -49,6 +52,17 @@ public class IncidentService : IIncidentService
     public async Task<IncidentResponseDto> CreateIncidentAsync(IncidentCreateDto incidentDto)
     {
         Console.WriteLine($"Creating incident - DTO ReportedById: {incidentDto.ReportedById}");
+
+        // If ReportedById is provided, make it null if the user doesn't exist
+        if (incidentDto.ReportedById.HasValue)
+        {
+            var userExists = await _incidentRepository.UserExistsAsync(incidentDto.ReportedById.Value);
+            if (!userExists)
+            {
+                Console.WriteLine($"User with ID {incidentDto.ReportedById.Value} does not exist, setting ReportedById to null");
+                incidentDto.ReportedById = null;
+            }
+        }
 
         var incident = _mapper.Map<Incident>(incidentDto);
         Console.WriteLine($"After mapping - incident.ReportedById: {incident.ReportedById}");
