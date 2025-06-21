@@ -128,49 +128,35 @@ public class AuthenticationService : IAuthenticationService
                 return false;
             }
 
-            // Log the raw response
-            var rawResponse = await response.Content.ReadAsStringAsync();
-            Console.WriteLine($"Raw response from API: {rawResponse}");
-
             var authResponse = await response.Content.ReadFromJsonAsync<AuthResponse>();
-            Console.WriteLine($"Deserialized response - Token: {authResponse?.Token?.Substring(0, 20)}..., UserId: {authResponse?.UserId}, UserName: {authResponse?.UserName}, Roles: {string.Join(", ", authResponse?.Roles ?? new List<string>())}");
-            
             if (authResponse?.Token == null) 
             {
                 Console.WriteLine("Login failed: No token received");
                 return false;
             }
 
+            // Set token first
             await _tokenService.SetTokenAsync(authResponse.Token);
             
-            // Get roles from the response
+            // Get roles from the response and set them
             var roles = string.Join(",", authResponse.Roles);
-            Console.WriteLine($"Roles from response: {roles}");
-            
-            if (authResponse.Roles.Any())
+            if (!string.IsNullOrEmpty(roles))
             {
                 await _tokenService.SetRolesAsync(roles);
-                Console.WriteLine($"Set user roles: {roles}");
-            }
-            else
-            {
-                Console.WriteLine("No roles found in the response");
             }
             
+            // Set user info
             _userEmail = authResponse.UserName;
             UserRole = authResponse.Roles.Contains("Admin", StringComparer.OrdinalIgnoreCase) ? Role.Admin : Role.Member;
-            Console.WriteLine($"Login successful for user: {_userEmail} with roles: {string.Join(", ", authResponse.Roles)}");
             
-            // Verify roles were set
-            var setRoles = _tokenService.GetRoles();
-            Console.WriteLine($"Verified roles in TokenService: {string.Join(", ", setRoles)}");
+            // Notify state change after everything is set
+            NotifyAuthenticationStateChanged();
             
             return true;
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Login exception: {ex.Message}");
-            Console.WriteLine($"Stack trace: {ex.StackTrace}");
             throw;
         }
     }
@@ -195,6 +181,10 @@ public class AuthenticationService : IAuthenticationService
             
             _userEmail = authResponse.UserName;
             UserRole = authResponse.Roles.Contains("Admin", StringComparer.OrdinalIgnoreCase) ? Role.Admin : Role.Member;
+            
+            // Notify state change after everything is set
+            NotifyAuthenticationStateChanged();
+            
             return true;
         }
         catch
@@ -209,11 +199,20 @@ public class AuthenticationService : IAuthenticationService
         await _tokenService.LogoutAsync();
         _userEmail = null;
         UserRole = null;
+        NotifyAuthenticationStateChanged();
         Console.WriteLine("Logout completed - token cleared and state reset");
+    }
+
+    private void NotifyAuthenticationStateChanged()
+    {
+        AuthenticationStateChanged?.Invoke();
+        // Navigate to home page after login/logout
+        _navigationManager.NavigateTo("/", forceLoad: true);
     }
 
     private void OnAuthenticationStateChanged()
     {
-        AuthenticationStateChanged?.Invoke();
+        // Force UI refresh
+        _navigationManager.NavigateTo(_navigationManager.Uri, forceLoad: false);
     }
 } 

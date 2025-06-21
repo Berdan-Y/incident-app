@@ -1,48 +1,40 @@
 ﻿@using Blazor.Services
 @inject ITokenService TokenService
+@inject NavigationManager NavigationManager
 @implements IDisposable
 
 <MudNavMenu>
-    @if (_isInitialized)
+    <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">
+        Home
+    </MudNavLink>
+    
+    @if (TokenService.IsLoggedIn && TokenService.HasRole("Admin"))
     {
-        <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">
-            Home
+        <MudNavLink Href="all-incidents" Icon="@Icons.Material.Filled.Assignment">
+            All Incidents
         </MudNavLink>
         
-        @if (TokenService.IsLoggedIn && TokenService.HasRole("Admin"))
-        {
-            <MudNavLink Href="all-incidents" Icon="@Icons.Material.Filled.Assignment">
-                All Incidents
-            </MudNavLink>
-            
-            <MudNavLink Href="register" Icon="@Icons.Material.Filled.PersonAdd">
-                Register User
-            </MudNavLink>
-        }
+        <MudNavLink Href="register" Icon="@Icons.Material.Filled.PersonAdd">
+            Register User
+        </MudNavLink>
     }
 </MudNavMenu>
 
 @code {
-    private bool _isInitialized;
-
     protected override void OnInitialized()
     {
-        _isInitialized = true;
         TokenService.LoggedIn += OnAuthenticationStateChanged;
         TokenService.LoggedOut += OnAuthenticationStateChanged;
-        Console.WriteLine($"NavMenu Initialized - IsLoggedIn: {TokenService.IsLoggedIn}, HasAdminRole: {TokenService.HasRole("Admin")}");
-        Console.WriteLine($"Current Roles: {string.Join(", ", TokenService.GetRoles())}");
     }
 
-    protected override void OnParametersSet()
+    private async void OnAuthenticationStateChanged()
     {
-        Console.WriteLine($"NavMenu Parameters Set - IsLoggedIn: {TokenService.IsLoggedIn}, HasAdminRole: {TokenService.HasRole("Admin")}");
-        Console.WriteLine($"Current Roles: {string.Join(", ", TokenService.GetRoles())}");
-    }
-
-    private void OnAuthenticationStateChanged()
-    {
-        InvokeAsync(StateHasChanged);
+        await InvokeAsync(() => {
+            StateHasChanged();
+            // Force navigation to current page to refresh the view
+            var currentUri = NavigationManager.Uri;
+            NavigationManager.NavigateTo(currentUri, forceLoad: false);
+        });
     }
 
     public void Dispose()

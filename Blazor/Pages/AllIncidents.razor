@@ -8,16 +8,26 @@
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JSRuntime
 
+<style>
+    .view-toggle-button {
+        min-width: 120px;
+    }
+    .view-toggle-button.active {
+        background-color: var(--mud-palette-primary) !important;
+        color: var(--mud-palette-primary-text) !important;
+    }
+</style>
+
 <MudContainer Class="mt-4">
     <div class="d-flex justify-space-between align-center mb-4">
         <MudText Typo="Typo.h3">All Incidents</MudText>
-        <MudButtonGroup Color="Color.Primary" Variant="Variant.Outlined">
-            <MudButton OnClick="@(() => viewType = ViewType.Cards)" 
-                      Variant="@(viewType == ViewType.Cards ? Variant.Filled : Variant.Outlined)">
+        <MudButtonGroup>
+            <MudButton OnClick="@(() => SwitchView(ViewType.Cards))" 
+                      Class="@($"view-toggle-button {(viewType == ViewType.Cards ? "active" : "")}")">
                 <MudIcon Icon="@Icons.Material.Filled.ViewModule" Class="mr-2"/>Cards
             </MudButton>
-            <MudButton OnClick="@(() => viewType = ViewType.Map)"
-                      Variant="@(viewType == ViewType.Map ? Variant.Filled : Variant.Outlined)">
+            <MudButton OnClick="@(() => SwitchView(ViewType.Map))"
+                      Class="@($"view-toggle-button {(viewType == ViewType.Map ? "active" : "")}")">
                 <MudIcon Icon="@Icons.Material.Filled.Map" Class="mr-2"/>Map
             </MudButton>
         </MudButtonGroup>
@@ -223,5 +233,33 @@
     private async Task OpenDirections(double lat, double lng)
     {
         await JSRuntime.InvokeVoidAsync("openGoogleMapsDirections", lat, lng);
+    }
+
+    private async Task SwitchView(ViewType newView)
+    {
+        viewType = newView;
+        StateHasChanged();
+        
+        // Initialize map if switching to map view
+        if (viewType == ViewType.Map && mapId == null)
+        {
+            await Task.Delay(50); // Small delay to ensure DOM is updated
+            mapId = await GoogleMapsService.InitializeMapAsync(mapElement);
+            if (incidents != null)
+            {
+                foreach (var incident in incidents)
+                {
+                    if (incident.Latitude != 0 || incident.Longitude != 0)
+                    {
+                        await GoogleMapsService.AddMarkerAsync(
+                            mapId.Value,
+                            incident.Latitude,
+                            incident.Longitude,
+                            incident.Title
+                        );
+                    }
+                }
+            }
+        }
     }
 } 
