@@ -15,6 +15,23 @@
         </member>
         <member name="T:Maui.ViewModels.AssignedIncidentsViewModel">
             <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:Maui.ViewModels.AssignedIncidentsViewModel.SelectedStatusFilter">
+            <inheritdoc cref="F:Maui.ViewModels.AssignedIncidentsViewModel.selectedStatusFilter"/>
+        </member>
+        <member name="P:Maui.ViewModels.AssignedIncidentsViewModel.SelectedPriorityFilter">
+            <inheritdoc cref="F:Maui.ViewModels.AssignedIncidentsViewModel.selectedPriorityFilter"/>
+        </member>
+        <member name="M:Maui.ViewModels.AssignedIncidentsViewModel.OnSelectedStatusFilterChanged(Maui.ViewModels.FilterOption{Shared.Models.Enums.Status})">
+            <summary>Executes the logic for when <see cref="P:Maui.ViewModels.AssignedIncidentsViewModel.SelectedStatusFilter"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:Maui.ViewModels.AssignedIncidentsViewModel.SelectedStatusFilter"/> is changed.</remarks>
+        </member>
+        <member name="M:Maui.ViewModels.AssignedIncidentsViewModel.OnSelectedPriorityFilterChanged(Maui.ViewModels.FilterOption{Shared.Models.Enums.Priority})">
+            <summary>Executes the logic for when <see cref="P:Maui.ViewModels.AssignedIncidentsViewModel.SelectedPriorityFilter"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:Maui.ViewModels.AssignedIncidentsViewModel.SelectedPriorityFilter"/> is changed.</remarks>
         </member>
         <member name="F:Maui.ViewModels.AssignedIncidentsViewModel.loadIncidentsCommand">
             <summary>The backing field for <see cref="P:Maui.ViewModels.AssignedIncidentsViewModel.LoadIncidentsCommand"/>.</summary>
@@ -398,6 +415,12 @@
             for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
             </summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedStatusFilter">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedStatusFilter" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedPriorityFilter">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedPriorityFilter" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsLoading">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsLoading" generated properties.</summary>
         </member>
@@ -493,6 +516,12 @@
             A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instances
             for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
             </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedStatusFilter">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedStatusFilter" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedPriorityFilter">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedPriorityFilter" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsLoading">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsLoading" generated properties.</summary>
