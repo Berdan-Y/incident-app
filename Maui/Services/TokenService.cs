@@ -254,6 +254,7 @@ public class TokenService : ITokenService, IDisposable, INotifyPropertyChanged
         }
         catch (Exception ex)
         {
+            throw new Exception("Failed to parse token for username.", ex);
         }
     }
 
