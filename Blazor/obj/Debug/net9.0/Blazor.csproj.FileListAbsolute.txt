@@ -1,8 +1,6 @@
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/AutoMapper.totk3ghnq9.wasm
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/BCrypt.Net-Next.atqw2jgj6x.wasm
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/blazor.boot.json
-/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Blazor.fa5zw4j8x8.pdb
-/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Blazor.6900kv7puf.wasm
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/blazor.webassembly.js
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/dotnet.js
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/dotnet.js.map
@@ -82,8 +80,6 @@
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/netstandard.wuzd3f1y6v.wasm
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Refit.HttpClientFactory.7h3muhceip.wasm
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Refit.cn4v5rxb33.wasm
-/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Shared.8ar7ruosaz.pdb
-/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Shared.52y3evns2h.wasm
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/SQLitePCLRaw.batteries_v2.3v5whd3evz.wasm
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/SQLitePCLRaw.core.1iu403apcu.wasm
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/SQLitePCLRaw.provider.e_sqlite3.uxqvbkxd4r.wasm
@@ -319,7 +315,6 @@
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/System.Reflection.Emit.ILGeneration.tnlqh325q4.wasm.gz
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/System.Reflection.Metadata.tx83z6ho7l.wasm.gz
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Microsoft.AspNetCore.Components.Web.9j9suo3916.wasm.gz
-/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Shared.52y3evns2h.wasm.gz
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/System.Diagnostics.TextWriterTraceListener.670flx7nki.wasm.gz
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/System.Transactions.Local.pil3cjgvw5.wasm.gz
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/System.Data.3adg3wr0gn.wasm.gz
@@ -335,7 +330,6 @@
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/System.Private.Xml.Linq.35ud51k85s.wasm.gz
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/System.Security.Cryptography.Encoding.4j2304etti.wasm.gz
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/System.ComponentModel.Primitives.fea7hw9xtf.wasm.gz
-/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Shared.8ar7ruosaz.pdb.gz
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Microsoft.Extensions.Configuration.EnvironmentVariables.9hrdqtuvi7.wasm.gz
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/System.Globalization.tde8zuw0yw.wasm.gz
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/System.IO.2zge8rv4ra.wasm.gz
@@ -478,7 +472,6 @@
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/WindowsBase.u25hol0de4.wasm.gz
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/System.Configuration.ex6vy58iyk.wasm.gz
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/System.Diagnostics.TraceSource.n515vmkk2p.wasm.gz
-/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Blazor.fa5zw4j8x8.pdb.gz
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/System.Xml.Linq.jhjtvo31q0.wasm.gz
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/System.Net.Http.Json.346n69ja1w.wasm.gz
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/System.Net.HttpListener.m0tberhw26.wasm.gz
@@ -507,7 +500,6 @@
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/System.Web.HttpUtility.4yi0atwy17.wasm.gz
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/System.Globalization.Extensions.o54lsqobzb.wasm.gz
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/System.Threading.Thread.07bttawl88.wasm.gz
-/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Blazor.6900kv7puf.wasm.gz
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/Blazor.staticwebassets.runtime.json
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/Blazor.staticwebassets.endpoints.json
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/Blazor.dll
@@ -1319,11 +1311,6 @@
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/itsr02yzkm-tjcz0u77k5.gz
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/jquf587rsw-tptq2av103.gz
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/7gnbzwaq31-lfu7j35m59.gz
-/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/8te7oj6iey-52y3evns2h.gz
-/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/ar496ongnu-8ar7ruosaz.gz
-/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/zxnfmdmcxx-6900kv7puf.gz
-/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/vzbwen8neo-fa5zw4j8x8.gz
-/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/peinipbwwh-7n8oo2cod4.gz
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/staticwebassets.build.json
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/staticwebassets.development.json
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/staticwebassets.build.endpoints.json
@@ -1338,3 +1325,16 @@
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/refint/Blazor.dll
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/Blazor.pdb
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/ref/Blazor.dll
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Blazor.pxdn93pyu1.pdb
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Blazor.hfugj9zftr.wasm
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Shared.08qoxuba5b.pdb
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Shared.slcpqqwk43.wasm
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Shared.slcpqqwk43.wasm.gz
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Shared.08qoxuba5b.pdb.gz
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Blazor.pxdn93pyu1.pdb.gz
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/Blazor.hfugj9zftr.wasm.gz
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/8te7oj6iey-slcpqqwk43.gz
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/ar496ongnu-08qoxuba5b.gz
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/zxnfmdmcxx-hfugj9zftr.gz
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/vzbwen8neo-pxdn93pyu1.gz
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/compressed/peinipbwwh-md2gp60n6a.gz
