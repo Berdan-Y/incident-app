@@ -426,6 +426,7 @@
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-ios/iossimulator-arm64/resourcestamps/Microsoft.Net.Http.Headers.stamp
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-ios/iossimulator-arm64/resourcestamps/Refit.stamp
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-ios/iossimulator-arm64/resourcestamps/Refit.HttpClientFactory.stamp
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-ios/iossimulator-arm64/resourcestamps/Shared.stamp
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-ios/iossimulator-arm64/resourcestamps/SQLitePCLRaw.batteries_v2.stamp
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-ios/iossimulator-arm64/resourcestamps/SQLitePCLRaw.core.stamp
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-ios/iossimulator-arm64/resourcestamps/SQLitePCLRaw.lib.e_sqlite3.ios.stamp

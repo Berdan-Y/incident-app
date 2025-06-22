@@ -19,6 +19,69 @@ using Microsoft.Maui.Media;
 
 namespace Maui.ViewModels;
 
+public class PhotoItem : ObservableObject
+{
+    private ImageSource _imageSource;
+    public ImageSource ImageSource
+    {
+        get => _imageSource;
+        set => SetProperty(ref _imageSource, value);
+    }
+
+    public FileResult File { get; set; }
+
+    public PhotoItem(FileResult file)
+    {
+        File = file;
+        MainThread.BeginInvokeOnMainThread(async () => await LoadImageAsync());
+    }
+
+    private async Task LoadImageAsync()
+    {
+        if (File == null)
+        {
+            System.Diagnostics.Debug.WriteLine("Cannot load image: File is null");
+            return;
+        }
+
+        try
+        {
+            System.Diagnostics.Debug.WriteLine($"Starting to load image for {File.FileName}");
+
+            if (!string.IsNullOrEmpty(File.FullPath))
+            {
+                System.Diagnostics.Debug.WriteLine($"Attempting to load from FullPath: {File.FullPath}");
+                using (var stream = File.OpenReadAsync().Result)
+                {
+                    var memoryStream = new MemoryStream();
+                    await stream.CopyToAsync(memoryStream);
+                    memoryStream.Position = 0;
+                    var bytes = memoryStream.ToArray();
+                    ImageSource = ImageSource.FromStream(() => new MemoryStream(bytes));
+                }
+                System.Diagnostics.Debug.WriteLine("Image loaded from FullPath");
+                return;
+            }
+
+            System.Diagnostics.Debug.WriteLine("FullPath not available or loading failed, trying direct stream method");
+            using (var stream = await File.OpenReadAsync())
+            {
+                var memoryStream = new MemoryStream();
+                await stream.CopyToAsync(memoryStream);
+                memoryStream.Position = 0;
+                var bytes = memoryStream.ToArray();
+                ImageSource = ImageSource.FromStream(() => new MemoryStream(bytes));
+            }
+            System.Diagnostics.Debug.WriteLine($"Successfully loaded image for {File.FileName} using stream method");
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Error loading image for {File.FileName}: {ex.Message}");
+            System.Diagnostics.Debug.WriteLine($"Stack trace: {ex.StackTrace}");
+        }
+    }
+}
+
 public partial class ReportIncidentViewModel : ObservableObject, IDisposable
 {
     private readonly IGeolocation _geolocation;
@@ -29,7 +92,9 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
     private bool _disposed;
 
     [ObservableProperty]
-    private ObservableCollection<FileResult> selectedPhotos;
+    private ObservableCollection<PhotoItem> photos;
+
+    private ObservableCollection<FileResult> _selectedPhotos;
 
     [ObservableProperty]
     private bool isAnonymous;
@@ -100,8 +165,9 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
         _tokenService = tokenService;
         _geocodingService = geocodingService;
 
-        // Initialize photos collection
-        SelectedPhotos = new ObservableCollection<FileResult>();
+        // Initialize collections
+        Photos = new ObservableCollection<PhotoItem>();
+        _selectedPhotos = new ObservableCollection<FileResult>();
 
         // Subscribe to token service property changes
         _tokenService.PropertyChanged += TokenService_PropertyChanged;
@@ -353,16 +419,22 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
     {
         try
         {
+            System.Diagnostics.Debug.WriteLine("TakePhoto command started");
+            
             if (!MediaPicker.Default.IsCaptureSupported)
             {
+                System.Diagnostics.Debug.WriteLine("Camera capture is not supported on this device");
                 await Application.Current.MainPage.DisplayAlert("Error", 
                     "Camera capture is not supported on this device.", "OK");
                 return;
             }
 
             var status = await Permissions.RequestAsync<Permissions.Camera>();
+            System.Diagnostics.Debug.WriteLine($"Camera permission status: {status}");
+            
             if (status != PermissionStatus.Granted)
             {
+                System.Diagnostics.Debug.WriteLine("Camera permission not granted");
                 await Application.Current.MainPage.DisplayAlert("Permission Required", 
                     "Camera permission is required to take photos.", "OK");
                 return;
@@ -371,11 +443,22 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
             var photo = await MediaPicker.Default.CapturePhotoAsync();
             if (photo != null)
             {
-                SelectedPhotos.Add(photo);
+                System.Diagnostics.Debug.WriteLine($"Photo captured: FileName={photo.FileName}, ContentType={photo.ContentType}, FullPath={photo.FullPath}");
+                
+                _selectedPhotos.Add(photo);
+                var photoItem = new PhotoItem(photo);
+                Photos.Add(photoItem);
+                
+                System.Diagnostics.Debug.WriteLine($"Photo added to collections. Photos count: {Photos.Count}, SelectedPhotos count: {_selectedPhotos.Count}");
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("Photo capture returned null");
             }
         }
         catch (Exception ex)
         {
+            System.Diagnostics.Debug.WriteLine($"Error in TakePhoto: {ex}");
             await Application.Current.MainPage.DisplayAlert("Error", 
                 $"Failed to take photo: {ex.Message}", "OK");
         }
@@ -386,9 +469,14 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
     {
         try
         {
+            System.Diagnostics.Debug.WriteLine("PickPhotos command started");
+            
             var status = await Permissions.RequestAsync<Permissions.Photos>();
+            System.Diagnostics.Debug.WriteLine($"Photos permission status: {status}");
+            
             if (status != PermissionStatus.Granted)
             {
+                System.Diagnostics.Debug.WriteLine("Photos permission not granted");
                 await Application.Current.MainPage.DisplayAlert("Permission Required", 
                     "Photo library access is required to select photos.", "OK");
                 return;
@@ -401,25 +489,68 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
 
             if (photos != null)
             {
+                System.Diagnostics.Debug.WriteLine($"Number of photos picked: {photos.Count()}");
                 foreach (var photo in photos)
                 {
-                    SelectedPhotos.Add(photo);
+                    System.Diagnostics.Debug.WriteLine($"Processing picked photo: FileName={photo.FileName}, ContentType={photo.ContentType}, FullPath={photo.FullPath}");
+                    _selectedPhotos.Add(photo);
+                    var photoItem = new PhotoItem(photo);
+                    Photos.Add(photoItem);
                 }
+                System.Diagnostics.Debug.WriteLine($"All photos processed. Photos count: {Photos.Count}, SelectedPhotos count: {_selectedPhotos.Count}");
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("No photos were picked");
             }
         }
         catch (Exception ex)
         {
+            System.Diagnostics.Debug.WriteLine($"Error in PickPhotos: {ex}");
             await Application.Current.MainPage.DisplayAlert("Error", 
                 $"Failed to pick photos: {ex.Message}", "OK");
         }
     }
 
     [RelayCommand]
-    private void RemovePhoto(FileResult photo)
+    private void RemovePhoto(PhotoItem photo)
     {
-        if (photo != null && SelectedPhotos.Contains(photo))
+        try
         {
-            SelectedPhotos.Remove(photo);
+            if (photo == null)
+            {
+                System.Diagnostics.Debug.WriteLine("RemovePhoto called with null photo");
+                return;
+            }
+
+            System.Diagnostics.Debug.WriteLine($"Attempting to remove photo: {photo.File?.FileName ?? "unknown"}");
+            
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                // Remove from Photos collection
+                if (Photos.Contains(photo))
+                {
+                    Photos.Remove(photo);
+                    System.Diagnostics.Debug.WriteLine("Photo removed from Photos collection");
+                }
+
+                // Remove from _selectedPhotos
+                if (photo.File != null)
+                {
+                    var fileToRemove = _selectedPhotos.FirstOrDefault(p => p.FileName == photo.File.FileName);
+                    if (fileToRemove != null)
+                    {
+                        _selectedPhotos.Remove(fileToRemove);
+                        System.Diagnostics.Debug.WriteLine("Photo removed from _selectedPhotos collection");
+                    }
+                }
+
+                System.Diagnostics.Debug.WriteLine($"Final counts - Photos: {Photos.Count}, SelectedPhotos: {_selectedPhotos.Count}");
+            });
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Error in RemovePhoto: {ex}");
         }
     }
 
@@ -472,6 +603,8 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
         try
         {
             IsLoading = true;
+            System.Diagnostics.Debug.WriteLine($"Starting report submission with {_selectedPhotos.Count} photos");
+            
             Guid? reportedById = null;
 
             System.Diagnostics.Debug.WriteLine($"SubmitReport - IsAnonymous: {IsAnonymous}, IsLoggedIn: {IsLoggedIn}");
@@ -509,8 +642,9 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
             content.Add(new StringContent(incidentJson, Encoding.UTF8, "application/json"), "incident");
 
             // Add photos
-            foreach (var photo in SelectedPhotos)
+            foreach (var photo in _selectedPhotos)
             {
+                System.Diagnostics.Debug.WriteLine($"Processing photo for upload: {photo.FileName}");
                 var stream = await photo.OpenReadAsync();
                 var streamContent = new StreamContent(stream);
                 streamContent.Headers.ContentType = new MediaTypeHeaderValue(photo.ContentType);
@@ -521,19 +655,18 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
 
             if (response.IsSuccessStatusCode)
             {
-                // Reset only title and description
+                // Reset form
                 Title = string.Empty;
                 Description = string.Empty;
-                
-                // Only reset address and zipcode if using manual location
                 if (UseManualLocation)
                 {
                     Address = string.Empty;
                     Zipcode = string.Empty;
                 }
-                
-                IsAnonymous = false;  // Reset anonymous flag
-                SelectedPhotos.Clear();
+                IsAnonymous = false;
+                _selectedPhotos.Clear();
+                Photos.Clear();
+                System.Diagnostics.Debug.WriteLine("Report submitted successfully, form reset");
 
                 await Application.Current.MainPage.DisplayAlert("Success",
                     "Incident report submitted successfully!", "OK");
@@ -551,6 +684,7 @@ public partial class ReportIncidentViewModel : ObservableObject, IDisposable
         }
         catch (Exception ex)
         {
+            System.Diagnostics.Debug.WriteLine($"Error in SubmitReport: {ex}");
             await Application.Current.MainPage.DisplayAlert("Error",
                 $"Failed to submit report. Please try again. - {ex.Message}", "OK");
         }

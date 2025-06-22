@@ -127,6 +127,52 @@
         <member name="P:Maui.ViewModels.FieldEmployeeEditViewModel.CancelCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:Maui.ViewModels.FieldEmployeeEditViewModel.Cancel"/>.</summary>
         </member>
+        <member name="T:Maui.ViewModels.IncidentDetailsViewModel">
+            <inheritdoc/>
+        </member>
+        <member name="P:Maui.ViewModels.IncidentDetailsViewModel.Incident">
+            <inheritdoc cref="F:Maui.ViewModels.IncidentDetailsViewModel.incident"/>
+        </member>
+        <member name="P:Maui.ViewModels.IncidentDetailsViewModel.IsLoading">
+            <inheritdoc cref="F:Maui.ViewModels.IncidentDetailsViewModel.isLoading"/>
+        </member>
+        <member name="P:Maui.ViewModels.IncidentDetailsViewModel.ErrorMessage">
+            <inheritdoc cref="F:Maui.ViewModels.IncidentDetailsViewModel.errorMessage"/>
+        </member>
+        <member name="P:Maui.ViewModels.IncidentDetailsViewModel.IncidentId">
+            <inheritdoc cref="F:Maui.ViewModels.IncidentDetailsViewModel.incidentId"/>
+        </member>
+        <member name="P:Maui.ViewModels.IncidentDetailsViewModel.HasValidCoordinates">
+            <inheritdoc cref="F:Maui.ViewModels.IncidentDetailsViewModel.hasValidCoordinates"/>
+        </member>
+        <member name="P:Maui.ViewModels.IncidentDetailsViewModel.CurrentLocation">
+            <inheritdoc cref="F:Maui.ViewModels.IncidentDetailsViewModel.currentLocation"/>
+        </member>
+        <member name="P:Maui.ViewModels.IncidentDetailsViewModel.MapSpan">
+            <inheritdoc cref="F:Maui.ViewModels.IncidentDetailsViewModel.mapSpan"/>
+        </member>
+        <member name="P:Maui.ViewModels.IncidentDetailsViewModel.Photos">
+            <inheritdoc cref="F:Maui.ViewModels.IncidentDetailsViewModel.photos"/>
+        </member>
+        <member name="P:Maui.ViewModels.IncidentDetailsViewModel.HasPhotos">
+            <inheritdoc cref="F:Maui.ViewModels.IncidentDetailsViewModel.hasPhotos"/>
+        </member>
+        <member name="P:Maui.ViewModels.IncidentDetailsViewModel.Geopath">
+            <inheritdoc cref="F:Maui.ViewModels.IncidentDetailsViewModel.geopath"/>
+        </member>
+        <member name="P:Maui.ViewModels.IncidentDetailsViewModel.RouteLine">
+            <inheritdoc cref="F:Maui.ViewModels.IncidentDetailsViewModel.routeLine"/>
+        </member>
+        <member name="M:Maui.ViewModels.IncidentDetailsViewModel.OnIncidentChanged(Shared.Models.Dtos.IncidentResponseDto)">
+            <summary>Executes the logic for when <see cref="P:Maui.ViewModels.IncidentDetailsViewModel.Incident"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:Maui.ViewModels.IncidentDetailsViewModel.Incident"/> is changed.</remarks>
+        </member>
+        <member name="M:Maui.ViewModels.IncidentDetailsViewModel.OnIncidentIdChanged(System.String)">
+            <summary>Executes the logic for when <see cref="P:Maui.ViewModels.IncidentDetailsViewModel.IncidentId"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:Maui.ViewModels.IncidentDetailsViewModel.IncidentId"/> is changed.</remarks>
+        </member>
         <member name="T:Maui.ViewModels.LoginViewModel">
             <inheritdoc/>
             <inheritdoc/>
@@ -218,8 +264,8 @@
             <inheritdoc/>
             <inheritdoc/>
         </member>
-        <member name="P:Maui.ViewModels.ReportIncidentViewModel.SelectedPhotos">
-            <inheritdoc cref="F:Maui.ViewModels.ReportIncidentViewModel.selectedPhotos"/>
+        <member name="P:Maui.ViewModels.ReportIncidentViewModel.Photos">
+            <inheritdoc cref="F:Maui.ViewModels.ReportIncidentViewModel.photos"/>
         </member>
         <member name="P:Maui.ViewModels.ReportIncidentViewModel.IsAnonymous">
             <inheritdoc cref="F:Maui.ViewModels.ReportIncidentViewModel.isAnonymous"/>
@@ -309,7 +355,7 @@
             <summary>The backing field for <see cref="P:Maui.ViewModels.ReportIncidentViewModel.RemovePhotoCommand"/>.</summary>
         </member>
         <member name="P:Maui.ViewModels.ReportIncidentViewModel.RemovePhotoCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:Maui.ViewModels.ReportIncidentViewModel.RemovePhoto(Microsoft.Maui.Storage.FileResult)"/>.</summary>
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:Maui.ViewModels.ReportIncidentViewModel.RemovePhoto(Maui.ViewModels.PhotoItem)"/>.</summary>
         </member>
         <member name="F:Maui.ViewModels.ReportIncidentViewModel.submitReportCommand">
             <summary>The backing field for <see cref="P:Maui.ViewModels.ReportIncidentViewModel.SubmitReportCommand"/>.</summary>
@@ -490,6 +536,33 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Status">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Status" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Incident">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Incident" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IncidentId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IncidentId" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.HasValidCoordinates">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "HasValidCoordinates" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CurrentLocation">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CurrentLocation" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.MapSpan">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "MapSpan" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Photos">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Photos" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.HasPhotos">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "HasPhotos" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Geopath">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Geopath" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.RouteLine">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "RouteLine" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Email">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Email" generated properties.</summary>
         </member>
@@ -510,9 +583,6 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.LastName">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "LastName" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedPhotos">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedPhotos" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsAnonymous">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsAnonymous" generated properties.</summary>
@@ -595,6 +665,33 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Status">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Status" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Incident">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Incident" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IncidentId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IncidentId" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.HasValidCoordinates">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "HasValidCoordinates" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CurrentLocation">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CurrentLocation" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.MapSpan">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "MapSpan" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Photos">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Photos" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.HasPhotos">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "HasPhotos" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Geopath">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Geopath" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.RouteLine">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "RouteLine" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Email">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Email" generated properties.</summary>
         </member>
@@ -615,9 +712,6 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.LastName">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "LastName" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedPhotos">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedPhotos" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsAnonymous">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsAnonymous" generated properties.</summary>

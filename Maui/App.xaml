@@ -28,6 +28,7 @@
             <converters:BoolToBackgroundColorConverter x:Key="BoolToBackgroundColorConverter" />
             <converters:BoolToReadUnreadConverter x:Key="BoolToReadUnreadConverter" />
             <converters:IsAssignedFieldEmployeeConverter x:Key="IsAssignedFieldEmployeeConverter" />
+            <converters:EnumToStringConverter x:Key="EnumToStringConverter" />
 
             <!-- Styles -->
             <Style TargetType="Button">

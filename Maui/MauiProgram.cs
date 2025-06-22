@@ -41,11 +41,18 @@ public static class MauiProgram
 
         // Register Converters
         builder.Services.AddSingleton<InverseBoolConverter>();
+        builder.Services.AddSingleton<EnumToStringConverter>();
+
+        // Register Services
+        builder.Services.AddSingleton<ITokenService, TokenService>();
+        builder.Services.AddSingleton<AuthService>();
+        builder.Services.AddSingleton<IDirectionsService, GoogleDirectionsService>();
+        builder.Services.AddSingleton<IIncidentService, IncidentService>();
+        builder.Services.AddSingleton<IApiConfigurationService, ApiConfigurationService>();
 
         // Configure API Services
-        var baseAddress = DeviceInfo.Platform == DevicePlatform.Android
-            ? "http://10.0.2.2:5007"  // Android emulator special DNS
-            : "http://localhost:5007"; // iOS and other platforms
+        var apiConfig = new ApiConfigurationService();
+        var baseAddress = apiConfig.BaseUrl;
 
         var httpClientHandler = new HttpClientHandler
         {
@@ -89,12 +96,6 @@ public static class MauiProgram
                 c.Timeout = TimeSpan.FromSeconds(30);
             })
             .ConfigurePrimaryHttpMessageHandler(() => httpClientHandler);
-
-        // Register Services
-        builder.Services.AddSingleton<ITokenService, TokenService>();
-        builder.Services.AddSingleton<AuthService>();
-        builder.Services.AddSingleton<IDirectionsService, GoogleDirectionsService>();
-        builder.Services.AddSingleton<IIncidentService, IncidentService>();
 
         // Register ViewModels
         builder.Services.AddSingleton<LogoutViewModel>();
