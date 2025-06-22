@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "klmlWQPuQeQ=",
+  "dgSpecHash": "D0y4Hduyuf8=",
   "success": true,
   "projectFilePath": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui.Core/Maui.Core.csproj",
   "expectedPackageFiles": [
@@ -52,6 +52,10 @@
     "/Users/berdanyilmaz/.nuget/packages/microsoft.extensions.options/9.0.5/microsoft.extensions.options.9.0.5.nupkg.sha512",
     "/Users/berdanyilmaz/.nuget/packages/microsoft.extensions.options.configurationextensions/9.0.0/microsoft.extensions.options.configurationextensions.9.0.0.nupkg.sha512",
     "/Users/berdanyilmaz/.nuget/packages/microsoft.extensions.primitives/9.0.5/microsoft.extensions.primitives.9.0.5.nupkg.sha512",
+    "/Users/berdanyilmaz/.nuget/packages/microsoft.identitymodel.abstractions/7.4.0/microsoft.identitymodel.abstractions.7.4.0.nupkg.sha512",
+    "/Users/berdanyilmaz/.nuget/packages/microsoft.identitymodel.jsonwebtokens/7.4.0/microsoft.identitymodel.jsonwebtokens.7.4.0.nupkg.sha512",
+    "/Users/berdanyilmaz/.nuget/packages/microsoft.identitymodel.logging/7.4.0/microsoft.identitymodel.logging.7.4.0.nupkg.sha512",
+    "/Users/berdanyilmaz/.nuget/packages/microsoft.identitymodel.tokens/7.4.0/microsoft.identitymodel.tokens.7.4.0.nupkg.sha512",
     "/Users/berdanyilmaz/.nuget/packages/microsoft.net.http.headers/2.2.0/microsoft.net.http.headers.2.2.0.nupkg.sha512",
     "/Users/berdanyilmaz/.nuget/packages/refit/7.2.1/refit.7.2.1.nupkg.sha512",
     "/Users/berdanyilmaz/.nuget/packages/refit.httpclientfactory/7.2.1/refit.httpclientfactory.7.2.1.nupkg.sha512",
@@ -63,6 +67,7 @@
     "/Users/berdanyilmaz/.nuget/packages/system.composition.hosting/9.0.0/system.composition.hosting.9.0.0.nupkg.sha512",
     "/Users/berdanyilmaz/.nuget/packages/system.composition.runtime/9.0.0/system.composition.runtime.9.0.0.nupkg.sha512",
     "/Users/berdanyilmaz/.nuget/packages/system.diagnostics.eventlog/9.0.0/system.diagnostics.eventlog.9.0.0.nupkg.sha512",
+    "/Users/berdanyilmaz/.nuget/packages/system.identitymodel.tokens.jwt/7.4.0/system.identitymodel.tokens.jwt.7.4.0.nupkg.sha512",
     "/Users/berdanyilmaz/.nuget/packages/system.memory/4.5.3/system.memory.4.5.3.nupkg.sha512",
     "/Users/berdanyilmaz/.nuget/packages/system.text.encodings.web/4.5.0/system.text.encodings.web.4.5.0.nupkg.sha512",
     "/Users/berdanyilmaz/.nuget/packages/system.text.json/9.0.5/system.text.json.9.0.5.nupkg.sha512"

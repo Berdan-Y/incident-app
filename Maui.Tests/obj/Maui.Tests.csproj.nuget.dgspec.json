@@ -56,6 +56,10 @@
             "Refit": {
               "target": "Package",
               "version": "[7.2.1, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[7.4.0, )"
             }
           },
           "imports": [
@@ -103,9 +107,6 @@
             "projectReferences": {
               "/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui.Core/Maui.Core.csproj": {
                 "projectPath": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui.Core/Maui.Core.csproj"
-              },
-              "/Users/berdanyilmaz/Documents/GitHub/incident-app/Shared/Shared.csproj": {
-                "projectPath": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Shared/Shared.csproj"
               }
             }
           }
@@ -128,11 +129,15 @@
           "dependencies": {
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
-              "version": "[17.14.1, )"
+              "version": "[17.9.0, )"
             },
             "Moq": {
               "target": "Package",
               "version": "[4.20.70, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[7.4.0, )"
             },
             "coverlet.collector": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
