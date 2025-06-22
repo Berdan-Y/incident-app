@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Incident App</title>
+    <base href="/" />
+    <link href="css/app.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+    <style>
+        .map-container {
+            height: 600px;
+            width: 100%;
+            margin-top: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div style="position:absolute; top:30vh; width:100%; text-align:center">
+            <div style="display:flex; gap:10px; justify-content:center; align-items:center">
+                <div class="mud-progress-circular mud-primary mud-progress-medium mud-progress-indeterminate">
+                    <svg class="mud-progress-circular-svg" viewBox="22 22 44 44">
+                        <circle class="mud-progress-circular-circle mud-progress-indeterminate" cx="44" cy="44" r="20" fill="none" stroke-width="3"></circle>
+                    </svg>
+                </div>
+                <span>Loading...</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="_framework/blazor.webassembly.js"></script>
+    <script src="_content/MudBlazor/MudBlazor.min.js"></script>
+    <script>
+        window.mapsConfig = {
+            apiKey: 'AIzaSyDsQd3FtHLZnQYThk_PsGiCCpfDksexAoE',
+            maps: new Map(),
+            currentMapId: 0
+        };
+
+        window.initializeMap = function (element) {
+            const mapId = ++window.mapsConfig.currentMapId;
+            const map = new google.maps.Map(element, {
+                zoom: 10,
+                center: { lat: 0, lng: 0 }
+            });
+            window.mapsConfig.maps.set(mapId, map);
+            return mapId;
+        };
+
+        window.addMarker = function (mapId, lat, lng, title) {
+            const map = window.mapsConfig.maps.get(mapId);
+            if (!map) return null;
+
+            const marker = new google.maps.Marker({
+                position: { lat: lat, lng: lng },
+                map: map,
+                title: title
+            });
+
+            // Create info window with directions button
+            const infoWindow = new google.maps.InfoWindow({
+                content: `
+                    <div>
+                        <h4>${title}</h4>
+                        <button onclick="window.openGoogleMapsDirections(${lat}, ${lng})" 
+                                style="background-color: #1976d2; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
+                            Get Directions
+                        </button>
+                    </div>`
+            });
+
+            marker.addListener('click', () => {
+                infoWindow.open(map, marker);
+            });
+
+            // Center map on first marker
+            if (map.markers === undefined || map.markers.length === 0) {
+                map.setCenter({ lat: lat, lng: lng });
+                map.markers = [];
+            }
+            map.markers.push(marker);
+            return marker;
+        };
+
+        window.openGoogleMapsDirections = function (destLat, destLng) {
+            // Open Google Maps in a new tab with directions from current location
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const url = `https://www.google.com/maps/dir/?api=1&origin=${position.coords.latitude},${position.coords.longitude}&destination=${destLat},${destLng}`;
+                        window.open(url, '_blank');
+                    },
+                    () => {
+                        // If location access is denied, just navigate to destination
+                        const url = `https://www.google.com/maps/dir/?api=1&destination=${destLat},${destLng}`;
+                        window.open(url, '_blank');
+                    }
+                );
+            } else {
+                // If geolocation is not supported, just navigate to destination
+                const url = `https://www.google.com/maps/dir/?api=1&destination=${destLat},${destLng}`;
+                window.open(url, '_blank');
+            }
+        };
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsQd3FtHLZnQYThk_PsGiCCpfDksexAoE"></script>
+</body>
+
+</html>

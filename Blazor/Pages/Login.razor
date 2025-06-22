@@ -1,0 +1,100 @@
+@page "/login"
+@using System.ComponentModel.DataAnnotations
+@using Blazor.Services
+@using Shared.Models.Dtos
+@using Shared.Models
+@inject IAuthenticationService AuthService
+@inject ITokenService TokenService
+@inject NavigationManager NavigationManager
+@inject ISnackbar Snackbar
+
+<MudContainer MaxWidth="MaxWidth.Small" Class="d-flex align-center justify-center" Style="height: 100vh;">
+    <MudPaper Class="pa-8" Style="width: 500px;">
+        <MudText Typo="Typo.h4" Class="mb-4">Login</MudText>
+        <MudForm @ref="form" @bind-IsValid="@success">
+            <MudTextField 
+                @bind-Value="loginRequest.Email" 
+                Label="Email" 
+                Required="true" 
+                RequiredError="Email is required"
+                Validation="@(new EmailAddressAttribute() {ErrorMessage = "Invalid email address"})" />
+            
+            <MudTextField 
+                @bind-Value="loginRequest.Password" 
+                Label="Password" 
+                Required="true"
+                RequiredError="Password is required"
+                InputType="InputType.Password" />
+
+            <div class="d-flex align-center justify-space-between mt-6">
+                <MudButton 
+                    Variant="Variant.Filled" 
+                    Color="Color.Primary" 
+                    Disabled="@(!success || _processing)" 
+                    OnClick="HandleLogin"
+                    Class="ml-auto">
+                    @if (_processing)
+                    {
+                        <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true"/>
+                        <MudText Class="ms-2">Processing</MudText>
+                    }
+                    else
+                    {
+                        <MudText>Login</MudText>
+                    }
+                </MudButton>
+            </div>
+        </MudForm>
+    </MudPaper>
+</MudContainer>
+
+@code {
+    private MudForm form;
+    private bool success;
+    private bool _processing;
+    private LoginRequest loginRequest = new();
+
+    private async Task HandleLogin()
+    {
+        await form.Validate();
+        if (!success)
+        {
+            Snackbar.Add("Please fix the validation errors before submitting.", Severity.Warning);
+            return;
+        }
+        
+        _processing = true;
+        try
+        {
+            var loginDto = new LoginDto { Email = loginRequest.Email!, Password = loginRequest.Password! };
+            if (await AuthService.LoginAsync(loginDto))
+            {
+                // Add a small delay to ensure roles are properly set
+                await Task.Delay(100);
+                
+                var roles = TokenService.GetRoles();
+                
+                if (!AuthService.IsAdmin())
+                {
+                    await AuthService.LogoutAsync();
+                    Snackbar.Add("Unauthorized access. Admin role required.", Severity.Error);
+                    return;
+                }
+                
+                NavigationManager.NavigateTo("/");
+            }
+            else
+            {
+                Snackbar.Add("Invalid email or password", Severity.Error);
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Login failed: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            _processing = false;
+        }
+    }
+} 

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Maui.ViewModels"
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+             xmlns:maps1="clr-namespace:Microsoft.Maui.Maps;assembly=Microsoft.Maui.Maps"
+             x:Class="Maui.Pages.IncidentDetailsPage"
+             x:DataType="viewmodels:IncidentDetailsViewModel"
+             Title="Incident Details">
+
+    <ScrollView>
+        <Grid RowDefinitions="Auto,Auto" Padding="15">
+            <!-- Loading Indicator -->
+            <ActivityIndicator Grid.Row="0"
+                             IsVisible="{Binding IsLoading}"
+                             IsRunning="{Binding IsLoading}"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center" />
+
+            <!-- Error Message -->
+            <Label Grid.Row="0"
+                   Text="{Binding ErrorMessage}"
+                   TextColor="Red"
+                   IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotEmptyConverter}}"
+                   HorizontalOptions="Center" />
+
+            <!-- Incident Details -->
+            <Grid Grid.Row="1" 
+                  IsVisible="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}"
+                  RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                  RowSpacing="15">
+
+                <!-- Title -->
+                <VerticalStackLayout Grid.Row="0" Spacing="5">
+                    <Label Text="Title"
+                           FontAttributes="Bold"
+                           FontSize="16" />
+                    <Label Text="{Binding Incident.Title, TargetNullValue='No title'}"
+                           FontSize="18" />
+                </VerticalStackLayout>
+
+                <!-- Status and Priority -->
+                <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="15">
+                    <VerticalStackLayout Grid.Column="0" Spacing="5">
+                        <Label Text="Status"
+                               FontAttributes="Bold"
+                               FontSize="16" />
+                        <Label Text="{Binding Incident.Status}"
+                               TextColor="{Binding Incident.Status, Converter={StaticResource StatusToColorConverter}}"
+                               FontSize="16" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Column="1" Spacing="5">
+                        <Label Text="Priority"
+                               FontAttributes="Bold"
+                               FontSize="16" />
+                        <Label Text="{Binding Incident.Priority}"
+                               TextColor="{Binding Incident.Priority, Converter={StaticResource PriorityToColorConverter}}"
+                               FontSize="16" />
+                    </VerticalStackLayout>
+                </Grid>
+
+                <!-- Description -->
+                <VerticalStackLayout Grid.Row="2" Spacing="5">
+                    <Label Text="Description"
+                           FontAttributes="Bold"
+                           FontSize="16" />
+                    <Label Text="{Binding Incident.Description, TargetNullValue='No description'}"
+                           FontSize="16" />
+                </VerticalStackLayout>
+
+                <!-- Photos -->
+                <VerticalStackLayout Grid.Row="3" Spacing="5">
+                    <Label Text="Photos"
+                           FontAttributes="Bold"
+                           FontSize="16" />
+                    <CollectionView ItemsSource="{Binding Photos}"
+                                  HeightRequest="120"
+                                  IsVisible="{Binding HasPhotos}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal"
+                                             ItemSpacing="10"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="x:String">
+                                <Frame WidthRequest="120"
+                                       HeightRequest="120"
+                                       Padding="0"
+                                       IsClippedToBounds="True"
+                                       CornerRadius="10">
+                                    <Image Source="{Binding .}"
+                                           Aspect="AspectFill"
+                                           HorizontalOptions="Fill"
+                                           VerticalOptions="Fill"/>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <Label Text="No photos available"
+                           IsVisible="{Binding HasPhotos, Converter={StaticResource InverseBoolConverter}}"
+                           TextColor="Gray"
+                           FontSize="14"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+                <!-- Location Map -->
+                <VerticalStackLayout Grid.Row="4" Spacing="5">
+                    <Label Text="Location"
+                           FontAttributes="Bold"
+                           FontSize="16" />
+                    <Frame Padding="0" 
+                           CornerRadius="10" 
+                           IsClippedToBounds="True"
+                           BorderColor="{StaticResource Primary}"
+                           HeightRequest="250"
+                           IsVisible="{Binding HasValidCoordinates}">
+                        <maps:Map x:Name="LocationMap"
+                                IsShowingUser="False"
+                                IsZoomEnabled="True"
+                                IsScrollEnabled="True"
+                                ItemsSource="{x:Null}"
+                                MapType="Street">
+                            <maps:Map.Pins>
+                                <!-- Pins will be added programmatically -->
+                            </maps:Map.Pins>
+                        </maps:Map>
+                    </Frame>
+                    <Label Text="No location data available"
+                           IsVisible="{Binding HasValidCoordinates, Converter={StaticResource InverseBoolConverter}}"
+                           TextColor="Gray"
+                           FontSize="14"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+                <!-- Location Details -->
+                <VerticalStackLayout Grid.Row="5" Spacing="5">
+                    <Label Text="{Binding Incident.Address, TargetNullValue='No address'}"
+                           FontSize="16" />
+                    <Label Text="{Binding Incident.ZipCode, TargetNullValue='No ZIP code'}"
+                           FontSize="14"
+                           TextColor="Gray" />
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Coordinates: " FontSize="14" TextColor="Gray" />
+                                <Span Text="{Binding Incident.Latitude, StringFormat='{0:F6}'}" FontSize="14" TextColor="Gray" />
+                                <Span Text=", " FontSize="14" TextColor="Gray" />
+                                <Span Text="{Binding Incident.Longitude, StringFormat='{0:F6}'}" FontSize="14" TextColor="Gray" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </VerticalStackLayout>
+
+                <!-- Reporter -->
+                <VerticalStackLayout Grid.Row="6" Spacing="5">
+                    <Label Text="Reported By"
+                           FontAttributes="Bold"
+                           FontSize="16" />
+                    <Label Text="{Binding Incident.CreatedBy.Email, TargetNullValue='Not assigned'}"
+                           FontSize="16" />
+                </VerticalStackLayout>
+
+                <!-- Assignee -->
+                <VerticalStackLayout Grid.Row="7" Spacing="5">
+                    <Label Text="Assigned To"
+                           FontAttributes="Bold"
+                           FontSize="16" />
+                    <Label Text="{Binding Incident.AssignedTo.Email}"
+                           FontSize="16" />
+                </VerticalStackLayout>
+
+                <!-- Dates -->
+                <Grid Grid.Row="8" ColumnDefinitions="*,*" ColumnSpacing="15">
+                    <VerticalStackLayout Grid.Column="0" Spacing="5">
+                        <Label Text="Created At"
+                               FontAttributes="Bold"
+                               FontSize="16" />
+                        <Label Text="{Binding Incident.CreatedAt, StringFormat='{0:g}'}"
+                               FontSize="14"
+                               TextColor="Gray" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Column="1" Spacing="5">
+                        <Label Text="Last Updated"
+                               FontAttributes="Bold"
+                               FontSize="16" />
+                        <Label Text="{Binding Incident.UpdatedAt, StringFormat='{0:g}'}"
+                               FontSize="14"
+                               TextColor="Gray" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Grid>
+        </Grid>
+    </ScrollView>
+</ContentPage> 

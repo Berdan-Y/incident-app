@@ -1,0 +1,86 @@
+﻿@inherits LayoutComponentBase
+@inject IAuthenticationService AuthService
+@inject IDialogService DialogService
+@inject NavigationManager NavigationManager
+@inject ISnackbar Snackbar
+@using Blazor.Components
+@using Blazor.Services
+@implements IDisposable
+
+<MudLayout>
+    <MudAppBar Elevation="1">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+        <MudText Typo="Typo.h6" Class="ml-4">Incident App</MudText>
+        <MudSpacer />
+        @if (!AuthService.IsAuthenticated)
+        {
+            <MudButton Href="/login" Variant="Variant.Filled" Color="Color.Primary" Class="mx-2">Login</MudButton>
+        }
+        else
+        {
+            <MudText Class="mr-4">Welcome, @AuthService.UserEmail!</MudText>
+            <MudButton OnClick="HandleLogout" Variant="Variant.Filled" Color="Color.Error">Logout</MudButton>
+        }
+    </MudAppBar>
+
+    <MudDrawer @bind-Open="@_drawerOpen" Elevation="1">
+        <MudDrawerHeader>
+            <MudText Typo="Typo.h6">Incident App</MudText>
+        </MudDrawerHeader>
+        <NavMenu />
+    </MudDrawer>
+
+    <MudMainContent Class="pt-16 px-16">
+        <MudContainer MaxWidth="MaxWidth.Large" Class="my-4">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
+
+@code {
+    bool _drawerOpen = true;
+
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+
+    protected override void OnInitialized()
+    {
+        AuthService.AuthenticationStateChanged += StateHasChanged;
+    }
+
+    private async Task HandleLogout()
+    {
+        var parameters = new DialogParameters
+        {
+            { "ContentText", "Are you sure you want to logout?" },
+            { "ButtonText", "Logout" },
+            { "Color", Color.Error }
+        };
+
+        var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall };
+        
+        var dialog = await DialogService.ShowAsync<ConfirmationDialog>("Confirm", parameters, options);
+        var result = await dialog.Result;
+
+        if (!result.Canceled)
+        {
+            try 
+            {
+                await AuthService.LogoutAsync();
+                Snackbar.Add("Successfully logged out!", Severity.Success);
+                NavigationManager.NavigateTo("/", true);
+            }
+            catch (Exception ex)
+            {
+                Snackbar.Add("Error during logout", Severity.Error);
+            }
+        }
+    }
+
+    public void Dispose()
+    {
+        AuthService.AuthenticationStateChanged -= StateHasChanged;
+    }
+}

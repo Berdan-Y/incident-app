@@ -1,14 +1,18 @@
-﻿namespace Maui;
+﻿using Microsoft.Maui.Controls;
+using Maui.Services;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace Maui;
 
 public partial class App : Application
 {
-    public App()
+    public App(IServiceProvider services)
     {
         InitializeComponent();
-    }
 
-    protected override Window CreateWindow(IActivationState? activationState)
-    {
-        return new Window(new AppShell());
+        // Ensure TokenService is available for converters
+        Resources["TokenService"] = services.GetRequiredService<ITokenService>();
+
+        MainPage = services.GetRequiredService<AppShell>();
     }
 }

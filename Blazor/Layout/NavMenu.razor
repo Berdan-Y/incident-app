@@ -1,0 +1,45 @@
+﻿@using Blazor.Services
+@inject ITokenService TokenService
+@inject NavigationManager NavigationManager
+@implements IDisposable
+
+<MudNavMenu>
+    <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">
+        Home
+    </MudNavLink>
+    
+    @if (TokenService.IsLoggedIn && TokenService.HasRole("Admin"))
+    {
+        <MudNavLink Href="all-incidents" Icon="@Icons.Material.Filled.Assignment">
+            All Incidents
+        </MudNavLink>
+        
+        <MudNavLink Href="register" Icon="@Icons.Material.Filled.PersonAdd">
+            Register User
+        </MudNavLink>
+    }
+</MudNavMenu>
+
+@code {
+    protected override void OnInitialized()
+    {
+        TokenService.LoggedIn += OnAuthenticationStateChanged;
+        TokenService.LoggedOut += OnAuthenticationStateChanged;
+    }
+
+    private async void OnAuthenticationStateChanged()
+    {
+        await InvokeAsync(() => {
+            StateHasChanged();
+            // Force navigation to current page to refresh the view
+            var currentUri = NavigationManager.Uri;
+            NavigationManager.NavigateTo(currentUri, forceLoad: false);
+        });
+    }
+
+    public void Dispose()
+    {
+        TokenService.LoggedIn -= OnAuthenticationStateChanged;
+        TokenService.LoggedOut -= OnAuthenticationStateChanged;
+    }
+}

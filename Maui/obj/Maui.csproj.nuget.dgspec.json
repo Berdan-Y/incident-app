@@ -19,8 +19,7 @@
         ],
         "originalTargetFrameworks": [
           "net9.0-android",
-          "net9.0-ios",
-          "net9.0-maccatalyst"
+          "net9.0-ios"
         ],
         "sources": {
           "/usr/local/share/dotnet/library-packs": {},
@@ -35,16 +34,8 @@
               }
             }
           },
-          "net9.0-ios18.4": {
+          "net9.0-ios18.5": {
             "targetAlias": "net9.0-ios",
-            "projectReferences": {
-              "/Users/berdanyilmaz/Documents/GitHub/incident-app/Shared/Shared.csproj": {
-                "projectPath": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Shared/Shared.csproj"
-              }
-            }
-          },
-          "net9.0-maccatalyst18.4": {
-            "targetAlias": "net9.0-maccatalyst",
             "projectReferences": {
               "/Users/berdanyilmaz/Documents/GitHub/incident-app/Shared/Shared.csproj": {
                 "projectPath": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Shared/Shared.csproj"
@@ -68,6 +59,14 @@
         "net9.0-android35.0": {
           "targetAlias": "net9.0-android",
           "dependencies": {
+            "CommunityToolkit.Maui": {
+              "target": "Package",
+              "version": "[5.3.0, )"
+            },
+            "CommunityToolkit.Mvvm": {
+              "target": "Package",
+              "version": "[8.2.2, )"
+            },
             "Microsoft.Extensions.Logging.Debug": {
               "target": "Package",
               "version": "[9.0.0, )"
@@ -76,11 +75,31 @@
               "target": "Package",
               "version": "[9.0.51, )"
             },
+            "Microsoft.Maui.Controls.Maps": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Microsoft.Maui.Maps": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
               "version": "[9.0.2, )",
               "autoReferenced": true
+            },
+            "Refit": {
+              "target": "Package",
+              "version": "[7.2.1, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[7.4.0, )"
+            },
+            "System.Net.Http": {
+              "target": "Package",
+              "version": "[4.3.4, )"
             }
           },
           "imports": [
@@ -97,7 +116,7 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.NETCore.App.Ref",
-              "version": "[9.0.5, 9.0.5]"
+              "version": "[9.0.6, 9.0.6]"
             }
           ],
           "frameworkReferences": {
@@ -110,9 +129,17 @@
           },
           "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
         },
-        "net9.0-ios18.4": {
+        "net9.0-ios18.5": {
           "targetAlias": "net9.0-ios",
           "dependencies": {
+            "CommunityToolkit.Maui": {
+              "target": "Package",
+              "version": "[5.3.0, )"
+            },
+            "CommunityToolkit.Mvvm": {
+              "target": "Package",
+              "version": "[8.2.2, )"
+            },
             "Microsoft.Extensions.Logging.Debug": {
               "target": "Package",
               "version": "[9.0.0, )"
@@ -121,11 +148,31 @@
               "target": "Package",
               "version": "[9.0.51, )"
             },
+            "Microsoft.Maui.Controls.Maps": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Microsoft.Maui.Maps": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
               "version": "[9.0.2, )",
               "autoReferenced": true
+            },
+            "Refit": {
+              "target": "Package",
+              "version": "[7.2.1, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[7.4.0, )"
+            },
+            "System.Net.Http": {
+              "target": "Package",
+              "version": "[4.3.4, )"
             }
           },
           "imports": [
@@ -142,57 +189,11 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.NETCore.App.Ref",
-              "version": "[9.0.5, 9.0.5]"
+              "version": "[9.0.6, 9.0.6]"
             }
           ],
           "frameworkReferences": {
             "Microsoft.iOS": {
-              "privateAssets": "all"
-            },
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
-        },
-        "net9.0-maccatalyst18.4": {
-          "targetAlias": "net9.0-maccatalyst",
-          "dependencies": {
-            "Microsoft.Extensions.Logging.Debug": {
-              "target": "Package",
-              "version": "[9.0.0, )"
-            },
-            "Microsoft.Maui.Controls": {
-              "target": "Package",
-              "version": "[9.0.51, )"
-            },
-            "Microsoft.NET.ILLink.Tasks": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[9.0.2, )",
-              "autoReferenced": true
-            }
-          },
-          "imports": [
-            "xamarinios10",
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[9.0.5, 9.0.5]"
-            }
-          ],
-          "frameworkReferences": {
-            "Microsoft.MacCatalyst": {
               "privateAssets": "all"
             },
             "Microsoft.NETCore.App": {
@@ -210,9 +211,6 @@
           "#import": []
         },
         "iossimulator-arm64": {
-          "#import": []
-        },
-        "maccatalyst-arm64": {
           "#import": []
         }
       }
@@ -257,6 +255,62 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[14.0.0, )"
+            },
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.3, )"
+            },
+            "Microsoft.AspNetCore.Hosting.Abstractions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.2.2, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[9.0.5, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Microsoft.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Refit": {
+              "target": "Package",
+              "version": "[7.2.1, )"
+            },
+            "Refit.HttpClientFactory": {
+              "target": "Package",
+              "version": "[7.2.1, )"
+            },
+            "System.Composition.Hosting": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "System.Text.Json": {
+              "target": "Package",
+              "version": "[9.0.5, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

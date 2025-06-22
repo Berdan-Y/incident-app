@@ -1,12 +1,1155 @@
 {
   "Version": 1,
-  "Hash": "A5c6GKfqW+kOYxX7+ezU9WKq8ts6/mK8f4alHUBjdmk=",
+  "Hash": "7NDm+7wN7bScpO8S2fhP1qlYFBQyz2ZncRmPTAhosfA=",
   "Source": "API",
   "BasePath": "_content/API",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "API/wwwroot",
+      "Source": "API",
+      "ContentRoot": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/",
+      "BasePath": "_content/API",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/01372fe8-0b70-4d75-87ae-22cad5de54a3.jpg",
+      "SourceId": "API",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/",
+      "BasePath": "_content/API",
+      "RelativePath": "uploads/incidents/01372fe8-0b70-4d75-87ae-22cad5de54a3#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "bs43l3s0sz",
+      "Integrity": "+xv6UR3DbJk5O7q40RDNdCMFydeX36Mhea+c1mTnZbo=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/incidents/01372fe8-0b70-4d75-87ae-22cad5de54a3.jpg"
+    },
+    {
+      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/0e587112-1a18-4735-b4e6-57bfcdbd9642.jpg",
+      "SourceId": "API",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/",
+      "BasePath": "_content/API",
+      "RelativePath": "uploads/incidents/0e587112-1a18-4735-b4e6-57bfcdbd9642#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "i480chcard",
+      "Integrity": "3iaV+ADzQT7/piU72oP5RkcFI+QIR6YWzGA9hqyysmM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/incidents/0e587112-1a18-4735-b4e6-57bfcdbd9642.jpg"
+    },
+    {
+      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/18cd4d71-f585-4e10-a5fe-caafc2989f80.jpg",
+      "SourceId": "API",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/",
+      "BasePath": "_content/API",
+      "RelativePath": "uploads/incidents/18cd4d71-f585-4e10-a5fe-caafc2989f80#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "eac9l3aqhq",
+      "Integrity": "ihjN9wVGHe2XX10aCYzmf8MD41s2J6FWLBoX98WG2i0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/incidents/18cd4d71-f585-4e10-a5fe-caafc2989f80.jpg"
+    },
+    {
+      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/1cb18c99-a500-4db0-80f4-2cdb43f162a4.jpg",
+      "SourceId": "API",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/",
+      "BasePath": "_content/API",
+      "RelativePath": "uploads/incidents/1cb18c99-a500-4db0-80f4-2cdb43f162a4#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "v3r2b6onhb",
+      "Integrity": "u/i5Q47cNfpxvTAuh3emH3gBcy4mVuE/MCUKxfSBbsg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/incidents/1cb18c99-a500-4db0-80f4-2cdb43f162a4.jpg"
+    },
+    {
+      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/6b255a2c-1a44-42d1-ae34-a57a353ea70e.jpg",
+      "SourceId": "API",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/",
+      "BasePath": "_content/API",
+      "RelativePath": "uploads/incidents/6b255a2c-1a44-42d1-ae34-a57a353ea70e#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "t05389alk6",
+      "Integrity": "0xdDlWF08tKQokLLzpGKP6yqD3FPs8pGiQve7PZ69ew=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/incidents/6b255a2c-1a44-42d1-ae34-a57a353ea70e.jpg"
+    },
+    {
+      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/85eb9e40-1942-41ef-9420-429220ac768d.jpg",
+      "SourceId": "API",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/",
+      "BasePath": "_content/API",
+      "RelativePath": "uploads/incidents/85eb9e40-1942-41ef-9420-429220ac768d#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "0wapvc43ve",
+      "Integrity": "YDJ6xB0oLTsasTcuyD4tPBkb5JYNqwDwiWU99F4aggo=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/incidents/85eb9e40-1942-41ef-9420-429220ac768d.jpg"
+    },
+    {
+      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/8d24de09-27d6-482d-a66c-46925d64a78d.jpg",
+      "SourceId": "API",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/",
+      "BasePath": "_content/API",
+      "RelativePath": "uploads/incidents/8d24de09-27d6-482d-a66c-46925d64a78d#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "5wgt9p8llp",
+      "Integrity": "xWfiDKLsp1JZI2hYMgRRxRmNnkaFYQvSlNF1odIMgQ0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/incidents/8d24de09-27d6-482d-a66c-46925d64a78d.jpg"
+    },
+    {
+      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/91e05245-6dd5-4121-aa2e-88e8388f4b13.jpg",
+      "SourceId": "API",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/",
+      "BasePath": "_content/API",
+      "RelativePath": "uploads/incidents/91e05245-6dd5-4121-aa2e-88e8388f4b13#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "bs43l3s0sz",
+      "Integrity": "+xv6UR3DbJk5O7q40RDNdCMFydeX36Mhea+c1mTnZbo=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/incidents/91e05245-6dd5-4121-aa2e-88e8388f4b13.jpg"
+    },
+    {
+      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/a361a8fe-583d-4cf8-8cf6-6807750a359a.jpg",
+      "SourceId": "API",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/",
+      "BasePath": "_content/API",
+      "RelativePath": "uploads/incidents/a361a8fe-583d-4cf8-8cf6-6807750a359a#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "spvniy7ggl",
+      "Integrity": "UIr56HC384ggYZlIfageYEkHOAcqk+WLYtH858//JgQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/incidents/a361a8fe-583d-4cf8-8cf6-6807750a359a.jpg"
+    },
+    {
+      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/c11a3023-343b-4768-b984-fbe998a9f263.jpg",
+      "SourceId": "API",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/",
+      "BasePath": "_content/API",
+      "RelativePath": "uploads/incidents/c11a3023-343b-4768-b984-fbe998a9f263#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "bs43l3s0sz",
+      "Integrity": "+xv6UR3DbJk5O7q40RDNdCMFydeX36Mhea+c1mTnZbo=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/incidents/c11a3023-343b-4768-b984-fbe998a9f263.jpg"
+    },
+    {
+      "Identity": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/f052341c-1fcf-441f-a366-47b5c6ccdf05.jpg",
+      "SourceId": "API",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/",
+      "BasePath": "_content/API",
+      "RelativePath": "uploads/incidents/f052341c-1fcf-441f-a366-47b5c6ccdf05#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "fgozwhbzl1",
+      "Integrity": "j9qDWckIlW5eIeAzccnzdahJXiQNZE5Rze4ineYozqY=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/incidents/f052341c-1fcf-441f-a366-47b5c6ccdf05.jpg"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "uploads/incidents/01372fe8-0b70-4d75-87ae-22cad5de54a3.bs43l3s0sz.jpg",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/01372fe8-0b70-4d75-87ae-22cad5de54a3.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "30333"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+xv6UR3DbJk5O7q40RDNdCMFydeX36Mhea+c1mTnZbo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 21 Jun 2025 23:23:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "bs43l3s0sz"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/incidents/01372fe8-0b70-4d75-87ae-22cad5de54a3.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-+xv6UR3DbJk5O7q40RDNdCMFydeX36Mhea+c1mTnZbo="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/incidents/01372fe8-0b70-4d75-87ae-22cad5de54a3.jpg",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/01372fe8-0b70-4d75-87ae-22cad5de54a3.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "30333"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+xv6UR3DbJk5O7q40RDNdCMFydeX36Mhea+c1mTnZbo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 21 Jun 2025 23:23:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+xv6UR3DbJk5O7q40RDNdCMFydeX36Mhea+c1mTnZbo="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/incidents/0e587112-1a18-4735-b4e6-57bfcdbd9642.i480chcard.jpg",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/0e587112-1a18-4735-b4e6-57bfcdbd9642.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "196805"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"3iaV+ADzQT7/piU72oP5RkcFI+QIR6YWzGA9hqyysmM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 21 Jun 2025 23:14:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "i480chcard"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/incidents/0e587112-1a18-4735-b4e6-57bfcdbd9642.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-3iaV+ADzQT7/piU72oP5RkcFI+QIR6YWzGA9hqyysmM="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/incidents/0e587112-1a18-4735-b4e6-57bfcdbd9642.jpg",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/0e587112-1a18-4735-b4e6-57bfcdbd9642.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "196805"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"3iaV+ADzQT7/piU72oP5RkcFI+QIR6YWzGA9hqyysmM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 21 Jun 2025 23:14:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-3iaV+ADzQT7/piU72oP5RkcFI+QIR6YWzGA9hqyysmM="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/incidents/18cd4d71-f585-4e10-a5fe-caafc2989f80.eac9l3aqhq.jpg",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/18cd4d71-f585-4e10-a5fe-caafc2989f80.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "198438"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ihjN9wVGHe2XX10aCYzmf8MD41s2J6FWLBoX98WG2i0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 22 Jun 2025 00:03:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "eac9l3aqhq"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/incidents/18cd4d71-f585-4e10-a5fe-caafc2989f80.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ihjN9wVGHe2XX10aCYzmf8MD41s2J6FWLBoX98WG2i0="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/incidents/18cd4d71-f585-4e10-a5fe-caafc2989f80.jpg",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/18cd4d71-f585-4e10-a5fe-caafc2989f80.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "198438"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ihjN9wVGHe2XX10aCYzmf8MD41s2J6FWLBoX98WG2i0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 22 Jun 2025 00:03:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ihjN9wVGHe2XX10aCYzmf8MD41s2J6FWLBoX98WG2i0="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/incidents/1cb18c99-a500-4db0-80f4-2cdb43f162a4.jpg",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/1cb18c99-a500-4db0-80f4-2cdb43f162a4.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "198152"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"u/i5Q47cNfpxvTAuh3emH3gBcy4mVuE/MCUKxfSBbsg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 21 Jun 2025 23:39:40 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-u/i5Q47cNfpxvTAuh3emH3gBcy4mVuE/MCUKxfSBbsg="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/incidents/1cb18c99-a500-4db0-80f4-2cdb43f162a4.v3r2b6onhb.jpg",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/1cb18c99-a500-4db0-80f4-2cdb43f162a4.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "198152"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"u/i5Q47cNfpxvTAuh3emH3gBcy4mVuE/MCUKxfSBbsg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 21 Jun 2025 23:39:40 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "v3r2b6onhb"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/incidents/1cb18c99-a500-4db0-80f4-2cdb43f162a4.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-u/i5Q47cNfpxvTAuh3emH3gBcy4mVuE/MCUKxfSBbsg="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/incidents/6b255a2c-1a44-42d1-ae34-a57a353ea70e.jpg",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/6b255a2c-1a44-42d1-ae34-a57a353ea70e.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "63725"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"0xdDlWF08tKQokLLzpGKP6yqD3FPs8pGiQve7PZ69ew=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 21 Jun 2025 23:23:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-0xdDlWF08tKQokLLzpGKP6yqD3FPs8pGiQve7PZ69ew="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/incidents/6b255a2c-1a44-42d1-ae34-a57a353ea70e.t05389alk6.jpg",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/6b255a2c-1a44-42d1-ae34-a57a353ea70e.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "63725"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"0xdDlWF08tKQokLLzpGKP6yqD3FPs8pGiQve7PZ69ew=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 21 Jun 2025 23:23:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "t05389alk6"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/incidents/6b255a2c-1a44-42d1-ae34-a57a353ea70e.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-0xdDlWF08tKQokLLzpGKP6yqD3FPs8pGiQve7PZ69ew="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/incidents/85eb9e40-1942-41ef-9420-429220ac768d.0wapvc43ve.jpg",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/85eb9e40-1942-41ef-9420-429220ac768d.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "198058"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"YDJ6xB0oLTsasTcuyD4tPBkb5JYNqwDwiWU99F4aggo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 21 Jun 2025 23:23:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "0wapvc43ve"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/incidents/85eb9e40-1942-41ef-9420-429220ac768d.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-YDJ6xB0oLTsasTcuyD4tPBkb5JYNqwDwiWU99F4aggo="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/incidents/85eb9e40-1942-41ef-9420-429220ac768d.jpg",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/85eb9e40-1942-41ef-9420-429220ac768d.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "198058"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"YDJ6xB0oLTsasTcuyD4tPBkb5JYNqwDwiWU99F4aggo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 21 Jun 2025 23:23:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-YDJ6xB0oLTsasTcuyD4tPBkb5JYNqwDwiWU99F4aggo="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/incidents/8d24de09-27d6-482d-a66c-46925d64a78d.5wgt9p8llp.jpg",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/8d24de09-27d6-482d-a66c-46925d64a78d.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "197659"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"xWfiDKLsp1JZI2hYMgRRxRmNnkaFYQvSlNF1odIMgQ0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 21 Jun 2025 23:39:03 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "5wgt9p8llp"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/incidents/8d24de09-27d6-482d-a66c-46925d64a78d.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-xWfiDKLsp1JZI2hYMgRRxRmNnkaFYQvSlNF1odIMgQ0="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/incidents/8d24de09-27d6-482d-a66c-46925d64a78d.jpg",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/8d24de09-27d6-482d-a66c-46925d64a78d.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "197659"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"xWfiDKLsp1JZI2hYMgRRxRmNnkaFYQvSlNF1odIMgQ0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 21 Jun 2025 23:39:03 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-xWfiDKLsp1JZI2hYMgRRxRmNnkaFYQvSlNF1odIMgQ0="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/incidents/91e05245-6dd5-4121-aa2e-88e8388f4b13.bs43l3s0sz.jpg",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/91e05245-6dd5-4121-aa2e-88e8388f4b13.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "30333"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+xv6UR3DbJk5O7q40RDNdCMFydeX36Mhea+c1mTnZbo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 21 Jun 2025 23:14:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "bs43l3s0sz"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/incidents/91e05245-6dd5-4121-aa2e-88e8388f4b13.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-+xv6UR3DbJk5O7q40RDNdCMFydeX36Mhea+c1mTnZbo="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/incidents/91e05245-6dd5-4121-aa2e-88e8388f4b13.jpg",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/91e05245-6dd5-4121-aa2e-88e8388f4b13.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "30333"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+xv6UR3DbJk5O7q40RDNdCMFydeX36Mhea+c1mTnZbo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 21 Jun 2025 23:14:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+xv6UR3DbJk5O7q40RDNdCMFydeX36Mhea+c1mTnZbo="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/incidents/a361a8fe-583d-4cf8-8cf6-6807750a359a.jpg",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/a361a8fe-583d-4cf8-8cf6-6807750a359a.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "63457"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"UIr56HC384ggYZlIfageYEkHOAcqk+WLYtH858//JgQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 21 Jun 2025 23:24:21 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-UIr56HC384ggYZlIfageYEkHOAcqk+WLYtH858//JgQ="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/incidents/a361a8fe-583d-4cf8-8cf6-6807750a359a.spvniy7ggl.jpg",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/a361a8fe-583d-4cf8-8cf6-6807750a359a.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "63457"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"UIr56HC384ggYZlIfageYEkHOAcqk+WLYtH858//JgQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 21 Jun 2025 23:24:21 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "spvniy7ggl"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/incidents/a361a8fe-583d-4cf8-8cf6-6807750a359a.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-UIr56HC384ggYZlIfageYEkHOAcqk+WLYtH858//JgQ="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/incidents/c11a3023-343b-4768-b984-fbe998a9f263.bs43l3s0sz.jpg",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/c11a3023-343b-4768-b984-fbe998a9f263.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "30333"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+xv6UR3DbJk5O7q40RDNdCMFydeX36Mhea+c1mTnZbo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 22 Jun 2025 00:03:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "bs43l3s0sz"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/incidents/c11a3023-343b-4768-b984-fbe998a9f263.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-+xv6UR3DbJk5O7q40RDNdCMFydeX36Mhea+c1mTnZbo="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/incidents/c11a3023-343b-4768-b984-fbe998a9f263.jpg",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/c11a3023-343b-4768-b984-fbe998a9f263.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "30333"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+xv6UR3DbJk5O7q40RDNdCMFydeX36Mhea+c1mTnZbo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 22 Jun 2025 00:03:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+xv6UR3DbJk5O7q40RDNdCMFydeX36Mhea+c1mTnZbo="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/incidents/f052341c-1fcf-441f-a366-47b5c6ccdf05.fgozwhbzl1.jpg",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/f052341c-1fcf-441f-a366-47b5c6ccdf05.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "197672"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"j9qDWckIlW5eIeAzccnzdahJXiQNZE5Rze4ineYozqY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 21 Jun 2025 23:38:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "fgozwhbzl1"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/incidents/f052341c-1fcf-441f-a366-47b5c6ccdf05.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-j9qDWckIlW5eIeAzccnzdahJXiQNZE5Rze4ineYozqY="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/incidents/f052341c-1fcf-441f-a366-47b5c6ccdf05.jpg",
+      "AssetFile": "/Users/berdanyilmaz/Documents/GitHub/incident-app/API/wwwroot/uploads/incidents/f052341c-1fcf-441f-a366-47b5c6ccdf05.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "197672"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"j9qDWckIlW5eIeAzccnzdahJXiQNZE5Rze4ineYozqY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 21 Jun 2025 23:38:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-j9qDWckIlW5eIeAzccnzdahJXiQNZE5Rze4ineYozqY="
+        }
+      ]
+    }
+  ]
 }

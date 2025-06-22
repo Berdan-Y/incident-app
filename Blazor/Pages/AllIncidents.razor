@@ -1,0 +1,258 @@
+@page "/all-incidents"
+@using Shared.Models.Dtos
+@using Shared.Api
+@using Shared.Models.Enums
+@using Blazor.Services
+@inject IIncidentApi IncidentApi
+@inject IGoogleMapsService GoogleMapsService
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
+
+<style>
+    .view-toggle-button {
+        min-width: 120px;
+    }
+    .view-toggle-button.active {
+        background-color: var(--mud-palette-primary) !important;
+        color: var(--mud-palette-primary-text) !important;
+    }
+</style>
+
+<MudContainer Class="mt-4">
+    <div class="d-flex justify-space-between align-center mb-4">
+        <MudText Typo="Typo.h3">All Incidents</MudText>
+        <MudButtonGroup>
+            <MudButton OnClick="@(() => SwitchView(ViewType.Cards))" 
+                      Class="@($"view-toggle-button {(viewType == ViewType.Cards ? "active" : "")}")">
+                <MudIcon Icon="@Icons.Material.Filled.ViewModule" Class="mr-2"/>Cards
+            </MudButton>
+            <MudButton OnClick="@(() => SwitchView(ViewType.Map))"
+                      Class="@($"view-toggle-button {(viewType == ViewType.Map ? "active" : "")}")">
+                <MudIcon Icon="@Icons.Material.Filled.Map" Class="mr-2"/>Map
+            </MudButton>
+        </MudButtonGroup>
+    </div>
+
+    @if (incidents == null)
+    {
+        <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+    }
+    else if (!incidents.Any())
+    {
+        <MudAlert Severity="Severity.Info">No incidents found.</MudAlert>
+    }
+    else
+    {
+        @if (viewType == ViewType.Cards)
+        {
+            <MudGrid>
+                @foreach (var incident in incidents)
+                {
+                    <MudItem xs="12" sm="6" md="4">
+                        <MudCard Elevation="3" Class="mb-4">
+                            <MudCardHeader>
+                                <MudText Typo="Typo.h6">@incident.Title</MudText>
+                            </MudCardHeader>
+                            <MudCardContent>
+                                <MudStack>
+                                    <MudText Class="d-flex align-center">
+                                        <MudIcon Icon="@Icons.Material.Filled.Flag" Class="mr-2" />
+                                        Status: <MudChip Color="@GetStatusColor(incident.Status.ToString())" Size="Size.Small" Class="ml-1">@incident.Status</MudChip>
+                                    </MudText>
+                                    <MudText Class="d-flex align-center">
+                                        <MudIcon Icon="@Icons.Material.Filled.PriorityHigh" Class="mr-2" />
+                                        Priority: 
+                                        @if (editingPriorityId != incident.Id)
+                                        {
+                                            <span class="d-flex align-center">
+                                                <MudChip Color="@GetPriorityColor(incident.Priority.ToString())" Size="Size.Small" Class="ml-1 mr-2">@incident.Priority</MudChip>
+                                                <MudIconButton Size="Size.Small"
+                                                             Icon="@Icons.Material.Filled.Edit"
+                                                             OnClick="@(() => editingPriorityId = incident.Id)"
+                                                             Class="pa-0 ml-1" />
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="d-flex align-center ml-1">
+                                                <MudSelect T="Priority" 
+                                                         Value="@incident.Priority"
+                                                         ValueChanged="@(async (Priority p) => await UpdatePriorityAsync(incident.Id, p))"
+                                                         Dense="true"
+                                                         Style="min-width: 120px;">
+                                                    @foreach (var priority in Enum.GetValues<Priority>())
+                                                    {
+                                                        <MudSelectItem Value="@priority">@priority</MudSelectItem>
+                                                    }
+                                                </MudSelect>
+                                                <MudIconButton Size="Size.Small"
+                                                             Icon="@Icons.Material.Filled.Close"
+                                                             OnClick="@(() => editingPriorityId = Guid.Empty)"
+                                                             Class="ml-2" />
+                                            </span>
+                                        }
+                                    </MudText>
+                                    <MudText Class="d-flex align-center">
+                                        <MudIcon Icon="@Icons.Material.Filled.CalendarToday" Class="mr-2" />
+                                        Created: @incident.CreatedAt.ToLocalTime().ToString("g")
+                                    </MudText>
+                                </MudStack>
+                            </MudCardContent>
+                            <MudCardActions>
+                                <MudButton Variant="Variant.Filled" 
+                                         Color="Color.Primary" 
+                                         OnClick="@(() => ViewDetails(incident.Id))"
+                                         StartIcon="@Icons.Material.Filled.Visibility"
+                                         Class="mr-2">
+                                    View Details
+                                </MudButton>
+                                @if (incident.Latitude != 0 || incident.Longitude != 0)
+                                {
+                                    <MudButton Variant="Variant.Filled"
+                                               Color="Color.Secondary"
+                                               OnClick="@(() => OpenDirections(incident.Latitude, incident.Longitude))"
+                                               StartIcon="@Icons.Material.Filled.Directions">
+                                        Get Directions
+                                    </MudButton>
+                                }
+                            </MudCardActions>
+                        </MudCard>
+                    </MudItem>
+                }
+            </MudGrid>
+        }
+        else
+        {
+            <div class="map-container" @ref="mapElement"></div>
+        }
+    }
+</MudContainer>
+
+@code {
+    private List<IncidentResponseDto> incidents;
+    private Guid editingPriorityId = Guid.Empty;
+    private ViewType viewType = ViewType.Cards;
+    private ElementReference mapElement;
+    private int? mapId;
+
+    private enum ViewType
+    {
+        Cards,
+        Map
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var response = await IncidentApi.GetIncidentsAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                incidents = response.Content;
+            }
+        }
+        catch (Exception ex)
+        {
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (viewType == ViewType.Map && mapId == null)
+        {
+            mapId = await GoogleMapsService.InitializeMapAsync(mapElement);
+            if (incidents != null)
+            {
+                foreach (var incident in incidents)
+                {
+                    if (incident.Latitude != 0 || incident.Longitude != 0)
+                    {
+                        await GoogleMapsService.AddMarkerAsync(
+                            mapId.Value,
+                            incident.Latitude,
+                            incident.Longitude,
+                            incident.Title
+                        );
+                    }
+                }
+            }
+        }
+    }
+
+    private async Task UpdatePriorityAsync(Guid incidentId, Priority newPriority)
+    {
+        try
+        {
+            var response = await IncidentApi.UpdateIncidentPriorityAsync(incidentId, (int)newPriority);
+            if (response.IsSuccessStatusCode)
+            {
+                // Update the local incident's priority
+                var incident = incidents.FirstOrDefault(i => i.Id == incidentId);
+                if (incident != null)
+                {
+                    incident.Priority = newPriority;
+                    editingPriorityId = Guid.Empty; // Hide the select after successful update
+                    StateHasChanged();
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+        }
+    }
+
+    private void ViewDetails(Guid id)
+    {
+        NavigationManager.NavigateTo($"/incident/{id}");
+    }
+
+    private Color GetStatusColor(string status) => status?.ToLower() switch
+    {
+        "todo" => Color.Error,
+        "inprogress" => Color.Warning,
+        "done" => Color.Success,
+        _ => Color.Default
+    };
+
+    private Color GetPriorityColor(string priority) => priority?.ToLower() switch
+    {
+        "high" => Color.Error,
+        "medium" => Color.Warning,
+        "low" => Color.Success,
+        "unknown" => Color.Default,
+        _ => Color.Default
+    };
+
+    private async Task OpenDirections(double lat, double lng)
+    {
+        await JSRuntime.InvokeVoidAsync("openGoogleMapsDirections", lat, lng);
+    }
+
+    private async Task SwitchView(ViewType newView)
+    {
+        viewType = newView;
+        StateHasChanged();
+        
+        // Initialize map if switching to map view
+        if (viewType == ViewType.Map && mapId == null)
+        {
+            await Task.Delay(50); // Small delay to ensure DOM is updated
+            mapId = await GoogleMapsService.InitializeMapAsync(mapElement);
+            if (incidents != null)
+            {
+                foreach (var incident in incidents)
+                {
+                    if (incident.Latitude != 0 || incident.Longitude != 0)
+                    {
+                        await GoogleMapsService.AddMarkerAsync(
+                            mapId.Value,
+                            incident.Latitude,
+                            incident.Longitude,
+                            incident.Title
+                        );
+                    }
+                }
+            }
+        }
+    }
+} 

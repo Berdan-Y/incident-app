@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Maui.Pages.LogoutPage"
+             Title="Logout">
+    <VerticalStackLayout Spacing="25" Padding="30,0" VerticalOptions="Center">
+        <Label 
+            Text="Are you sure you want to logout?"
+            SemanticProperties.HeadingLevel="Level1"
+            FontSize="32"
+            HorizontalOptions="Center" />
+
+        <Button 
+            x:Name="LogoutButton"
+            Text="Logout"
+            SemanticProperties.Hint="Logs you out of the application"
+            Command="{Binding LogoutCommand}"
+            HorizontalOptions="Center" />
+    </VerticalStackLayout>
+</ContentPage> 

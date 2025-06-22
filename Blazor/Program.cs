@@ -1,28 +1,61 @@
-using Blazor.Components;
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Blazor;
+using MudBlazor.Services;
+using Blazor.Services;
+using Refit;
+using Shared.Api;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebAssemblyHostBuilder.CreateDefault(args);
+builder.RootComponents.Add<App>("#app");
+builder.RootComponents.Add<HeadOutlet>("head::after");
 
-// Add services to the container.
-builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents();
+// Load configuration
+var apiBaseAddress = builder.Configuration.GetValue<string>("ApiSettings:BaseUrl")
+    ?? throw new InvalidOperationException("API Base URL is not configured");
 
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+// Configure JSON serialization settings
+var jsonOptions = new JsonSerializerOptions
 {
-    app.UseExceptionHandler("/Error", createScopeForErrors: true);
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
+    PropertyNameCaseInsensitive = true,
+    Converters = { new JsonStringEnumConverter() }
+};
 
-app.UseHttpsRedirection();
+var refitSettings = new RefitSettings
+{
+    ContentSerializer = new SystemTextJsonContentSerializer(jsonOptions)
+};
 
+// Register services
+builder.Services.AddMudServices();
 
-app.UseAntiforgery();
+// Register core services
+builder.Services.AddSingleton<ITokenService, TokenService>();
+builder.Services.AddSingleton<IAuthenticationService, AuthenticationService>();
+builder.Services.AddSingleton<IGoogleMapsService, GoogleMapsService>();
 
-app.MapStaticAssets();
-app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode();
+// Configure HttpClient with auth handler
+builder.Services.AddTransient<AuthMessageHandler>();
 
-app.Run();
+// Configure the default HttpClient (used by AuthenticationService)
+builder.Services.AddHttpClient(string.Empty, client =>
+{
+    client.BaseAddress = new Uri(apiBaseAddress);
+}).AddHttpMessageHandler<AuthMessageHandler>();
+
+// Register Refit client for IIncidentApi
+builder.Services.AddRefitClient<IIncidentApi>(refitSettings)
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri(apiBaseAddress))
+    .AddHttpMessageHandler<AuthMessageHandler>();
+
+// Register Refit client for IUserApi
+builder.Services.AddRefitClient<IUserApi>(refitSettings)
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri(apiBaseAddress))
+    .AddHttpMessageHandler<AuthMessageHandler>();
+
+// Configure Google Maps service
+builder.Services.AddHttpClient<IGoogleMapsService, GoogleMapsService>();
+
+await builder.Build().RunAsync();
