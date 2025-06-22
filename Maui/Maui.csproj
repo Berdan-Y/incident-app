@@ -1,7 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
+        <TargetFrameworks>net9.0-android;net9.0-ios</TargetFrameworks>
         <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>
         <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
         <!-- <TargetFrameworks>$(TargetFrameworks);net9.0-tizen</TargetFrameworks> -->
@@ -24,7 +25,7 @@
         <ApplicationTitle>Maui</ApplicationTitle>
 
         <!-- App Identifier -->
-        <ApplicationId>com.companyname.maui</ApplicationId>
+        <ApplicationId>com.companyname.incident-app</ApplicationId>
 
         <!-- Versions -->
         <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -33,6 +34,10 @@
         <!-- To develop, package, and publish an app to the Microsoft Store, see: https://aka.ms/MauiTemplateUnpackaged -->
         <WindowsPackageType>None</WindowsPackageType>
 
+        <!-- Android Specific -->
+        <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidMessageHandler</AndroidHttpClientHandlerType>
+        <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
+        
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">15.0</SupportedOSPlatformVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
@@ -41,31 +46,113 @@
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
     </PropertyGroup>
 
+    <!-- iOS Specific Configuration -->
+    <PropertyGroup Condition="$(TargetFramework.Contains('-ios'))">
+        <CreatePackage>false</CreatePackage>
+        <RuntimeIdentifier>iossimulator-arm64</RuntimeIdentifier>
+        <CodesignEntitlements></CodesignEntitlements>
+        <CodesignKey>-</CodesignKey>
+        <CodesignProvision></CodesignProvision>
+        <MtouchDebug>true</MtouchDebug>
+        <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
+        <MtouchFastDev>true</MtouchFastDev>
+        <Platform>iPhoneSimulator</Platform>
+        <MtouchLink>None</MtouchLink>
+        <EnableCodeSigning>false</EnableCodeSigning>
+        <EnablePackageSigning>false</EnablePackageSigning>
+        <UseHardenedRuntime>false</UseHardenedRuntime>
+        <IOSDebugOverWiFi>false</IOSDebugOverWiFi>
+        <!-- iOS Location Permissions -->
+        <ProvisioningType>automatic</ProvisioningType>
+    </PropertyGroup>
+
+    <!-- iOS Info.plist Values -->
+    <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
+        <InfoPlistValue Include="NSLocationWhenInUseUsageDescription" Text="This app needs access to location services to show your current location." />
+        <InfoPlistValue Include="NSLocationAlwaysUsageDescription" Text="This app needs access to location services to show your current location." />
+    </ItemGroup>
+
+    <!-- Android Specific Configuration -->
+    <PropertyGroup Condition="$(TargetFramework.Contains('-android'))">
+        <AndroidLinkMode>None</AndroidLinkMode>
+        <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
+        <AndroidUseAapt2>true</AndroidUseAapt2>
+        <AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
+        <AndroidUseIntermediateDesignerFile>false</AndroidUseIntermediateDesignerFile>
+    </PropertyGroup>
+
     <ItemGroup>
         <!-- App Icon -->
-        <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4"/>
+        <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
         <!-- Splash Screen -->
-        <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128"/>
+        <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
 
         <!-- Images -->
-        <MauiImage Include="Resources\Images\*"/>
-        <MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185"/>
+        <MauiImage Include="Resources\Images\*" />
+        <MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
 
         <!-- Custom Fonts -->
-        <MauiFont Include="Resources\Fonts\*"/>
+        <MauiFont Include="Resources\Fonts\*" />
 
         <!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
-        <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)"/>
+        <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)"/>
-        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0"/>
+        <PackageReference Include="CommunityToolkit.Maui" Version="5.3.0" />
+        <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
+        <PackageReference Include="System.Net.Http" Version="4.3.4" />
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.4.0" />
+        <PackageReference Include="Refit" Version="7.2.1" />
+        <PackageReference Include="Microsoft.Maui.Controls.Maps" Version="9.0.0" />
+        <PackageReference Include="Microsoft.Maui.Maps" Version="9.0.0" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Shared\Shared.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <MauiXaml Update="Pages\RegistrationPage.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
+      <MauiXaml Update="Pages\ReportIncidentPage.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Pages\RegistrationPage.xaml.cs">
+        <DependentUpon>RegistrationPage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Pages\ReportIncidentPage.xaml.cs">
+        <DependentUpon>ReportIncidentPage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Remove="Converters\IsNotNullConverter.cs" />
+      <Compile Remove="Converters\IsGreaterThanZeroConverter.cs" />
+      <Compile Remove="Behaviors\MapBehavior.cs" />
+    </ItemGroup>
+
+    <!-- Android Permissions -->
+    <ItemGroup>
+      <AndroidPermission Include="android.permission.ACCESS_COARSE_LOCATION" />
+      <AndroidPermission Include="android.permission.ACCESS_FINE_LOCATION" />
+    </ItemGroup>
+
+    <!-- Android Resources -->
+    <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
+      <AndroidResource Include="Platforms\Android\Resources\values\strings.xml">
+        <SubType></SubType>
+        <Generator></Generator>
+      </AndroidResource>
+    </ItemGroup>
+    <ItemGroup>
+      <None Remove="Resources\AppIcon\appicon_foreground.svg" />
     </ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 using API.Data;
 using Shared.Models.Dtos;
-using API.Models.Classes;
+using Shared.Models.Classes;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Repositories;
@@ -79,12 +79,25 @@ public class IncidentRepository : IIncidentRepository
 
     public async Task<IEnumerable<Incident>> GetByUserIdAsync(Guid userId)
     {
-        return await _context.Incidents
+
+        // First check if the user exists
+        var user = await _context.Users.FindAsync(userId);
+
+        // Get all incidents and log them
+        var allIncidents = await _context.Incidents.ToListAsync();
+        foreach (var incident in allIncidents)
+        {
+        }
+
+        // Now get incidents for this user
+        var incidents = await _context.Incidents
             .Include(i => i.CreatedBy)
             .Include(i => i.AssignedTo)
             .Where(i => i.ReportedById == userId)
             .OrderByDescending(i => i.CreatedAt)
             .ToListAsync();
+
+        return incidents;
     }
 
     public async Task<IEnumerable<Incident>> GetAssignedToUserAsync(Guid userId)
@@ -241,7 +254,6 @@ public class IncidentRepository : IIncidentRepository
     {
         return await _context.IncidentPhotos
             .Where(p => p.IncidentId == incidentId)
-            .OrderByDescending(p => p.UploadedAt)
             .ToListAsync();
     }
 
@@ -267,5 +279,10 @@ public class IncidentRepository : IIncidentRepository
         }
 
         return await query.ToListAsync();
+    }
+
+    public async Task<bool> UserExistsAsync(Guid userId)
+    {
+        return await _context.Users.AnyAsync(u => u.Id == userId);
     }
 }

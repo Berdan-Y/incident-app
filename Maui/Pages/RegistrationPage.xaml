@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Maui.ViewModels"
+             xmlns:behaviors="clr-namespace:Maui.Behaviors"
+             x:Class="Maui.Pages.RegistrationPage"
+             x:DataType="viewmodels:RegistrationViewModel">
+    
+    <Grid RowDefinitions="*,Auto,*"
+          Padding="20">
+        <VerticalStackLayout Grid.Row="1"
+                            Spacing="5">
+            <Label Text="Register"
+                   FontSize="32"
+                   HorizontalOptions="Center"
+                   Margin="0,0,0,15" />
+
+            <Entry Text="{Binding Email}"
+                   Placeholder="Email"
+                   Keyboard="Email">
+                <Entry.Behaviors>
+                    <behaviors:EmailValidationBehavior />
+                </Entry.Behaviors>
+            </Entry>
+            
+            <Label StyleId="EmailErrorLabel"
+                   TextColor="Red"
+                   FontSize="12"
+                   IsVisible="False"
+                   Margin="0,0,0,10" />
+
+            <Entry Text="{Binding Password}"
+                   Placeholder="Password"
+                   IsPassword="True"
+                   Margin="0,10,0,0" />
+
+            <Entry Text="{Binding FirstName}"
+                   Placeholder="First name"
+                   Margin="0,10,0,0" />
+
+            <Entry Text="{Binding LastName}"
+                   Placeholder="Last name"
+                   Margin="0,10,0,0" />
+
+            <Label Text="{Binding ErrorMessage}"
+                   TextColor="Red"
+                   IsVisible="{Binding ErrorMessage, Mode=OneWay}"
+                   Margin="0,10,0,0" />
+
+            <Button Text="Register"
+                    Command="{Binding RegisterCommand}"
+                    IsEnabled="{Binding Path=IsLoading, Mode=OneWay, Converter={StaticResource InverseBoolConverter}}"
+                    Margin="0,10,0,0" />
+
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                             IsVisible="{Binding IsLoading}"
+                             HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage> 

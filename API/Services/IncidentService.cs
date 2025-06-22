@@ -1,6 +1,7 @@
 using Shared.Models.Dtos;
-using API.Models.Classes;
+using Shared.Models.Classes;
 using API.Repositories;
+using API.Data;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -14,12 +15,14 @@ public class IncidentService : IIncidentService
     private readonly IIncidentRepository _incidentRepository;
     private readonly IMapper _mapper;
     private readonly IFileService _fileService;
+    private readonly IncidentDbContext _context;
 
-    public IncidentService(IIncidentRepository incidentRepository, IMapper mapper, IFileService fileService)
+    public IncidentService(IIncidentRepository incidentRepository, IMapper mapper, IFileService fileService, IncidentDbContext context)
     {
         _incidentRepository = incidentRepository;
         _mapper = mapper;
         _fileService = fileService;
+        _context = context;
     }
 
     public async Task<IEnumerable<IncidentResponseDto>> GetAllIncidentsAsync()
@@ -46,15 +49,28 @@ public class IncidentService : IIncidentService
         return _mapper.Map<IEnumerable<IncidentResponseDto>>(incidents);
     }
 
-    public async Task<IncidentResponseDto> CreateIncidentAsync(IncidentCreateDto incidentDto, Guid? userId = null)
+    public async Task<IncidentResponseDto> CreateIncidentAsync(IncidentCreateDto incidentDto)
     {
+
+        // If ReportedById is provided, make it null if the user doesn't exist
+        if (incidentDto.ReportedById.HasValue)
+        {
+            var userExists = await _incidentRepository.UserExistsAsync(incidentDto.ReportedById.Value);
+            if (!userExists)
+            {
+                incidentDto.ReportedById = null;
+            }
+        }
+
         var incident = _mapper.Map<Incident>(incidentDto);
-        incident.ReportedById = incidentDto.ReportedById ?? userId;
+
+        // Only set non-ReportedById fields
         incident.AssignedToId = null;
         incident.CreatedAt = DateTime.UtcNow;
         incident.UpdatedAt = DateTime.UtcNow;
 
         var createdIncident = await _incidentRepository.CreateAsync(incident);
+
         return _mapper.Map<IncidentResponseDto>(createdIncident);
     }
 

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Maui.ViewModels"
+             xmlns:converters="clr-namespace:Maui.Converters"
+             xmlns:behaviors="clr-namespace:Maui.Behaviors"
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+             x:Class="Maui.Pages.ReportIncidentPage"
+             x:DataType="viewmodels:ReportIncidentViewModel">
+
+    <ScrollView>
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
+              Padding="20">
+            <!-- Report Details -->
+            <VerticalStackLayout Grid.Row="0"
+                                Spacing="5">
+                <Label Text="Report Incident"
+                       FontSize="32"
+                       HorizontalOptions="Center"
+                       Margin="0,0,0,15" />
+
+                <Entry Text="{Binding Title}"
+                       Placeholder="Title" 
+                       Margin="0,0,0,15" />
+
+                <Entry Text="{Binding Description}"
+                       Placeholder="Description"
+                       Margin="0,10,0,0" />
+
+                <Label Text="Location Settings"
+                       FontSize="18"
+                       Margin="0,20,0,10"/>
+
+                <RadioButton Content="Use Current Location"
+                            IsChecked="{Binding UseCurrentLocation}"
+                            GroupName="LocationChoice"/>
+
+                <RadioButton Content="Set Location Manually"
+                            IsChecked="{Binding UseManualLocation}"
+                            GroupName="LocationChoice"/>
+            </VerticalStackLayout>
+
+            <!-- Manual Location Input -->
+            <VerticalStackLayout Grid.Row="1"
+                                Spacing="5"
+                                IsVisible="{Binding UseManualLocation}">
+                <Entry Text="{Binding Address}"
+                       Placeholder="Address"/>
+                <Entry Text="{Binding Zipcode}"
+                       Placeholder="Zipcode"
+                       Margin="0,10,0,0"/>
+            </VerticalStackLayout>
+
+            <!-- Map -->
+            <VerticalStackLayout Grid.Row="2"
+                                Spacing="5"
+                                IsVisible="{Binding UseCurrentLocation}">
+                <maps:Map x:Name="LocationMap"
+                         IsVisible="{Binding ShowMap}"
+                         IsShowingUser="True"
+                         ItemsSource="{Binding MapPins}"
+                         MapType="Street"
+                         Loaded="OnMapLoaded"
+                         Margin="0,10,0,10"
+                         HeightRequest="200"/>
+
+                <Label Text="{Binding LocationStatus}"
+                       HorizontalOptions="Center"
+                       Margin="0,5,0,10"
+                       TextColor="{OnPlatform iOS='#007AFF', Android='#512BD4'}"
+                       FontSize="14"/>
+            </VerticalStackLayout>
+
+            <!-- Photo Section -->
+            <VerticalStackLayout Grid.Row="3"
+                               Spacing="10"
+                               Margin="0,20,0,0">
+                <Label Text="Add Photos"
+                      FontSize="18"/>
+                
+                <HorizontalStackLayout Spacing="10">
+                    <Button Text="Take Photo"
+                            Command="{Binding TakePhotoCommand}"
+                            HorizontalOptions="FillAndExpand"
+                            WidthRequest="150"/>
+                    
+                    <Button Text="Choose Photos"
+                            Command="{Binding PickPhotosCommand}"
+                            HorizontalOptions="FillAndExpand"
+                            WidthRequest="150"/>
+                </HorizontalStackLayout>
+
+                <CollectionView ItemsSource="{Binding Photos}"
+                              HeightRequest="120"
+                              Margin="0,10,0,0">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal"
+                                         ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="viewmodels:PhotoItem">
+                            <Frame WidthRequest="120"
+                                   HeightRequest="120"
+                                   Padding="0"
+                                   IsClippedToBounds="True"
+                                   CornerRadius="10">
+                                <Grid>
+                                    <Image Source="{Binding ImageSource}"
+                                           Aspect="AspectFill"
+                                           HorizontalOptions="Fill"
+                                           VerticalOptions="Fill"/>
+                                    <Button Text="X"
+                                            Command="{Binding Path=RemovePhotoCommand, Source={RelativeSource AncestorType={x:Type viewmodels:ReportIncidentViewModel}}}"
+                                            CommandParameter="{Binding .}"
+                                            HorizontalOptions="End"
+                                            VerticalOptions="Start"
+                                            Padding="5"
+                                            BackgroundColor="Red"
+                                            TextColor="White"
+                                            FontSize="10"
+                                            CornerRadius="10"
+                                            HeightRequest="24"
+                                            WidthRequest="24"
+                                            Margin="0,5,5,0"/>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+            <!-- Anonymous Reporting -->
+            <VerticalStackLayout Grid.Row="4" 
+                               IsVisible="{Binding IsLoggedIn}"
+                               Spacing="5"
+                               Margin="0,10,0,10">
+                <Label Text="Report anonymously"
+                      FontSize="16"/>
+                <HorizontalStackLayout Spacing="10">
+                    <CheckBox IsChecked="{Binding IsAnonymous, Mode=TwoWay}"/>
+                    <Label Text="Submit this report anonymously"
+                           VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <!-- Submit Button -->
+            <VerticalStackLayout Grid.Row="5">
+                <Button Text="Submit Report"
+                        Command="{Binding SubmitReportCommand}"
+                        IsEnabled="{Binding IsNotLoading}"
+                        Margin="0,30,0,0" />
+
+                <ActivityIndicator IsRunning="{Binding IsLoading}"
+                                 IsVisible="{Binding IsLoading}"
+                                 HorizontalOptions="Center" />
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
+
+</ContentPage> 

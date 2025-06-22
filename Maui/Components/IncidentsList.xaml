@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Maui.ViewModels"
+             xmlns:models="clr-namespace:Shared.Models.Dtos;assembly=Shared"
+             xmlns:services="clr-namespace:Maui.Services"
+             x:Class="Maui.Components.IncidentsList">
+
+    <ContentView.Resources>
+        <services:TokenService x:Key="TokenService" />
+    </ContentView.Resources>
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Error Message Row -->
+        <VerticalStackLayout Grid.Row="0" Padding="15"
+                            IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotEmptyConverter}}">
+            <Label Text="{Binding ErrorMessage}"
+                   TextColor="Red"
+                   HorizontalOptions="Center" />
+        </VerticalStackLayout>
+
+        <!-- Loading Indicator -->
+        <ActivityIndicator Grid.Row="1"
+                          IsRunning="{Binding IsLoading}"
+                          IsVisible="{Binding IsLoading}"
+                          HorizontalOptions="Center"
+                          VerticalOptions="Center" />
+
+        <!-- Incidents List -->
+        <CollectionView Grid.Row="1"
+                       ItemsSource="{Binding Incidents}"
+                       IsVisible="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}"
+                       SelectionMode="Single"
+                       SelectionChanged="OnIncidentSelected">
+            
+            <CollectionView.EmptyView>
+                <VerticalStackLayout Padding="15" 
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center">
+                    <Label Text="No incidents found"
+                           FontSize="18"
+                           HorizontalOptions="Center" />
+                    <Label Text="{Binding EmptyMessage}"
+                           FontSize="14"
+                           TextColor="Gray"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:IncidentResponseDto">
+                    <Frame Margin="15,7.5" 
+                           Padding="15"
+                           BorderColor="{Binding Priority, Converter={StaticResource PriorityToColorConverter}}"
+                           HasShadow="True">
+                        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" 
+                              ColumnDefinitions="*,Auto">
+                            
+                            <Label Grid.Row="0" Grid.Column="0"
+                                   Text="{Binding Title}"
+                                   FontSize="18"
+                                   TextColor="Black"
+                                   FontAttributes="Bold" />
+                            
+                            <Label Grid.Row="0" Grid.Column="1"
+                                   Text="{Binding Status}"
+                                   FontSize="14"
+                                   TextColor="{Binding Status, Converter={StaticResource StatusToColorConverter}}" />
+                            
+                            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                   Text="{Binding Description}"
+                                   FontSize="14"
+                                   TextColor="Black"
+                                   LineBreakMode="TailTruncation"
+                                   MaxLines="2" />
+                            
+                            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                                   Text="{Binding CreatedAt, StringFormat='{0:g}'}"
+                                   FontSize="12"
+                                   TextColor="Gray" />
+
+                            <HorizontalStackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                                                 Spacing="10"
+                                                 Margin="0,10,0,0">
+                                <Button Text="View Details"
+                                        Clicked="OnViewDetailsClicked"
+                                        CommandParameter="{Binding .}" />
+
+                                <!-- Edit button for incident creators (in MyIncidentsPage) -->
+                                <Button Text="Edit"
+                                        Clicked="OnEditClicked"
+                                        CommandParameter="{Binding .}"
+                                        IsVisible="{Binding CreatedBy, Converter={StaticResource IsCurrentUserConverter}}"
+                                        BackgroundColor="Orange" />
+
+                                <!-- Edit button for assigned field employees -->
+                                <Button Text="Edit Status"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:BaseIncidentsViewModel}}, Path=FieldEmployeeEditCommand}"
+                                        CommandParameter="{Binding .}"
+                                        IsVisible="{Binding ., Converter={StaticResource IsAssignedFieldEmployeeConverter}}"
+                                        BackgroundColor="Orange" />
+
+                                <Button Text="Delete"
+                                        Clicked="OnDeleteClicked"
+                                        CommandParameter="{Binding .}"
+                                        IsVisible="{Binding CreatedBy, Converter={StaticResource IsCurrentUserConverter}}"
+                                        BackgroundColor="Red" />
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentView> 

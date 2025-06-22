@@ -4,11 +4,100 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Maui"
-    Title="Maui">
+    xmlns:pages="clr-namespace:Maui.Pages"
+    xmlns:converters="clr-namespace:Maui.Converters"
+    x:Name="AppShellPage"
+    Title="Maui"
+    Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <Shell.Resources>
+        <ResourceDictionary>
+            <converters:AccountTabTitleConverter x:Key="AccountTabTitleConverter"/>
+            <converters:HasRoleConverter x:Key="HasRoleConverter"/>
+            <converters:MultiBindingBoolConverter x:Key="MultiBindingBoolConverter"/>
+            <converters:InverseBoolConverter x:Key="InverseBoolConverter"/>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="#455A64" />
+                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.TitleColor" Value="White" />
+                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF" />
+            </Style>
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <TabBar>
+        <ShellContent
+            Title="Home"
+            Icon="{FontImage FontFamily='Fa-Solid', Glyph='&#xf015;', Size=24}"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="MainPage" />
+        
+        <Tab Title="Reports" Icon="{FontImage FontFamily='Fa-Solid', Glyph='&#xf15c;', Size=24}">
+            <ShellContent
+                Title="Report Incident"
+                ContentTemplate="{DataTemplate pages:ReportIncidentPage}"
+                Route="ReportIncidentPage" />
+                
+            <ShellContent
+                Title="My Incidents"
+                ContentTemplate="{DataTemplate pages:MyIncidentsPage}"
+                Route="MyIncidentsPage"
+                IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:AppShell}}, Path=BindingContext.IsLoggedIn}" />
+                
+            <ShellContent
+                Title="Assigned to me"
+                ContentTemplate="{DataTemplate pages:AssignedIncidentsPage}"
+                Route="AssignedIncidentsPage">
+                <ShellContent.IsVisible>
+                    <MultiBinding Converter="{StaticResource MultiBindingBoolConverter}">
+                        <Binding Path="IsLoggedIn" />
+                        <Binding Path="TokenService" Converter="{StaticResource HasRoleConverter}" ConverterParameter="FieldEmployee" />
+                    </MultiBinding>
+                </ShellContent.IsVisible>
+            </ShellContent>
+                
+            <ShellContent
+                Title="All Incidents"
+                ContentTemplate="{DataTemplate pages:AllIncidentsPage}"
+                Route="AllIncidentsPage">
+                <ShellContent.IsVisible>
+                    <MultiBinding Converter="{StaticResource MultiBindingBoolConverter}">
+                        <Binding Path="IsLoggedIn" />
+                        <Binding Path="TokenService" Converter="{StaticResource HasRoleConverter}" ConverterParameter="Admin,FieldEmployee" />
+                    </MultiBinding>
+                </ShellContent.IsVisible>
+            </ShellContent>
+        </Tab>
+
+        <Tab Title="Account" Icon="{FontImage FontFamily='Fa-Solid', Glyph='&#xf007;', Size=24}">
+            <ShellContent
+                x:Name="LoginContent"
+                Title="Login"
+                ContentTemplate="{DataTemplate pages:LoginPage}"
+                Route="LoginPage"
+                IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:AppShell}}, Path=BindingContext.IsLoggedIn, Converter={StaticResource InverseBoolConverter}}" />
+                    
+            <ShellContent
+                x:Name="RegisterContent"
+                Title="Register"
+                ContentTemplate="{DataTemplate pages:RegistrationPage}"
+                Route="RegistrationPage"
+                IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:AppShell}}, Path=BindingContext.IsLoggedIn, Converter={StaticResource InverseBoolConverter}}" />
+
+            <ShellContent
+                x:Name="NotificationsContent"
+                Title="Notifications"
+                ContentTemplate="{DataTemplate pages:NotificationsPage}"
+                Route="NotificationsPage"
+                IsVisible="{Binding IsLoggedIn}" />
+                
+            <ShellContent
+                x:Name="LogoutContent"
+                Title="Logout"
+                ContentTemplate="{DataTemplate pages:LogoutPage}"
+                Route="LogoutPage"
+                IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:AppShell}}, Path=BindingContext.IsLoggedIn}" />
+        </Tab>
+    </TabBar>
 
 </Shell>

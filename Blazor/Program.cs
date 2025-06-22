@@ -1,70 +1,61 @@
-using Blazor.Components;
-using Blazor.Components.Services;
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Blazor;
 using MudBlazor.Services;
-using Microsoft.AspNetCore.DataProtection;
-using Microsoft.AspNetCore.Components.Authorization;
+using Blazor.Services;
+using Refit;
+using Shared.Api;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebAssemblyHostBuilder.CreateDefault(args);
+builder.RootComponents.Add<App>("#app");
+builder.RootComponents.Add<HeadOutlet>("head::after");
 
-// Add services to the container.
-builder.Services.AddRazorPages();
-builder.Services.AddServerSideBlazor();
-builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents();
+// Load configuration
+var apiBaseAddress = builder.Configuration.GetValue<string>("ApiSettings:BaseUrl")
+    ?? throw new InvalidOperationException("API Base URL is not configured");
 
-// Add Authentication
-builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
-builder.Services.AddAuthorizationCore();
+// Configure JSON serialization settings
+var jsonOptions = new JsonSerializerOptions
+{
+    PropertyNameCaseInsensitive = true,
+    Converters = { new JsonStringEnumConverter() }
+};
 
-// Add MudBlazor services
+var refitSettings = new RefitSettings
+{
+    ContentSerializer = new SystemTextJsonContentSerializer(jsonOptions)
+};
+
+// Register services
 builder.Services.AddMudServices();
 
-// Add ThemeService as scoped
-builder.Services.AddScoped<ThemeService>();
+// Register core services
+builder.Services.AddSingleton<ITokenService, TokenService>();
+builder.Services.AddSingleton<IAuthenticationService, AuthenticationService>();
+builder.Services.AddSingleton<IGoogleMapsService, GoogleMapsService>();
 
-// Add AuthService
-builder.Services.AddScoped<AuthService>();
+// Configure HttpClient with auth handler
+builder.Services.AddTransient<AuthMessageHandler>();
 
-// Add HttpClient
-builder.Services.AddHttpClient("API", client =>
+// Configure the default HttpClient (used by AuthenticationService)
+builder.Services.AddHttpClient(string.Empty, client =>
 {
-    client.BaseAddress = new Uri(builder.Configuration["ApiBaseUrl"] ?? "http://localhost:5007/");
-});
+    client.BaseAddress = new Uri(apiBaseAddress);
+}).AddHttpMessageHandler<AuthMessageHandler>();
 
-// Configure Data Protection
-builder.Services.AddDataProtection()
-    .SetApplicationName("IncidentApp")
-    .PersistKeysToFileSystem(new DirectoryInfo(Path.Combine(builder.Environment.ContentRootPath, "DataProtection-Keys")));
+// Register Refit client for IIncidentApi
+builder.Services.AddRefitClient<IIncidentApi>(refitSettings)
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri(apiBaseAddress))
+    .AddHttpMessageHandler<AuthMessageHandler>();
 
-// Configure Antiforgery
-builder.Services.AddAntiforgery(options =>
-{
-    options.Cookie.Name = "IncidentApp.Antiforgery";
-    options.Cookie.HttpOnly = true;
-    options.Cookie.SecurePolicy = CookieSecurePolicy.None;
-    options.Cookie.SameSite = SameSiteMode.Lax;
-    options.SuppressXFrameOptionsHeader = true;
-});
+// Register Refit client for IUserApi
+builder.Services.AddRefitClient<IUserApi>(refitSettings)
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri(apiBaseAddress))
+    .AddHttpMessageHandler<AuthMessageHandler>();
 
-var app = builder.Build();
+// Configure Google Maps service
+builder.Services.AddHttpClient<IGoogleMapsService, GoogleMapsService>();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage();
-}
-else
-{
-    app.UseExceptionHandler("/Error", createScopeForErrors: true);
-    app.UseHsts();
-    app.UseHttpsRedirection();
-}
-
-app.UseStaticFiles();
-app.UseAntiforgery();
-
-app.MapRazorPages();
-app.MapBlazorHub();
-app.MapFallbackToPage("/_Host");
-
-app.Run();
+await builder.Build().RunAsync();

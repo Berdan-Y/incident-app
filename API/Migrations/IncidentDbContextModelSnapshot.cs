@@ -22,7 +22,7 @@ namespace API.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("API.Models.Classes.Incident", b =>
+            modelBuilder.Entity("Shared.Models.Classes.Incident", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -78,7 +78,7 @@ namespace API.Migrations
                     b.ToTable("Incidents");
                 });
 
-            modelBuilder.Entity("API.Models.Classes.IncidentPhoto", b =>
+            modelBuilder.Entity("Shared.Models.Classes.IncidentPhoto", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -109,7 +109,7 @@ namespace API.Migrations
                     b.ToTable("IncidentPhotos");
                 });
 
-            modelBuilder.Entity("API.Models.Classes.InvalidatedToken", b =>
+            modelBuilder.Entity("Shared.Models.Classes.InvalidatedToken", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -130,7 +130,41 @@ namespace API.Migrations
                     b.ToTable("InvalidatedTokens");
                 });
 
-            modelBuilder.Entity("API.Models.Classes.Role", b =>
+            modelBuilder.Entity("Shared.Models.Classes.Notification", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("IncidentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ReadAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IncidentId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Notifications");
+                });
+
+            modelBuilder.Entity("Shared.Models.Classes.Role", b =>
                 {
                     b.Property<int>("Id")
                         .HasColumnType("int");
@@ -145,7 +179,7 @@ namespace API.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("API.Models.Classes.User", b =>
+            modelBuilder.Entity("Shared.Models.Classes.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -185,7 +219,7 @@ namespace API.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("API.Models.Classes.UserRole", b =>
+            modelBuilder.Entity("Shared.Models.Classes.UserRole", b =>
                 {
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -200,13 +234,13 @@ namespace API.Migrations
                     b.ToTable("UserRoles");
                 });
 
-            modelBuilder.Entity("API.Models.Classes.Incident", b =>
+            modelBuilder.Entity("Shared.Models.Classes.Incident", b =>
                 {
-                    b.HasOne("API.Models.Classes.User", "AssignedTo")
+                    b.HasOne("Shared.Models.Classes.User", "AssignedTo")
                         .WithMany()
                         .HasForeignKey("AssignedToId");
 
-                    b.HasOne("API.Models.Classes.User", "CreatedBy")
+                    b.HasOne("Shared.Models.Classes.User", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("ReportedById");
 
@@ -215,9 +249,9 @@ namespace API.Migrations
                     b.Navigation("CreatedBy");
                 });
 
-            modelBuilder.Entity("API.Models.Classes.IncidentPhoto", b =>
+            modelBuilder.Entity("Shared.Models.Classes.IncidentPhoto", b =>
                 {
-                    b.HasOne("API.Models.Classes.Incident", "Incident")
+                    b.HasOne("Shared.Models.Classes.Incident", "Incident")
                         .WithMany("Photos")
                         .HasForeignKey("IncidentId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -226,15 +260,34 @@ namespace API.Migrations
                     b.Navigation("Incident");
                 });
 
-            modelBuilder.Entity("API.Models.Classes.UserRole", b =>
+            modelBuilder.Entity("Shared.Models.Classes.Notification", b =>
                 {
-                    b.HasOne("API.Models.Classes.Role", "Role")
+                    b.HasOne("Shared.Models.Classes.Incident", "Incident")
+                        .WithMany()
+                        .HasForeignKey("IncidentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Shared.Models.Classes.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Incident");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Shared.Models.Classes.UserRole", b =>
+                {
+                    b.HasOne("Shared.Models.Classes.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("API.Models.Classes.User", "User")
+                    b.HasOne("Shared.Models.Classes.User", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -245,12 +298,12 @@ namespace API.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("API.Models.Classes.Incident", b =>
+            modelBuilder.Entity("Shared.Models.Classes.Incident", b =>
                 {
                     b.Navigation("Photos");
                 });
 
-            modelBuilder.Entity("API.Models.Classes.User", b =>
+            modelBuilder.Entity("Shared.Models.Classes.User", b =>
                 {
                     b.Navigation("UserRoles");
                 });

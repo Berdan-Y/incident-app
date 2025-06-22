@@ -1,6 +1,6 @@
 using Shared.Models.Dtos;
 using Shared.Models.Enums;
-using API.Models.Classes;
+using Shared.Models.Classes;
 using AutoMapper;
 using IncidentCreateDto = Shared.Models.Dtos.IncidentCreateDto;
 using IncidentPhotoDto = Shared.Models.Dtos.IncidentPhotoDto;
@@ -22,7 +22,8 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Status, opt => opt.MapFrom(src => Status.Todo))
             .ForMember(dest => dest.Priority, opt => opt.MapFrom(src => Priority.Unknown))
             .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => DateTime.UtcNow))
-            .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => DateTime.UtcNow));
+            .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => DateTime.UtcNow))
+            .ForMember(dest => dest.ReportedById, opt => opt.MapFrom(src => src.ReportedById));
 
         CreateMap<IncidentUpdateDto, Incident>()
             .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => DateTime.UtcNow))

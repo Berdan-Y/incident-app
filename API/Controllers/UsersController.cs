@@ -1,6 +1,6 @@
 using API.Data;
 using Shared.Models.Dtos;
-using API.Models.Classes;
+using Shared.Models.Classes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

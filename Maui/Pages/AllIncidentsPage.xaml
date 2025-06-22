@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Maui.ViewModels"
+             xmlns:components="clr-namespace:Maui.Components"
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+             x:Class="Maui.Pages.AllIncidentsPage"
+             x:DataType="viewmodels:AllIncidentsViewModel"
+             Title="All Incidents">
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- View Toggle Button -->
+        <HorizontalStackLayout Grid.Row="0" 
+                             Spacing="10" 
+                             Padding="15"
+                             HorizontalOptions="End">
+            <Button Text="List View" 
+                    Command="{Binding ToggleViewCommand}"
+                    IsVisible="{Binding IsMapView}"/>
+            <Button Text="Map View" 
+                    Command="{Binding ToggleViewCommand}"
+                    IsVisible="{Binding IsListView}"/>
+        </HorizontalStackLayout>
+
+        <!-- List View -->
+        <RefreshView Grid.Row="1"
+                    Command="{Binding LoadIncidentsCommand}"
+                    IsRefreshing="{Binding IsLoading}"
+                    IsVisible="{Binding IsListView}">
+            <components:IncidentsList />
+        </RefreshView>
+
+        <!-- Map View -->
+        <Frame Grid.Row="1"
+               Padding="0" 
+               IsVisible="{Binding IsMapView}"
+               BorderColor="{StaticResource Primary}">
+            <maps:Map x:Name="IncidentsMap"
+                     IsShowingUser="True"
+                     IsZoomEnabled="True"
+                     IsScrollEnabled="True"
+                     ItemsSource="{Binding MapPins}"
+                     MapType="Street"/>
+        </Frame>
+    </Grid>
+
+</ContentPage> 

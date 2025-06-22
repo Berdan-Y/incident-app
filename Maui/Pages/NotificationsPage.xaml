@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Maui.Pages.NotificationsPage"
+             Title="Notifications">
+    <Grid RowDefinitions="Auto,*">
+        <Button Grid.Row="0"
+                Text="Mark All as Read"
+                Command="{Binding MarkAllAsReadCommand}"
+                HorizontalOptions="End"
+                Margin="10"
+                IsVisible="{Binding HasUnreadNotifications}"/>
+
+        <RefreshView Grid.Row="1"
+                     Command="{Binding RefreshCommand}"
+                     IsRefreshing="{Binding IsRefreshing}">
+            <CollectionView ItemsSource="{Binding Notifications}"
+                          EmptyView="No notifications">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10"
+                              ColumnDefinitions="*,Auto"
+                              BackgroundColor="{Binding IsRead, Converter={StaticResource BoolToBackgroundColorConverter}}">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.NotificationTappedCommand}"
+                                                      CommandParameter="{Binding .}"/>
+                            </Grid.GestureRecognizers>
+
+                            <VerticalStackLayout Grid.Column="0" Spacing="5">
+                                <Label Text="{Binding Message}"
+                                       FontAttributes="Bold"/>
+                                <Label Text="{Binding CreatedAt, StringFormat='{0:g}'}"
+                                       TextColor="Gray"
+                                       FontSize="Small"/>
+                            </VerticalStackLayout>
+
+                            <Button Grid.Column="1"
+                                    Text="{Binding IsRead, Converter={StaticResource BoolToReadUnreadConverter}}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ToggleReadStatusCommand}"
+                                    CommandParameter="{Binding .}"
+                                    VerticalOptions="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+</ContentPage> 

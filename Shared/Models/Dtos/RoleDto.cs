@@ -2,6 +2,6 @@ namespace Shared.Models.Dtos;
 
 public class RoleDto
 {
-    public string Name { get; set; }
-    public string[] Permissions { get; set; }
+    public required string Name { get; set; }
+    public required string[] Permissions { get; set; }
 }

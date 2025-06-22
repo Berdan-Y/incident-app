@@ -1,32 +1,32 @@
 {
   "Files": [
     {
-      "Id": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/scopedcss/projectbundle/Blazor.bundle.scp.css",
-      "PackagePath": "staticwebassets/Blazor.brrll72w73.bundle.scp.css"
+      "Id": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/bin/Debug/net9.0/wwwroot/_framework/blazor.webassembly.js",
+      "PackagePath": "staticwebassets/_framework/blazor.webassembly.js"
     },
     {
-      "Id": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/app.css",
-      "PackagePath": "staticwebassets/app.css"
+      "Id": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/obj/Debug/net9.0/scopedcss/bundle/Blazor.styles.css",
+      "PackagePath": "staticwebassets/Blazor.styles.css"
+    },
+    {
+      "Id": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/appsettings.json",
+      "PackagePath": "staticwebassets/appsettings.json"
+    },
+    {
+      "Id": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/css/app.css",
+      "PackagePath": "staticwebassets/css/app.css"
     },
     {
       "Id": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/favicon.png",
       "PackagePath": "staticwebassets/favicon.png"
     },
     {
+      "Id": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/icon-192.png",
+      "PackagePath": "staticwebassets/icon-192.png"
+    },
+    {
       "Id": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/index.html",
       "PackagePath": "staticwebassets/index.html"
-    },
-    {
-      "Id": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/js/app.js",
-      "PackagePath": "staticwebassets/js/app.js"
-    },
-    {
-      "Id": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/js/camera.js",
-      "PackagePath": "staticwebassets/js/camera.js"
-    },
-    {
-      "Id": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/js/googleMaps.js",
-      "PackagePath": "staticwebassets/js/googleMaps.js"
     },
     {
       "Id": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
@@ -203,6 +203,10 @@
     {
       "Id": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.min.js.map"
+    },
+    {
+      "Id": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/wwwroot/sample-data/weather.json",
+      "PackagePath": "staticwebassets/sample-data/weather.json"
     },
     {
       "Id": "obj/Debug/net9.0/staticwebassets/msbuild.Blazor.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

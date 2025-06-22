@@ -2,7 +2,7 @@ using System.Text;
 using API.Data;
 using API.Helpers;
 using API.Middleware;
-using API.Models.Classes;
+using Shared.Models.Classes;
 using API.Repositories;
 using API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 var key = Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"] ?? throw new InvalidOperationException("JWT Key is not configured"));
@@ -23,7 +24,8 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        policy.WithOrigins("http://localhost:5292", "https://localhost:5292")
+        policy.WithOrigins("http://localhost:5292", "https://localhost:5292", "http://10.0.2.2:5007")
+              .SetIsOriginAllowed(_ => true)
               .AllowAnyMethod()
               .AllowAnyHeader()
               .AllowCredentials();
@@ -80,6 +82,7 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<IIncidentRepository, IncidentRepository>();
 builder.Services.AddScoped<IIncidentService, IncidentService>();
 builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddScoped<INotificationService, NotificationService>();
 
 builder.Services.AddAuthentication(options =>
     {
@@ -154,6 +157,14 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 
 app.UseHttpsRedirection();
 
+// Configure static files with explicit options
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(builder.Environment.ContentRootPath, "wwwroot")),
+    RequestPath = ""
+});
+
 // Add CORS before authentication
 app.UseCors();
 
@@ -181,7 +192,6 @@ using (var scope = app.Services.CreateScope())
 }
 
 // Add custom JavaScript file for Swagger UI
-app.UseStaticFiles();
 app.MapGet("/swagger-ui/custom.js", async context =>
 {
     var js = @"
@@ -235,11 +245,7 @@ app.MapGet("/swagger-ui/custom.js", async context =>
         console.log('[Swagger Auth Debug] Using saved token from localStorage');
         setTimeout(() => tryAuthorize(savedToken), 200); // delay
     }
-}, 500);
-";
-
-
-    context.Response.ContentType = "application/javascript";
+}, 500);";
     await context.Response.WriteAsync(js);
 });
 

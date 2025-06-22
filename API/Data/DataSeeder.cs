@@ -1,4 +1,4 @@
-using API.Models.Classes;
+using Shared.Models.Classes;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data;
@@ -33,7 +33,7 @@ public class DataSeeder
         var now = DateTime.UtcNow;
         var adminUser = new User
         {
-            Id = Guid.NewGuid(),
+            Id = Guid.Parse("8e3c8453-2192-408b-ab06-2fb8e37a8de3"),
             Email = "admin@gmail.com",
             Password = BCrypt.Net.BCrypt.HashPassword("password"),
             FirstName = "Admin",
@@ -42,6 +42,7 @@ public class DataSeeder
             CreatedAt = now,
             UpdatedAt = now
         };
+
 
         var testUser = new User
         {
@@ -55,14 +56,27 @@ public class DataSeeder
             UpdatedAt = now
         };
 
-        await _context.Users.AddRangeAsync(adminUser, testUser);
+        var fieldEmployeeUser = new User
+        {
+            Id = Guid.NewGuid(),
+            Email = "employee@gmail.com",
+            Password = BCrypt.Net.BCrypt.HashPassword("password"),
+            FirstName = "Employee",
+            LastName = "Field",
+            RoleJson = "{\"Name\":\"FieldEmployee\"}",
+            CreatedAt = now,
+            UpdatedAt = now
+        };
+
+        await _context.Users.AddRangeAsync(adminUser, testUser, fieldEmployeeUser);
         await _context.SaveChangesAsync();
 
         // Create UserRole entries
         var adminRole = await _context.Roles.FindAsync(Role.AdminId);
         var memberRole = await _context.Roles.FindAsync(Role.MemberId);
+        var fieldEmployeeRole = await _context.Roles.FindAsync(Role.FieldEmployeeId);
 
-        if (adminRole == null || memberRole == null)
+        if (adminRole == null || memberRole == null || fieldEmployeeRole == null)
         {
             throw new InvalidOperationException("Required roles not found in database");
         }
@@ -83,8 +97,57 @@ public class DataSeeder
             Role = memberRole
         };
 
-        await _context.UserRoles.AddRangeAsync(adminUserRole, testUserRole);
+        var fieldEmployeeUserRole = new UserRole
+        {
+            UserId = fieldEmployeeUser.Id,
+            RoleId = Role.FieldEmployeeId,
+            User = fieldEmployeeUser,
+            Role = fieldEmployeeRole
+        };
+
+        await _context.UserRoles.AddRangeAsync(adminUserRole, testUserRole, fieldEmployeeUserRole);
         await _context.SaveChangesAsync();
+
+        // Add some test incidents
+        var testIncident1 = new Incident
+        {
+            Id = Guid.NewGuid(),
+            Title = "Test Incident 1",
+            Description = "This is a test incident for the test user",
+            Status = Shared.Models.Enums.Status.Todo,
+            Priority = Shared.Models.Enums.Priority.Medium,
+            ReportedById = adminUser.Id,
+            CreatedAt = now,
+            UpdatedAt = now,
+            Latitude = 37.7749,
+            Longitude = -122.4194,
+            Address = "123 Test St, Test City",
+            ZipCode = "12345"
+        };
+
+
+        var testIncident2 = new Incident
+        {
+            Id = Guid.NewGuid(),
+            Title = "Test Incident 2",
+            Description = "This is another test incident for the test user",
+            Status = Shared.Models.Enums.Status.InProgress,
+            Priority = Shared.Models.Enums.Priority.High,
+            ReportedById = adminUser.Id,
+            CreatedAt = now,
+            UpdatedAt = now,
+            Latitude = 37.7749,
+            Longitude = -122.4194,
+            Address = "456 Test St, Test City",
+            ZipCode = "12345"
+        };
+
+
+        await _context.Incidents.AddRangeAsync(testIncident1, testIncident2);
+        await _context.SaveChangesAsync();
+
+        // Verify incidents were saved
+        var savedIncidents = await _context.Incidents.ToListAsync();
     }
 
     private async Task CleanDataAsync()

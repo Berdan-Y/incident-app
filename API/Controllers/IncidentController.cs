@@ -1,5 +1,5 @@
 using Shared.Models.Enums;
-using API.Models.Classes;
+using Shared.Models.Classes;
 using API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +9,7 @@ using Shared.Models.Dtos;
 using IncidentCreateDto = Shared.Models.Dtos.IncidentCreateDto;
 using IncidentPhotoDto = Shared.Models.Dtos.IncidentPhotoDto;
 using IncidentResponseDto = Shared.Models.Dtos.IncidentResponseDto;
+using Role = Shared.Models.Classes.Role;
 using Status = Shared.Models.Enums.Status;
 
 namespace API.Controllers;
@@ -19,11 +20,16 @@ public class IncidentController : ControllerBase
 {
     private readonly IIncidentService _incidentService;
     private readonly IAuthorizationService _authorizationService;
+    private readonly INotificationService _notificationService;
 
-    public IncidentController(IIncidentService incidentService, IAuthorizationService authorizationService)
+    public IncidentController(
+        IIncidentService incidentService,
+        IAuthorizationService authorizationService,
+        INotificationService notificationService)
     {
         _incidentService = incidentService;
         _authorizationService = authorizationService;
+        _notificationService = notificationService;
     }
 
     [HttpGet]
@@ -77,9 +83,12 @@ public class IncidentController : ControllerBase
         if (incident == null)
             return NotFound();
 
+        var currentUserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException());
+
         // Check if user is authorized to view this incident
         var authResult = await _authorizationService.AuthorizeAsync(User, incident, "CanViewAllIncidents");
-        if (!authResult.Succeeded && incident.ReportedById != Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException()))
+
+        if (!authResult.Succeeded && incident.ReportedById != currentUserId)
         {
             return Forbid();
         }
@@ -95,7 +104,6 @@ public class IncidentController : ControllerBase
     {
         // Get the incident data from form
         var incidentData = form["incident"];
-        Console.WriteLine($"Received incident data: {incidentData}");
 
         if (string.IsNullOrEmpty(incidentData))
             return BadRequest("Incident data is required");
@@ -115,22 +123,13 @@ public class IncidentController : ControllerBase
         if (string.IsNullOrEmpty(incidentDto.Description))
             return BadRequest("Description is required");
 
-        // Get the user ID if authenticated
-        Guid? userId = null;
-        if (User.Identity?.IsAuthenticated == true)
-        {
-            userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException());
-        }
-
-        // Create the incident
-        var incident = await _incidentService.CreateIncidentAsync(incidentDto, userId);
+        // Create the incident with whatever ReportedById was sent in the DTO
+        var incident = await _incidentService.CreateIncidentAsync(incidentDto);
 
         // Handle photos if any
         var photos = form.Files.Where(f => f.Name.StartsWith("photos"));
-        Console.WriteLine($"Number of photos received: {photos.Count()}");
         foreach (var photo in photos)
         {
-            Console.WriteLine($"Processing photo: {photo.FileName}, ContentType: {photo.ContentType}, Length: {photo.Length}");
             await _incidentService.AddPhotoToIncidentAsync(incident.Id, photo);
         }
 
@@ -168,7 +167,12 @@ public class IncidentController : ControllerBase
 
         try
         {
+            var currentUserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException());
             var updatedIncident = await _incidentService.UpdateIncidentAsync(id, incidentDto);
+            await _notificationService.CreateIncidentUpdateNotificationAsync(
+                id,
+                "The incident information has been updated",
+                currentUserId);
             return Ok(updatedIncident);
         }
         catch (KeyNotFoundException)
@@ -188,28 +192,53 @@ public class IncidentController : ControllerBase
         if (incident == null)
             return NotFound();
 
+        var currentUserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException());
+
         // Check if user is authorized to update this incident
         var authResult = await _authorizationService.AuthorizeAsync(User, incident, "CanUpdateAnyIncident");
         if (!authResult.Succeeded)
         {
-            // If not admin, check if user is the reporter and can update their own incidents
-            if (incident.ReportedById != Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException()))
-            {
-                return Forbid();
-            }
-            authResult = await _authorizationService.AuthorizeAsync(User, incident, "CanUpdateOwnIncidents");
-            if (!authResult.Succeeded)
+            // Check if user is the reporter
+            bool isReporter = incident.ReportedById == currentUserId;
+
+            // Check if user is the assigned field employee
+            bool isAssignedFieldEmployee = User.IsInRole(Role.FieldEmployee) && incident.AssignedToId == currentUserId;
+
+            if (!isReporter && !isAssignedFieldEmployee)
             {
                 return Forbid();
             }
 
-            // Members can only update certain fields
+            // If reporter, check if they can update their own incidents
+            if (isReporter)
+            {
+                authResult = await _authorizationService.AuthorizeAsync(User, incident, "CanUpdateOwnIncidents");
+                if (!authResult.Succeeded)
+                {
+                    return Forbid();
+                }
+            }
+
+            // Restrict what fields can be updated based on role
             if (User.IsInRole(Role.Member))
             {
-                // Members can only update title, description, and address
+                // Members can update title, description, address, zipcode, and coordinates
                 if (patchDto.Status.HasValue || patchDto.Priority.HasValue ||
-                    patchDto.AssignedToId.HasValue || patchDto.Latitude.HasValue ||
-                    patchDto.Longitude.HasValue || patchDto.ZipCode != null)
+                    patchDto.AssignedToId.HasValue)
+                {
+                    return Forbid();
+                }
+            }
+            else if (isAssignedFieldEmployee)
+            {
+                // Field employees can only update status and description when assigned
+                var allowedFields = new HashSet<string> { nameof(patchDto.Status), nameof(patchDto.Description) };
+                var attemptedFields = typeof(IncidentPatchDto).GetProperties()
+                    .Where(p => p.GetValue(patchDto) != null)
+                    .Select(p => p.Name);
+
+
+                if (attemptedFields.Any(f => !allowedFields.Contains(f)))
                 {
                     return Forbid();
                 }
@@ -262,9 +291,21 @@ public class IncidentController : ControllerBase
     [ProducesResponseType(typeof(IEnumerable<IncidentResponseDto>), StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<IncidentResponseDto>>> GetMyIncidents()
     {
-        var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException());
-        var incidents = await _incidentService.GetIncidentsByUserAsync(userId);
-        return Ok(incidents);
+        try
+        {
+            var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException());
+
+            var incidents = await _incidentService.GetIncidentsByUserAsync(userId);
+
+            // Ensure incidents is not null
+            incidents ??= Enumerable.Empty<IncidentResponseDto>();
+
+            return Ok(incidents);
+        }
+        catch (Exception ex)
+        {
+            throw;
+        }
     }
 
     [HttpGet("assigned-to-me")]
@@ -285,8 +326,17 @@ public class IncidentController : ControllerBase
     {
         try
         {
-            var incident = await _incidentService.UpdateIncidentStatusAsync(id, status);
-            return Ok(incident);
+            var incident = await _incidentService.GetIncidentByIdAsync(id);
+            if (incident == null)
+                return NotFound();
+
+            var currentUserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException());
+            var updatedIncident = await _incidentService.UpdateIncidentStatusAsync(id, status);
+            await _notificationService.CreateIncidentUpdateNotificationAsync(
+                id,
+                $"The incident status has been changed from {incident.Status} to {status}",
+                currentUserId);
+            return Ok(updatedIncident);
         }
         catch (KeyNotFoundException)
         {
@@ -302,8 +352,17 @@ public class IncidentController : ControllerBase
     {
         try
         {
-            var incident = await _incidentService.UpdateIncidentPriorityAsync(id, priority);
-            return Ok(incident);
+            var incident = await _incidentService.GetIncidentByIdAsync(id);
+            if (incident == null)
+                return NotFound();
+
+            var currentUserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException());
+            var updatedIncident = await _incidentService.UpdateIncidentPriorityAsync(id, priority);
+            await _notificationService.CreateIncidentUpdateNotificationAsync(
+                id,
+                $"The incident priority has been changed from {incident.Priority} to {priority}",
+                currentUserId);
+            return Ok(updatedIncident);
         }
         catch (KeyNotFoundException)
         {
@@ -319,11 +378,22 @@ public class IncidentController : ControllerBase
     {
         try
         {
-            var incident = await _incidentService.AssignIncidentAsync(id, assigneeId);
+            var incident = await _incidentService.GetIncidentByIdAsync(id);
             if (incident == null)
                 return NotFound();
 
-            return Ok(incident);
+            var currentUserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException());
+            var updatedIncident = await _incidentService.AssignIncidentAsync(id, assigneeId);
+
+            var oldAssignee = incident.AssignedTo?.FirstName + " " + incident.AssignedTo?.LastName ?? "no one";
+            var newAssignee = updatedIncident.AssignedTo?.FirstName + " " + updatedIncident.AssignedTo?.LastName ?? "no one";
+
+            await _notificationService.CreateIncidentUpdateNotificationAsync(
+                id,
+                $"The incident assignee has been changed from {oldAssignee} to {newAssignee}",
+                currentUserId);
+
+            return Ok(updatedIncident);
         }
         catch (Exception)
         {
