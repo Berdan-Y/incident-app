@@ -14,8 +14,8 @@ A cross-platform application with Blazor, API, and MAUI (Android) projects.
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/your-repo.git
-cd your-repo
+git clone https://github.com/Berdan-Y/incident-app
+cd incident-app
 ```
 
 ### 2. Open in Solution
