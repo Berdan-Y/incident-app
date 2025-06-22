@@ -1,0 +1,16 @@
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui.Core/bin/Debug/net9.0/Maui.Core.deps.json
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui.Core/bin/Debug/net9.0/Maui.Core.dll
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui.Core/bin/Debug/net9.0/Maui.Core.pdb
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui.Core/bin/Debug/net9.0/Shared.dll
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui.Core/bin/Debug/net9.0/Shared.pdb
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui.Core/obj/Debug/net9.0/Maui.Core.csproj.AssemblyReference.cache
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui.Core/obj/Debug/net9.0/Maui.Core.GeneratedMSBuildEditorConfig.editorconfig
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui.Core/obj/Debug/net9.0/Maui.Core.AssemblyInfoInputs.cache
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui.Core/obj/Debug/net9.0/Maui.Core.AssemblyInfo.cs
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui.Core/obj/Debug/net9.0/Maui.Core.csproj.CoreCompileInputs.cache
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui.Core/obj/Debug/net9.0/Maui.Core.sourcelink.json
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui.Core/obj/Debug/net9.0/Maui.Core.csproj.Up2Date
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui.Core/obj/Debug/net9.0/Maui.Core.dll
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui.Core/obj/Debug/net9.0/refint/Maui.Core.dll
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui.Core/obj/Debug/net9.0/Maui.Core.pdb
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui.Core/obj/Debug/net9.0/ref/Maui.Core.dll
