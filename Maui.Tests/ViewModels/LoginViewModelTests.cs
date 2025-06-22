@@ -3,6 +3,7 @@ using Moq;
 using Refit;
 using Shared.Api;
 using Shared.Models.Dtos;
+using Shared.Services;
 using Xunit;
 
 namespace Maui.Tests.ViewModels;

@@ -714,8 +714,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>rfxqw5gdy3</Fingerprint>
-      <Integrity>x79E2wG4dZxWK7d7tTI/M4SeeI/DUhB+XL6CDs4qInI=</Integrity>
+      <Fingerprint>59zqj0j5t9</Fingerprint>
+      <Integrity>B2g/kgjpHJeB3BAlTfOssBzrHqgSDyQdafPQ4crGEtM=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\js\bootstrap.bundle.js'))</OriginalItemSpec>

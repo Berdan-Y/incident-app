@@ -3,6 +3,7 @@ using Shared.Api;
 using Shared.Models.Dtos;
 using System.Net.Http;
 using Refit;
+using Shared.Services;
 
 namespace Maui.Core.ViewModels;
 
@@ -92,14 +93,8 @@ public abstract partial class LoginViewModelBase : ObservableObject
     }
 }
 
-public interface ITokenService
-{
-    Task SetTokenAsync(string token);
-    Task SetRolesAsync(string roles);
-}
-
 public class LoginResult
 {
     public bool Success { get; set; }
     public string Message { get; set; } = string.Empty;
-} 
+}
