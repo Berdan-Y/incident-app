@@ -133,6 +133,9 @@
         <DependentUpon>ReportIncidentPage.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
+      <Compile Remove="Converters\IsNotNullConverter.cs" />
+      <Compile Remove="Converters\IsGreaterThanZeroConverter.cs" />
+      <Compile Remove="Behaviors\MapBehavior.cs" />
     </ItemGroup>
 
     <!-- Android Permissions -->

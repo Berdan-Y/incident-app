@@ -28,11 +28,11 @@
     <TabBar>
         <ShellContent
             Title="Home"
-            Icon="{FontImage FontFamily=MaterialIcons, Glyph=&#xe88a;}"
+            Icon="{FontImage FontFamily='Fa-Solid', Glyph='&#xf015;', Size=24}"
             ContentTemplate="{DataTemplate local:MainPage}"
             Route="MainPage" />
         
-        <Tab Title="Reports" Icon="{FontImage FontFamily=MaterialIcons, Glyph=&#xe88a;}">
+        <Tab Title="Reports" Icon="{FontImage FontFamily='Fa-Solid', Glyph='&#xf15c;', Size=24}">
             <ShellContent
                 Title="Report Incident"
                 ContentTemplate="{DataTemplate pages:ReportIncidentPage}"
@@ -69,7 +69,7 @@
             </ShellContent>
         </Tab>
 
-        <Tab Title="Account" Icon="account_icon.png">
+        <Tab Title="Account" Icon="{FontImage FontFamily='Fa-Solid', Glyph='&#xf007;', Size=24}">
             <ShellContent
                 x:Name="LoginContent"
                 Title="Login"
