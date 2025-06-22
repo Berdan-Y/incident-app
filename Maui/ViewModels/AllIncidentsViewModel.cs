@@ -1,15 +1,27 @@
+using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Maui.Services;
 using Shared.Models.Dtos;
 using Maui.Pages;
 using System.Diagnostics;
+using Microsoft.Maui.Controls.Maps;
+using Microsoft.Maui.Maps;
 
 namespace Maui.ViewModels;
 
 public partial class AllIncidentsViewModel : BaseIncidentsViewModel
 {
     private readonly ITokenService _tokenService;
+
+    [ObservableProperty]
+    private bool isListView = true;
+
+    [ObservableProperty]
+    private bool isMapView;
+
+    [ObservableProperty]
+    private ObservableCollection<Pin> mapPins = new();
 
     public AllIncidentsViewModel(IIncidentService incidentService, ITokenService tokenService)
         : base(incidentService)
@@ -23,7 +35,48 @@ public partial class AllIncidentsViewModel : BaseIncidentsViewModel
         MainThread.BeginInvokeOnMainThread(async () => await LoadIncidents());
     }
 
-    private async Task OnViewIncidentDetails(IncidentResponseDto incident)
+    [RelayCommand]
+    private void ToggleView()
+    {
+        IsListView = !IsListView;
+        IsMapView = !IsMapView;
+        
+        if (IsMapView)
+        {
+            UpdateMapPins();
+        }
+    }
+
+    private void UpdateMapPins()
+    {
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            MapPins.Clear();
+            foreach (var incident in Incidents)
+            {
+                if (incident.Latitude != 0 && incident.Longitude != 0)
+                {
+                    var pin = new Pin
+                    {
+                        Location = new Location(incident.Latitude, incident.Longitude),
+                        Label = incident.Title,
+                        Address = incident.Address,
+                        Type = PinType.Place
+                    };
+                    
+                    // Add tap gesture
+                    pin.MarkerClicked += async (s, e) =>
+                    {
+                        await OnViewIncidentDetails(incident);
+                    };
+                    
+                    MapPins.Add(pin);
+                }
+            }
+        });
+    }
+
+    public async Task OnViewIncidentDetails(IncidentResponseDto incident)
     {
         if (incident == null) return;
         await Shell.Current.GoToAsync($"{nameof(IncidentDetailsPage)}?id={incident.Id}");
@@ -73,6 +126,13 @@ public partial class AllIncidentsViewModel : BaseIncidentsViewModel
                         Incidents.Add(incident);
                     }
                 }
+                
+                // Update map pins if in map view
+                if (IsMapView)
+                {
+                    UpdateMapPins();
+                }
+                
                 Debug.WriteLine($"Loaded {incidents?.Count ?? 0} incidents");
             });
         }
@@ -85,7 +145,11 @@ public partial class AllIncidentsViewModel : BaseIncidentsViewModel
         {
             Debug.WriteLine($"Error in LoadIncidents: {ex}");
             ErrorMessage = ex.Message;
-            MainThread.BeginInvokeOnMainThread(() => Incidents.Clear()); // Clear on error
+            MainThread.BeginInvokeOnMainThread(() => 
+            {
+                Incidents.Clear();
+                MapPins.Clear();
+            }); // Clear on error
         }
         finally
         {
