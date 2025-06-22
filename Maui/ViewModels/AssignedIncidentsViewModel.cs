@@ -119,7 +119,7 @@ public partial class AssignedIncidentsViewModel : BaseIncidentsViewModel
 
             IsLoading = true;
             var incidents = await _incidentService.GetAssignedIncidentsAsync();
-            
+
             _unfilteredIncidents.Clear();
             foreach (var incident in incidents)
             {

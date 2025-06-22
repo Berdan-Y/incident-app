@@ -43,7 +43,6 @@ public class DataSeeder
             UpdatedAt = now
         };
 
-        Console.WriteLine($"Created admin user with ID: {adminUser.Id}");
 
         var testUser = new User
         {
@@ -126,7 +125,6 @@ public class DataSeeder
             ZipCode = "12345"
         };
 
-        Console.WriteLine($"Creating test incident 1 with ID: {testIncident1.Id}, ReportedById: {testIncident1.ReportedById}");
 
         var testIncident2 = new Incident
         {
@@ -144,20 +142,12 @@ public class DataSeeder
             ZipCode = "12345"
         };
 
-        Console.WriteLine($"Creating test incident 2 with ID: {testIncident2.Id}, ReportedById: {testIncident2.ReportedById}");
 
         await _context.Incidents.AddRangeAsync(testIncident1, testIncident2);
         await _context.SaveChangesAsync();
 
-        Console.WriteLine("Incidents saved to database");
-
         // Verify incidents were saved
         var savedIncidents = await _context.Incidents.ToListAsync();
-        Console.WriteLine($"Total incidents in database: {savedIncidents.Count}");
-        foreach (var incident in savedIncidents)
-        {
-            Console.WriteLine($"Incident {incident.Id}: Title={incident.Title}, ReportedById={incident.ReportedById}");
-        }
     }
 
     private async Task CleanDataAsync()

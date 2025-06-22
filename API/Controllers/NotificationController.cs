@@ -43,7 +43,7 @@ public class NotificationController : ControllerBase
     {
         var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException());
         var notification = await _notificationService.MarkAsReadAsync(id, userId);
-        
+
         if (notification == null)
             return NotFound();
 
@@ -57,7 +57,7 @@ public class NotificationController : ControllerBase
     {
         var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException());
         var notification = await _notificationService.MarkAsUnreadAsync(id, userId);
-        
+
         if (notification == null)
             return NotFound();
 
@@ -72,4 +72,4 @@ public class NotificationController : ControllerBase
         await _notificationService.MarkAllAsReadAsync(userId);
         return Ok();
     }
-} 
+}

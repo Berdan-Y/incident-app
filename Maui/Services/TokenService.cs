@@ -67,7 +67,6 @@ public class TokenService : ITokenService, IDisposable, INotifyPropertyChanged
 
         if (IsTokenExpired(_token))
         {
-            Debug.WriteLine("Token expired during validation check");
             await LogoutAsync();
             await MainThread.InvokeOnMainThreadAsync(async () =>
             {
@@ -79,21 +78,17 @@ public class TokenService : ITokenService, IDisposable, INotifyPropertyChanged
 
     private async Task InitializeAsync()
     {
-        Debug.WriteLine("TokenService.InitializeAsync called");
         try
         {
             // Try to get token from secure storage first
             var token = await SecureStorage.Default.GetAsync(TokenKey);
             var roles = await SecureStorage.Default.GetAsync(RolesKey);
 
-            Debug.WriteLine($"Retrieved from SecureStorage - Token: {(token != null ? "exists" : "null")}, Roles: {roles}");
-
             // If not found in secure storage, try preferences
             if (token == null)
             {
                 token = _preferences.Get<string>(TokenKey, null);
                 roles = _preferences.Get<string>(RolesKey, null);
-                Debug.WriteLine($"Retrieved from Preferences - Token: {(token != null ? "exists" : "null")}, Roles: {roles}");
             }
 
             if (!string.IsNullOrEmpty(token))
@@ -105,26 +100,22 @@ public class TokenService : ITokenService, IDisposable, INotifyPropertyChanged
                 if (!string.IsNullOrEmpty(roles))
                 {
                     Roles = roles.Split(',').Select(r => r.Trim()).ToList();
-                    Debug.WriteLine($"Set roles from storage: {string.Join(", ", Roles)}");
                 }
             }
             else
             {
                 IsLoggedIn = false;
                 Roles = new List<string>();
-                Debug.WriteLine("No token found, user is not logged in");
             }
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error in InitializeAsync: {ex.Message}");
             IsLoggedIn = false;
             Roles = new List<string>();
         }
         finally
         {
             IsInitializing = false;
-            Debug.WriteLine($"InitializeAsync completed. IsLoggedIn: {IsLoggedIn}, Roles: {string.Join(", ", Roles)}");
         }
     }
 
@@ -138,19 +129,12 @@ public class TokenService : ITokenService, IDisposable, INotifyPropertyChanged
 
         try
         {
-            Debug.WriteLine($"Attempting to validate and store token: {token.Substring(0, Math.Min(50, token.Length))}...");
 
             var handler = new JwtSecurityTokenHandler();
             var jwtToken = handler.ReadJwtToken(token);
 
-            Debug.WriteLine($"Token validation results:");
-            Debug.WriteLine($"Valid From: {jwtToken.ValidFrom}");
-            Debug.WriteLine($"Valid To: {jwtToken.ValidTo}");
-            Debug.WriteLine($"Current UTC Time: {DateTime.UtcNow}");
-
             if (jwtToken.ValidTo < DateTime.UtcNow)
             {
-                Debug.WriteLine("Token validation failed: Token is expired");
                 await LogoutAsync();
                 throw new Exception($"Token is expired. Token expiry: {jwtToken.ValidTo}, Current time: {DateTime.UtcNow}");
             }
@@ -162,7 +146,6 @@ public class TokenService : ITokenService, IDisposable, INotifyPropertyChanged
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"SecureStorage failed, using fallback: {ex.Message}");
                 // Fallback to preferences if secure storage fails
                 _preferences.Set(TokenKey, token);
             }
@@ -170,11 +153,9 @@ public class TokenService : ITokenService, IDisposable, INotifyPropertyChanged
             IsLoggedIn = true;
             _tokenValidationTimer.Start();
             LoggedIn?.Invoke(this, EventArgs.Empty);
-            Debug.WriteLine("Token successfully stored and validated");
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error in SetTokenAsync: {ex.Message}");
             throw;
         }
     }
@@ -183,49 +164,42 @@ public class TokenService : ITokenService, IDisposable, INotifyPropertyChanged
 
     private void ClearAllStorage()
     {
-        Debug.WriteLine("Clearing all storage...");
         try
         {
             // Clear SecureStorage
             SecureStorage.Default.RemoveAll();
-            Debug.WriteLine("SecureStorage cleared");
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error clearing SecureStorage: {ex.Message}");
         }
 
         // Clear Preferences
         try
         {
             _preferences.Clear();
-            Debug.WriteLine("Preferences cleared");
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error clearing Preferences: {ex.Message}");
         }
     }
 
     public async Task LogoutAsync()
     {
-        Debug.WriteLine("LogoutAsync called");
         _tokenValidationTimer.Stop();
-        
+
         // Clear the token and roles
         _token = null;
         Roles.Clear();
-        
+
         // Clear all storage
         ClearAllStorage();
-        
+
         // Update state
         IsLoggedIn = false;
-        
+
         // Notify listeners
         LoggedOut?.Invoke(this, EventArgs.Empty);
-        
-        Debug.WriteLine("Logout completed");
+
         await Task.CompletedTask;
     }
 
@@ -236,12 +210,10 @@ public class TokenService : ITokenService, IDisposable, INotifyPropertyChanged
             var handler = new JwtSecurityTokenHandler();
             var jwtToken = handler.ReadJwtToken(token);
             var isExpired = jwtToken.ValidTo < DateTime.UtcNow;
-            Debug.WriteLine($"Token expiry check - ValidTo: {jwtToken.ValidTo}, Current UTC: {DateTime.UtcNow}, IsExpired: {isExpired}");
             return isExpired;
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error checking token expiration: {ex.Message}");
             return true;
         }
     }
@@ -265,7 +237,6 @@ public class TokenService : ITokenService, IDisposable, INotifyPropertyChanged
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error getting user ID from token: {ex.Message}");
             return null;
         }
     }
@@ -283,8 +254,6 @@ public class TokenService : ITokenService, IDisposable, INotifyPropertyChanged
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error getting username from token: {ex.Message}");
-            return null;
         }
     }
 
@@ -304,14 +273,12 @@ public class TokenService : ITokenService, IDisposable, INotifyPropertyChanged
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error getting email from token: {ex.Message}");
             return null;
         }
     }
 
     public async Task SetRolesAsync(string roles)
     {
-        Debug.WriteLine($"TokenService.SetRolesAsync called with roles: {roles}");
         try
         {
             if (string.IsNullOrEmpty(roles))
@@ -327,11 +294,9 @@ public class TokenService : ITokenService, IDisposable, INotifyPropertyChanged
                 _preferences.Set(RolesKey, roles);
                 Roles = roles.Split(',').Select(r => r.Trim()).ToList();
             }
-            Debug.WriteLine($"Roles successfully stored. Current roles: {string.Join(", ", Roles)}");
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error storing roles in SecureStorage: {ex.Message}");
             // Ensure roles are at least stored in preferences
             _preferences.Set(RolesKey, roles ?? string.Empty);
             Roles = string.IsNullOrEmpty(roles)
@@ -342,8 +307,6 @@ public class TokenService : ITokenService, IDisposable, INotifyPropertyChanged
 
     public List<string> GetRoles()
     {
-        Debug.WriteLine("GetRoles called");
-        Debug.WriteLine($"Returning cached roles: {string.Join(", ", _roles)}");
         return _roles;
     }
 
@@ -353,7 +316,6 @@ public class TokenService : ITokenService, IDisposable, INotifyPropertyChanged
 
         var roles = GetRoles();
         var hasRole = roles.Contains(role, StringComparer.OrdinalIgnoreCase);
-        Debug.WriteLine($"HasRole check - Role: {role}, User roles: {string.Join(", ", roles)}, Has role: {hasRole}");
         return hasRole;
     }
 }

@@ -23,7 +23,6 @@ public partial class AllIncidentsPage : ContentPage
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"Exception in AllIncidentsPage constructor: {ex}");
         }
     }
 
@@ -55,7 +54,6 @@ public partial class AllIncidentsPage : ContentPage
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"Exception in InitializeMap: {ex}");
             _isMapInitialized = false;
         }
     }
@@ -63,7 +61,7 @@ public partial class AllIncidentsPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        
+
         try
         {
             if (!_isPageLoaded)
@@ -90,14 +88,12 @@ public partial class AllIncidentsPage : ContentPage
                     }
                     catch (Exception ex)
                     {
-                        System.Diagnostics.Debug.WriteLine($"Exception in OnAppearing async lambda: {ex}");
                     }
                 });
             }
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"Exception in OnAppearing: {ex}");
         }
     }
 
@@ -174,13 +170,11 @@ public partial class AllIncidentsPage : ContentPage
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine($"Exception in UpdateMapPins inner lambda: {ex}");
                 }
             });
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"Exception in UpdateMapPins: {ex}");
         }
     }
 
@@ -206,7 +200,6 @@ public partial class AllIncidentsPage : ContentPage
                     }
                     catch (Exception ex)
                     {
-                        System.Diagnostics.Debug.WriteLine($"Exception in PropertyChanged async lambda: {ex}");
                     }
                 });
             }
@@ -220,7 +213,6 @@ public partial class AllIncidentsPage : ContentPage
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"Exception in ViewModel_PropertyChanged: {ex}");
         }
     }
 

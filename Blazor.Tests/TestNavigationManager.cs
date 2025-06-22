@@ -23,4 +23,4 @@ public class TestNavigationManager : NavigationManager
         var navigationManager = new TestNavigationManager();
         services.AddSingleton<NavigationManager>(navigationManager);
     }
-} 
+}

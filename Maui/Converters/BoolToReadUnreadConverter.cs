@@ -17,4 +17,4 @@ public class BoolToReadUnreadConverter : IValueConverter
     {
         throw new NotImplementedException();
     }
-} 
+}

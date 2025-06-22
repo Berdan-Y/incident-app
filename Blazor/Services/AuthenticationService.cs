@@ -13,7 +13,7 @@ public class AuthenticationService : IAuthenticationService
     private readonly NavigationManager _navigationManager;
     private readonly ITokenService _tokenService;
     private string? _userEmail;
-    
+
     public event Action? AuthenticationStateChanged;
 
     public bool IsAuthenticated => _tokenService.IsLoggedIn;
@@ -46,9 +46,9 @@ public class AuthenticationService : IAuthenticationService
     {
         try
         {
-            var request = new RegisterRequest 
-            { 
-                Email = registerDto.Email, 
+            var request = new RegisterRequest
+            {
+                Email = registerDto.Email,
                 Password = registerDto.Password,
                 FirstName = registerDto.FirstName,
                 LastName = registerDto.LastName,
@@ -115,48 +115,41 @@ public class AuthenticationService : IAuthenticationService
     {
         try
         {
-            Console.WriteLine($"Attempting to login with email: {request.Email}");
-            Console.WriteLine($"Using HttpClient with base address: {_httpClient.BaseAddress}");
-            
             var response = await _httpClient.PostAsJsonAsync("api/Auth/login", request);
-            Console.WriteLine($"Login response status: {response.StatusCode}");
-            
-            if (!response.IsSuccessStatusCode) 
+
+            if (!response.IsSuccessStatusCode)
             {
                 var error = await response.Content.ReadAsStringAsync();
-                Console.WriteLine($"Login failed with error: {error}");
                 return false;
             }
 
             var authResponse = await response.Content.ReadFromJsonAsync<AuthResponse>();
-            if (authResponse?.Token == null) 
+            if (authResponse?.Token == null)
             {
-                Console.WriteLine("Login failed: No token received");
                 return false;
             }
 
             // Set token first
             await _tokenService.SetTokenAsync(authResponse.Token);
-            
+
             // Get roles from the response and set them
             var roles = string.Join(",", authResponse.Roles);
             if (!string.IsNullOrEmpty(roles))
             {
                 await _tokenService.SetRolesAsync(roles);
             }
-            
+
             // Set user info
             _userEmail = authResponse.UserName;
             UserRole = authResponse.Roles.Contains("Admin", StringComparer.OrdinalIgnoreCase) ? Role.Admin : Role.Member;
-            
+
             // Notify state change after everything is set
             NotifyAuthenticationStateChanged();
-            
+
             return true;
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Login exception: {ex.Message}");
             throw;
         }
     }
@@ -166,35 +159,29 @@ public class AuthenticationService : IAuthenticationService
         try
         {
             var response = await _httpClient.PostAsJsonAsync("api/Auth/register", request);
-            Console.WriteLine($"Register response status: {response.StatusCode}");
-            
+
             if (!response.IsSuccessStatusCode)
             {
                 var error = await response.Content.ReadAsStringAsync();
-                Console.WriteLine($"Registration failed with error: {error}");
                 return false;
             }
 
             var responseContent = await response.Content.ReadFromJsonAsync<AuthResponse>();
-            Console.WriteLine($"Registration success with message: {responseContent?.Message}");
-            
+
             return true;
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Registration exception: {ex.Message}");
             return false;
         }
     }
 
     public async Task Logout()
     {
-        Console.WriteLine("AuthenticationService.Logout called");
         await _tokenService.LogoutAsync();
         _userEmail = null;
         UserRole = null;
         NotifyAuthenticationStateChanged();
-        Console.WriteLine("Logout completed - token cleared and state reset");
     }
 
     private void NotifyAuthenticationStateChanged()
@@ -209,4 +196,4 @@ public class AuthenticationService : IAuthenticationService
         // Force UI refresh
         _navigationManager.NavigateTo(_navigationManager.Uri, forceLoad: false);
     }
-} 
+}

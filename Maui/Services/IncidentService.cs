@@ -21,12 +21,12 @@ public class IncidentService : IIncidentService
         try
         {
             var response = await _incidentApi.DeleteIncidentAsync(incident.Id);
-            
+
             if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
                 throw new UnauthorizedAccessException("Your session has expired. Please log in again.");
             }
-            
+
             if (!response.IsSuccessStatusCode)
             {
                 string errorContent = "Failed to delete incident";
@@ -50,7 +50,6 @@ public class IncidentService : IIncidentService
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error in DeleteIncidentAsync: {ex}");
             throw new Exception("Failed to delete incident. Please try again.");
         }
     }
@@ -60,12 +59,12 @@ public class IncidentService : IIncidentService
         try
         {
             var response = await _incidentApi.GetMyIncidentsAsync();
-            
+
             if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
                 throw new UnauthorizedAccessException("Your session has expired. Please log in again.");
             }
-            
+
             if (!response.IsSuccessStatusCode)
             {
                 string errorContent = "Failed to load my incidents";
@@ -82,7 +81,7 @@ public class IncidentService : IIncidentService
                 }
                 throw new Exception(errorContent);
             }
-            
+
             return response.Content ?? new List<IncidentResponseDto>();
         }
         catch (UnauthorizedAccessException)
@@ -91,7 +90,6 @@ public class IncidentService : IIncidentService
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error in GetMyIncidentsAsync: {ex}");
             throw new Exception("Failed to load incidents. Please try again.");
         }
     }
@@ -101,12 +99,12 @@ public class IncidentService : IIncidentService
         try
         {
             var response = await _incidentApi.GetIncidentsAsync();
-            
+
             if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
                 throw new UnauthorizedAccessException("Your session has expired. Please log in again.");
             }
-            
+
             if (!response.IsSuccessStatusCode)
             {
                 string errorContent = "Failed to load all incidents";
@@ -123,7 +121,7 @@ public class IncidentService : IIncidentService
                 }
                 throw new Exception(errorContent);
             }
-            
+
             return response.Content ?? new List<IncidentResponseDto>();
         }
         catch (UnauthorizedAccessException)
@@ -132,7 +130,6 @@ public class IncidentService : IIncidentService
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error in GetAllIncidentsAsync: {ex}");
             throw new Exception("Failed to load incidents. Please try again.");
         }
     }
@@ -142,12 +139,12 @@ public class IncidentService : IIncidentService
         try
         {
             var response = await _incidentApi.GetIncidentsAssignedToMeAsync();
-            
+
             if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
                 throw new UnauthorizedAccessException("Your session has expired. Please log in again.");
             }
-            
+
             if (!response.IsSuccessStatusCode)
             {
                 string errorContent = "Failed to load assigned incidents";
@@ -164,7 +161,7 @@ public class IncidentService : IIncidentService
                 }
                 throw new Exception(errorContent);
             }
-            
+
             return response.Content ?? new List<IncidentResponseDto>();
         }
         catch (UnauthorizedAccessException)
@@ -173,7 +170,6 @@ public class IncidentService : IIncidentService
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error in GetAssignedIncidentsAsync: {ex}");
             throw new Exception("Failed to load incidents. Please try again.");
         }
     }
@@ -183,12 +179,12 @@ public class IncidentService : IIncidentService
         try
         {
             var response = await _incidentApi.GetIncidentByIdAsync(id);
-            
+
             if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
                 throw new UnauthorizedAccessException("Your session has expired. Please log in again.");
             }
-            
+
             if (!response.IsSuccessStatusCode || response.Content == null)
             {
                 string errorContent = "Failed to load incident details";
@@ -205,7 +201,7 @@ public class IncidentService : IIncidentService
                 }
                 throw new Exception(errorContent);
             }
-            
+
             return response.Content;
         }
         catch (UnauthorizedAccessException)
@@ -214,7 +210,6 @@ public class IncidentService : IIncidentService
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error in GetIncidentByIdAsync: {ex}");
             throw new Exception("Failed to load incident details. Please try again.");
         }
     }
@@ -224,12 +219,12 @@ public class IncidentService : IIncidentService
         try
         {
             var response = await _incidentApi.UpdateIncidentAsync(id, updateDto);
-            
+
             if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
                 throw new UnauthorizedAccessException("Your session has expired. Please log in again.");
             }
-            
+
             if (!response.IsSuccessStatusCode || response.Content == null)
             {
                 string errorContent = "Failed to update incident";
@@ -256,7 +251,6 @@ public class IncidentService : IIncidentService
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error in UpdateIncidentAsync: {ex}");
             throw new Exception("Failed to update incident. Please try again.");
         }
     }
@@ -266,12 +260,12 @@ public class IncidentService : IIncidentService
         try
         {
             var response = await _incidentApi.UpdateIncidentDetailsAsync(id, details);
-            
+
             if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
                 throw new UnauthorizedAccessException("Your session has expired. Please log in again.");
             }
-            
+
             if (!response.IsSuccessStatusCode || response.Content == null)
             {
                 string errorContent = "Failed to update incident details";
@@ -298,7 +292,6 @@ public class IncidentService : IIncidentService
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error in UpdateIncidentDetailsAsync: {ex}");
             throw new Exception("Failed to update incident details. Please try again.");
         }
     }
@@ -308,12 +301,12 @@ public class IncidentService : IIncidentService
         try
         {
             var response = await _incidentApi.UpdateIncidentStatusAsync(id, status);
-            
+
             if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
                 throw new UnauthorizedAccessException("Your session has expired. Please log in again.");
             }
-            
+
             if (!response.IsSuccessStatusCode)
             {
                 string errorContent = "Failed to update incident status";
@@ -340,7 +333,6 @@ public class IncidentService : IIncidentService
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error in UpdateIncidentStatusAsync: {ex}");
             throw new Exception("Failed to update incident status. Please try again.");
         }
     }
@@ -354,7 +346,7 @@ public class IncidentService : IIncidentService
             {
                 throw new UnauthorizedAccessException("Your session has expired. Please log in again.");
             }
-            
+
             if (!response.IsSuccessStatusCode)
             {
                 string errorContent = "Failed to update incident";
@@ -381,7 +373,6 @@ public class IncidentService : IIncidentService
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error in PatchIncidentAsync: {ex}");
             throw new Exception("Failed to update incident. Please try again.");
         }
     }

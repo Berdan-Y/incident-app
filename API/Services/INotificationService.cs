@@ -10,4 +10,4 @@ public interface INotificationService
     Task<NotificationDto?> MarkAsUnreadAsync(Guid notificationId, Guid userId);
     Task<bool> MarkAllAsReadAsync(Guid userId);
     Task CreateIncidentUpdateNotificationAsync(Guid incidentId, string message, Guid? excludeUserId = null);
-} 
+}

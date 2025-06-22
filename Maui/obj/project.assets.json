@@ -14313,7 +14313,7 @@
         }
       }
     },
-    "net9.0-ios18.4": {
+    "net9.0-ios18.5": {
       "AutoMapper/14.0.0": {
         "type": "package",
         "dependencies": {
@@ -16668,7 +16668,7 @@
         }
       }
     },
-    "net9.0-ios18.4/android-arm64": {
+    "net9.0-ios18.5/android-arm64": {
       "AutoMapper/14.0.0": {
         "type": "package",
         "dependencies": {
@@ -19177,7 +19177,7 @@
         }
       }
     },
-    "net9.0-ios18.4/android-x64": {
+    "net9.0-ios18.5/android-x64": {
       "AutoMapper/14.0.0": {
         "type": "package",
         "dependencies": {
@@ -21686,7 +21686,7 @@
         }
       }
     },
-    "net9.0-ios18.4/iossimulator-arm64": {
+    "net9.0-ios18.5/iossimulator-arm64": {
       "AutoMapper/14.0.0": {
         "type": "package",
         "dependencies": {
@@ -31716,7 +31716,7 @@
       "System.IdentityModel.Tokens.Jwt >= 7.4.0",
       "System.Net.Http >= 4.3.4"
     ],
-    "net9.0-ios18.4": [
+    "net9.0-ios18.5": [
       "CommunityToolkit.Maui >= 5.3.0",
       "CommunityToolkit.Mvvm >= 8.2.2",
       "Microsoft.Extensions.Logging.Debug >= 9.0.0",
@@ -31763,7 +31763,7 @@
             }
           }
         },
-        "net9.0-ios18.4": {
+        "net9.0-ios18.5": {
           "targetAlias": "net9.0-ios",
           "projectReferences": {
             "/Users/berdanyilmaz/Documents/GitHub/incident-app/Shared/Shared.csproj": {
@@ -31845,7 +31845,7 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.NETCore.App.Ref",
-            "version": "[9.0.5, 9.0.5]"
+            "version": "[9.0.6, 9.0.6]"
           }
         ],
         "frameworkReferences": {
@@ -31858,7 +31858,7 @@
         },
         "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
       },
-      "net9.0-ios18.4": {
+      "net9.0-ios18.5": {
         "targetAlias": "net9.0-ios",
         "dependencies": {
           "CommunityToolkit.Maui": {
@@ -31918,7 +31918,7 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.NETCore.App.Ref",
-            "version": "[9.0.5, 9.0.5]"
+            "version": "[9.0.6, 9.0.6]"
           }
         ],
         "frameworkReferences": {
@@ -31956,10 +31956,10 @@
         "net9.0-android35.0/android-arm64",
         "net9.0-android35.0/android-x64",
         "net9.0-android35.0/iossimulator-arm64",
-        "net9.0-ios18.4",
-        "net9.0-ios18.4/android-arm64",
-        "net9.0-ios18.4/android-x64",
-        "net9.0-ios18.4/iossimulator-arm64"
+        "net9.0-ios18.5",
+        "net9.0-ios18.5/android-arm64",
+        "net9.0-ios18.5/android-x64",
+        "net9.0-ios18.5/iossimulator-arm64"
       ]
     }
   ]

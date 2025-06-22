@@ -68,15 +68,12 @@
         {
             try 
             {
-                Console.WriteLine("Logging out...");
                 await AuthService.LogoutAsync();
-                Console.WriteLine("Logged out successfully");
                 Snackbar.Add("Successfully logged out!", Severity.Success);
                 NavigationManager.NavigateTo("/", true);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Logout error: {ex.Message}");
                 Snackbar.Add("Error during logout", Severity.Error);
             }
         }

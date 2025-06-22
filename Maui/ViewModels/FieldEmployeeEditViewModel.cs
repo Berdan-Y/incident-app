@@ -51,7 +51,7 @@ public partial class FieldEmployeeEditViewModel : ObservableObject
             _incidentId = incidentId;
 
             var incident = await _incidentService.GetIncidentByIdAsync(incidentId);
-            
+
             Title = incident.Title;
             Description = incident.Description;
             Address = incident.Address;
@@ -76,8 +76,7 @@ public partial class FieldEmployeeEditViewModel : ObservableObject
             IsLoading = true;
             ErrorMessage = string.Empty;
 
-            Debug.WriteLine($"Saving incident {_incidentId} with Description: {Description}, Status: {Status}");
-            
+
             // Create a patch DTO with only description field
             var patchDto = new IncidentPatchDto
             {
@@ -91,7 +90,6 @@ public partial class FieldEmployeeEditViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error saving incident: {ex}");
             ErrorMessage = $"Failed to save changes: {ex.Message}";
         }
         finally
@@ -105,4 +103,4 @@ public partial class FieldEmployeeEditViewModel : ObservableObject
     {
         await Shell.Current.GoToAsync("..");
     }
-} 
+}

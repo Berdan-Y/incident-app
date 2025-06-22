@@ -28,4 +28,4 @@ public partial class FieldEmployeeEditPage : ContentPage
             await viewModel.LoadIncidentAsync(Guid.Parse(IncidentId));
         }
     }
-} 
+}

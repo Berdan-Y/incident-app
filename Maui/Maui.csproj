@@ -151,5 +151,8 @@
         <Generator></Generator>
       </AndroidResource>
     </ItemGroup>
+    <ItemGroup>
+      <None Remove="Resources\AppIcon\appicon_foreground.svg" />
+    </ItemGroup>
 
 </Project>

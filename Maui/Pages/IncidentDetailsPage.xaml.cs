@@ -15,7 +15,6 @@ public partial class IncidentDetailsPage : ContentPage
     {
         try
         {
-            System.Diagnostics.Debug.WriteLine("Initializing IncidentDetailsPage");
             InitializeComponent();
             _viewModel = viewModel;
             BindingContext = viewModel;
@@ -23,12 +22,10 @@ public partial class IncidentDetailsPage : ContentPage
             // Subscribe to the PropertyChanged event of the ViewModel
             _viewModel.PropertyChanged += ViewModel_PropertyChanged;
             _viewModel.RegionChanged += OnRegionChanged;
-            
-            System.Diagnostics.Debug.WriteLine("Added property changed handler");
+
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"Exception in IncidentDetailsPage constructor: {ex}");
         }
     }
 
@@ -36,10 +33,8 @@ public partial class IncidentDetailsPage : ContentPage
     {
         try
         {
-            System.Diagnostics.Debug.WriteLine("Initializing map");
             if (LocationMap == null)
             {
-                System.Diagnostics.Debug.WriteLine("LocationMap is null, cannot initialize");
                 _isMapInitialized = false;
                 return;
             }
@@ -59,11 +54,9 @@ public partial class IncidentDetailsPage : ContentPage
             LocationMap.IsScrollEnabled = true;
 
             _isMapInitialized = true;
-            System.Diagnostics.Debug.WriteLine("Map initialized successfully");
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"Exception in InitializeMap: {ex}");
             _isMapInitialized = false;
         }
     }
@@ -71,7 +64,7 @@ public partial class IncidentDetailsPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        
+
         try
         {
             if (!_isPageLoaded)
@@ -98,14 +91,12 @@ public partial class IncidentDetailsPage : ContentPage
                     }
                     catch (Exception ex)
                     {
-                        System.Diagnostics.Debug.WriteLine($"Exception in OnAppearing async lambda: {ex}");
                     }
                 });
             }
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"Exception in OnAppearing: {ex}");
         }
     }
 
@@ -115,7 +106,6 @@ public partial class IncidentDetailsPage : ContentPage
         {
             if (LocationMap != null && _isMapInitialized)
             {
-                System.Diagnostics.Debug.WriteLine($"Moving map to new region: Center({e.Center.Latitude}, {e.Center.Longitude}), Radius: {e.Radius.Kilometers}km");
                 MainThread.BeginInvokeOnMainThread(() =>
                 {
                     try
@@ -124,14 +114,12 @@ public partial class IncidentDetailsPage : ContentPage
                     }
                     catch (Exception ex)
                     {
-                        System.Diagnostics.Debug.WriteLine($"Exception moving map region: {ex}");
                     }
                 });
             }
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"Exception in OnRegionChanged: {ex}");
         }
     }
 
@@ -141,7 +129,6 @@ public partial class IncidentDetailsPage : ContentPage
         {
             if (!_viewModel.HasValidCoordinates || _viewModel.Incident == null || !_isMapInitialized || LocationMap == null)
             {
-                System.Diagnostics.Debug.WriteLine("Cannot update pin - prerequisites not met");
                 return;
             }
 
@@ -166,7 +153,6 @@ public partial class IncidentDetailsPage : ContentPage
                         Location = pinLocation
                     };
 
-                    System.Diagnostics.Debug.WriteLine($"Adding pin at {pinLocation.Latitude}, {pinLocation.Longitude} with label '{_incidentPin.Label}'");
 
                     // Add pin to map
                     LocationMap.Pins?.Add(_incidentPin);
@@ -178,17 +164,14 @@ public partial class IncidentDetailsPage : ContentPage
                     );
                     LocationMap.MoveToRegion(mapSpan);
 
-                    System.Diagnostics.Debug.WriteLine("Pin added and map centered");
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine($"Exception in UpdateMapPin inner lambda: {ex}");
                 }
             });
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"Exception in UpdateMapPin: {ex}");
         }
     }
 
@@ -196,8 +179,6 @@ public partial class IncidentDetailsPage : ContentPage
     {
         try
         {
-            System.Diagnostics.Debug.WriteLine($"Property changed: {e.PropertyName}");
-            
             if (e.PropertyName == nameof(IncidentDetailsViewModel.HasValidCoordinates) ||
                 e.PropertyName == nameof(IncidentDetailsViewModel.Incident))
             {
@@ -220,21 +201,18 @@ public partial class IncidentDetailsPage : ContentPage
                     }
                     catch (Exception ex)
                     {
-                        System.Diagnostics.Debug.WriteLine($"Exception in PropertyChanged async lambda: {ex}");
                     }
                 });
             }
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"Exception in ViewModel_PropertyChanged: {ex}");
         }
     }
 
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
-        System.Diagnostics.Debug.WriteLine("IncidentDetailsPage OnDisappearing");
         _viewModel.PropertyChanged -= ViewModel_PropertyChanged;
         _viewModel.RegionChanged -= OnRegionChanged;
         _isPageLoaded = false;

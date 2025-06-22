@@ -155,4 +155,4 @@ public partial class NotificationsViewModel : BaseViewModel
             await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
         }
     }
-} 
+}

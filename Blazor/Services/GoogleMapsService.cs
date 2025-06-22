@@ -58,7 +58,6 @@ public class GoogleMapsService : IGoogleMapsService
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error validating address: {ex.Message}");
             return new GeocodingResponse { IsValid = false };
         }
     }
@@ -95,4 +94,4 @@ public class GoogleMapsService : IGoogleMapsService
         public double Lat { get; set; }
         public double Lng { get; set; }
     }
-} 
+}

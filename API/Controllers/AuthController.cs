@@ -49,10 +49,7 @@ public class AuthController : ControllerBase
         };
 
         _context.Users.Add(user);
-        
-        Console.WriteLine($"Role from request (raw): {registerDto.Role}");
-        Console.WriteLine($"Role from request (int): {(int?)registerDto.Role}");
-        Console.WriteLine($"Role from request (string): {registerDto.Role?.ToString()}");
+
 
         // Map enum values to database role IDs
         var roleId = registerDto.Role switch
@@ -66,14 +63,11 @@ public class AuthController : ControllerBase
         // Also set the RoleJson property
         user.RoleJson = JsonSerializer.Serialize(new { Name = registerDto.Role?.ToString() ?? "Member" });
 
-        Console.WriteLine($"Mapped roleId: {roleId}");
         var role = _context.Roles.Find(roleId);
         if (role == null)
         {
-            Console.WriteLine($"Role not found in database for roleId: {roleId}");
             return BadRequest(new { message = "Selected role not found" });
         }
-        Console.WriteLine($"Found role in database: {role.Name} (ID: {role.Id})");
 
         var userRole = new UserRole
         {

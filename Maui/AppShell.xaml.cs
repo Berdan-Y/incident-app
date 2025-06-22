@@ -16,7 +16,6 @@ public partial class AppShell : Shell, INotifyPropertyChanged
     {
         get
         {
-            Debug.WriteLine($"TokenService getter called, returning {_tokenService}");
             return _tokenService;
         }
     }
@@ -34,7 +33,6 @@ public partial class AppShell : Shell, INotifyPropertyChanged
         // Subscribe to TokenService property changes
         _tokenService.PropertyChanged += (s, e) =>
         {
-            Debug.WriteLine($"TokenService property changed: {e.PropertyName}");
             OnPropertyChanged(nameof(TokenService));
             OnPropertyChanged(nameof(IsLoggedIn));
         };
@@ -88,13 +86,11 @@ public partial class AppShell : Shell, INotifyPropertyChanged
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"Navigation error: {ex.Message}");
         }
     }
 
     private void UpdateItemVisibility(BaseShellItem item, bool isAuthenticated)
     {
-        Debug.WriteLine($"UpdateItemVisibility called for {item.GetType().Name} - {item.Route}, isAuthenticated: {isAuthenticated}");
 
         switch (item)
         {
@@ -102,7 +98,6 @@ public partial class AppShell : Shell, INotifyPropertyChanged
                 // Skip visibility update for pages with role-based visibility
                 if (content.Route is "AllIncidentsPage" or "AssignedIncidentsPage")
                 {
-                    Debug.WriteLine($"Skipping visibility update for {content.Route} to respect its binding");
                     break;
                 }
 
@@ -113,7 +108,6 @@ public partial class AppShell : Shell, INotifyPropertyChanged
                     "MainPage" or "ReportIncidentPage" => true,
                     _ => content.IsVisible
                 };
-                Debug.WriteLine($"Setting visibility for {content.Route} to {newVisibility}");
                 content.IsVisible = newVisibility;
                 break;
 

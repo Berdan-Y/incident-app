@@ -17,4 +17,4 @@ public class EnumToStringConverter : IValueConverter
     {
         throw new NotImplementedException();
     }
-} 
+}

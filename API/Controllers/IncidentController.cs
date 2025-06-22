@@ -23,7 +23,7 @@ public class IncidentController : ControllerBase
     private readonly INotificationService _notificationService;
 
     public IncidentController(
-        IIncidentService incidentService, 
+        IIncidentService incidentService,
         IAuthorizationService authorizationService,
         INotificationService notificationService)
     {
@@ -84,17 +84,12 @@ public class IncidentController : ControllerBase
             return NotFound();
 
         var currentUserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException());
-        Console.WriteLine($"[GetIncidentById] Current User ID: {currentUserId}");
-        Console.WriteLine($"[GetIncidentById] Incident AssignedToId: {incident.AssignedTo?.Id}");
-        Console.WriteLine($"[GetIncidentById] User Roles: {string.Join(", ", User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value))}");
 
         // Check if user is authorized to view this incident
         var authResult = await _authorizationService.AuthorizeAsync(User, incident, "CanViewAllIncidents");
-        Console.WriteLine($"[GetIncidentById] CanViewAllIncidents result: {authResult.Succeeded}");
 
         if (!authResult.Succeeded && incident.ReportedById != currentUserId)
         {
-            Console.WriteLine($"[GetIncidentById] Access denied - User is not reporter and cannot view all incidents");
             return Forbid();
         }
 
@@ -133,10 +128,8 @@ public class IncidentController : ControllerBase
 
         // Handle photos if any
         var photos = form.Files.Where(f => f.Name.StartsWith("photos"));
-        Console.WriteLine($"Number of photos received: {photos.Count()}");
         foreach (var photo in photos)
         {
-            Console.WriteLine($"Processing photo: {photo.FileName}, ContentType: {photo.ContentType}, Length: {photo.Length}");
             await _incidentService.AddPhotoToIncidentAsync(incident.Id, photo);
         }
 
@@ -177,7 +170,7 @@ public class IncidentController : ControllerBase
             var currentUserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException());
             var updatedIncident = await _incidentService.UpdateIncidentAsync(id, incidentDto);
             await _notificationService.CreateIncidentUpdateNotificationAsync(
-                id, 
+                id,
                 "The incident information has been updated",
                 currentUserId);
             return Ok(updatedIncident);
@@ -200,27 +193,19 @@ public class IncidentController : ControllerBase
             return NotFound();
 
         var currentUserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException());
-        Console.WriteLine($"Current User ID: {currentUserId}");
-        Console.WriteLine($"Incident AssignedToId: {incident.AssignedToId}");
-        Console.WriteLine($"User Roles: {string.Join(", ", User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value))}");
-        Console.WriteLine($"Is Field Employee: {User.IsInRole(Role.FieldEmployee)}");
 
         // Check if user is authorized to update this incident
         var authResult = await _authorizationService.AuthorizeAsync(User, incident, "CanUpdateAnyIncident");
-        Console.WriteLine($"CanUpdateAnyIncident result: {authResult.Succeeded}");
         if (!authResult.Succeeded)
         {
             // Check if user is the reporter
             bool isReporter = incident.ReportedById == currentUserId;
-            Console.WriteLine($"Is Reporter: {isReporter}");
-            
+
             // Check if user is the assigned field employee
             bool isAssignedFieldEmployee = User.IsInRole(Role.FieldEmployee) && incident.AssignedToId == currentUserId;
-            Console.WriteLine($"Is Assigned Field Employee: {isAssignedFieldEmployee}");
 
             if (!isReporter && !isAssignedFieldEmployee)
             {
-                Console.WriteLine("Access denied: User is neither reporter nor assigned field employee");
                 return Forbid();
             }
 
@@ -228,10 +213,8 @@ public class IncidentController : ControllerBase
             if (isReporter)
             {
                 authResult = await _authorizationService.AuthorizeAsync(User, incident, "CanUpdateOwnIncidents");
-                Console.WriteLine($"CanUpdateOwnIncidents result: {authResult.Succeeded}");
                 if (!authResult.Succeeded)
                 {
-                    Console.WriteLine("Access denied: Reporter doesn't have permission to update own incidents");
                     return Forbid();
                 }
             }
@@ -243,7 +226,6 @@ public class IncidentController : ControllerBase
                 if (patchDto.Status.HasValue || patchDto.Priority.HasValue ||
                     patchDto.AssignedToId.HasValue)
                 {
-                    Console.WriteLine("Access denied: Member trying to update restricted fields");
                     return Forbid();
                 }
             }
@@ -255,12 +237,9 @@ public class IncidentController : ControllerBase
                     .Where(p => p.GetValue(patchDto) != null)
                     .Select(p => p.Name);
 
-                Console.WriteLine($"Attempted fields: {string.Join(", ", attemptedFields)}");
-                Console.WriteLine($"Allowed fields: {string.Join(", ", allowedFields)}");
 
                 if (attemptedFields.Any(f => !allowedFields.Contains(f)))
                 {
-                    Console.WriteLine("Access denied: Field employee trying to update restricted fields");
                     return Forbid();
                 }
             }
@@ -315,27 +294,16 @@ public class IncidentController : ControllerBase
         try
         {
             var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException());
-            Console.WriteLine($"GetMyIncidents called for user ID: {userId}");
 
             var incidents = await _incidentService.GetIncidentsByUserAsync(userId);
 
             // Ensure incidents is not null
             incidents ??= Enumerable.Empty<IncidentResponseDto>();
 
-            var incidentCount = incidents.Count();
-            Console.WriteLine($"Found {incidentCount} incidents for user {userId}");
-
-            // Log each incident individually without using Aggregate or Select
-            foreach (var incident in incidents)
-            {
-                Console.WriteLine($"Incident available: {incident.Id} - {incident.Title}");
-            }
-
             return Ok(incidents);
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error in GetMyIncidents: {ex}");
             throw;
         }
     }
@@ -365,7 +333,7 @@ public class IncidentController : ControllerBase
             var currentUserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException());
             var updatedIncident = await _incidentService.UpdateIncidentStatusAsync(id, status);
             await _notificationService.CreateIncidentUpdateNotificationAsync(
-                id, 
+                id,
                 $"The incident status has been changed from {incident.Status} to {status}",
                 currentUserId);
             return Ok(updatedIncident);
@@ -391,7 +359,7 @@ public class IncidentController : ControllerBase
             var currentUserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException());
             var updatedIncident = await _incidentService.UpdateIncidentPriorityAsync(id, priority);
             await _notificationService.CreateIncidentUpdateNotificationAsync(
-                id, 
+                id,
                 $"The incident priority has been changed from {incident.Priority} to {priority}",
                 currentUserId);
             return Ok(updatedIncident);
@@ -416,12 +384,12 @@ public class IncidentController : ControllerBase
 
             var currentUserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new UnauthorizedAccessException());
             var updatedIncident = await _incidentService.AssignIncidentAsync(id, assigneeId);
-            
+
             var oldAssignee = incident.AssignedTo?.FirstName + " " + incident.AssignedTo?.LastName ?? "no one";
             var newAssignee = updatedIncident.AssignedTo?.FirstName + " " + updatedIncident.AssignedTo?.LastName ?? "no one";
-            
+
             await _notificationService.CreateIncidentUpdateNotificationAsync(
-                id, 
+                id,
                 $"The incident assignee has been changed from {oldAssignee} to {newAssignee}",
                 currentUserId);
 

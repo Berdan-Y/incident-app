@@ -21,4 +21,4 @@ public class AutoMapperProfile : Profile
             .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => $"{src.User.FirstName} {src.User.LastName}"))
             .ForMember(dest => dest.IncidentTitle, opt => opt.MapFrom(src => src.Incident.Title));
     }
-} 
+}

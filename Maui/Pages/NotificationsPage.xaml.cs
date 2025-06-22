@@ -18,4 +18,4 @@ public partial class NotificationsPage : ContentPage
             viewModel.LoadNotificationsCommand.Execute(null);
         }
     }
-} 
+}

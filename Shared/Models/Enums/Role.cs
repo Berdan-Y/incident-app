@@ -5,4 +5,4 @@ public enum Role
     Member,
     FieldEmployee,
     Admin
-} 
+}

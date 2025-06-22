@@ -15,16 +15,10 @@ public partial class MyIncidentsViewModel : BaseIncidentsViewModel
     public MyIncidentsViewModel(IIncidentService incidentService, ITokenService tokenService)
         : base(incidentService)
     {
-        Debug.WriteLine("Initializing MyIncidentsViewModel");
         _tokenService = tokenService;
 
         EmptyMessage = "You haven't reported any incidents yet. Tap the 'Report Incident' tab to create one.";
         ViewIncidentDetailsCommand = new Command<IncidentResponseDto>(async (incident) => await OnViewIncidentDetails(incident));
-
-        Debug.WriteLine("MyIncidentsViewModel initialized with commands:");
-        Debug.WriteLine($"- ViewIncidentDetailsCommand: {ViewIncidentDetailsCommand != null}");
-        Debug.WriteLine($"- EditIncidentCommand: {EditIncidentCommand != null}");
-        Debug.WriteLine($"- DeleteIncidentCommand: {DeleteIncidentCommand != null}");
 
         // Load incidents when the ViewModel is created
         MainThread.BeginInvokeOnMainThread(async () => await LoadMyReports());
@@ -32,14 +26,12 @@ public partial class MyIncidentsViewModel : BaseIncidentsViewModel
 
     private async Task OnViewIncidentDetails(IncidentResponseDto incident)
     {
-        Debug.WriteLine($"OnViewIncidentDetails called for incident: {incident?.Id}");
         if (incident == null) return;
         await Shell.Current.GoToAsync($"{nameof(IncidentDetailsPage)}?id={incident.Id}");
     }
 
     protected override async Task OnEditIncident(IncidentResponseDto incident)
     {
-        Debug.WriteLine($"OnEditIncident called for incident: {incident?.Id}");
         if (incident == null) return;
         await Shell.Current.GoToAsync($"{nameof(EditIncidentPage)}?id={incident.Id}");
         await LoadMyReports(); // Refresh the list after editing
@@ -47,7 +39,6 @@ public partial class MyIncidentsViewModel : BaseIncidentsViewModel
 
     protected override async Task OnDeleteIncident(IncidentResponseDto incident)
     {
-        Debug.WriteLine($"OnDeleteIncident called for incident: {incident?.Id}");
         if (incident == null) return;
 
         bool answer = await Shell.Current.DisplayAlert(
@@ -67,7 +58,6 @@ public partial class MyIncidentsViewModel : BaseIncidentsViewModel
                 if (Incidents.Contains(incident))
                 {
                     Incidents.Remove(incident);
-                    Debug.WriteLine($"Removed incident {incident.Id} from collection");
                 }
 
                 // Optionally refresh the list to ensure consistency
@@ -75,12 +65,10 @@ public partial class MyIncidentsViewModel : BaseIncidentsViewModel
             }
             catch (UnauthorizedAccessException)
             {
-                Debug.WriteLine("Unauthorized access - redirecting to login");
                 await HandleUnauthorizedAccess();
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Error deleting incident: {ex}");
                 await Shell.Current.DisplayAlert("Error", $"Failed to delete incident: {ex.Message}", "OK");
             }
             finally
@@ -107,7 +95,6 @@ public partial class MyIncidentsViewModel : BaseIncidentsViewModel
 
         try
         {
-            Debug.WriteLine("LoadMyReports started");
             IsLoading = true;
             ErrorMessage = string.Empty;
 
@@ -134,17 +121,14 @@ public partial class MyIncidentsViewModel : BaseIncidentsViewModel
                         Incidents.Add(incident);
                     }
                 }
-                Debug.WriteLine($"Loaded {incidents?.Count ?? 0} incidents");
             });
         }
         catch (UnauthorizedAccessException)
         {
-            Debug.WriteLine("Unauthorized access - redirecting to login");
             await HandleUnauthorizedAccess();
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error in LoadMyReports: {ex}");
             ErrorMessage = ex.Message;
             MainThread.BeginInvokeOnMainThread(() => Incidents.Clear()); // Clear on error
         }

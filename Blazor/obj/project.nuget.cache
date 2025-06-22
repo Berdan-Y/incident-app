@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "zbyA8PPsoj8=",
+  "dgSpecHash": "mO3k8E7AwVE=",
   "success": true,
   "projectFilePath": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Blazor/Blazor.csproj",
   "expectedPackageFiles": [
@@ -69,7 +69,7 @@
     "/Users/berdanyilmaz/.nuget/packages/microsoft.jsinterop.webassembly/9.0.2/microsoft.jsinterop.webassembly.9.0.2.nupkg.sha512",
     "/Users/berdanyilmaz/.nuget/packages/microsoft.net.http.headers/2.2.0/microsoft.net.http.headers.2.2.0.nupkg.sha512",
     "/Users/berdanyilmaz/.nuget/packages/microsoft.net.illink.tasks/9.0.2/microsoft.net.illink.tasks.9.0.2.nupkg.sha512",
-    "/Users/berdanyilmaz/.nuget/packages/microsoft.net.sdk.webassembly.pack/9.0.5/microsoft.net.sdk.webassembly.pack.9.0.5.nupkg.sha512",
+    "/Users/berdanyilmaz/.nuget/packages/microsoft.net.sdk.webassembly.pack/9.0.6/microsoft.net.sdk.webassembly.pack.9.0.6.nupkg.sha512",
     "/Users/berdanyilmaz/.nuget/packages/mudblazor/6.17.0/mudblazor.6.17.0.nupkg.sha512",
     "/Users/berdanyilmaz/.nuget/packages/refit/7.2.1/refit.7.2.1.nupkg.sha512",
     "/Users/berdanyilmaz/.nuget/packages/refit.httpclientfactory/7.2.1/refit.httpclientfactory.7.2.1.nupkg.sha512",
@@ -85,8 +85,8 @@
     "/Users/berdanyilmaz/.nuget/packages/system.memory/4.5.3/system.memory.4.5.3.nupkg.sha512",
     "/Users/berdanyilmaz/.nuget/packages/system.text.encodings.web/4.5.0/system.text.encodings.web.4.5.0.nupkg.sha512",
     "/Users/berdanyilmaz/.nuget/packages/system.text.json/9.0.5/system.text.json.9.0.5.nupkg.sha512",
-    "/Users/berdanyilmaz/.nuget/packages/microsoft.netcore.app.ref/9.0.5/microsoft.netcore.app.ref.9.0.5.nupkg.sha512",
-    "/Users/berdanyilmaz/.nuget/packages/microsoft.netcore.app.runtime.mono.browser-wasm/9.0.5/microsoft.netcore.app.runtime.mono.browser-wasm.9.0.5.nupkg.sha512"
+    "/Users/berdanyilmaz/.nuget/packages/microsoft.netcore.app.ref/9.0.6/microsoft.netcore.app.ref.9.0.6.nupkg.sha512",
+    "/Users/berdanyilmaz/.nuget/packages/microsoft.netcore.app.runtime.mono.browser-wasm/9.0.6/microsoft.netcore.app.runtime.mono.browser-wasm.9.0.6.nupkg.sha512"
   ],
   "logs": []
 }

@@ -79,18 +79,14 @@ public class IncidentRepository : IIncidentRepository
 
     public async Task<IEnumerable<Incident>> GetByUserIdAsync(Guid userId)
     {
-        Console.WriteLine($"GetByUserIdAsync called for user {userId}");
 
         // First check if the user exists
         var user = await _context.Users.FindAsync(userId);
-        Console.WriteLine($"User found: {user != null}, Email: {user?.Email}");
 
         // Get all incidents and log them
         var allIncidents = await _context.Incidents.ToListAsync();
-        Console.WriteLine($"Total incidents in database: {allIncidents.Count}");
         foreach (var incident in allIncidents)
         {
-            Console.WriteLine($"Incident {incident.Id}: Title={incident.Title}, ReportedById={incident.ReportedById}");
         }
 
         // Now get incidents for this user
@@ -100,12 +96,6 @@ public class IncidentRepository : IIncidentRepository
             .Where(i => i.ReportedById == userId)
             .OrderByDescending(i => i.CreatedAt)
             .ToListAsync();
-
-        Console.WriteLine($"Found {incidents.Count()} incidents for user {userId}");
-        foreach (var incident in incidents)
-        {
-            Console.WriteLine($"Found incident: {incident.Id}, Title: {incident.Title}, ReportedById: {incident.ReportedById}");
-        }
 
         return incidents;
     }

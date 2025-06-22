@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "TK1vTsyBsH8=",
+  "dgSpecHash": "RFNEVLgFbB4=",
   "success": true,
   "projectFilePath": "/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/Maui.csproj",
   "expectedPackageFiles": [
@@ -256,8 +256,8 @@
     "/Users/berdanyilmaz/.nuget/packages/xamarin.kotlinx.coroutines.core.jvm/1.9.0.2/xamarin.kotlinx.coroutines.core.jvm.1.9.0.2.nupkg.sha512",
     "/Users/berdanyilmaz/.nuget/packages/xamarin.kotlinx.serialization.core/1.7.3.2/xamarin.kotlinx.serialization.core.1.7.3.2.nupkg.sha512",
     "/Users/berdanyilmaz/.nuget/packages/xamarin.kotlinx.serialization.core.jvm/1.7.3.2/xamarin.kotlinx.serialization.core.jvm.1.7.3.2.nupkg.sha512",
-    "/Users/berdanyilmaz/.nuget/packages/microsoft.netcore.app.ref/9.0.5/microsoft.netcore.app.ref.9.0.5.nupkg.sha512",
-    "/Users/berdanyilmaz/.nuget/packages/microsoft.netcore.app.ref/9.0.5/microsoft.netcore.app.ref.9.0.5.nupkg.sha512"
+    "/Users/berdanyilmaz/.nuget/packages/microsoft.netcore.app.ref/9.0.6/microsoft.netcore.app.ref.9.0.6.nupkg.sha512",
+    "/Users/berdanyilmaz/.nuget/packages/microsoft.netcore.app.ref/9.0.6/microsoft.netcore.app.ref.9.0.6.nupkg.sha512"
   ],
   "logs": [
     {
@@ -271,10 +271,10 @@
         "net9.0-android35.0/android-arm64",
         "net9.0-android35.0/android-x64",
         "net9.0-android35.0/iossimulator-arm64",
-        "net9.0-ios18.4",
-        "net9.0-ios18.4/android-arm64",
-        "net9.0-ios18.4/android-x64",
-        "net9.0-ios18.4/iossimulator-arm64"
+        "net9.0-ios18.5",
+        "net9.0-ios18.5/android-arm64",
+        "net9.0-ios18.5/android-x64",
+        "net9.0-ios18.5/iossimulator-arm64"
       ]
     }
   ]

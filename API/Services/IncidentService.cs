@@ -51,7 +51,6 @@ public class IncidentService : IIncidentService
 
     public async Task<IncidentResponseDto> CreateIncidentAsync(IncidentCreateDto incidentDto)
     {
-        Console.WriteLine($"Creating incident - DTO ReportedById: {incidentDto.ReportedById}");
 
         // If ReportedById is provided, make it null if the user doesn't exist
         if (incidentDto.ReportedById.HasValue)
@@ -59,22 +58,18 @@ public class IncidentService : IIncidentService
             var userExists = await _incidentRepository.UserExistsAsync(incidentDto.ReportedById.Value);
             if (!userExists)
             {
-                Console.WriteLine($"User with ID {incidentDto.ReportedById.Value} does not exist, setting ReportedById to null");
                 incidentDto.ReportedById = null;
             }
         }
 
         var incident = _mapper.Map<Incident>(incidentDto);
-        Console.WriteLine($"After mapping - incident.ReportedById: {incident.ReportedById}");
 
         // Only set non-ReportedById fields
         incident.AssignedToId = null;
         incident.CreatedAt = DateTime.UtcNow;
         incident.UpdatedAt = DateTime.UtcNow;
 
-        Console.WriteLine($"Final ReportedById before saving: {incident.ReportedById}");
         var createdIncident = await _incidentRepository.CreateAsync(incident);
-        Console.WriteLine($"Created incident with ReportedById: {createdIncident.ReportedById}");
 
         return _mapper.Map<IncidentResponseDto>(createdIncident);
     }

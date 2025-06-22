@@ -45,7 +45,6 @@ public class GoogleDirectionsService : IDirectionsService
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"Error getting directions: {ex}");
             return new List<Location>();
         }
     }
@@ -65,7 +64,6 @@ public class GoogleDirectionsService : IDirectionsService
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"Error getting current location: {ex}");
             throw;
         }
     }

@@ -13,10 +13,8 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 // Load configuration
-var apiBaseAddress = builder.Configuration.GetValue<string>("ApiSettings:BaseUrl") 
+var apiBaseAddress = builder.Configuration.GetValue<string>("ApiSettings:BaseUrl")
     ?? throw new InvalidOperationException("API Base URL is not configured");
-
-Console.WriteLine($"API Base URL configured as: {apiBaseAddress}");
 
 // Configure JSON serialization settings
 var jsonOptions = new JsonSerializerOptions
@@ -45,7 +43,6 @@ builder.Services.AddTransient<AuthMessageHandler>();
 builder.Services.AddHttpClient(string.Empty, client =>
 {
     client.BaseAddress = new Uri(apiBaseAddress);
-    Console.WriteLine($"Configured default HttpClient with base address: {client.BaseAddress}");
 }).AddHttpMessageHandler<AuthMessageHandler>();
 
 // Register Refit client for IIncidentApi

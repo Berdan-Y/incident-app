@@ -26,6 +26,8 @@
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-android/resizetizer/sp/values/maui_colors.xml
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-android/mauisplash.stamp
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-android/mauifont.stamp
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-android/resizetizer/f/fa-solid-900.ttf
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-android/resizetizer/f/MaterialIcons-Regular.ttf
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-android/resizetizer/f/OpenSans-Regular.ttf
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-android/resizetizer/f/OpenSans-Semibold.ttf
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-android/resizetizer/r/drawable-hdpi/dotnet_bot.png
@@ -1055,6 +1057,8 @@
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-android/android/src/mono/com/google/android/material/textfield/TextInputLayout_OnEndIconChangedListenerImplementor.java
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-android/android/src/mono/MonoPackageManager_Resources.java
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-android/assets/AboutAssets.txt
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-android/assets/fa-solid-900.ttf
+/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-android/assets/MaterialIcons-Regular.ttf
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-android/assets/OpenSans-Regular.ttf
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-android/assets/OpenSans-Semibold.ttf
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-android/android/bin/packaged_resources
@@ -1077,7 +1081,3 @@
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-android/stamp/_GenerateJavaStubs.stamp
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-android/stamp/_GeneratePackageManagerJava.stamp
 /Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-android/stamp/_ResolveLibraryProjectImports.stamp
-/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-android/resizetizer/f/MaterialIcons-Regular.ttf
-/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-android/assets/MaterialIcons-Regular.ttf
-/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-android/resizetizer/f/fa-solid-900.ttf
-/Users/berdanyilmaz/Documents/GitHub/incident-app/Maui/obj/Debug/net9.0-android/assets/fa-solid-900.ttf

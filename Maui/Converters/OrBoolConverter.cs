@@ -16,4 +16,4 @@ public class OrBoolConverter : IMultiValueConverter
     {
         throw new NotImplementedException();
     }
-} 
+}

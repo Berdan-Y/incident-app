@@ -9,7 +9,7 @@ public interface IAuthenticationService
     string? UserEmail { get; }
     Role? UserRole { get; }
     event Action? AuthenticationStateChanged;
-    
+
     Task<bool> LoginAsync(LoginDto loginDto);
     Task<bool> RegisterAsync(RegisterDto registerDto);
     Task LogoutAsync();
@@ -20,4 +20,4 @@ public interface IAuthenticationService
     bool IsAdmin();
     void RequireAuthentication();
     void RequireAdmin();
-} 
+}

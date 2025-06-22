@@ -127,13 +127,13 @@ public class IncidentManagementTests : TestContext
                 new RefitSettings()));
 
         var cut = RenderComponent<AllIncidents>();
-        
+
         // Wait for the component to render and data to load
-        try 
+        try
         {
             // Wait for the incidents to be loaded and rendered
             cut.WaitForState(() => cut.FindAll(".mud-card").Any(), TimeSpan.FromSeconds(5));
-            
+
             // Then wait for the status chip to be rendered
             cut.WaitForState(() => cut.FindComponents<MudChip>().Any(), TimeSpan.FromSeconds(5));
         }
@@ -144,18 +144,18 @@ public class IncidentManagementTests : TestContext
                              $"Chips found: {cut.FindComponents<MudChip>().Count}";
             throw new Exception(currentState, ex);
         }
-        
+
         // Navigate to incident details to update status
         var detailsButton = cut.FindAll("button").First(b => b.TextContent.Contains("View Details"));
         await cut.InvokeAsync(() => detailsButton.Click());
-        
+
         // Verify navigation occurred
         Assert.EndsWith($"incident/{incidents[0].Id}", _navigationManager.Uri);
-        
+
         // Render the details component
         var detailsComponent = RenderComponent<IncidentDetails>(parameters => parameters
             .Add(p => p.Id, incidents[0].Id));
-            
+
         // Wait for the status select to be rendered in the details view
         try
         {
@@ -167,10 +167,10 @@ public class IncidentManagementTests : TestContext
                              $"Select components found: {detailsComponent.FindComponents<MudSelect<Status>>().Count}";
             throw new Exception(currentState, ex);
         }
-        
+
         // Update the status
         var statusSelect = detailsComponent.FindComponents<MudSelect<Status>>().First();
-        await detailsComponent.InvokeAsync(async () => 
+        await detailsComponent.InvokeAsync(async () =>
         {
             await statusSelect.Instance.ValueChanged.InvokeAsync(Status.InProgress);
         });
@@ -259,7 +259,7 @@ public class IncidentManagementTests : TestContext
         // Wait for the component to render
         try
         {
-            cut.WaitForState(() => 
+            cut.WaitForState(() =>
             {
                 var assigneeSelect = cut.FindComponents<MudSelect<UserDto>>().Any();
                 return assigneeSelect;
@@ -278,7 +278,7 @@ public class IncidentManagementTests : TestContext
         }
 
         // Trigger the value change
-        await cut.InvokeAsync(async () => 
+        await cut.InvokeAsync(async () =>
         {
             await assigneeSelect.Instance.ValueChanged.InvokeAsync(fieldEmployees[0]);
         });
@@ -321,9 +321,9 @@ public class IncidentManagementTests : TestContext
         {
             // First wait for the basic component structure to render
             cut.WaitForState(() => cut.FindAll(".mud-grid").Any(), TimeSpan.FromSeconds(5));
-            
+
             // Then wait for the select components to be rendered
-            cut.WaitForState(() => 
+            cut.WaitForState(() =>
             {
                 var selects = cut.FindComponents<MudSelect<Status>>();
                 return selects.Any() && selects.Count >= 1;
@@ -341,9 +341,9 @@ public class IncidentManagementTests : TestContext
         // Get the select components after we're sure they exist
         var statusSelect = cut.FindComponents<MudSelect<Status>>().First();
         var prioritySelect = cut.FindComponents<MudSelect<Priority>>().First();
-        
+
         // Update the values within InvokeAsync to ensure proper state management
-        await cut.InvokeAsync(async () => 
+        await cut.InvokeAsync(async () =>
         {
             await statusSelect.Instance.ValueChanged.InvokeAsync(Status.InProgress);
             await Task.Delay(100); // Give time for the first update to process
@@ -362,4 +362,4 @@ public class IncidentManagementTests : TestContext
             incidentId,
             (int)Priority.High), Times.Once);
     }
-} 
+}

@@ -40,7 +40,7 @@ public partial class AllIncidentsViewModel : BaseIncidentsViewModel
     {
         IsListView = !IsListView;
         IsMapView = !IsMapView;
-        
+
         if (IsMapView)
         {
             UpdateMapPins();
@@ -63,13 +63,13 @@ public partial class AllIncidentsViewModel : BaseIncidentsViewModel
                         Address = incident.Address,
                         Type = PinType.Place
                     };
-                    
+
                     // Add tap gesture
                     pin.MarkerClicked += async (s, e) =>
                     {
                         await OnViewIncidentDetails(incident);
                     };
-                    
+
                     MapPins.Add(pin);
                 }
             }
@@ -99,7 +99,6 @@ public partial class AllIncidentsViewModel : BaseIncidentsViewModel
 
         try
         {
-            Debug.WriteLine("LoadIncidents started");
             IsLoading = true;
             ErrorMessage = string.Empty;
 
@@ -114,7 +113,7 @@ public partial class AllIncidentsViewModel : BaseIncidentsViewModel
             }
 
             var incidents = await _incidentService.GetAllIncidentsAsync();
-            
+
             // Clear and update the collection on the main thread
             MainThread.BeginInvokeOnMainThread(() =>
             {
@@ -126,26 +125,23 @@ public partial class AllIncidentsViewModel : BaseIncidentsViewModel
                         Incidents.Add(incident);
                     }
                 }
-                
+
                 // Update map pins if in map view
                 if (IsMapView)
                 {
                     UpdateMapPins();
                 }
-                
-                Debug.WriteLine($"Loaded {incidents?.Count ?? 0} incidents");
+
             });
         }
         catch (UnauthorizedAccessException)
         {
-            Debug.WriteLine("Unauthorized access - redirecting to login");
             await HandleUnauthorizedAccess();
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error in LoadIncidents: {ex}");
             ErrorMessage = ex.Message;
-            MainThread.BeginInvokeOnMainThread(() => 
+            MainThread.BeginInvokeOnMainThread(() =>
             {
                 Incidents.Clear();
                 MapPins.Clear();

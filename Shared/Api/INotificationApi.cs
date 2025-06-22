@@ -19,4 +19,4 @@ public interface INotificationApi
 
     [Patch("/api/notification/read-all")]
     Task<IApiResponse<bool>> MarkAllAsReadAsync();
-} 
+}

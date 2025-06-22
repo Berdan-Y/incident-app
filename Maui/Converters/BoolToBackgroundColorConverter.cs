@@ -17,4 +17,4 @@ public class BoolToBackgroundColorConverter : IValueConverter
     {
         throw new NotImplementedException();
     }
-} 
+}

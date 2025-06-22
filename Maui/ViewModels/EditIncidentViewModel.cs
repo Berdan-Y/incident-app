@@ -42,7 +42,6 @@ public partial class EditIncidentViewModel : ObservableObject, INotifyPropertyCh
     partial void OnIsLoadingChanged(bool value)
     {
         OnPropertyChanged(nameof(CanSave));
-        Debug.WriteLine($"IsLoading changed to {value}, CanSave: {CanSave}");
     }
 
     public string Title
@@ -111,7 +110,6 @@ public partial class EditIncidentViewModel : ObservableObject, INotifyPropertyCh
                 _hasChanges = value;
                 OnPropertyChanged(nameof(HasChanges));
                 OnPropertyChanged(nameof(CanSave));
-                Debug.WriteLine($"HasChanges set to {value}, CanSave: {CanSave}");
             }
         }
     }
@@ -120,11 +118,10 @@ public partial class EditIncidentViewModel : ObservableObject, INotifyPropertyCh
     {
         get
         {
-            var canSave = !IsLoading && 
+            var canSave = !IsLoading &&
                          HasChanges &&
-                         !string.IsNullOrWhiteSpace(Title) && 
+                         !string.IsNullOrWhiteSpace(Title) &&
                          !string.IsNullOrWhiteSpace(Description);
-            Debug.WriteLine($"CanSave evaluated: {canSave} (IsLoading: {IsLoading}, HasChanges: {HasChanges}, Title: {!string.IsNullOrWhiteSpace(Title)}, Description: {!string.IsNullOrWhiteSpace(Description)})");
             return canSave;
         }
     }
@@ -229,7 +226,6 @@ public partial class EditIncidentViewModel : ObservableObject, INotifyPropertyCh
 
     public EditIncidentViewModel(IIncidentApi incidentApi, IGeocodingService geocodingService, ITokenService tokenService)
     {
-        Debug.WriteLine("Initializing EditIncidentViewModel");
         _incidentApi = incidentApi;
         _geocodingService = geocodingService;
         _tokenService = tokenService;
@@ -246,7 +242,6 @@ public partial class EditIncidentViewModel : ObservableObject, INotifyPropertyCh
         HasChanges = false;
 
         InitializeCommands();
-        Debug.WriteLine("EditIncidentViewModel initialized");
     }
 
     private void InitializeCommands()
@@ -254,7 +249,6 @@ public partial class EditIncidentViewModel : ObservableObject, INotifyPropertyCh
         ValidateAddressCommand = new RelayCommand(
             async () =>
             {
-                Debug.WriteLine("ValidateAddress command executing");
                 await ValidateAddress();
             },
             () => !IsLoading && !string.IsNullOrWhiteSpace(Address) && !string.IsNullOrWhiteSpace(ZipCode)
@@ -263,13 +257,11 @@ public partial class EditIncidentViewModel : ObservableObject, INotifyPropertyCh
         SaveCommand = new RelayCommand(
             async () =>
             {
-                Debug.WriteLine("Save command executing");
                 await SaveAsync();
             },
             () =>
             {
                 var can = CanSave;
-                Debug.WriteLine($"SaveCommand CanExecute evaluated: {can}");
                 return can;
             }
         );
@@ -309,7 +301,7 @@ public partial class EditIncidentViewModel : ObservableObject, INotifyPropertyCh
 
             var handler = new JwtSecurityTokenHandler();
             var jwtToken = handler.ReadJwtToken(token);
-            
+
             var currentUserRole = jwtToken.Claims.FirstOrDefault(c => c.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role")?.Value;
             var currentUserId = jwtToken.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
 
@@ -321,7 +313,6 @@ public partial class EditIncidentViewModel : ObservableObject, INotifyPropertyCh
 
             var incident = response.Content;
             _reportedByUserId = incident.CreatedBy?.Id.ToString();
-            Debug.WriteLine($"Loaded incident with ReportedById: {_reportedByUserId}");
 
             // Set the properties on the main thread
             MainThread.BeginInvokeOnMainThread(() =>
@@ -341,27 +332,21 @@ public partial class EditIncidentViewModel : ObservableObject, INotifyPropertyCh
 
                 Status = incident.Status;
                 OnPropertyChanged(nameof(Status));
-                
+
                 Priority = incident.Priority;
                 OnPropertyChanged(nameof(Priority));
 
                 // Force refresh of all bindings
                 OnPropertyChanged(string.Empty);
-
-                Console.WriteLine($"Set ViewModel properties - Title: {Title}, Description: {Description}, Address: {Address}, ZipCode: {ZipCode}");
-                Console.WriteLine($"Set Status: {Status}, Priority: {Priority}");
             });
 
             // Determine edit permissions
             IsCreator = incident.CreatedBy?.Id.ToString() == currentUserId;
-            IsAssignedFieldEmployee = currentUserRole == "FieldEmployee" && 
+            IsAssignedFieldEmployee = currentUserRole == "FieldEmployee" &&
                                     incident.AssignedTo?.Id.ToString() == currentUserId;
-            
+
             // Only Admin can edit priority
             CanEditPriority = currentUserRole == "Admin";
-
-            Console.WriteLine($"incident.CreatedBy?.Id: {incident.CreatedBy?.Id}, incident.AssignedTo?.Id: {incident.AssignedTo?.Id}");
-            Console.WriteLine($"IsCreator: {IsCreator}, IsAssignedFieldEmployee: {IsAssignedFieldEmployee}, CanEditPriority: {CanEditPriority}");
 
             // If not authorized to edit, go back
             if (!IsCreator && !IsAssignedFieldEmployee)
@@ -376,7 +361,7 @@ public partial class EditIncidentViewModel : ObservableObject, INotifyPropertyCh
             _originalZipCode = ZipCode;
             _originalLatitude = incident.Latitude;
             _originalLongitude = incident.Longitude;
-            
+
             // If we have coordinates, show them on the map
             if (incident.Latitude != 0 && incident.Longitude != 0)
             {
@@ -446,7 +431,6 @@ public partial class EditIncidentViewModel : ObservableObject, INotifyPropertyCh
 
     private async Task ValidateAddress()
     {
-        Debug.WriteLine($"ValidateAddress called with Address: {Address}, ZipCode: {ZipCode}");
         if (string.IsNullOrWhiteSpace(Address) || string.IsNullOrWhiteSpace(ZipCode))
         {
             MainThread.BeginInvokeOnMainThread(() =>
@@ -470,9 +454,7 @@ public partial class EditIncidentViewModel : ObservableObject, INotifyPropertyCh
                 OnPropertyChanged(nameof(AddressValidationMessage));
             });
 
-            Debug.WriteLine("Calling geocoding service...");
             var result = await _geocodingService.GeocodeAddressAsync(Address, ZipCode);
-            Debug.WriteLine($"Geocoding result - Success: {result.success}, Error: {result.errorMessage}");
 
             MainThread.BeginInvokeOnMainThread(async () =>
             {
@@ -506,7 +488,6 @@ public partial class EditIncidentViewModel : ObservableObject, INotifyPropertyCh
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error in ValidateAddress: {ex}");
             MainThread.BeginInvokeOnMainThread(() =>
             {
                 IsAddressValid = false;
@@ -527,12 +508,10 @@ public partial class EditIncidentViewModel : ObservableObject, INotifyPropertyCh
 
     private async Task SaveAsync()
     {
-        Debug.WriteLine("SaveAsync called");
         try
         {
             IsLoading = true;
 
-            Debug.WriteLine("Creating IncidentPatchDto with only general editable fields");
             var patchDto = new IncidentPatchDto
             {
                 Title = Title,
@@ -543,9 +522,8 @@ public partial class EditIncidentViewModel : ObservableObject, INotifyPropertyCh
                 Longitude = currentLongitude
             };
 
-            Debug.WriteLine($"Sending patch for incident {IncidentId} with data: Title={patchDto.Title}, Description={patchDto.Description}, Address={patchDto.Address}, ZipCode={patchDto.ZipCode}");
             var response = await _incidentApi.PatchIncidentAsync(Guid.Parse(IncidentId), patchDto);
-            
+
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception(response.Error?.Content ?? "Failed to update incident");
@@ -556,7 +534,6 @@ public partial class EditIncidentViewModel : ObservableObject, INotifyPropertyCh
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error in SaveAsync: {ex}");
             await Shell.Current.DisplayAlert("Error", "Failed to save changes: " + ex.Message, "OK");
         }
         finally

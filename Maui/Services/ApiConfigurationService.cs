@@ -17,4 +17,4 @@ public class ApiConfigurationService : IApiConfigurationService
             ? "http://10.0.2.2:5007"  // Android emulator special DNS
             : "http://localhost:5007"; // iOS and other platforms
     }
-} 
+}

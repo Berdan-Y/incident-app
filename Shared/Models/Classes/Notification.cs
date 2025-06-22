@@ -28,4 +28,4 @@ public class Notification
 
     [ForeignKey(nameof(IncidentId))]
     public Incident? Incident { get; set; }
-} 
+}

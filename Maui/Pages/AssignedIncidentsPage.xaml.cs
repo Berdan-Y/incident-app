@@ -5,7 +5,7 @@ namespace Maui.Pages;
 public partial class AssignedIncidentsPage : ContentPage
 {
     private readonly AssignedIncidentsViewModel _viewModel;
-    
+
     public AssignedIncidentsPage(AssignedIncidentsViewModel viewModel)
     {
         InitializeComponent();

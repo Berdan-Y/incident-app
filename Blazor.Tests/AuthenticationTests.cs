@@ -79,7 +79,7 @@ public class AuthenticationTests : TestContext
         // Act
         await cut.InvokeAsync(() => emailInput.Change(loginDto.Email));
         await cut.InvokeAsync(() => passwordInput.Change(loginDto.Password));
-        
+
         // Validate the form
         await cut.InvokeAsync(() => form.Instance.Validate());
 
@@ -93,8 +93,8 @@ public class AuthenticationTests : TestContext
         await Task.WhenAny(navigationOccurred.Task, Task.Delay(TimeSpan.FromSeconds(10)));
 
         // Assert
-        _authServiceMock.Verify(x => x.LoginAsync(It.Is<LoginDto>(dto => 
-            dto.Email == loginDto.Email && 
+        _authServiceMock.Verify(x => x.LoginAsync(It.Is<LoginDto>(dto =>
+            dto.Email == loginDto.Email &&
             dto.Password == loginDto.Password)), Times.Once);
         Assert.Equal("http://localhost/", _navigationManager.Uri);
     }
@@ -119,12 +119,12 @@ public class AuthenticationTests : TestContext
         // Act
         await cut.InvokeAsync(() => emailInput.Change(loginDto.Email));
         await cut.InvokeAsync(() => passwordInput.Change(loginDto.Password));
-        
+
         // Set up snackbar mock before clicking the button
         var snackbarMessage = string.Empty;
         var snackbarSeverity = Severity.Normal;
         var snackbarCalled = new TaskCompletionSource<bool>();
-        
+
         _snackbarMock
             .Setup(x => x.Add(It.IsAny<string>(), It.IsAny<Severity>(), It.IsAny<Action<SnackbarOptions>>(), It.IsAny<string>()))
             .Callback((string message, Severity severity, Action<SnackbarOptions> _, string __) =>
@@ -142,8 +142,8 @@ public class AuthenticationTests : TestContext
         await Task.WhenAny(snackbarCalled.Task, Task.Delay(TimeSpan.FromSeconds(5)));
 
         // Assert
-        _authServiceMock.Verify(x => x.LoginAsync(It.Is<LoginDto>(dto => 
-            dto.Email == loginDto.Email && 
+        _authServiceMock.Verify(x => x.LoginAsync(It.Is<LoginDto>(dto =>
+            dto.Email == loginDto.Email &&
             dto.Password == loginDto.Password)), Times.Once);
         Assert.Equal("Invalid email or password", snackbarMessage);
         Assert.Equal(Severity.Error, snackbarSeverity);
@@ -156,8 +156,8 @@ public class AuthenticationTests : TestContext
     public async Task Register_WithValidData_ShouldRegisterAndNavigateToHome()
     {
         // Arrange
-        var registerDto = new RegisterDto 
-        { 
+        var registerDto = new RegisterDto
+        {
             Email = "newuser@example.com",
             Password = "password123",
             FirstName = "John",
@@ -179,7 +179,7 @@ public class AuthenticationTests : TestContext
 
         // Set up snackbar mock
         var snackbarMessages = new List<(string Message, Severity Severity)>();
-        
+
         _snackbarMock
             .Setup(x => x.Add(It.IsAny<string>(), It.IsAny<Severity>(), It.IsAny<Action<SnackbarOptions>>(), It.IsAny<string>()))
             .Callback((string message, Severity severity, Action<SnackbarOptions> _, string __) =>
@@ -189,7 +189,7 @@ public class AuthenticationTests : TestContext
 
         // Set up navigation tracking
         var navigationOccurred = new TaskCompletionSource<bool>();
-        _navigationManager.LocationChanged += (sender, args) => 
+        _navigationManager.LocationChanged += (sender, args) =>
         {
             if (args.Location == _navigationManager.BaseUri)
             {
@@ -230,18 +230,18 @@ public class AuthenticationTests : TestContext
         await Task.Delay(100);
 
         // Assert
-        _authServiceMock.Verify(x => x.RegisterAsync(It.Is<RegisterDto>(dto => 
-            dto.Email == registerDto.Email && 
+        _authServiceMock.Verify(x => x.RegisterAsync(It.Is<RegisterDto>(dto =>
+            dto.Email == registerDto.Email &&
             dto.Password == registerDto.Password &&
             dto.FirstName == registerDto.FirstName &&
             dto.LastName == registerDto.LastName)), Times.Once);
 
         Assert.True(form.Instance.IsValid);
-        
+
         var successMessage = snackbarMessages.LastOrDefault();
         Assert.Equal("User registered successfully", successMessage.Message);
         Assert.Equal(Severity.Success, successMessage.Severity);
-        
+
         Assert.Equal(navManager.BaseUri, navManager.Uri);
     }
 
@@ -249,8 +249,8 @@ public class AuthenticationTests : TestContext
     public async Task Register_WithInvalidData_ShouldShowError()
     {
         // Arrange
-        var registerDto = new RegisterDto 
-        { 
+        var registerDto = new RegisterDto
+        {
             Email = "invalid",
             Password = "short",
             FirstName = "Random",
@@ -272,7 +272,7 @@ public class AuthenticationTests : TestContext
 
         // Set up snackbar mock
         var snackbarMessages = new List<(string Message, Severity Severity)>();
-        
+
         _snackbarMock
             .Setup(x => x.Add(It.IsAny<string>(), It.IsAny<Severity>(), It.IsAny<Action<SnackbarOptions>>(), It.IsAny<string>()))
             .Callback((string message, Severity severity, Action<SnackbarOptions> _, string __) =>
@@ -302,7 +302,7 @@ public class AuthenticationTests : TestContext
 
         // Assert
         _authServiceMock.Verify(x => x.RegisterAsync(It.IsAny<RegisterDto>()), Times.Never);
-        
+
         var errorMessage = snackbarMessages.FirstOrDefault();
         Assert.Equal("Please enter a valid email address.", errorMessage.Message);
         Assert.Equal(Severity.Warning, errorMessage.Severity);
@@ -314,4 +314,4 @@ public class AuthenticationTests : TestContext
         // Verify we didn't navigate
         Assert.Equal(navManager.BaseUri + "register", navManager.Uri);
     }
-} 
+}
